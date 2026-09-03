@@ -28,6 +28,7 @@ struct AppAlertAction {
 final class AppAlertViewController: UIViewController {
     private let icon: UIImage?
     private let iconTint: UIColor?
+    private let iconHeight: CGFloat
     private let titleText: String
     private let messageText: String?
     private let actions: [AppAlertAction]
@@ -36,9 +37,10 @@ final class AppAlertViewController: UIViewController {
     private let card = UIView()
     private let dimView = UIView()
 
-    init(icon: UIImage?, iconTint: UIColor? = nil, title: String, message: String?, actions: [AppAlertAction]) {
+    init(icon: UIImage?, iconTint: UIColor? = nil, iconHeight: CGFloat = 64, title: String, message: String?, actions: [AppAlertAction]) {
         self.icon = icon
         self.iconTint = iconTint
+        self.iconHeight = iconHeight
         self.titleText = title
         self.messageText = message
         self.actions = actions
@@ -121,7 +123,7 @@ final class AppAlertViewController: UIViewController {
         stack.setCustomSpacing(16, after: iconView)
         card.addSubview(stack)
         stack.snp.makeConstraints { $0.edges.equalToSuperview().inset(24) }
-        iconView.snp.makeConstraints { $0.height.equalTo(64) }
+        iconView.snp.makeConstraints { $0.height.equalTo(iconHeight) }
     }
 
     private func finish(with index: Int) {
@@ -136,7 +138,8 @@ enum OfflinePopup {
     @MainActor
     static func present(from presenter: UIViewController, retry: @escaping () -> Void) {
         let alert = AppAlertViewController(
-            icon: UIImage(systemName: "wifi.slash"),
+            icon: Asset.Assets.App.imgOffline.image,
+            iconHeight: 80,
             title: L10n.popupOfflineTitle,
             message: L10n.popupOfflineMessage,
             actions: [
@@ -169,7 +172,8 @@ enum SaveChangesPopup {
     @MainActor
     static func present(from presenter: UIViewController, cancel: @escaping () -> Void, save: @escaping () -> Void) {
         let alert = AppAlertViewController(
-            icon: UIImage(systemName: "folder.fill"),
+            icon: Asset.Assets.App.imgSaveChangesFolder.image,
+            iconHeight: 120,
             title: L10n.popupSaveChangesTitle,
             message: L10n.popupSaveChangesMessage,
             actions: [

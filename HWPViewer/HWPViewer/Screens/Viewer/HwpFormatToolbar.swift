@@ -45,7 +45,7 @@ final class HwpFormatToolbar: UIView {
     private let highlightItem = ToolbarItem(icon: Asset.Assets.App.icTbHighlight.image, title: L10n.toolbarHighlight)
     private let alignRightItem = ToolbarItem(icon: Asset.Assets.App.icTbAlignRight.image, title: L10n.toolbarAlignRight)
     private let alignLeftItem = ToolbarItem(icon: Asset.Assets.App.icTbAlignRight.image.withHorizontallyFlippedOrientation(), title: L10n.toolbarAlignLeft)
-    private let scrollView = UIScrollView()
+    private let scrollView = ControlScrollView()
     private let scrollStack = UIStackView()
     private let textColorStrip: ColorStripView
     private let highlightStrip: ColorStripView
@@ -223,6 +223,11 @@ final class HwpFormatToolbar: UIView {
     private func requireAlign(_ action: () -> Void) {
         canAlign ? action() : onAction?(.selectionHint)
     }
+}
+
+/// Lets a horizontal pan that starts on a button still scroll (UIScrollView refuses to cancel UIControl touches by default).
+final class ControlScrollView: UIScrollView {
+    override func touchesShouldCancel(in view: UIView) -> Bool { true }
 }
 
 // MARK: - Item

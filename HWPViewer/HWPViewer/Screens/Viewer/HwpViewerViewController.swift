@@ -171,7 +171,8 @@ final class HwpViewerViewController: AppBaseViewController {
         coordinator.attach(scrollView: scrollView, vm: vm)
         scrollView.backgroundColor = AppColors.viewerBackground
 
-        // Bottom bar: "Edit HWP"
+        // Bottom bar: "Edit HWP". Stays in the stack in both modes (alpha toggled) so the document
+        // scroll view keeps a constant size; resizing it makes the engine canvas mis-layout tiles.
         bottomBar.backgroundColor = AppColors.surface
         let topLine = UIView()
         topLine.backgroundColor = AppColors.surfaceCircle
@@ -209,7 +210,7 @@ final class HwpViewerViewController: AppBaseViewController {
         view.addSubview(pageIndicator)
         pageIndicator.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.bottom.equalTo(scrollView.snp.bottom).inset(26)
+            make.bottom.equalTo(bottomBar.snp.top).offset(-26)
         }
 
         // Edit chrome
@@ -437,8 +438,8 @@ final class HwpViewerViewController: AppBaseViewController {
         editHeader.isHidden = !isEdit
         formatToolbar.isHidden = !isEdit
         toolbarBackdrop.isHidden = !isEdit
-        bottomBar.isHidden = isEdit
-        nativeAdSlot.isHidden = isEdit || isPremium
+        bottomBar.alpha = isEdit ? 0 : 1
+        bottomBar.isUserInteractionEnabled = !isEdit
         pageIndicator.isHidden = isEdit || vm.pages.isEmpty
         if !isEdit { formatToolbar.collapseStrips() }
     }
