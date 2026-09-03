@@ -15,8 +15,17 @@ final class PaywallPresenter {
 
     /// Presents the paywall full screen. Returns `false` when it should be skipped.
     @MainActor
+    @discardableResult
     func present(trigger: SPNPaywallTrigger, from presenter: UIViewController, completion: @escaping () -> Void) -> Bool {
-        let purchaseVC = PurchaseViewController()
+        present(from: presenter, completion: completion)
+    }
+
+    /// Feature-gated / settings entry point (no onboarding trigger).
+    @MainActor
+    @discardableResult
+    func present(from presenter: UIViewController, completion: @escaping () -> Void = {}) -> Bool {
+        guard !SPNSession.shared.isPremium else { return false }
+        let purchaseVC = PaywallViewController()
         let bridge = PaywallBridge { [weak self, weak purchaseVC] in
             self?.activeBridges.removeAll { $0 === purchaseVC?.delegate as? PaywallBridge }
             completion()
@@ -29,7 +38,7 @@ final class PaywallPresenter {
     }
 }
 
-private final class PaywallBridge: IAPVCEvent {
+final class PaywallBridge: IAPVCEvent {
     private var completion: (() -> Void)?
 
     init(completion: @escaping () -> Void) {

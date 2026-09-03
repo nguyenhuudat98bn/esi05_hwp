@@ -5,7 +5,7 @@
         "max_time_splash_loading": 30,
         "is_enable_retry": false,
         "max_retry_count": 2,
-        "main_color": "#FF2024",
+        "main_color": "#2E90FA",
         "is_enable_purchase_after_loading": true,
         "time_show_button_close_purchase": 0,
         "force_update_version": "0.9.0"
@@ -15,8 +15,8 @@
         "is_show_purchase_slide": true,
         "is_enable_auto_skip_language": true,
         "time_skip_language": 20,
-        "select_language_color": "#16B5FD",
-        "apply_language_color": "#16B5FD",
+        "select_language_color": "#2E90FA",
+        "apply_language_color": "#2E90FA",
         "apply_language_size": 30,
         "is_language_default": false
     },
@@ -101,6 +101,31 @@
             "place_name": "setting_screen",
             "native_template_size": "small",
             "is_enable": true
+        },
+        {
+            "place_name": "import_sheet",
+            "native_template_size": "small",
+            "is_enable": true
+        },
+        {
+            "place_name": "viewer_screen",
+            "native_template_size": "small",
+            "is_enable": false
+        },
+        {
+            "place_name": "tools_screen",
+            "native_template_size": "small",
+            "is_enable": false
+        },
+        {
+            "place_name": "search_screen",
+            "native_template_size": "small",
+            "is_enable": false
+        },
+        {
+            "place_name": "convert_screen",
+            "native_template_size": "small",
+            "is_enable": false
         }
     ],
     "native_advertiser_units": [
@@ -231,16 +256,24 @@
     "iap_configs": {
         "is_show_in_tools": true,
         "is_show_in_view_file": true,
-        "weekly_id": "com.spn.scanxpro.prd.weekly",
-        "weekly_trial_id": "com.spn.scanxpro.prd.weekly.trial",
-        "yearly_id": "com.spn.scanxpro.prd.yearly",
-        "yearly_trial_id": "com.spn.scanxpro.prd.yearly.trial",
+        "weekly_id": "com.spn.hwpviewer.editor.monthly",
+        "weekly_trial_id": "com.spn.hwpviewer.editor.monthly",
+        "yearly_id": "com.spn.hwpviewer.editor.yearly",
+        "yearly_trial_id": "com.spn.hwpviewer.editor.yearly",
         "enable_trial": true,
         "continue_button_version": 1,
         "time_show_button_close_purchase_since_second_time": 1,
         "continue_button_at_popup_iap_version": 2,
         "max_paywall_shows_per_session": 2,
         "percent_show_paywall": 35,
-        "title_trial_version": 2
+        "title_trial_version": 2,
+        "monthly_id": "com.spn.hwpviewer.editor.monthly"
+    },
+    "app_extra_configs": {
+        "hwp_fonts_base_url": "https://raw.githubusercontent.com/nguyenhuudat98bn/NotoSFont/main/fonts",
+        "edit_requires_premium": false,
+        "convert_requires_premium": true,
+        "gift_box_enabled": false,
+        "gift_box_countdown_seconds": 180
     }
 }

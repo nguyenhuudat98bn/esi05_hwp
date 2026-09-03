@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		AADCAC3C2F6BAB94002F053F /* SPNComponent in Frameworks */ = {isa = PBXBuildFile; productRef = AADCAC3B2F6BAB94002F053F /* SPNComponent */; };
 		AADCAC3F2F6BAC25002F053F /* SPNComponent in Frameworks */ = {isa = PBXBuildFile; productRef = AADCAC3E2F6BAC25002F053F /* SPNComponent */; };
+		AAFFEE00112233445566CC08 /* HwpEditorKit in Frameworks */ = {isa = PBXBuildFile; productRef = AAFFEE00112233445566CC07 /* HwpEditorKit */; };
 		DF4F975F2EA9D21000B9FDB6 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = DF4F975E2EA9D21000B9FDB6 /* FirebaseAnalytics */; };
 		DF4F97612EA9D21000B9FDB6 /* FirebaseAnalyticsCore in Frameworks */ = {isa = PBXBuildFile; productRef = DF4F97602EA9D21000B9FDB6 /* FirebaseAnalyticsCore */; };
 		DF4F97632EA9D21000B9FDB6 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = DF4F97622EA9D21000B9FDB6 /* FirebaseCore */; };
@@ -81,6 +82,7 @@
 				DFCE14E82D9E3BB500DB3E8E /* FacebookCore in Frameworks */,
 				AADCAC3C2F6BAB94002F053F /* SPNComponent in Frameworks */,
 				DF4F97632EA9D21000B9FDB6 /* FirebaseCore in Frameworks */,
+				AAFFEE00112233445566CC08 /* HwpEditorKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,6 +153,7 @@
 				DF4F97682EA9D21000B9FDB6 /* FirebaseRemoteConfig */,
 				AADCAC3B2F6BAB94002F053F /* SPNComponent */,
 				AADCAC3E2F6BAC25002F053F /* SPNComponent */,
+				AAFFEE00112233445566CC07 /* HwpEditorKit */,
 			);
 			productName = HWPViewer;
 			productReference = DFCE14AF2D9E2F7E00DB3E8E /* HWPViewer.app */;
@@ -223,6 +226,7 @@
 				DF6B8EDE2E5C586900E6D9AE /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				DF4F975D2EA9D20F00B9FDB6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				AADCAC3D2F6BAC25002F053F /* XCLocalSwiftPackageReference "../../SPNComponent" */,
+				AAFFEE00112233445566CC06 /* XCRemoteSwiftPackageReference "HwpEditorKit" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = DFCE14B02D9E2F7E00DB3E8E /* Products */;
@@ -266,7 +270,7 @@
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 3FUMGRZ7LK;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = x86_64;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HWPViewer/Info.plist;
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "We use tracking to provide personalized ads, helping keep the app free for you. Your data helps us display relevant ads and improve your experience.";
@@ -303,7 +307,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = x86_64;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HWPViewer/Info.plist;
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "We use tracking to provide personalized ads, helping keep the app free for you. Your data helps us display relevant ads and improve your experience.";
@@ -480,6 +484,14 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		AAFFEE00112233445566CC06 /* XCRemoteSwiftPackageReference "HwpEditorKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:nguyenhuudat98bn/HwpEditorKit.git";
+			requirement = {
+				kind = exactVersion;
+				version = 1.1.0;
+			};
+		};
 		DF4F975D2EA9D20F00B9FDB6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -570,6 +582,11 @@
 		AADCAC3E2F6BAC25002F053F /* SPNComponent */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SPNComponent;
+		};
+		AAFFEE00112233445566CC07 /* HwpEditorKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AAFFEE00112233445566CC06 /* XCRemoteSwiftPackageReference "HwpEditorKit" */;
+			productName = HwpEditorKit;
 		};
 		DF4F975E2EA9D21000B9FDB6 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;

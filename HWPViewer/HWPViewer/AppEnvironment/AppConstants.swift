@@ -8,9 +8,9 @@
 import UIKit
 import SPNComponent
 
-let appStoreUrl = ""
-let privacyUrl = ""
-let termOfUseUrl = ""
+let appStoreUrl = "https://apps.apple.com/app/id0000000000" // TODO: real App Store id
+let privacyUrl = "https://sites.google.com/view/supernova-privacy-policy" // TODO: confirm
+let termOfUseUrl = "https://sites.google.com/view/supernova-terms-of-use" // TODO: confirm
 let actionWhenPurchaseCompleted = Notification.Name("ActionWhenPurchaseCompleted")
 
 /// Session state now lives in the package; keep the old name for feature code.
@@ -21,5 +21,5 @@ var mainColor: UIColor { SPNTheme.current.primary }
 var mainTextColor: UIColor { SPNTheme.current.mainText }
 
 enum AppColor {
-    static let mainText = UIColor(hex: "000D1A")
+    static let mainText = UIColor(hex: "181D27")
 }

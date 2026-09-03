@@ -70,6 +70,7 @@ final class FirebaseRemoteConfigStore: SPNRemoteConfigStore {
 // MARK: - App-only config models
 
 struct IapConfigs: Codable {
+    var monthlyId: String?
     var weeklyId: String?
     var weeklyTrialId: String?
     var yearlyId: String?
@@ -80,6 +81,7 @@ struct IapConfigs: Codable {
     var titleTrialVersion: Int?
 
     enum CodingKeys: String, CodingKey {
+        case monthlyId = "monthly_id"
         case weeklyId = "weekly_id"
         case weeklyTrialId = "weekly_trial_id"
         case yearlyId = "yearly_id"

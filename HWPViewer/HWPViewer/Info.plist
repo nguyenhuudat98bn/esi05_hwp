@@ -2,6 +2,22 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>HWP Document</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Owner</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.spn.hwpviewer.hwp</string>
+				<string>com.spn.hwpviewer.hwpx</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -21,11 +37,63 @@
 	<string>HWP Viewer - Hangul Reader</string>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-9064163751027478~6749725301</string>
+	<key>LSSupportsOpeningDocumentsInPlace</key>
+	<false/>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
 		<false/>
 	</dict>
+	<key>UIFileSharingEnabled</key>
+	<true/>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>HWP Document</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.spn.hwpviewer.hwp</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>hwp</string>
+				</array>
+				<key>public.mime-type</key>
+				<array>
+					<string>application/x-hwp</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data</string>
+				<string>public.zip-archive</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>HWPX Document</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.spn.hwpviewer.hwpx</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>hwpx</string>
+				</array>
+				<key>public.mime-type</key>
+				<array>
+					<string>application/hwp+zip</string>
+				</array>
+			</dict>
+		</dict>
+	</array>
 	<key>VerifyReceiptDomain</key>
 	<string>https://${VERIFY_RECEIPT_DOMAIN}</string>
 </dict>

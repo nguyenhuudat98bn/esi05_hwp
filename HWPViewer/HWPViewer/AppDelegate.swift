@@ -75,7 +75,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-        ApplicationDelegate.shared.application(
+        if url.isFileURL, FileKind(url: url)?.isHwp == true {
+            IncomingFileHandler.shared.handle(url)
+            return true
+        }
+        return ApplicationDelegate.shared.application(
             app,
             open: url,
             sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
@@ -124,7 +128,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let hooks = SPNOnboardingHooks(
             launch: launchHooks,
-            makeHome: { HomeViewController() },
+            makeHome: { MainTabBarController() },
             presentPaywall: { trigger, presenter, completion in
                 PaywallPresenter.shared.present(trigger: trigger, from: presenter, completion: completion)
             }
@@ -141,7 +145,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         case "intro": return SPNIntroViewController(config: config.intro)
         case "status": return SPNStatusViewController(config: config.status ?? SPNStatusConfig())
         case "prepare": return SPNPrepareForAdsViewController(config: config.prepareAds)
-        case "home": return HomeViewController()
+        case "home": return MainTabBarController()
+        case "tools", "settings":
+            let tab = MainTabBarController()
+            tab.loadViewIfNeeded()
+            tab.selectedIndex = name == "tools" ? 1 : 2
+            return tab
+        case "import", "more", "rename":
+            let tab = MainTabBarController()
+            tab.loadViewIfNeeded()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                (tab.viewControllers?.first as? HomeViewController)?.debugPresent(name)
+            }
+            return tab
+        case "search": return SearchViewController()
+        case "viewer", "editor":
+            guard let item = FileStore.shared.hwpFiles().first else { return MainTabBarController() }
+            return HwpViewerViewController(item: item, startInEditMode: name == "editor")
+        case "select_pdf": return SelectFileViewController(tool: .pdfToHwp)
+        case "convert_result":
+            guard let item = FileStore.shared.hwpFiles().first else { return MainTabBarController() }
+            return ConvertResultViewController(outputURL: item.url, size: item.size)
+        case "paywall": return PaywallViewController()
         default: return nil
         }
     }

@@ -1,0 +1,87 @@
+//
+//  FileItem.swift
+//  HWPViewer
+//
+//  A document stored in the app's Documents folder (HWP/HWPX plus PDF/DOC sources for conversion).
+//
+
+import Foundation
+import UniformTypeIdentifiers
+
+enum FileKind: String, CaseIterable {
+    case hwp, hwpx, pdf, doc, docx
+
+    init?(url: URL) {
+        self.init(rawValue: url.pathExtension.lowercased())
+    }
+
+    var isHwp: Bool { self == .hwp || self == .hwpx }
+    var isDoc: Bool { self == .doc || self == .docx }
+
+    /// Extensions grouped by the "file family" used in Tools → Select File.
+    static let hwpExtensions: Set<String> = ["hwp", "hwpx"]
+    static let pdfExtensions: Set<String> = ["pdf"]
+    static let docExtensions: Set<String> = ["doc", "docx"]
+
+    var utType: UTType? {
+        switch self {
+        case .hwp: return UTType("com.spn.hwpviewer.hwp") ?? UTType(filenameExtension: "hwp")
+        case .hwpx: return UTType("com.spn.hwpviewer.hwpx") ?? UTType(filenameExtension: "hwpx")
+        case .pdf: return .pdf
+        case .doc: return UTType("com.microsoft.word.doc") ?? UTType(filenameExtension: "doc")
+        case .docx: return UTType("org.openxmlformats.wordprocessingml.document") ?? UTType(filenameExtension: "docx")
+        }
+    }
+}
+
+/// Family used by pickers and the Tools flow.
+enum FileFamily {
+    case hwp, pdf, doc
+
+    var extensions: Set<String> {
+        switch self {
+        case .hwp: return FileKind.hwpExtensions
+        case .pdf: return FileKind.pdfExtensions
+        case .doc: return FileKind.docExtensions
+        }
+    }
+
+    var utTypes: [UTType] {
+        extensions.compactMap { FileKind(rawValue: $0)?.utType }
+    }
+}
+
+struct FileItem: Identifiable, Equatable {
+    var url: URL
+    var name: String
+    var kind: FileKind
+    var size: Int64
+    var modifiedAt: Date
+    var lastOpenedAt: Date?
+    var isBookmarked: Bool
+
+    var id: String { url.lastPathComponent }
+    var displayName: String { url.deletingPathExtension().lastPathComponent }
+
+    var sizeText: String {
+        ByteCountFormatter.string(fromByteCount: size, countStyle: .file)
+    }
+
+    var dateText: String {
+        Self.dateFormatter.string(from: modifiedAt)
+    }
+
+    /// "12/03/2026 · 1.2 MB"
+    var metaText: String { "\(dateText) · \(sizeText)" }
+
+    private static let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy"
+        return formatter
+    }()
+
+    static func == (lhs: FileItem, rhs: FileItem) -> Bool {
+        lhs.url == rhs.url && lhs.size == rhs.size && lhs.modifiedAt == rhs.modifiedAt
+            && lhs.lastOpenedAt == rhs.lastOpenedAt && lhs.isBookmarked == rhs.isBookmarked
+    }
+}

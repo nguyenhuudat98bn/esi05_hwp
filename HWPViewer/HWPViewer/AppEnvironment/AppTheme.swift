@@ -9,7 +9,7 @@ import UIKit
 import SPNComponent
 
 enum AppTheme {
-    static let fallbackPrimary = UIColor(0xFF2024)
+    static let fallbackPrimary = UIColor(0x2E90FA)
 
     /// Builds the theme from the current remote snapshot (defaults before the first fetch).
     static func make() -> SPNTheme {
@@ -18,9 +18,9 @@ enum AppTheme {
         theme.onPrimary = .white
         theme.background = .white
         theme.cardBackground = .white
-        theme.mainText = UIColor(0x000D1A)
-        theme.secondaryText = UIColor(0x8E90A0)
-        theme.border = UIColor(0xD9D9D9)
+        theme.mainText = UIColor(0x181D27)
+        theme.secondaryText = UIColor(0x717680)
+        theme.border = UIColor(0xCECFD2)
         theme.disabled = UIColor(0x9E9E9E)
         return theme
     }
