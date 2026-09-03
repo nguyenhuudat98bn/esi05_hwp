@@ -95,35 +95,6 @@ internal enum Asset {
       internal static let imgPremiumBannerSparkle2 = ImageAsset(name: "App/img_premium_banner_sparkle2")
       internal static let imgSaveChangesFolder = ImageAsset(name: "App/img_save_changes_folder")
     }
-    internal enum Flags {
-      internal static let flagAr = ImageAsset(name: "flag_ar")
-      internal static let flagCs = ImageAsset(name: "flag_cs")
-      internal static let flagDa = ImageAsset(name: "flag_da")
-      internal static let flagDe = ImageAsset(name: "flag_de")
-      internal static let flagEl = ImageAsset(name: "flag_el")
-      internal static let flagEn = ImageAsset(name: "flag_en")
-      internal static let flagEs = ImageAsset(name: "flag_es")
-      internal static let flagFr = ImageAsset(name: "flag_fr")
-      internal static let flagHe = ImageAsset(name: "flag_he")
-      internal static let flagHi = ImageAsset(name: "flag_hi")
-      internal static let flagHr = ImageAsset(name: "flag_hr")
-      internal static let flagHu = ImageAsset(name: "flag_hu")
-      internal static let flagId = ImageAsset(name: "flag_id")
-      internal static let flagIt = ImageAsset(name: "flag_it")
-      internal static let flagJa = ImageAsset(name: "flag_ja")
-      internal static let flagKo = ImageAsset(name: "flag_ko")
-      internal static let flagNl = ImageAsset(name: "flag_nl")
-      internal static let flagPl = ImageAsset(name: "flag_pl")
-      internal static let flagPtPT = ImageAsset(name: "flag_pt-PT")
-      internal static let flagRo = ImageAsset(name: "flag_ro")
-      internal static let flagRu = ImageAsset(name: "flag_ru")
-      internal static let flagSv = ImageAsset(name: "flag_sv")
-      internal static let flagTh = ImageAsset(name: "flag_th")
-      internal static let flagTr = ImageAsset(name: "flag_tr")
-      internal static let flagVi = ImageAsset(name: "flag_vi")
-      internal static let flagZhHans = ImageAsset(name: "flag_zh-Hans")
-      internal static let flagZhHant = ImageAsset(name: "flag_zh-Hant")
-    }
     internal enum Intro {
       internal static let icSwipe = ImageAsset(name: "ic_swipe")
       internal static let imgIntro1 = ImageAsset(name: "img_intro_1")
@@ -160,6 +131,7 @@ internal enum Asset {
     }
     internal enum Splash {
       internal static let logo = ImageAsset(name: "logo")
+      internal static let splashBg = ImageAsset(name: "splash_bg")
     }
     internal static let icImageConvertCloseTip = ImageAsset(name: "ic_image_convert_close_tip")
   }

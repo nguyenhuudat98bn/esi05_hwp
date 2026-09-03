@@ -28,6 +28,7 @@ enum OnboardingConfigs {
             subtitle: nil
         )
         config.backgroundColor = UIColor(hex: "#EEF3FC")
+        config.backgroundImage = Asset.Assets.Splash.splashBg.image
         config.titleColor = AppColors.textPrimary
         config.titleFont = AppFonts.semibold(18)
         config.progressTrackColor = UIColor(hex: "#F0F0F1")
@@ -45,11 +46,6 @@ enum OnboardingConfigs {
     /// selected = blue card with white text.
     static func language() -> SPNLanguageConfig {
         var config = SPNLanguageConfig()
-        config.languages = SPNLanguage.defaults.map { language in
-            var copy = language
-            copy.flagImageName = "flag_\(language.code)"
-            return copy
-        }
         config.title = L10n.languageTitle
         config.applyButtonTitle = L10n.languageNext
         config.applyButtonType = .text
@@ -72,7 +68,9 @@ enum OnboardingConfigs {
         config.cell.selectedBackgroundColor = AppColors.primary
         config.cell.selectedBorderColor = AppColors.primary
         config.cell.selectedTextColor = .white
+        config.cell.selectedIcon = SPNOnboardingAssets.radioOn
         config.cell.selectedIconTint = .white
+        config.cell.deselectedIcon = SPNOnboardingAssets.radioOff
         return config
     }
 

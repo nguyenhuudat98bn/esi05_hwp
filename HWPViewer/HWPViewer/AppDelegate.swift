@@ -176,6 +176,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             hooks.skipConsent = true
             return SPNSplashViewController(config: config.splash, hooks: hooks)
         case "language": return SPNLanguageViewController(config: config.language, source: .onboarding)
+        case "language_selected":
+            var language = config.language
+            language.preselectCurrentLanguage = true
+            return SPNLanguageViewController(config: language, source: .onboarding)
         case "language_settings": return SPNLanguageViewController(config: config.language, source: .settings)
         case "intro": return SPNIntroViewController(config: config.intro)
         case "status": return SPNStatusViewController(config: config.status ?? SPNStatusConfig())
