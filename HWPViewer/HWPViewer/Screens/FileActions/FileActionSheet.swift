@@ -132,16 +132,20 @@ final class FileActionSheet: UIViewController {
         let grabber = UIView()
         grabber.backgroundColor = AppColors.grabber
         grabber.layer.cornerRadius = 2
+        let grabberWrap = UIView()
+        grabberWrap.addSubview(grabber)
         grabber.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.bottom.equalToSuperview()
             make.width.equalTo(32)
             make.height.equalTo(4)
         }
 
-        let stack = UIStackView(arrangedSubviews: [grabber, header, divider] + rows)
+        let stack = UIStackView(arrangedSubviews: [grabberWrap, header, divider] + rows)
         stack.axis = .vertical
         stack.spacing = 4
         stack.alignment = .fill
-        stack.setCustomSpacing(16, after: grabber)
+        stack.setCustomSpacing(16, after: grabberWrap)
         stack.setCustomSpacing(16, after: header)
         stack.setCustomSpacing(8, after: divider)
         sheet.addSubview(stack)
@@ -150,7 +154,6 @@ final class FileActionSheet: UIViewController {
             make.leading.trailing.equalToSuperview().inset(AppMetrics.screenPadding)
             make.bottom.equalTo(view.safeAreaLayoutGuide).inset(12)
         }
-        grabber.snp.makeConstraints { $0.centerX.equalToSuperview() }
         sheet.transform = CGAffineTransform(translationX: 0, y: 400)
     }
 

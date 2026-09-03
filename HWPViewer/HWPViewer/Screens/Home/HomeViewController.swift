@@ -230,6 +230,8 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         case "import": presentImportSheet()
         case "more": if let first = items.first { actions.presentMore(for: first) }
         case "rename": if let first = items.first { actions.rename(first) }
+        case "delete": if let first = items.first { DeleteConfirmPopup.present(from: self, fileName: first.name) {} }
+        case "offline": OfflinePopup.present(from: self) {}
         default: break
         }
     }

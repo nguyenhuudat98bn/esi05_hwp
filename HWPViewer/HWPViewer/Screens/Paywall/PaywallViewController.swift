@@ -103,7 +103,7 @@ final class PaywallViewController: UIViewController {
         // Feature table
         let table = UIStackView()
         table.axis = .vertical
-        table.spacing = 14
+        table.spacing = 12
         table.addArrangedSubview(featureRow(nil, pro: nil, basic: nil))
         let features: [(String, Bool)] = [
             (L10n.paywallFeatureOpenRead, true),
@@ -195,7 +195,7 @@ final class PaywallViewController: UIViewController {
             make.trailing.lessThanOrEqualTo(proView.snp.leading).offset(-8)
             make.centerY.equalToSuperview()
         }
-        row.snp.makeConstraints { $0.height.greaterThanOrEqualTo(20) }
+        row.snp.makeConstraints { $0.height.equalTo(22) }
         return row
     }
 
@@ -340,6 +340,7 @@ final class PaywallViewController: UIViewController {
 final class PlanCardView: UIControl {
     var onTap: (() -> Void)?
 
+    private let borderView = UIView()
     private let radio = UIView()
     private let check = UIImageView(image: Asset.Assets.App.icPaywallCheckWhite.image.withRenderingMode(.alwaysTemplate))
     private let titleLabel = UILabel()
@@ -350,7 +351,11 @@ final class PlanCardView: UIControl {
     override init(frame: CGRect) {
         super.init(frame: frame)
         layer.cornerRadius = 26
-        layer.borderWidth = 1.5
+        borderView.layer.cornerRadius = 26
+        borderView.layer.borderWidth = 1.5
+        borderView.isUserInteractionEnabled = false
+        addSubview(borderView)
+        borderView.snp.makeConstraints { $0.edges.equalToSuperview() }
         radio.layer.cornerRadius = 12
         radio.layer.borderWidth = 1.5
         radio.isUserInteractionEnabled = false
@@ -418,7 +423,7 @@ final class PlanCardView: UIControl {
 
     func setSelected(_ selected: Bool) {
         backgroundColor = selected ? AppColors.primarySoft : UIColor.white.withAlphaComponent(0.6)
-        layer.borderColor = (selected ? AppColors.primary : AppColors.border).cgColor
+        borderView.layer.borderColor = (selected ? AppColors.primary : AppColors.border).cgColor
         radio.backgroundColor = selected ? AppColors.primary : .clear
         radio.layer.borderColor = (selected ? AppColors.primary : AppColors.border).cgColor
         check.isHidden = !selected

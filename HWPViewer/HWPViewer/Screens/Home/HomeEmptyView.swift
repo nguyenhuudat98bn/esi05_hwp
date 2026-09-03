@@ -20,7 +20,7 @@ final class HomeEmptyView: UIView {
     private let button = UIButton(type: .system)
     private var cancellables = Set<AnyCancellable>()
 
-    init(image: UIImage?, title: String, subtitle: String? = nil, actionTitle: String? = nil, actionIcon: UIImage? = nil) {
+    init(image: UIImage?, title: String, subtitle: String? = nil, actionTitle: String? = nil, actionIcon: UIImage? = nil, imageSize: CGSize = CGSize(width: 165, height: 140)) {
         super.init(frame: .zero)
         imageView.image = image
         imageView.contentMode = .scaleAspectFit
@@ -65,7 +65,7 @@ final class HomeEmptyView: UIView {
             make.center.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(32)
         }
-        imageView.snp.makeConstraints { $0.size.equalTo(CGSize(width: 165, height: 140)) }
+        imageView.snp.makeConstraints { $0.size.equalTo(imageSize) }
         button.snp.makeConstraints { $0.height.equalTo(48) }
     }
 

@@ -101,10 +101,11 @@ final class FileCell: UITableViewCell {
     }
 }
 
-/// Document icon: HWP / PDF artwork from Figma; DOC falls back to a tinted badge.
+/// Document icon composed from the Figma vector parts: tinted body + folded corner + white glyph.
 final class FileKindIconView: UIView {
-    private let imageView = UIImageView()
-    private let page = UIView()
+    private let body = UIImageView(image: Asset.Assets.App.icFileBody.image.withRenderingMode(.alwaysTemplate))
+    private let fold = UIImageView(image: Asset.Assets.App.icFileFold.image)
+    private let glyph = UIImageView()
     private let badge = UILabel()
 
     var kind: FileKind = .hwp {
@@ -113,23 +114,33 @@ final class FileKindIconView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        imageView.contentMode = .scaleAspectFit
-        addSubview(imageView)
-        imageView.snp.makeConstraints { $0.edges.equalToSuperview() }
-        page.layer.cornerRadius = 6
-        addSubview(page)
-        page.snp.makeConstraints { $0.edges.equalToSuperview() }
-        badge.font = AppFonts.bold(10)
+        body.contentMode = .scaleAspectFit
+        fold.contentMode = .scaleAspectFit
+        glyph.contentMode = .scaleAspectFit
+        addSubview(body)
+        addSubview(fold)
+        addSubview(glyph)
+        addSubview(badge)
+        body.snp.makeConstraints { $0.edges.equalToSuperview() }
+        // Body is 33.5×40; fold is 10.7 square in the top-right corner; glyph ≈ 60% of the width, centred, slightly low.
+        fold.snp.makeConstraints { make in
+            make.top.trailing.equalToSuperview()
+            make.width.equalTo(self.snp.width).multipliedBy(10.72 / 33.53)
+            make.height.equalTo(fold.snp.width)
+        }
+        glyph.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview().offset(2)
+            make.width.equalTo(self.snp.width).multipliedBy(0.62)
+            make.height.equalTo(glyph.snp.width)
+        }
+        badge.font = AppFonts.bold(9)
         badge.textColor = .white
         badge.textAlignment = .center
-        badge.layer.cornerRadius = 4
-        badge.clipsToBounds = true
-        page.addSubview(badge)
         badge.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.bottom.equalToSuperview().inset(6)
-            make.height.equalTo(16)
-            make.leading.trailing.equalToSuperview().inset(3)
+            make.centerY.equalToSuperview().offset(4)
+            make.leading.trailing.equalToSuperview().inset(2)
         }
         apply()
     }
@@ -140,16 +151,17 @@ final class FileKindIconView: UIView {
     private func apply() {
         switch kind {
         case .hwp, .hwpx:
-            imageView.image = Asset.Assets.App.imgHwpFile.image
-            page.isHidden = true
+            body.tintColor = AppColors.hwp
+            glyph.image = Asset.Assets.App.icFileGlyphHwp.image
+            badge.isHidden = true
         case .pdf:
-            imageView.image = Asset.Assets.App.imgPdfFile.image
-            page.isHidden = true
+            body.tintColor = AppColors.pdf
+            glyph.image = Asset.Assets.App.icFileGlyphPdf.image
+            badge.isHidden = true
         case .doc, .docx:
-            imageView.image = nil
-            page.isHidden = false
-            page.backgroundColor = AppColors.doc.withAlphaComponent(0.14)
-            badge.backgroundColor = AppColors.doc
+            body.tintColor = AppColors.doc
+            glyph.image = nil
+            badge.isHidden = false
             badge.text = kind.rawValue.uppercased()
         }
     }

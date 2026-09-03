@@ -16,8 +16,9 @@ final class SearchViewController: AppBaseViewController {
     private let fieldContainer = UIView()
     private let tableView = UITableView(frame: .zero, style: .plain)
     private lazy var emptyView = HomeEmptyView(
-        image: Asset.Assets.App.imgNoResultFound.image,
-        title: L10n.searchNoResult
+        image: Asset.Assets.App.imgNoResultFoundVector.image,
+        title: L10n.searchNoResult,
+        imageSize: CGSize(width: 120, height: 120)
     )
     private let viewModel = FileListViewModel(filter: .all)
     private var items: [FileItem] = []
@@ -87,7 +88,10 @@ final class SearchViewController: AppBaseViewController {
 
         emptyView.isHidden = true
         view.addSubview(emptyView)
-        emptyView.snp.makeConstraints { $0.edges.equalTo(tableView) }
+        emptyView.snp.makeConstraints { make in
+            make.leading.trailing.top.equalTo(tableView)
+            make.bottom.equalTo(view.keyboardLayoutGuide.snp.top)
+        }
     }
 
     private func bind() {

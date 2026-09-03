@@ -140,6 +140,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func makeDebugScreen(_ name: String) -> UIViewController? {
         let config = OnboardingConfigs.make()
         switch name {
+        case "splash":
+            // Never finishes: keeps the splash on screen for UI review.
+            var hooks = SPNLaunchFlowHooks(fetchRemoteConfig: { _ in })
+            hooks.skipTracking = true
+            hooks.skipConsent = true
+            return SPNSplashViewController(config: config.splash, hooks: hooks)
         case "language": return SPNLanguageViewController(config: config.language, source: .onboarding)
         case "language_settings": return SPNLanguageViewController(config: config.language, source: .settings)
         case "intro": return SPNIntroViewController(config: config.intro)
@@ -151,7 +157,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             tab.loadViewIfNeeded()
             tab.selectedIndex = name == "tools" ? 1 : 2
             return tab
-        case "import", "more", "rename":
+        case "import", "more", "rename", "delete", "offline":
             let tab = MainTabBarController()
             tab.loadViewIfNeeded()
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {

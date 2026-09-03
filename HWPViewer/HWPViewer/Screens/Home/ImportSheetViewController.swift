@@ -64,21 +64,25 @@ final class ImportSheetViewController: UIViewController {
         convertRow.spacing = 12
         convertRow.distribution = .fillEqually
 
-        let stack = UIStackView(arrangedSubviews: [grabber, title, importCard, convertRow, adSlot])
+        let grabberWrap = UIView()
+        grabberWrap.addSubview(grabber)
+        grabber.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.bottom.equalToSuperview()
+            make.width.equalTo(32)
+            make.height.equalTo(4)
+        }
+        let stack = UIStackView(arrangedSubviews: [grabberWrap, title, importCard, convertRow, adSlot])
         stack.axis = .vertical
         stack.spacing = 12
         stack.alignment = .fill
-        stack.setCustomSpacing(16, after: grabber)
+        stack.setCustomSpacing(16, after: grabberWrap)
         stack.setCustomSpacing(20, after: title)
         sheet.addSubview(stack)
         stack.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(10)
             make.leading.trailing.equalToSuperview().inset(AppMetrics.screenPadding)
             make.bottom.equalTo(view.safeAreaLayoutGuide).inset(16)
-        }
-        grabber.snp.makeConstraints { make in
-            make.width.equalTo(32)
-            make.height.equalTo(4)
         }
         importCard.snp.makeConstraints { $0.height.equalTo(80) }
         convertRow.snp.makeConstraints { $0.height.equalTo(88) }
