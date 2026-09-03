@@ -49,7 +49,6 @@ final class HomeViewController: AppBaseViewController {
         navigationView.isHidden = true
         setupViews()
         bind()
-        setupAdvertiser(on: .home)
         listAd.onChange = { [weak self] in self?.tableView.reloadData() }
         listAd.attachIfNeeded()
         SPNSession.shared.isFirstTimeOnboard = false
@@ -171,9 +170,24 @@ final class HomeViewController: AppBaseViewController {
             .store(in: &cancellables)
     }
 
+    /// Empty list → native at the bottom; list with files → inline row instead (never both).
+    private var bottomAdAttached = false
+
+    private func updateBottomAd(isEmpty: Bool) {
+        if isEmpty {
+            guard !bottomAdAttached else { return }
+            bottomAdAttached = true
+            nativeAdSlot.attach(place: .home, style: .native)
+        } else if bottomAdAttached {
+            bottomAdAttached = false
+            nativeAdSlot.detach()
+        }
+    }
+
     private func updateEmptyState() {
         let isEmpty = items.isEmpty
         emptyView.isHidden = !isEmpty
+        updateBottomAd(isEmpty: isEmpty)
         // Figma B2: no segment tabs / FAB when the library itself is empty.
         let libraryEmpty = isEmpty && viewModel.filter == .all
         tabs.isHidden = libraryEmpty

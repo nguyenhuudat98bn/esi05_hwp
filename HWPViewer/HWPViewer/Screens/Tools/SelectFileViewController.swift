@@ -29,7 +29,7 @@ final class SelectFileViewController: AppBaseViewController {
     init(tool: ToolKind) {
         self.tool = tool
         self.viewModel = FileListViewModel(filter: .family(tool.family))
-        super.init(place: .tools, navigationConfigs: SPNNavigationConfiguration(
+        super.init(place: .selectFile, navigationConfigs: SPNNavigationConfiguration(
             title: L10n.toolsSelectFile, hasBackButton: true,
             titleFont: AppFonts.semibold(18), titleColor: AppColors.textPrimary, backgroundColor: AppColors.background
         ))
@@ -43,8 +43,23 @@ final class SelectFileViewController: AppBaseViewController {
         bind()
     }
 
+    private var bottomAdAttached = false
+
+    /// Empty list → native at the bottom; list with files → inline row instead.
+    private func updateBottomAd(isEmpty: Bool) {
+        if isEmpty {
+            guard !bottomAdAttached else { return }
+            bottomAdAttached = true
+            nativeAdSlot.attach(place: .selectFile, style: .native)
+        } else if bottomAdAttached {
+            bottomAdAttached = false
+            nativeAdSlot.detach()
+        }
+    }
+
     private func setupViews() {
         containerStackView.addArrangedSubview(tableView)
+        containerStackView.addArrangedSubview(nativeAdSlot)
         tableView.backgroundColor = .clear
         tableView.separatorStyle = .none
         tableView.register(FileCell.self, forCellReuseIdentifier: FileCell.identifier)
@@ -70,7 +85,7 @@ final class SelectFileViewController: AppBaseViewController {
         view.addSubview(importButton)
         importButton.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(AppMetrics.screenPadding)
-            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(16)
+            make.bottom.equalTo(tableView.snp.bottom).inset(16)
             make.height.equalTo(AppMetrics.buttonHeight)
         }
     }
@@ -83,6 +98,7 @@ final class SelectFileViewController: AppBaseViewController {
                 tableView.reloadData()
                 emptyView.isHidden = !items.isEmpty
                 importButton.isHidden = items.isEmpty
+                updateBottomAd(isEmpty: items.isEmpty)
             }
             .store(in: &cancellables)
         importButton.tapPublisher.receive(on: DispatchQueue.main)
