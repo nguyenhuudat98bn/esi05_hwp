@@ -16,6 +16,16 @@ class AppBaseViewController: SPNBaseViewController {
         super.viewDidLoad()
         view.backgroundColor = AppColors.background
         statusBarView.backgroundColor = navigationView.configuration.backgroundColor
+        if !hidesBottomBarByDefault {
+            // Tab roots: content (including the native ad slot) must end above the floating tab bar.
+            // The tab controller reserves that space through `additionalSafeAreaInsets`.
+            // Ads covered by other UI violate AdMob policy.
+            containerStackView.snp.remakeConstraints { make in
+                make.top.equalTo(statusBarView.snp.bottom)
+                make.leading.trailing.equalToSuperview()
+                make.bottom.equalTo(view.safeAreaLayoutGuide)
+            }
+        }
         NotificationCenter.default.publisher(for: actionWhenPurchaseCompleted)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in self?.premiumStatusDidChange() }

@@ -13,7 +13,7 @@ internal enum L10n {
   ///   HWPViewer
   /// 
   ///   Created by datnh on 01/4/24.
-  internal static var applicationName: String { return L10n.tr("Localizable", "ApplicationName", fallback: "HWP Viewer - Hangul Reader") }
+  internal static var applicationName: String { return L10n.tr("Localizable", "ApplicationName", fallback: "HWP Editor") }
   /// Update Now
   internal static var updateNowButton: String { return L10n.tr("Localizable", "update_now_button", fallback: "Update Now") }
   /// A newer version of this app is available. Please update to continue using the app.

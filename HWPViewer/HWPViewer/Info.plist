@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CFBundleDisplayName</key>
+	<string>HWP Editor</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
@@ -34,7 +36,7 @@
 	<key>FacebookClientToken</key>
 	<string>04a513d85fb97408e503609713e1eaaf</string>
 	<key>FacebookDisplayName</key>
-	<string>HWP Viewer - Hangul Reader</string>
+	<string>HWP Editor</string>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-9064163751027478~6749725301</string>
 	<key>LSSupportsOpeningDocumentsInPlace</key>

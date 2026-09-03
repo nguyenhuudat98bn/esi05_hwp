@@ -78,7 +78,7 @@ final class HomeViewController: AppBaseViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = AppMetrics.cellHeight + AppMetrics.cellSpacing
-        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 96, right: 0)
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 80, right: 0)
         tableView.showsVerticalScrollIndicator = false
 
         // Header (cards + tabs) scrolls with the list.
@@ -110,7 +110,7 @@ final class HomeViewController: AppBaseViewController {
         emptyView.snp.makeConstraints { make in
             make.leading.trailing.equalTo(tableView)
             make.top.equalTo(tableView).offset(header.frame.height)
-            make.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.bottom.equalTo(tableView)
         }
 
         fab.setImage(Asset.Assets.App.icRoundPlus.image.withRenderingMode(.alwaysTemplate), for: .normal)
@@ -125,7 +125,7 @@ final class HomeViewController: AppBaseViewController {
         fab.snp.makeConstraints { make in
             make.size.equalTo(48)
             make.trailing.equalToSuperview().inset(16)
-            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(52)
+            make.bottom.equalTo(tableView.snp.bottom).inset(24)
         }
     }
 

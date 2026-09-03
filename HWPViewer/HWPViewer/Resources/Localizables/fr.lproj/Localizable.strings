@@ -7,7 +7,7 @@
 */
 
 //MARK: - LoadData
-"ApplicationName" = "HWP Viewer - Hangul Reader";
+"ApplicationName" = "HWP Editor";
 "LoadData.SubTitle" = "Projet de base de Nova JSC";
 "LoadData.LoadTitle" = "Les publicités vont bientôt s\'afficher...";
 "LoadData.Network.Title" = "Connexion Internet perdue";
