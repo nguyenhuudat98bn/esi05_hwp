@@ -77,7 +77,14 @@ final class SearchViewController: AppBaseViewController {
             make.height.equalTo(40)
         }
 
+        // Everything (list + bottom native) stays above the keyboard so an ad is never covered.
+        containerStackView.snp.remakeConstraints { make in
+            make.top.equalTo(statusBarView.snp.bottom)
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(view.keyboardLayoutGuide.snp.top)
+        }
         containerStackView.addArrangedSubview(tableView)
+        containerStackView.addArrangedSubview(nativeAdSlot)
         tableView.backgroundColor = .clear
         tableView.separatorStyle = .none
         tableView.register(FileCell.self, forCellReuseIdentifier: FileCell.identifier)
@@ -91,9 +98,20 @@ final class SearchViewController: AppBaseViewController {
 
         emptyView.isHidden = true
         view.addSubview(emptyView)
-        emptyView.snp.makeConstraints { make in
-            make.leading.trailing.top.equalTo(tableView)
-            make.bottom.equalTo(view.keyboardLayoutGuide.snp.top)
+        emptyView.snp.makeConstraints { $0.edges.equalTo(tableView) }
+    }
+
+    private var bottomAdAttached = false
+
+    /// No rows (nothing typed yet / no result) → native at the bottom, above the keyboard; results → inline row.
+    private func updateBottomAd(isEmpty: Bool) {
+        if isEmpty {
+            guard !bottomAdAttached else { return }
+            bottomAdAttached = true
+            nativeAdSlot.attach(place: .search, style: .native)
+        } else if bottomAdAttached {
+            bottomAdAttached = false
+            nativeAdSlot.detach()
         }
     }
 
@@ -112,6 +130,7 @@ final class SearchViewController: AppBaseViewController {
                 tableView.reloadData()
                 let query = viewModel.query.trimmingCharacters(in: .whitespacesAndNewlines)
                 emptyView.isHidden = !(items.isEmpty && !query.isEmpty)
+                updateBottomAd(isEmpty: items.isEmpty)
             }
             .store(in: &cancellables)
     }

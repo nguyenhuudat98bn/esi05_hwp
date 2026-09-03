@@ -120,7 +120,7 @@
         {
             "place_name": "search_screen",
             "native_template_size": "small",
-            "is_enable": false
+            "is_enable": true
         },
         {
             "place_name": "convert_screen",
