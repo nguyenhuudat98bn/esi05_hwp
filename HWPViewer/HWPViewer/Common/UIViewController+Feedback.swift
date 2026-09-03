@@ -46,7 +46,7 @@ final class ToastView: UIView {
     init(message: String) {
         super.init(frame: .zero)
         tag = Self.tag
-        backgroundColor = UIColor(hex: "#1F2937").withAlphaComponent(0.92)
+        backgroundColor = AppColors.primary
         layer.cornerRadius = 20
         let label = UILabel()
         label.text = message

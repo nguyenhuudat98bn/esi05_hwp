@@ -77,8 +77,8 @@ final class FileActionSheet: UIViewController {
         let iconView = FileKindIconView()
         iconView.kind = item.kind
         let nameLabel = UILabel()
-        nameLabel.text = item.displayName
-        nameLabel.font = AppFonts.semibold(15)
+        nameLabel.text = item.name
+        nameLabel.font = AppFonts.medium(16)
         nameLabel.textColor = AppColors.textPrimary
         nameLabel.lineBreakMode = .byTruncatingMiddle
         let metaLabel = UILabel()

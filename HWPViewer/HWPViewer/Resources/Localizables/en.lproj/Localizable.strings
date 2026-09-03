@@ -93,7 +93,7 @@
 "Search.Placeholder" = "Search files...";
 "Search.NoResult" = "No result";
 "Popup.Offline.Title" = "You're Offline";
-"Popup.Offline.Message" = "Please check your internet connection and try again.";
+"Popup.Offline.Message" = "Check your network and try again.";
 "Popup.Later" = "Later";
 "Popup.TryAgain" = "Try Again";
 "Popup.Cancel" = "Cancel";
@@ -104,7 +104,7 @@
 "Popup.Exit.Message" = "Are you sure you want to exit the app?";
 "Popup.Exit.Confirm" = "Exit Now";
 "Popup.SaveChanges.Title" = "Save Changes?";
-"Popup.SaveChanges.Message" = "Do you want to save your changes to this file?";
+"Popup.SaveChanges.Message" = "Do you want to save your changes before leaving?";
 "Popup.Delete.Title" = "Delete File?";
 "Popup.Delete.Message" = "This file will be permanently deleted.";
 "Popup.Error.Title" = "Something went wrong";
@@ -173,12 +173,12 @@
 "Paywall.Title" = "Go Premium with HWP Pro";
 "Paywall.Column.Pro" = "PRO";
 "Paywall.Column.Basic" = "BASIC";
-"Paywall.Feature.OpenRead" = "Open & read HWP/HWPX";
-"Paywall.Feature.Edit" = "Edit HWP files";
-"Paywall.Feature.Convert" = "Convert PDF/DOC to HWP";
-"Paywall.Feature.Print" = "Print & share";
-"Paywall.Feature.AdFree" = "Ad-free experience";
-"Paywall.Feature.Unlimited" = "Unlimited files";
+"Paywall.Feature.OpenRead" = "Open & Read HWP/HWPX";
+"Paywall.Feature.Edit" = "Edit HWP Files with Ease";
+"Paywall.Feature.Convert" = "Convert PDF or DOC to HWP";
+"Paywall.Feature.Print" = "Faster Processing Speed";
+"Paywall.Feature.AdFree" = "Enjoy an Ad-Free Experience";
+"Paywall.Feature.Unlimited" = "Unlock All Premium Features";
 "Paywall.Note.Trial" = "Free for %@ days, then %@ per year";
 "Paywall.Note.NoTrial" = "%@ per year. Cancel anytime.";
 "Paywall.Option.FirstMonth" = "%@ for the first month";

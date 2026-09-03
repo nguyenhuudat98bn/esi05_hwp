@@ -70,7 +70,7 @@ final class HwpFormatToolbar: UIView {
     @available(*, unavailable)
     required init?(coder: NSCoder) { fatalError() }
 
-    override var intrinsicContentSize: CGSize { CGSize(width: UIView.noIntrinsicMetric, height: 64) }
+    override var intrinsicContentSize: CGSize { CGSize(width: UIView.noIntrinsicMetric, height: 56) }
 
     private func setupLayout() {
         let bottomLine = UIView()

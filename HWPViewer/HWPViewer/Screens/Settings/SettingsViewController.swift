@@ -68,9 +68,6 @@ final class SettingsViewController: AppBaseViewController {
 
         let card = UIView()
         card.backgroundColor = AppColors.surface
-        card.layer.cornerRadius = 16
-        card.layer.borderWidth = 1
-        card.layer.borderColor = AppColors.divider.cgColor
         let rows = UIStackView()
         rows.axis = .vertical
         rows.spacing = 8
@@ -86,7 +83,7 @@ final class SettingsViewController: AppBaseViewController {
             rows.addArrangedSubview(view)
         }
         card.addSubview(rows)
-        rows.snp.makeConstraints { $0.edges.equalToSuperview().inset(UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)) }
+        rows.snp.makeConstraints { $0.edges.equalToSuperview() }
 
         let content = UIStackView(arrangedSubviews: [premiumBanner, card])
         content.axis = .vertical

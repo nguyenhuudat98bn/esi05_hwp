@@ -81,7 +81,7 @@ final class SearchViewController: AppBaseViewController {
         tableView.register(FileCell.self, forCellReuseIdentifier: FileCell.identifier)
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.rowHeight = 78
+        tableView.rowHeight = AppMetrics.cellHeight + 16
         tableView.keyboardDismissMode = .onDrag
         tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 24, right: 0)
 

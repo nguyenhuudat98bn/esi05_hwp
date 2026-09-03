@@ -23,7 +23,6 @@ final class HwpViewerViewController: AppBaseViewController {
 
     // MARK: - Controls
     private let formatToolbar = HwpFormatToolbar()
-    private let toolbarBackdrop = UIView()
     private let editHeader = HwpEditHeaderView()
     private let searchBarView = HwpSearchBar()
     private let bottomBar = UIView()
@@ -165,14 +164,16 @@ final class HwpViewerViewController: AppBaseViewController {
         }
 
         containerStackView.spacing = 0
+        formatToolbar.isHidden = true
+        containerStackView.addArrangedSubview(formatToolbar)
         containerStackView.addArrangedSubview(scrollView)
         containerStackView.addArrangedSubview(nativeAdSlot)
         containerStackView.addArrangedSubview(bottomBar)
         coordinator.attach(scrollView: scrollView, vm: vm)
         scrollView.backgroundColor = AppColors.viewerBackground
 
-        // Bottom bar: "Edit HWP". Stays in the stack in both modes (alpha toggled) so the document
-        // scroll view keeps a constant size; resizing it makes the engine canvas mis-layout tiles.
+        // Bottom bar: "Edit HWP" (read mode only). Note: never un-hide `nativeAdSlot` by hand —
+        // an empty slot takes ~170pt and shrinks the document area.
         bottomBar.backgroundColor = AppColors.surface
         let topLine = UIView()
         topLine.backgroundColor = AppColors.surfaceCircle
@@ -213,22 +214,8 @@ final class HwpViewerViewController: AppBaseViewController {
             make.bottom.equalTo(bottomBar.snp.top).offset(-26)
         }
 
-        // Edit chrome
-        formatToolbar.isHidden = true
-        toolbarBackdrop.isHidden = true
-        toolbarBackdrop.backgroundColor = AppColors.toolbarBackground
-        view.addSubview(toolbarBackdrop)
-        view.addSubview(formatToolbar)
-        formatToolbar.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
-            make.height.equalTo(64)
-            make.bottom.equalTo(view.keyboardLayoutGuide.snp.top)
-        }
-        toolbarBackdrop.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
-            make.top.equalTo(formatToolbar.snp.bottom)
-            make.bottom.equalToSuperview()
-        }
+        // Edit chrome (toolbar sits under the header, Figma F2)
+        formatToolbar.snp.makeConstraints { $0.height.equalTo(56) }
 
         editHeader.isHidden = true
         view.addSubview(editHeader)
@@ -313,7 +300,7 @@ final class HwpViewerViewController: AppBaseViewController {
             case .textColor(let hex): vm.applyFormat(RhwpCharFormat(textColor: hex ?? "#000000"))
             case .fontSize(let pt): vm.applyFormat(RhwpCharFormat(fontSizePt: pt))
             case .pickColor(let target): presentColorPicker(for: target)
-            case .selectionHint: showToast(L10n.viewerSelectionRequired, bottomInset: 120)
+            case .selectionHint: showToast(L10n.viewerSelectionRequired, bottomInset: 320)
             }
         }
     }
@@ -335,7 +322,7 @@ final class HwpViewerViewController: AppBaseViewController {
         if !didShowSelectionHint {
             didShowSelectionHint = true
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { [weak self] in
-                self?.showToast(L10n.viewerSelectionHint, bottomInset: 120)
+                self?.showToast(L10n.viewerSelectionHint, bottomInset: 320)
             }
         }
     }
@@ -437,9 +424,7 @@ final class HwpViewerViewController: AppBaseViewController {
         let isEdit = vm.mode == .edit
         editHeader.isHidden = !isEdit
         formatToolbar.isHidden = !isEdit
-        toolbarBackdrop.isHidden = !isEdit
-        bottomBar.alpha = isEdit ? 0 : 1
-        bottomBar.isUserInteractionEnabled = !isEdit
+        bottomBar.isHidden = isEdit
         pageIndicator.isHidden = isEdit || vm.pages.isEmpty
         if !isEdit { formatToolbar.collapseStrips() }
     }

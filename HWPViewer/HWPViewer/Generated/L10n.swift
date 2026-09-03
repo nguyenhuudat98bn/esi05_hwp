@@ -152,18 +152,18 @@ internal enum L10n {
   internal static var paywallColumnBasic: String { return L10n.tr("Localizable", "Paywall.Column.Basic", fallback: "BASIC") }
   /// PRO
   internal static var paywallColumnPro: String { return L10n.tr("Localizable", "Paywall.Column.Pro", fallback: "PRO") }
-  /// Ad-free experience
-  internal static var paywallFeatureAdFree: String { return L10n.tr("Localizable", "Paywall.Feature.AdFree", fallback: "Ad-free experience") }
-  /// Convert PDF/DOC to HWP
-  internal static var paywallFeatureConvert: String { return L10n.tr("Localizable", "Paywall.Feature.Convert", fallback: "Convert PDF/DOC to HWP") }
-  /// Edit HWP files
-  internal static var paywallFeatureEdit: String { return L10n.tr("Localizable", "Paywall.Feature.Edit", fallback: "Edit HWP files") }
-  /// Open & read HWP/HWPX
-  internal static var paywallFeatureOpenRead: String { return L10n.tr("Localizable", "Paywall.Feature.OpenRead", fallback: "Open & read HWP/HWPX") }
-  /// Print & share
-  internal static var paywallFeaturePrint: String { return L10n.tr("Localizable", "Paywall.Feature.Print", fallback: "Print & share") }
-  /// Unlimited files
-  internal static var paywallFeatureUnlimited: String { return L10n.tr("Localizable", "Paywall.Feature.Unlimited", fallback: "Unlimited files") }
+  /// Enjoy an Ad-Free Experience
+  internal static var paywallFeatureAdFree: String { return L10n.tr("Localizable", "Paywall.Feature.AdFree", fallback: "Enjoy an Ad-Free Experience") }
+  /// Convert PDF or DOC to HWP
+  internal static var paywallFeatureConvert: String { return L10n.tr("Localizable", "Paywall.Feature.Convert", fallback: "Convert PDF or DOC to HWP") }
+  /// Edit HWP Files with Ease
+  internal static var paywallFeatureEdit: String { return L10n.tr("Localizable", "Paywall.Feature.Edit", fallback: "Edit HWP Files with Ease") }
+  /// Open & Read HWP/HWPX
+  internal static var paywallFeatureOpenRead: String { return L10n.tr("Localizable", "Paywall.Feature.OpenRead", fallback: "Open & Read HWP/HWPX") }
+  /// Faster Processing Speed
+  internal static var paywallFeaturePrint: String { return L10n.tr("Localizable", "Paywall.Feature.Print", fallback: "Faster Processing Speed") }
+  /// Unlock All Premium Features
+  internal static var paywallFeatureUnlimited: String { return L10n.tr("Localizable", "Paywall.Feature.Unlimited", fallback: "Unlock All Premium Features") }
   /// %@ per year. Cancel anytime.
   internal static func paywallNoteNoTrial(_ p1: Any) -> String {
     return L10n.tr("Localizable", "Paywall.Note.NoTrial", String(describing: p1), fallback: "%@ per year. Cancel anytime.")
@@ -210,12 +210,12 @@ internal enum L10n {
   internal static var popupExitMessage: String { return L10n.tr("Localizable", "Popup.Exit.Message", fallback: "Are you sure you want to exit the app?") }
   /// Exit App?
   internal static var popupExitTitle: String { return L10n.tr("Localizable", "Popup.Exit.Title", fallback: "Exit App?") }
-  /// Please check your internet connection and try again.
-  internal static var popupOfflineMessage: String { return L10n.tr("Localizable", "Popup.Offline.Message", fallback: "Please check your internet connection and try again.") }
+  /// Check your network and try again.
+  internal static var popupOfflineMessage: String { return L10n.tr("Localizable", "Popup.Offline.Message", fallback: "Check your network and try again.") }
   /// You're Offline
   internal static var popupOfflineTitle: String { return L10n.tr("Localizable", "Popup.Offline.Title", fallback: "You're Offline") }
-  /// Do you want to save your changes to this file?
-  internal static var popupSaveChangesMessage: String { return L10n.tr("Localizable", "Popup.SaveChanges.Message", fallback: "Do you want to save your changes to this file?") }
+  /// Do you want to save your changes before leaving?
+  internal static var popupSaveChangesMessage: String { return L10n.tr("Localizable", "Popup.SaveChanges.Message", fallback: "Do you want to save your changes before leaving?") }
   /// Save Changes?
   internal static var popupSaveChangesTitle: String { return L10n.tr("Localizable", "Popup.SaveChanges.Title", fallback: "Save Changes?") }
   /// Welcome back

@@ -49,7 +49,7 @@ final class RenameDialog: UIViewController {
         dimView.snp.makeConstraints { $0.edges.equalToSuperview() }
 
         card.backgroundColor = AppColors.surface
-        card.layer.cornerRadius = AppMetrics.popupRadius
+        card.layer.cornerRadius = 28
         view.addSubview(card)
         card.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(28)
@@ -58,16 +58,16 @@ final class RenameDialog: UIViewController {
 
         let titleLabel = UILabel()
         titleLabel.text = titleText
-        titleLabel.font = AppFonts.semibold(18)
+        titleLabel.font = AppFonts.medium(20)
         titleLabel.textColor = AppColors.textPrimary
-        titleLabel.textAlignment = .center
+        titleLabel.textAlignment = .left
 
         fieldContainer.layer.cornerRadius = 12
-        fieldContainer.layer.borderWidth = 1.5
-        fieldContainer.backgroundColor = AppColors.surfaceMuted
+        fieldContainer.layer.borderWidth = 1
+        fieldContainer.backgroundColor = AppColors.surface
         textField.text = initialName
         textField.placeholder = L10n.renamePlaceholder
-        textField.font = AppFonts.regular(15)
+        textField.font = AppFonts.medium(14)
         textField.textColor = AppColors.textPrimary
         textField.clearButtonMode = .whileEditing
         textField.returnKeyType = .done
@@ -84,27 +84,27 @@ final class RenameDialog: UIViewController {
 
         let cancelButton = UIButton(type: .system)
         cancelButton.setTitle(L10n.popupCancel, for: .normal)
-        cancelButton.titleLabel?.font = AppFonts.semibold(15)
+        cancelButton.titleLabel?.font = AppFonts.medium(16)
         cancelButton.setTitleColor(AppColors.textPrimary, for: .normal)
         cancelButton.backgroundColor = AppColors.surfaceMuted
-        cancelButton.layer.cornerRadius = 24
+        cancelButton.layer.cornerRadius = 22
         okButton.setTitle(confirmTitle, for: .normal)
-        okButton.titleLabel?.font = AppFonts.semibold(15)
+        okButton.titleLabel?.font = AppFonts.medium(16)
         okButton.setTitleColor(.white, for: .normal)
-        okButton.layer.cornerRadius = 24
+        okButton.layer.cornerRadius = 22
         let buttons = UIStackView(arrangedSubviews: [cancelButton, okButton])
         buttons.axis = .horizontal
-        buttons.spacing = 12
+        buttons.spacing = 16
         buttons.distribution = .fillEqually
-        buttons.snp.makeConstraints { $0.height.equalTo(48) }
+        buttons.snp.makeConstraints { $0.height.equalTo(44) }
 
         let stack = UIStackView(arrangedSubviews: [titleLabel, fieldContainer, errorLabel, buttons])
         stack.axis = .vertical
         stack.spacing = 8
-        stack.setCustomSpacing(18, after: titleLabel)
-        stack.setCustomSpacing(20, after: errorLabel)
+        stack.setCustomSpacing(16, after: titleLabel)
+        stack.setCustomSpacing(16, after: errorLabel)
         card.addSubview(stack)
-        stack.snp.makeConstraints { $0.edges.equalToSuperview().inset(22) }
+        stack.snp.makeConstraints { $0.edges.equalToSuperview().inset(UIEdgeInsets(top: 24, left: 16, bottom: 16, right: 16)) }
 
         cancelButton.tapPublisher.receive(on: DispatchQueue.main)
             .sink { [weak self] _ in self?.dismissDialog(nil) }.store(in: &cancellables)

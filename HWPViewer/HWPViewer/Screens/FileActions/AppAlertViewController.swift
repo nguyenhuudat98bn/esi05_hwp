@@ -92,6 +92,7 @@ final class AppAlertViewController: UIViewController {
             button.setTitle(action.title, for: .normal)
             button.titleLabel?.font = AppFonts.semibold(15)
             button.layer.cornerRadius = 24
+            button.titleLabel?.font = AppFonts.semibold(16)
             switch action.style {
             case .primary:
                 button.backgroundColor = AppColors.primary
@@ -119,11 +120,23 @@ final class AppAlertViewController: UIViewController {
         stack.axis = .vertical
         stack.spacing = 12
         stack.alignment = .fill
-        stack.setCustomSpacing(20, after: messageLabel)
+        stack.setCustomSpacing(32, after: messageLabel)
         stack.setCustomSpacing(16, after: iconView)
         card.addSubview(stack)
-        stack.snp.makeConstraints { $0.edges.equalToSuperview().inset(24) }
+        stack.snp.makeConstraints { $0.edges.equalToSuperview().inset(UIEdgeInsets(top: 32, left: 15, bottom: 24, right: 15)) }
         iconView.snp.makeConstraints { $0.height.equalTo(iconHeight) }
+
+        let closeButton = UIButton(type: .system)
+        closeButton.setImage(Asset.Assets.App.icCancelX.image.withRenderingMode(.alwaysTemplate), for: .normal)
+        closeButton.tintColor = AppColors.textSecondary
+        card.addSubview(closeButton)
+        closeButton.snp.makeConstraints { make in
+            make.top.trailing.equalToSuperview().inset(10)
+            make.size.equalTo(28)
+        }
+        closeButton.tapPublisher.receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in self?.dismiss(animated: true) }
+            .store(in: &cancellables)
     }
 
     private func finish(with index: Int) {

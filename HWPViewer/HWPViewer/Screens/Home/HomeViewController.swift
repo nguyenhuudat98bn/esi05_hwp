@@ -77,7 +77,7 @@ final class HomeViewController: AppBaseViewController {
         tableView.register(FileCell.self, forCellReuseIdentifier: FileCell.identifier)
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.rowHeight = 78
+        tableView.rowHeight = AppMetrics.cellHeight + AppMetrics.cellSpacing
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 96, right: 0)
         tableView.showsVerticalScrollIndicator = false
 
@@ -99,10 +99,10 @@ final class HomeViewController: AppBaseViewController {
         tabs.snp.makeConstraints { make in
             make.top.equalTo(cardsView.snp.bottom).offset(16)
             make.leading.trailing.equalToSuperview().inset(AppMetrics.screenPadding)
-            make.height.equalTo(40)
-            make.bottom.equalToSuperview().inset(8)
+            make.height.equalTo(26)
+            make.bottom.equalToSuperview().inset(12)
         }
-        header.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 8 + 88 + 16 + 40 + 8)
+        header.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 8 + 88 + 16 + 26 + 12)
         tableView.tableHeaderView = header
 
         emptyView.isHidden = true
@@ -125,7 +125,7 @@ final class HomeViewController: AppBaseViewController {
         fab.snp.makeConstraints { make in
             make.size.equalTo(48)
             make.trailing.equalToSuperview().inset(16)
-            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(24)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(52)
         }
     }
 
@@ -171,6 +171,10 @@ final class HomeViewController: AppBaseViewController {
     private func updateEmptyState() {
         let isEmpty = items.isEmpty
         emptyView.isHidden = !isEmpty
+        // Figma B2: no segment tabs / FAB when the library itself is empty.
+        let libraryEmpty = isEmpty && viewModel.filter == .all
+        tabs.isHidden = libraryEmpty
+        fab.isHidden = libraryEmpty
         switch viewModel.filter {
         case .recent: emptyView.update(title: L10n.homeEmptyRecent, subtitle: nil, actionTitle: nil)
         case .bookmark: emptyView.update(title: L10n.homeEmptyBookmark, subtitle: nil, actionTitle: nil)

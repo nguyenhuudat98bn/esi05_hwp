@@ -61,6 +61,7 @@ struct FileItem: Identifiable, Equatable {
     var isBookmarked: Bool
 
     var id: String { url.lastPathComponent }
+    /// Name without extension (rename dialog, convert output).
     var displayName: String { url.deletingPathExtension().lastPathComponent }
 
     var sizeText: String {
@@ -71,12 +72,12 @@ struct FileItem: Identifiable, Equatable {
         Self.dateFormatter.string(from: modifiedAt)
     }
 
-    /// "12/03/2026 · 1.2 MB"
+    /// "05/28/2026 12:00 · 145 MB"
     var metaText: String { "\(dateText) · \(sizeText)" }
 
     private static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "dd/MM/yyyy"
+        formatter.dateFormat = "MM/dd/yyyy HH:mm"
         return formatter
     }()
 

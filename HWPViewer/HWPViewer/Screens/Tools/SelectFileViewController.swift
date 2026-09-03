@@ -49,7 +49,7 @@ final class SelectFileViewController: AppBaseViewController {
         tableView.register(FileCell.self, forCellReuseIdentifier: FileCell.identifier)
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.rowHeight = 78
+        tableView.rowHeight = AppMetrics.cellHeight + AppMetrics.cellSpacing
         tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 100, right: 0)
 
         emptyView.isHidden = true
@@ -142,8 +142,7 @@ extension SelectFileViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FileCell.identifier, for: indexPath) as! FileCell
         let item = items[indexPath.row]
-        cell.configure(item, showsBookmark: false, showsMore: true)
-        cell.onMore = { [weak self] in self?.actions.presentMore(for: item, actions: [.rename, .share, .delete]) }
+        cell.configure(item, showsBookmark: false, showsMore: false)
         return cell
     }
 

@@ -35,11 +35,11 @@ final class FileCell: UITableViewCell {
         card.layer.cornerRadius = AppMetrics.cellRadius
         contentView.addSubview(card)
         card.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview().inset(5)
-            make.leading.trailing.equalToSuperview().inset(AppMetrics.screenPadding)
+            make.top.bottom.equalToSuperview().inset(6)
+            make.leading.trailing.equalToSuperview()
         }
 
-        nameLabel.font = AppFonts.medium(15)
+        nameLabel.font = AppFonts.medium(16)
         nameLabel.textColor = AppColors.textPrimary
         nameLabel.lineBreakMode = .byTruncatingMiddle
         metaLabel.font = AppFonts.regular(12)
@@ -59,13 +59,13 @@ final class FileCell: UITableViewCell {
         card.addSubview(moreButton)
 
         iconView.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(12)
+            make.leading.equalToSuperview().inset(AppMetrics.screenPadding)
             make.centerY.equalToSuperview()
             make.size.equalTo(CGSize(width: 34, height: 40))
             make.top.equalToSuperview().inset(11)
         }
         textStack.snp.makeConstraints { make in
-            make.leading.equalTo(iconView.snp.trailing).offset(12)
+            make.leading.equalTo(iconView.snp.trailing).offset(16)
             make.centerY.equalToSuperview()
             make.trailing.equalTo(bookmarkButton.snp.leading).offset(-8)
         }
@@ -91,7 +91,7 @@ final class FileCell: UITableViewCell {
 
     func configure(_ item: FileItem, showsBookmark: Bool = true, showsMore: Bool = true) {
         iconView.kind = item.kind
-        nameLabel.text = item.displayName
+        nameLabel.text = item.name
         metaLabel.text = item.metaText
         bookmarkButton.isHidden = !showsBookmark
         moreButton.isHidden = !showsMore
