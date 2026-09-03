@@ -1,0 +1,30 @@
+/* 
+  Localizable.strings
+  HWPViewer
+
+  Created by datnh on 01/4/24.
+  
+*/
+
+//MARK: - LoadData
+"ApplicationName" = "HWP Viewer - Hangul Reader";
+"LoadData.SubTitle" = "Base project of Nova JSC";
+"LoadData.LoadTitle" = "Ads are about to be show...";
+"LoadData.Network.Title" = "Internet connection lost";
+"LoadData.Network.Description" = "Please check your connection and re-open application again.";
+//MARK: - Language
+"Language.Title" = "Select Language";
+"Language.ApplyButton" = "Done";
+//MARK: - Introduce
+"Introduce.Step1.Title" = "Step 1 title";
+"Introduce.Step2.Title" = "Step 2 title";
+"Introduce.Step3.Title" = "Step 3 title";
+"Introduce.NextButton" = "Next";
+"Introduce.StartButton" = "Start";
+//MARK: - Home
+"Home.Title" = "Home";
+//MARK: - Purchases
+"Purchase.Title" = "PREMIUM VERSION";
+"Purchase.SuccessMessage" = "Congratulations, you have successfully upgraded to the PREMIUM version. Enjoy your experience!";
+"Purchase.RestoreSuccessMessage" = "Successfully restored the PREMIUM version";
+"Purchase.FailedMessage" = "Transaction failed, please try again later";

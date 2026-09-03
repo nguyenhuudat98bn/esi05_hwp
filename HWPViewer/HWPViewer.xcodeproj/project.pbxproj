@@ -1,0 +1,657 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AADCAC3C2F6BAB94002F053F /* SPNComponent in Frameworks */ = {isa = PBXBuildFile; productRef = AADCAC3B2F6BAB94002F053F /* SPNComponent */; };
+		AADCAC3F2F6BAC25002F053F /* SPNComponent in Frameworks */ = {isa = PBXBuildFile; productRef = AADCAC3E2F6BAC25002F053F /* SPNComponent */; };
+		DF4F975F2EA9D21000B9FDB6 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = DF4F975E2EA9D21000B9FDB6 /* FirebaseAnalytics */; };
+		DF4F97612EA9D21000B9FDB6 /* FirebaseAnalyticsCore in Frameworks */ = {isa = PBXBuildFile; productRef = DF4F97602EA9D21000B9FDB6 /* FirebaseAnalyticsCore */; };
+		DF4F97632EA9D21000B9FDB6 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = DF4F97622EA9D21000B9FDB6 /* FirebaseCore */; };
+		DF4F97652EA9D21000B9FDB6 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = DF4F97642EA9D21000B9FDB6 /* FirebaseCrashlytics */; };
+		DF4F97672EA9D21000B9FDB6 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = DF4F97662EA9D21000B9FDB6 /* FirebaseMessaging */; };
+		DF4F97692EA9D21000B9FDB6 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = DF4F97682EA9D21000B9FDB6 /* FirebaseRemoteConfig */; };
+		DF6B8EE02E5C586900E6D9AE /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = DF6B8EDF2E5C586900E6D9AE /* Lottie */; };
+		DFC109872E5C0C0C00B563C4 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFC109862E5C0C0B00B563C4 /* AdSupport.framework */; };
+		DFC109892E5C0C2B00B563C4 /* AppTrackingTransparency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFC109882E5C0C2B00B563C4 /* AppTrackingTransparency.framework */; };
+		DFCE14E62D9E3BB500DB3E8E /* FacebookBasics in Frameworks */ = {isa = PBXBuildFile; productRef = DFCE14E52D9E3BB500DB3E8E /* FacebookBasics */; };
+		DFCE14E82D9E3BB500DB3E8E /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = DFCE14E72D9E3BB500DB3E8E /* FacebookCore */; };
+		DFCE14FD2D9E3D0E00DB3E8E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = DFCE14FC2D9E3D0E00DB3E8E /* SnapKit */; };
+		DFCE15002D9E3D2900DB3E8E /* SVProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = DFCE14FF2D9E3D2900DB3E8E /* SVProgressHUD */; };
+		DFCE15032D9E3D6A00DB3E8E /* FSPagerView in Frameworks */ = {isa = PBXBuildFile; productRef = DFCE15022D9E3D6A00DB3E8E /* FSPagerView */; };
+		DFCE15062D9E3D9D00DB3E8E /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = DFCE15052D9E3D9D00DB3E8E /* SkeletonView */; };
+		DFCE15092D9E3DCD00DB3E8E /* PanModal in Frameworks */ = {isa = PBXBuildFile; productRef = DFCE15082D9E3DCD00DB3E8E /* PanModal */; };
+		DFCE150C2D9E3DEA00DB3E8E /* CHIPageControl in Frameworks */ = {isa = PBXBuildFile; productRef = DFCE150B2D9E3DEA00DB3E8E /* CHIPageControl */; };
+		DFCE150F2D9E3E2100DB3E8E /* CombineCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = DFCE150E2D9E3E2100DB3E8E /* CombineCocoa */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		DFC109862E5C0C0B00B563C4 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		DFC109882E5C0C2B00B563C4 /* AppTrackingTransparency.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppTrackingTransparency.framework; path = System/Library/Frameworks/AppTrackingTransparency.framework; sourceTree = SDKROOT; };
+		DFCE14AF2D9E2F7E00DB3E8E /* HWPViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HWPViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		DFCE14C12D9E2F7F00DB3E8E /* Exceptions for "HWPViewer" folder in "HWPViewer" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = DFCE14AE2D9E2F7E00DB3E8E /* HWPViewer */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		DFCE14B12D9E2F7E00DB3E8E /* HWPViewer */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				DFCE14C12D9E2F7F00DB3E8E /* Exceptions for "HWPViewer" folder in "HWPViewer" target */,
+			);
+			path = HWPViewer;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DFCE14AC2D9E2F7E00DB3E8E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DFC109892E5C0C2B00B563C4 /* AppTrackingTransparency.framework in Frameworks */,
+				AADCAC3F2F6BAC25002F053F /* SPNComponent in Frameworks */,
+				DFC109872E5C0C0C00B563C4 /* AdSupport.framework in Frameworks */,
+				DF4F97692EA9D21000B9FDB6 /* FirebaseRemoteConfig in Frameworks */,
+				DFCE15092D9E3DCD00DB3E8E /* PanModal in Frameworks */,
+				DF6B8EE02E5C586900E6D9AE /* Lottie in Frameworks */,
+				DFCE150C2D9E3DEA00DB3E8E /* CHIPageControl in Frameworks */,
+				DFCE14E62D9E3BB500DB3E8E /* FacebookBasics in Frameworks */,
+				DFCE14FD2D9E3D0E00DB3E8E /* SnapKit in Frameworks */,
+				DFCE15032D9E3D6A00DB3E8E /* FSPagerView in Frameworks */,
+				DF4F975F2EA9D21000B9FDB6 /* FirebaseAnalytics in Frameworks */,
+				DFCE150F2D9E3E2100DB3E8E /* CombineCocoa in Frameworks */,
+				DF4F97672EA9D21000B9FDB6 /* FirebaseMessaging in Frameworks */,
+				DFCE15002D9E3D2900DB3E8E /* SVProgressHUD in Frameworks */,
+				DF4F97612EA9D21000B9FDB6 /* FirebaseAnalyticsCore in Frameworks */,
+				DF4F97652EA9D21000B9FDB6 /* FirebaseCrashlytics in Frameworks */,
+				DFCE15062D9E3D9D00DB3E8E /* SkeletonView in Frameworks */,
+				DFCE14E82D9E3BB500DB3E8E /* FacebookCore in Frameworks */,
+				AADCAC3C2F6BAB94002F053F /* SPNComponent in Frameworks */,
+				DF4F97632EA9D21000B9FDB6 /* FirebaseCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A92A04F01B4518E73A267AE1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DFC109882E5C0C2B00B563C4 /* AppTrackingTransparency.framework */,
+				DFC109862E5C0C0B00B563C4 /* AdSupport.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DFCE14A62D9E2F7E00DB3E8E = {
+			isa = PBXGroup;
+			children = (
+				DFCE14B12D9E2F7E00DB3E8E /* HWPViewer */,
+				DFCE14B02D9E2F7E00DB3E8E /* Products */,
+				A92A04F01B4518E73A267AE1 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		DFCE14B02D9E2F7E00DB3E8E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DFCE14AF2D9E2F7E00DB3E8E /* HWPViewer.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DFCE14AE2D9E2F7E00DB3E8E /* HWPViewer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DFCE14C22D9E2F7F00DB3E8E /* Build configuration list for PBXNativeTarget "HWPViewer" */;
+			buildPhases = (
+				DFCE14AB2D9E2F7E00DB3E8E /* Sources */,
+				DFCE14AC2D9E2F7E00DB3E8E /* Frameworks */,
+				DFCE14AD2D9E2F7E00DB3E8E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				DFCE14B12D9E2F7E00DB3E8E /* HWPViewer */,
+			);
+			name = HWPViewer;
+			packageProductDependencies = (
+				DFCE14E52D9E3BB500DB3E8E /* FacebookBasics */,
+				DFCE14E72D9E3BB500DB3E8E /* FacebookCore */,
+				DFCE14FC2D9E3D0E00DB3E8E /* SnapKit */,
+				DFCE14FF2D9E3D2900DB3E8E /* SVProgressHUD */,
+				DFCE15022D9E3D6A00DB3E8E /* FSPagerView */,
+				DFCE15052D9E3D9D00DB3E8E /* SkeletonView */,
+				DFCE15082D9E3DCD00DB3E8E /* PanModal */,
+				DFCE150B2D9E3DEA00DB3E8E /* CHIPageControl */,
+				DFCE150E2D9E3E2100DB3E8E /* CombineCocoa */,
+				DF6B8EDF2E5C586900E6D9AE /* Lottie */,
+				DF4F975E2EA9D21000B9FDB6 /* FirebaseAnalytics */,
+				DF4F97602EA9D21000B9FDB6 /* FirebaseAnalyticsCore */,
+				DF4F97622EA9D21000B9FDB6 /* FirebaseCore */,
+				DF4F97642EA9D21000B9FDB6 /* FirebaseCrashlytics */,
+				DF4F97662EA9D21000B9FDB6 /* FirebaseMessaging */,
+				DF4F97682EA9D21000B9FDB6 /* FirebaseRemoteConfig */,
+				AADCAC3B2F6BAB94002F053F /* SPNComponent */,
+				AADCAC3E2F6BAC25002F053F /* SPNComponent */,
+			);
+			productName = HWPViewer;
+			productReference = DFCE14AF2D9E2F7E00DB3E8E /* HWPViewer.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DFCE14A72D9E2F7E00DB3E8E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1630;
+				LastUpgradeCheck = 1630;
+				TargetAttributes = {
+					DFCE14AE2D9E2F7E00DB3E8E = {
+						CreatedOnToolsVersion = 16.3;
+					};
+				};
+			};
+			buildConfigurationList = DFCE14AA2D9E2F7E00DB3E8E /* Build configuration list for PBXProject "HWPViewer" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				ar,
+				"zh-Hans",
+				"zh-Hant",
+				hr,
+				cs,
+				da,
+				nl,
+				fr,
+				de,
+				el,
+				he,
+				hi,
+				hu,
+				id,
+				it,
+				ja,
+				ko,
+				pl,
+				"pt-PT",
+				ro,
+				ru,
+				es,
+				sv,
+				th,
+				tr,
+				vi,
+				ca,
+				fi,
+				ms,
+				sk,
+				uk,
+			);
+			mainGroup = DFCE14A62D9E2F7E00DB3E8E;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				DFCE14E42D9E3BB500DB3E8E /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
+				DFCE14FB2D9E3D0E00DB3E8E /* XCRemoteSwiftPackageReference "SnapKit" */,
+				DFCE14FE2D9E3D2900DB3E8E /* XCRemoteSwiftPackageReference "SVProgressHUD" */,
+				DFCE15012D9E3D6A00DB3E8E /* XCRemoteSwiftPackageReference "FSPagerView" */,
+				DFCE15042D9E3D9D00DB3E8E /* XCRemoteSwiftPackageReference "SkeletonView" */,
+				DFCE15072D9E3DCD00DB3E8E /* XCRemoteSwiftPackageReference "PanModal" */,
+				DFCE150A2D9E3DEA00DB3E8E /* XCRemoteSwiftPackageReference "CHIPageControl" */,
+				DFCE150D2D9E3E2100DB3E8E /* XCRemoteSwiftPackageReference "CombineCocoa" */,
+				DF6B8EDE2E5C586900E6D9AE /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				DF4F975D2EA9D20F00B9FDB6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				AADCAC3D2F6BAC25002F053F /* XCLocalSwiftPackageReference "../../SPNComponent" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = DFCE14B02D9E2F7E00DB3E8E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DFCE14AE2D9E2F7E00DB3E8E /* HWPViewer */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DFCE14AD2D9E2F7E00DB3E8E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DFCE14AB2D9E2F7E00DB3E8E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		DFCE14C32D9E2F7F00DB3E8E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 3FUMGRZ7LK;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HWPViewer/Info.plist;
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "We use tracking to provide personalized ads, helping keep the app free for you. Your data helps us display relevant ads and improve your experience.";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.9;
+				PRODUCT_BUNDLE_IDENTIFIER = com.spn.hwpviewer.editor;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = baseprojectdev;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		DFCE14C42D9E2F7F00DB3E8E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HWPViewer/Info.plist;
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "We use tracking to provide personalized ads, helping keep the app free for you. Your data helps us display relevant ads and improve your experience.";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.9;
+				PRODUCT_BUNDLE_IDENTIFIER = com.spn.hwpviewer.editor;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		DFCE14C52D9E2F7F00DB3E8E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		DFCE14C62D9E2F7F00DB3E8E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DFCE14AA2D9E2F7E00DB3E8E /* Build configuration list for PBXProject "HWPViewer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DFCE14C52D9E2F7F00DB3E8E /* Debug */,
+				DFCE14C62D9E2F7F00DB3E8E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DFCE14C22D9E2F7F00DB3E8E /* Build configuration list for PBXNativeTarget "HWPViewer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DFCE14C32D9E2F7F00DB3E8E /* Debug */,
+				DFCE14C42D9E2F7F00DB3E8E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		AADCAC3D2F6BAC25002F053F /* XCLocalSwiftPackageReference "../../SPNComponent" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../SPNComponent;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DF4F975D2EA9D20F00B9FDB6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.2.0;
+			};
+		};
+		DF6B8EDE2E5C586900E6D9AE /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.2;
+			};
+		};
+		DFCE14E42D9E3BB500DB3E8E /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
+			requirement = {
+				kind = exactVersion;
+				version = 18.0.1;
+			};
+		};
+		DFCE14FB2D9E3D0E00DB3E8E /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+		DFCE14FE2D9E3D2900DB3E8E /* XCRemoteSwiftPackageReference "SVProgressHUD" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SVProgressHUD/SVProgressHUD";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.3.1;
+			};
+		};
+		DFCE15012D9E3D6A00DB3E8E /* XCRemoteSwiftPackageReference "FSPagerView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/olbartek/FSPagerView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.8.3;
+			};
+		};
+		DFCE15042D9E3D9D00DB3E8E /* XCRemoteSwiftPackageReference "SkeletonView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Juanpe/SkeletonView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.31.0;
+			};
+		};
+		DFCE15072D9E3DCD00DB3E8E /* XCRemoteSwiftPackageReference "PanModal" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/slackhq/PanModal.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.7;
+			};
+		};
+		DFCE150A2D9E3DEA00DB3E8E /* XCRemoteSwiftPackageReference "CHIPageControl" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ChiliLabs/CHIPageControl.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.1;
+			};
+		};
+		DFCE150D2D9E3E2100DB3E8E /* XCRemoteSwiftPackageReference "CombineCocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/CombineCommunity/CombineCocoa.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.4.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AADCAC3B2F6BAB94002F053F /* SPNComponent */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SPNComponent;
+		};
+		AADCAC3E2F6BAC25002F053F /* SPNComponent */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SPNComponent;
+		};
+		DF4F975E2EA9D21000B9FDB6 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DF4F975D2EA9D20F00B9FDB6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		DF4F97602EA9D21000B9FDB6 /* FirebaseAnalyticsCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DF4F975D2EA9D20F00B9FDB6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsCore;
+		};
+		DF4F97622EA9D21000B9FDB6 /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DF4F975D2EA9D20F00B9FDB6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		DF4F97642EA9D21000B9FDB6 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DF4F975D2EA9D20F00B9FDB6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		DF4F97662EA9D21000B9FDB6 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DF4F975D2EA9D20F00B9FDB6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+		DF4F97682EA9D21000B9FDB6 /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DF4F975D2EA9D20F00B9FDB6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
+		};
+		DF6B8EDF2E5C586900E6D9AE /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DF6B8EDE2E5C586900E6D9AE /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+		DFCE14E52D9E3BB500DB3E8E /* FacebookBasics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DFCE14E42D9E3BB500DB3E8E /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookBasics;
+		};
+		DFCE14E72D9E3BB500DB3E8E /* FacebookCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DFCE14E42D9E3BB500DB3E8E /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookCore;
+		};
+		DFCE14FC2D9E3D0E00DB3E8E /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DFCE14FB2D9E3D0E00DB3E8E /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		DFCE14FF2D9E3D2900DB3E8E /* SVProgressHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DFCE14FE2D9E3D2900DB3E8E /* XCRemoteSwiftPackageReference "SVProgressHUD" */;
+			productName = SVProgressHUD;
+		};
+		DFCE15022D9E3D6A00DB3E8E /* FSPagerView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DFCE15012D9E3D6A00DB3E8E /* XCRemoteSwiftPackageReference "FSPagerView" */;
+			productName = FSPagerView;
+		};
+		DFCE15052D9E3D9D00DB3E8E /* SkeletonView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DFCE15042D9E3D9D00DB3E8E /* XCRemoteSwiftPackageReference "SkeletonView" */;
+			productName = SkeletonView;
+		};
+		DFCE15082D9E3DCD00DB3E8E /* PanModal */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DFCE15072D9E3DCD00DB3E8E /* XCRemoteSwiftPackageReference "PanModal" */;
+			productName = PanModal;
+		};
+		DFCE150B2D9E3DEA00DB3E8E /* CHIPageControl */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DFCE150A2D9E3DEA00DB3E8E /* XCRemoteSwiftPackageReference "CHIPageControl" */;
+			productName = CHIPageControl;
+		};
+		DFCE150E2D9E3E2100DB3E8E /* CombineCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DFCE150D2D9E3E2100DB3E8E /* XCRemoteSwiftPackageReference "CombineCocoa" */;
+			productName = CombineCocoa;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = DFCE14A72D9E2F7E00DB3E8E /* Project object */;
+}

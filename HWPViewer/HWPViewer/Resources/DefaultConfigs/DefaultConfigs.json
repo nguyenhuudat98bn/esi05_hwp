@@ -1,0 +1,246 @@
+{
+    "appconfigs": {
+        "accept_ad_version": "1.0.0",
+        "time_interval_show_ad": 25,
+        "max_time_splash_loading": 30,
+        "is_enable_retry": false,
+        "max_retry_count": 2,
+        "main_color": "#FF2024",
+        "is_enable_purchase_after_loading": true,
+        "time_show_button_close_purchase": 0,
+        "force_update_version": "0.9.0"
+    },
+    "language_intro_configs": {
+        "is_show_language": true,
+        "is_show_purchase_slide": true,
+        "is_enable_auto_skip_language": true,
+        "time_skip_language": 20,
+        "select_language_color": "#16B5FD",
+        "apply_language_color": "#16B5FD",
+        "apply_language_size": 30,
+        "is_language_default": false
+    },
+    "banner_onboard_configs": {
+        "title_color": "#FCFDFD",
+        "sub_title_color": "#8C9298",
+        "cta_background_color": "#16B5FD",
+        "cta_title_color": "#FCFDFD",
+        "background": "#1F2243",
+        "border_width": 0,
+        "border_color": "#EAEAEA",
+        "border_radius": 0,
+        "ad_title_color": "#010101",
+        "ad_background_color": "#FFD60A"
+    },
+    "banner_inline_configs": {
+        "title_color": "#1D1D1D",
+        "sub_title_color": "#7F7F7F",
+        "cta_background_color": "#E5252A",
+        "cta_title_color": "#FFFFFF",
+        "background": "#EDF3FF",
+        "border_width": 0,
+        "border_color": "#EAEAEA",
+        "border_radius": 8,
+        "ad_title_color": "#FFFFFF",
+        "ad_background_color": "#9E9E9E"
+    },
+    "banner_native_configs": {
+        "title_color": "#1D1D1D",
+        "sub_title_color": "#7F7F7F",
+        "cta_background_color": "#23AA49",
+        "cta_title_color": "#FFFFFF",
+        "background": "#EDF3FF",
+        "border_width": 0,
+        "border_color": "#EAEAEA",
+        "border_radius": 8,
+        "ad_title_color": "#FFFFFF",
+        "ad_background_color": "#9E9E9E"
+    },
+    "banner_native_places": [
+        {
+            "place_name": "language_screen",
+            "native_template_size": "small",
+            "is_enable": true
+        },
+        {
+            "place_name": "introduce_0_screen",
+            "native_template_size": "small",
+            "is_enable": false
+        },
+        {
+            "place_name": "introduce_1_screen",
+            "native_template_size": "full_screen",
+            "is_enable": false
+        },
+        {
+            "place_name": "introduce_2_screen",
+            "native_template_size": "small",
+            "is_enable": false
+        },
+        {
+            "place_name": "introduce_3_screen",
+            "native_template_size": "full_screen",
+            "is_enable": false
+        },
+        {
+            "place_name": "introduce_4_screen",
+            "native_template_size": "small",
+            "is_enable": true
+        },
+        {
+            "place_name": "permission_screen",
+            "native_template_size": "small",
+            "is_enable": false
+        },
+        {
+            "place_name": "home_screen",
+            "native_template_size": "small",
+            "is_enable": false
+        },
+        {
+            "place_name": "setting_screen",
+            "native_template_size": "small",
+            "is_enable": true
+        }
+    ],
+    "native_advertiser_units": [
+        {
+            "place_name": "onboarding",
+            "enc_high_ad_id": "4PuvMSaoJZBdkLlayaXEyCgNmcDDycDUYM8Ib5nrZOO7NQL5mkmI7WSrrUTWR1Yq",
+            "enc_medium_ad_id": "4PuvMSaoJZBdkLlayaXEyCgNmcDDycDUYM8Ib5nrZOO7NQL5mkmI7WSrrUTWR1Yq",
+            "enc_ad_id": "4PuvMSaoJZBdkLlayaXEyCgNmcDDycDUYM8Ib5nrZOO7NQL5mkmI7WSrrUTWR1Yq",
+            "countries": [
+                {
+                    "code": "tier1",
+                    "enc_high_ad_id": "4PuvMSaoJZBdkLlayaXEyCgNmcDDycDUYM8Ib5nrZOO7NQL5mkmI7WSrrUTWR1Yq",
+                    "enc_medium_ad_id": "4PuvMSaoJZBdkLlayaXEyCgNmcDDycDUYM8Ib5nrZOO7NQL5mkmI7WSrrUTWR1Yq",
+                    "enc_ad_id": "4PuvMSaoJZBdkLlayaXEyCgNmcDDycDUYM8Ib5nrZOO7NQL5mkmI7WSrrUTWR1Yq"
+                }
+            ]
+        },
+        {
+            "place_name": "others",
+            "enc_high_ad_id": "4PuvMSaoJZBdkLlayaXEyBSiznHmVs9R8xSuWwNm8vMCZxxCMF6cupt4Esq4MMWm",
+            "enc_medium_ad_id": "4PuvMSaoJZBdkLlayaXEyBSiznHmVs9R8xSuWwNm8vMCZxxCMF6cupt4Esq4MMWm",
+            "enc_ad_id": "4PuvMSaoJZBdkLlayaXEyBSiznHmVs9R8xSuWwNm8vMCZxxCMF6cupt4Esq4MMWm",
+            "countries": [
+                {
+                    "code": "tier1",
+                    "enc_high_ad_id": "4PuvMSaoJZBdkLlayaXEyBSiznHmVs9R8xSuWwNm8vMCZxxCMF6cupt4Esq4MMWm",
+                    "enc_medium_ad_id": "4PuvMSaoJZBdkLlayaXEyBSiznHmVs9R8xSuWwNm8vMCZxxCMF6cupt4Esq4MMWm",
+                    "enc_ad_id": "4PuvMSaoJZBdkLlayaXEyBSiznHmVs9R8xSuWwNm8vMCZxxCMF6cupt4Esq4MMWm"
+                }
+            ]
+        }
+    ],
+    "interstitial_advertiser": {
+        "units": [
+            "Se9LiUWNDycaQOKP0PDGCZ8wQdmTipTD7ic1M6pI45V3LfW/Gr0Esj3B6A1R3VuX"
+        ],
+        "places": [
+            {
+                "place_name": "language_screen",
+                "is_enable": true
+            },
+            {
+                "place_name": "introduce_screen",
+                "is_enable": true
+            },
+            {
+                "place_name": "home_screen",
+                "is_enable": true
+            }
+        ]
+    },
+    "open_app_advertiser_places": [
+        {
+            "place_name": "first_open_app",
+            "ad_type": "app_open",
+            "is_enable": true
+        },
+        {
+            "place_name": "open_app",
+            "ad_type": "app_open",
+            "is_enable": true
+        },
+        {
+            "place_name": "reopen_app",
+            "ad_type": "app_open",
+            "is_enable": true
+        }
+    ],
+    "open_app_advertiser_units": [
+        {
+            "place_name": "first_open_app",
+            "enc_high_ad_id": "4PuvMSaoJZBdkLlayaXEyHsWoD/Kusr12brHgWNpAF/3VpA2BZgdk38QmWsMBPG+",
+            "enc_medium_ad_id": "4PuvMSaoJZBdkLlayaXEyHsWoD/Kusr12brHgWNpAF/3VpA2BZgdk38QmWsMBPG+",
+            "enc_ad_id": "4PuvMSaoJZBdkLlayaXEyHsWoD/Kusr12brHgWNpAF/3VpA2BZgdk38QmWsMBPG+",
+            "countries": [
+                {
+                    "code": "tier1",
+                    "enc_high_ad_id": "4PuvMSaoJZBdkLlayaXEyHsWoD/Kusr12brHgWNpAF/3VpA2BZgdk38QmWsMBPG+",
+                    "enc_medium_ad_id": "4PuvMSaoJZBdkLlayaXEyHsWoD/Kusr12brHgWNpAF/3VpA2BZgdk38QmWsMBPG+",
+                    "enc_ad_id": "4PuvMSaoJZBdkLlayaXEyHsWoD/Kusr12brHgWNpAF/3VpA2BZgdk38QmWsMBPG+"
+                }
+            ]
+        },
+        {
+            "place_name": "open_app",
+            "enc_high_ad_id": "4PuvMSaoJZBdkLlayaXEyHsWoD/Kusr12brHgWNpAF/3VpA2BZgdk38QmWsMBPG+",
+            "enc_medium_ad_id": "4PuvMSaoJZBdkLlayaXEyHsWoD/Kusr12brHgWNpAF/3VpA2BZgdk38QmWsMBPG+",
+            "enc_ad_id": "4PuvMSaoJZBdkLlayaXEyHsWoD/Kusr12brHgWNpAF/3VpA2BZgdk38QmWsMBPG+",
+            "countries": [
+                {
+                    "code": "tier1",
+                    "enc_high_ad_id": "4PuvMSaoJZBdkLlayaXEyHsWoD/Kusr12brHgWNpAF/3VpA2BZgdk38QmWsMBPG+",
+                    "enc_medium_ad_id": "4PuvMSaoJZBdkLlayaXEyHsWoD/Kusr12brHgWNpAF/3VpA2BZgdk38QmWsMBPG+",
+                    "enc_ad_id": "4PuvMSaoJZBdkLlayaXEyHsWoD/Kusr12brHgWNpAF/3VpA2BZgdk38QmWsMBPG+"
+                }
+            ]
+        },
+        {
+            "place_name": "reopen_app",
+            "enc_high_ad_id": "4PuvMSaoJZBdkLlayaXEyHsWoD/Kusr12brHgWNpAF/3VpA2BZgdk38QmWsMBPG+",
+            "enc_medium_ad_id": "4PuvMSaoJZBdkLlayaXEyHsWoD/Kusr12brHgWNpAF/3VpA2BZgdk38QmWsMBPG+",
+            "enc_ad_id": "4PuvMSaoJZBdkLlayaXEyHsWoD/Kusr12brHgWNpAF/3VpA2BZgdk38QmWsMBPG+",
+            "countries": [
+                {
+                    "code": "tier1",
+                    "enc_high_ad_id": "4PuvMSaoJZBdkLlayaXEyHsWoD/Kusr12brHgWNpAF/3VpA2BZgdk38QmWsMBPG+",
+                    "enc_medium_ad_id": "4PuvMSaoJZBdkLlayaXEyHsWoD/Kusr12brHgWNpAF/3VpA2BZgdk38QmWsMBPG+",
+                    "enc_ad_id": "4PuvMSaoJZBdkLlayaXEyHsWoD/Kusr12brHgWNpAF/3VpA2BZgdk38QmWsMBPG+"
+                }
+            ]
+        }
+    ],
+    "global_configs": {
+        "preload_reopen_ad": true,
+        "max_seconds_reopen_waiting_time": 10,
+        "load_native_hf_percent": 100,
+        "load_ao_hf_percent": 100,
+        "tier1": [
+            "us"
+        ],
+        "tier2": [
+            "kr"
+        ],
+        "tier3": [
+            "af"
+        ]
+    },
+    "iap_configs": {
+        "is_show_in_tools": true,
+        "is_show_in_view_file": true,
+        "weekly_id": "com.spn.scanxpro.prd.weekly",
+        "weekly_trial_id": "com.spn.scanxpro.prd.weekly.trial",
+        "yearly_id": "com.spn.scanxpro.prd.yearly",
+        "yearly_trial_id": "com.spn.scanxpro.prd.yearly.trial",
+        "enable_trial": true,
+        "continue_button_version": 1,
+        "time_show_button_close_purchase_since_second_time": 1,
+        "continue_button_at_popup_iap_version": 2,
+        "max_paywall_shows_per_session": 2,
+        "percent_show_paywall": 35,
+        "title_trial_version": 2
+    }
+}

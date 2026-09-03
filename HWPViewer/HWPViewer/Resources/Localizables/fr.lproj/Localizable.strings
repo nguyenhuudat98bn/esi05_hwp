@@ -1,0 +1,68 @@
+/* 
+  Localizable.strings
+  HWPViewer
+
+  Created by datnh on 01/4/24.
+  
+*/
+
+//MARK: - LoadData
+"ApplicationName" = "HWP Viewer - Hangul Reader";
+"LoadData.SubTitle" = "Projet de base de Nova JSC";
+"LoadData.LoadTitle" = "Les publicités vont bientôt s\'afficher...";
+"LoadData.Network.Title" = "Connexion Internet perdue";
+"LoadData.Network.Description" = "Pour une meilleure expérience, veuillez activer votre connexion Internet.";
+"LoadData.Network.CheckConnection" = "Vérifier la connexion";
+"LoadData.Network.UseWithoutInternet" = "Utiliser sans Internet";
+//MARK: - Language
+"Language.Title" = "Sélectionner la langue";
+"Language.ApplyButton" = "Terminé";
+"Language.ApplySuccess" = "Langue appliquée avec succès !";
+//MARK: - Introduce
+"Introduce.Step1.Title" = "Titre de l\'étape 1";
+"Introduce.Step2.Title" = "Titre de l\'étape 2";
+"Introduce.Step3.Title" = "Titre de l\'étape 3";
+"Introduce.NextButton" = "Suivant";
+"Introduce.StartButton" = "Commencer";
+//MARK: - Home
+"Home.Title" = "Accueil";
+//MARK: - Purchases slide
+"PurchasesSlide.Step1.Title" = "Bienvenue";
+"PurchasesSlide.Step1.SubTitle" = "NOVA PROJECT";
+"PurchasesSlide.Step1.ButtonTitle" = "COMMENÇONS";
+"PurchasesSlide.Step2.Title" = "Titre étape 2";
+"PurchasesSlide.Step2.SubTitle" = "Sous-titre étape 2";
+"PurchasesSlide.Step2.ButtonTitle" = "CONTINUER";
+"PurchasesSlide.Step3.Title" = "Titre étape 3";
+"PurchasesSlide.Step3.SubTitle" = "Sous-titre étape 3";
+"PurchasesSlide.Step3.ButtonTitle" = "CONTINUER";
+"PurchasesSlide.ScanDocuments" = "Documents";
+"PurchasesSlide.ScanIDCards" = "Cartes d\'identité";
+"PurchasesSlide.ScanPassports" = "Passeports";
+"PurchasesSlide.ConvertToPDF" = "Convertir en PDF";
+"PurchasesSlide.ConvertToDOCX" = "Convertir en DOCX";
+"PurchasesSlide.ConvertToJPG" = "Convertir en JPG";
+//MARK: - Purchases
+"Purchase.Title" = "VERSION PREMIUM";
+"Purchase.SuccessMessage" = "Félicitations, vous avez réussi la mise à niveau vers la version PREMIUM. Profitez de votre expérience !";
+"Purchase.RestoreSuccessMessage" = "Version PREMIUM restaurée avec succès";
+"Purchase.FailedMessage" = "La transaction a échoué, veuillez réessayer plus tard";
+"Purchase.Benefit1" = "Modifier le texte PDF";
+"Purchase.Benefit2" = "SIGNER DES DOCUMENTS";
+"Purchase.Benefit3" = "Convertir des fichiers en PDF";
+"Purchase.Benefit4" = "Outils d\'édition avancés";
+"Purchase.Benefit5" = "Supprimer les publicités définitivement";
+"Purchase.FreeTrial" = "Essai gratuit de %@ jours";
+"Purchase.PricePerWeek" = "%@/semaine";
+"Purchase.Weekly" = "Hebdomadaire";
+"Purchase.Yearly" = "Annuel";
+"Purchase.1Year" = "An";
+"Purchase.1Week" = "Semaine";
+"Purchase.ButtonContinue" = "Continuer";
+"Purchase.TermOfUse" = "Conditions d\'utilisation";
+"Purchase.PrivacyPolicy" = "Politique de confidentialité";
+"Purchase.ButtonRestore" = "Restaurer";
+//MARK: - Force update
+"update_required_title" = "Mise à jour requise";
+"update_required_message" = "Une nouvelle version de cette application est disponible. Veuillez mettre à jour pour continuer à utiliser l\'application.";
+"update_now_button" = "Mettre à jour";

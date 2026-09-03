@@ -1,0 +1,68 @@
+/* 
+  Localizable.strings
+  HWPViewer
+
+  Created by datnh on 01/4/24.
+  
+*/
+
+//MARK: - LoadData
+"ApplicationName" = "HWP Viewer - Hangul Reader";
+"LoadData.SubTitle" = "Base project of Nova JSC";
+"LoadData.LoadTitle" = "Ads are about to be show...";
+"LoadData.Network.Title" = "Internet connection lost";
+"LoadData.Network.Description" = "For the best app experience, please enable your Internet connection.";
+"LoadData.Network.CheckConnection" = "Check Connection";
+"LoadData.Network.UseWithoutInternet" = "Use without Internet";
+//MARK: - Language
+"Language.Title" = "Select Language";
+"Language.ApplyButton" = "Done";
+"Language.ApplySuccess" = "Language applied successfully!";
+//MARK: - Introduce
+"Introduce.Step1.Title" = "Step 1 title";
+"Introduce.Step2.Title" = "Step 2 title";
+"Introduce.Step3.Title" = "Step 3 title";
+"Introduce.NextButton" = "Next";
+"Introduce.StartButton" = "Start";
+//MARK: - Home
+"Home.Title" = "Home";
+//MARK: - Purchases slide
+"PurchasesSlide.Step1.Title" = "Welcome";
+"PurchasesSlide.Step1.SubTitle" = "NOVA PROJECT";
+"PurchasesSlide.Step1.ButtonTitle" = "LET'S START";
+"PurchasesSlide.Step2.Title" = "Step2 Title";
+"PurchasesSlide.Step2.SubTitle" = "Step2 SubTitle";
+"PurchasesSlide.Step2.ButtonTitle" = "CONTINUE";
+"PurchasesSlide.Step3.Title" = "Step3 Title";
+"PurchasesSlide.Step3.SubTitle" = "Step3 SubTitle";
+"PurchasesSlide.Step3.ButtonTitle" = "CONTINUE";
+"PurchasesSlide.ScanDocuments" = "Documents";
+"PurchasesSlide.ScanIDCards" = "ID Cards";
+"PurchasesSlide.ScanPassports" = "Passports";
+"PurchasesSlide.ConvertToPDF" = "Convert to PDF";
+"PurchasesSlide.ConvertToDOCX" = "Convert to DOCX";
+"PurchasesSlide.ConvertToJPG" = "Convert to JPG";
+//MARK: - Purchases
+"Purchase.Title" = "PREMIUM VERSION";
+"Purchase.SuccessMessage" = "Congratulations, you have successfully upgraded to the PREMIUM version. Enjoy your experience!";
+"Purchase.RestoreSuccessMessage" = "Successfully restored the PREMIUM version";
+"Purchase.FailedMessage" = "Transaction failed, please try again later";
+"Purchase.Benefit1" = "Edit PDF Text";
+"Purchase.Benefit2" = "E-SIGN DOCUMENTS";
+"Purchase.Benefit3" = "Convert Files to PDF";
+"Purchase.Benefit4" = "Advanced Editing Tools";
+"Purchase.Benefit5" = "Remove Ads For Good";
+"Purchase.FreeTrial" = "%@-day free trial";
+"Purchase.PricePerWeek" = "%@/week";
+"Purchase.Weekly" = "Weekly";
+"Purchase.Yearly" = "Yearly";
+"Purchase.1Year" = "Year";
+"Purchase.1Week" = "Week";
+"Purchase.ButtonContinue" = "Continue";
+"Purchase.TermOfUse" = "Terms of Use";
+"Purchase.PrivacyPolicy" = "Privacy Policy";
+"Purchase.ButtonRestore" = "Restore";
+//MARK: - Force update
+"update_required_title" = "Update Required";
+"update_required_message" = "A newer version of this app is available. Please update to continue using the app.";
+"update_now_button" = "Update Now";

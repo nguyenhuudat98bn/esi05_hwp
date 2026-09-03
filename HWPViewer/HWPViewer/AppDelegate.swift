@@ -1,0 +1,193 @@
+//
+//  AppDelegate.swift
+//  HWPViewer
+//
+//  Created by datnh on 01/4/25.
+//
+
+import UIKit
+import StoreKit
+import GoogleMobileAds
+import FirebaseCore
+import FirebaseMessaging
+import FirebaseAnalytics
+import FBSDKCoreKit
+import FBAudienceNetwork
+import VungleAdsSDK
+import MTGSDK
+import SPNComponent
+
+@main
+class AppDelegate: UIResponder, UIApplicationDelegate {
+    var window: UIWindow?
+    let iapObserver = StoreKitManager.shared
+    private var onboarding: SPNOnboardingCoordinator?
+
+    /// DEBUG only: launch with env `SPN_DISABLE_ADS=1` to run the flow without ads (UI smoke tests).
+    static var adsDisabledForDebug: Bool {
+        #if DEBUG
+        return ProcessInfo.processInfo.environment["SPN_DISABLE_ADS"] == "1"
+        #else
+        return false
+        #endif
+    }
+
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        FirebaseApp.configure()
+        MobileAds.shared.start()
+        ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+        FBAdSettings.setAdvertiserTrackingEnabled(true)
+        VunglePrivacySettings.setGDPRStatus(true)
+        VunglePrivacySettings.setGDPRMessageVersion("v1.0.0")
+        VunglePrivacySettings.setCCPAStatus(true)
+        MTGSDK.sharedInstance().consentStatus = true
+        MTGSDK.sharedInstance().doNotTrackStatus = false
+
+        configureSPNComponent()
+
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        let navigationController = UINavigationController()
+        navigationController.isNavigationBarHidden = true
+        window.rootViewController = navigationController
+        window.makeKeyAndVisible()
+        self.window = window
+
+        onboarding = makeOnboardingCoordinator(navigationController: navigationController)
+        #if DEBUG
+        // SIMCTL_CHILD_SPN_DEBUG_SCREEN=language|intro|status|prepare opens one package screen directly (reskin / smoke test).
+        if let debugScreen = ProcessInfo.processInfo.environment["SPN_DEBUG_SCREEN"], let vc = makeDebugScreen(debugScreen) {
+            navigationController.setViewControllers([vc], animated: false)
+        } else {
+            onboarding?.start()
+        }
+        #else
+        onboarding?.start()
+        #endif
+
+        Messaging.messaging().delegate = self
+        UNUserNotificationCenter.current().delegate = self
+        SKPaymentQueue.default().add(iapObserver)
+        return true
+    }
+
+    func applicationWillTerminate(_ application: UIApplication) {
+        SKPaymentQueue.default().remove(iapObserver)
+    }
+
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+        ApplicationDelegate.shared.application(
+            app,
+            open: url,
+            sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
+            annotation: options[UIApplication.OpenURLOptionsKey.annotation]
+        )
+    }
+
+    // MARK: - SPNComponent
+
+    private func configureSPNComponent() {
+        let store = FirebaseRemoteConfigStore.shared
+        SPNComponent.configure(
+            theme: SPNTheme(),
+            ads: SPNAdsEnvironment(
+                adSecret: AppSecrets.adSecret,
+                isPremium: { SPNSession.shared.isPremium || AppDelegate.adsDisabledForDebug },
+                analytics: TrackingManager.shared,
+                appStoreURL: URL(string: appStoreUrl)
+            ),
+            defaultsStore: store.defaultsStore
+        )
+        SPNTheme.current = AppTheme.make()
+    }
+
+    private func makeOnboardingCoordinator(navigationController: UINavigationController) -> SPNOnboardingCoordinator {
+        let store = FirebaseRemoteConfigStore.shared
+        var launchHooks = SPNLaunchFlowHooks(
+            fetchRemoteConfig: { done in
+                store.fetch {
+                    SPNRemoteConfig.reload(from: store)
+                    AppTheme.refreshFromRemote()
+                    done()
+                }
+            },
+            remoteConfigStore: nil, // reload handled above so the theme can refresh in the same step
+            onTrackingStatus: { status in
+                FBAdSettings.setAdvertiserTrackingEnabled(status == .authorized)
+            }
+        )
+        launchHooks.attDelay = 1.0
+        #if DEBUG
+        // Dev switches for UI smoke tests: SIMCTL_CHILD_SPN_SKIP_ATT=1 / SIMCTL_CHILD_SPN_DISABLE_ADS=1
+        launchHooks.skipTracking = ProcessInfo.processInfo.environment["SPN_SKIP_ATT"] == "1"
+        launchHooks.skipConsent = ProcessInfo.processInfo.environment["SPN_SKIP_CONSENT"] == "1"
+        #endif
+
+        let hooks = SPNOnboardingHooks(
+            launch: launchHooks,
+            makeHome: { HomeViewController() },
+            presentPaywall: { trigger, presenter, completion in
+                PaywallPresenter.shared.present(trigger: trigger, from: presenter, completion: completion)
+            }
+        )
+        return SPNOnboardingCoordinator(navigationController: navigationController, config: OnboardingConfigs.make(), hooks: hooks)
+    }
+
+    #if DEBUG
+    private func makeDebugScreen(_ name: String) -> UIViewController? {
+        let config = OnboardingConfigs.make()
+        switch name {
+        case "language": return SPNLanguageViewController(config: config.language, source: .onboarding)
+        case "language_settings": return SPNLanguageViewController(config: config.language, source: .settings)
+        case "intro": return SPNIntroViewController(config: config.intro)
+        case "status": return SPNStatusViewController(config: config.status ?? SPNStatusConfig())
+        case "prepare": return SPNPrepareForAdsViewController(config: config.prepareAds)
+        case "home": return HomeViewController()
+        default: return nil
+        }
+    }
+    #endif
+
+    // MARK: - Lifecycle → ads
+
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        AppEvents.shared.activateApp()
+        onboarding?.lifecycleHandler.applicationDidBecomeActive()
+    }
+
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        onboarding?.lifecycleHandler.applicationDidEnterBackground()
+    }
+
+    // MARK: - Push
+
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
+        Messaging.messaging().appDidReceiveMessage(userInfo)
+        logger(userInfo)
+    }
+
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        logger("Unable to register for remote notifications: \(error.localizedDescription)")
+    }
+
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        Messaging.messaging().apnsToken = deviceToken
+    }
+}
+
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification) async -> UNNotificationPresentationOptions {
+        Messaging.messaging().appDidReceiveMessage(notification.request.content.userInfo)
+        return [[.banner, .sound]]
+    }
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
+        Messaging.messaging().appDidReceiveMessage(response.notification.request.content.userInfo)
+    }
+}
+
+extension AppDelegate: MessagingDelegate {
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+        logger("Firebase registration token: \(String(describing: fcmToken))")
+        NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: ["token": fcmToken ?? ""])
+    }
+}
