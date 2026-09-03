@@ -45,12 +45,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         configureSPNComponent()
 
-        let window = UIWindow(frame: UIScreen.main.bounds)
+        Messaging.messaging().delegate = self
+        UNUserNotificationCenter.current().delegate = self
+        SKPaymentQueue.default().add(iapObserver)
+        return true
+    }
+
+    func applicationWillTerminate(_ application: UIApplication) {
+        SKPaymentQueue.default().remove(iapObserver)
+    }
+
+    // MARK: - UIScene (iOS 26 SDK requires the scene lifecycle; SceneDelegate calls back here)
+
+    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+        let config = UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
+        config.delegateClass = SceneDelegate.self
+        return config
+    }
+
+    /// Builds the root navigation stack for the window created by `SceneDelegate`.
+    func startUI(in window: UIWindow) {
+        self.window = window
         let navigationController = UINavigationController()
         navigationController.isNavigationBarHidden = true
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
-        self.window = window
 
         onboarding = makeOnboardingCoordinator(navigationController: navigationController)
         #if DEBUG
@@ -63,15 +82,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #else
         onboarding?.start()
         #endif
-
-        Messaging.messaging().delegate = self
-        UNUserNotificationCenter.current().delegate = self
-        SKPaymentQueue.default().add(iapObserver)
-        return true
     }
 
-    func applicationWillTerminate(_ application: UIApplication) {
-        SKPaymentQueue.default().remove(iapObserver)
+    /// Forwarded from `SceneDelegate` (the app-delegate variants are not called under the scene lifecycle).
+    func sceneDidBecomeActive() {
+        AppEvents.shared.activateApp()
+        onboarding?.lifecycleHandler.applicationDidBecomeActive()
+    }
+
+    func sceneDidEnterBackground() {
+        onboarding?.lifecycleHandler.applicationDidEnterBackground()
+    }
+
+    /// File / URL opened while the scene is alive (or at launch via `connectionOptions`).
+    func handleOpen(url: URL) {
+        if url.isFileURL, FileKind(url: url)?.isHwp == true {
+            IncomingFileHandler.shared.handle(url)
+        } else {
+            _ = ApplicationDelegate.shared.application(UIApplication.shared, open: url, sourceApplication: nil, annotation: nil)
+        }
     }
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
@@ -177,17 +206,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     #endif
-
-    // MARK: - Lifecycle → ads
-
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        AppEvents.shared.activateApp()
-        onboarding?.lifecycleHandler.applicationDidBecomeActive()
-    }
-
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        onboarding?.lifecycleHandler.applicationDidEnterBackground()
-    }
 
     // MARK: - Push
 
