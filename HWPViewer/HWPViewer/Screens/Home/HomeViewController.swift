@@ -31,6 +31,7 @@ final class HomeViewController: AppBaseViewController {
     // MARK: - State
     private let viewModel = FileListViewModel(filter: .all)
     private var items: [FileItem] = []
+    private let listAd = ListAdInserter(place: .homeListInline)
     private lazy var actions = FileActionsCoordinator(presenter: self, viewModel: viewModel)
 
     // MARK: - Init
@@ -49,6 +50,8 @@ final class HomeViewController: AppBaseViewController {
         setupViews()
         bind()
         setupAdvertiser(on: .home)
+        listAd.onChange = { [weak self] in self?.tableView.reloadData() }
+        listAd.attachIfNeeded()
         SPNSession.shared.isFirstTimeOnboard = false
         HwpFontManager.shared.prefetchIfNeeded()
     }
@@ -75,9 +78,9 @@ final class HomeViewController: AppBaseViewController {
         tableView.backgroundColor = .clear
         tableView.separatorStyle = .none
         tableView.register(FileCell.self, forCellReuseIdentifier: FileCell.identifier)
+        tableView.register(NativeAdTableCell.self, forCellReuseIdentifier: NativeAdTableCell.identifier)
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.rowHeight = AppMetrics.cellHeight + AppMetrics.cellSpacing
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 80, right: 0)
         tableView.showsVerticalScrollIndicator = false
 
@@ -185,6 +188,7 @@ final class HomeViewController: AppBaseViewController {
     override func premiumStatusDidChange() {
         super.premiumStatusDidChange()
         headerView.setPremiumHidden(isPremium)
+        if isPremium { listAd.detach() }
     }
 
     // MARK: - Navigation
@@ -208,19 +212,31 @@ final class HomeViewController: AppBaseViewController {
 // MARK: - UITableView
 
 extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { items.count }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        listAd.rowCount(itemCount: items.count)
+    }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let index = listAd.itemIndex(for: indexPath.row, itemCount: items.count) else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: NativeAdTableCell.identifier, for: indexPath) as! NativeAdTableCell
+            cell.host(listAd.slot)
+            return cell
+        }
         let cell = tableView.dequeueReusableCell(withIdentifier: FileCell.identifier, for: indexPath) as! FileCell
-        let item = items[indexPath.row]
+        let item = items[index]
         cell.configure(item)
         cell.onBookmark = { [weak self] in self?.actions.toggleBookmark(item) }
         cell.onMore = { [weak self] in self?.actions.presentMore(for: item) }
         return cell
     }
 
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        listAd.isAdRow(indexPath.row, itemCount: items.count) ? listAd.adRowHeight : AppMetrics.cellHeight + AppMetrics.cellSpacing
+    }
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        open(items[indexPath.row])
+        guard let index = listAd.itemIndex(for: indexPath.row, itemCount: items.count) else { return }
+        open(items[index])
     }
 
     #if DEBUG

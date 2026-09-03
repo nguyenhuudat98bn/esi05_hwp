@@ -126,6 +126,21 @@
             "place_name": "convert_screen",
             "native_template_size": "small",
             "is_enable": false
+        },
+        {
+            "place_name": "home_list_inline",
+            "native_template_size": "in_line_cta_right",
+            "is_enable": true
+        },
+        {
+            "place_name": "search_list_inline",
+            "native_template_size": "in_line_cta_right",
+            "is_enable": true
+        },
+        {
+            "place_name": "select_file_list_inline",
+            "native_template_size": "in_line_cta_right",
+            "is_enable": true
         }
     ],
     "native_advertiser_units": [

@@ -22,6 +22,7 @@ final class SearchViewController: AppBaseViewController {
     )
     private let viewModel = FileListViewModel(filter: .all)
     private var items: [FileItem] = []
+    private let listAd = ListAdInserter(place: .searchListInline)
     private lazy var actions = FileActionsCoordinator(presenter: self, viewModel: viewModel)
 
     init() {
@@ -80,9 +81,11 @@ final class SearchViewController: AppBaseViewController {
         tableView.backgroundColor = .clear
         tableView.separatorStyle = .none
         tableView.register(FileCell.self, forCellReuseIdentifier: FileCell.identifier)
+        tableView.register(NativeAdTableCell.self, forCellReuseIdentifier: NativeAdTableCell.identifier)
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.rowHeight = AppMetrics.cellHeight + 16
+        listAd.onChange = { [weak self] in self?.tableView.reloadData() }
+        listAd.attachIfNeeded()
         tableView.keyboardDismissMode = .onDrag
         tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 24, right: 0)
 
@@ -115,19 +118,31 @@ final class SearchViewController: AppBaseViewController {
 }
 
 extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { items.count }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        listAd.rowCount(itemCount: items.count)
+    }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let index = listAd.itemIndex(for: indexPath.row, itemCount: items.count) else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: NativeAdTableCell.identifier, for: indexPath) as! NativeAdTableCell
+            cell.host(listAd.slot)
+            return cell
+        }
         let cell = tableView.dequeueReusableCell(withIdentifier: FileCell.identifier, for: indexPath) as! FileCell
-        let item = items[indexPath.row]
+        let item = items[index]
         cell.configure(item)
         cell.onBookmark = { [weak self] in self?.actions.toggleBookmark(item) }
         cell.onMore = { [weak self] in self?.actions.presentMore(for: item) }
         return cell
     }
 
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        listAd.isAdRow(indexPath.row, itemCount: items.count) ? listAd.adRowHeight : AppMetrics.cellHeight + 16
+    }
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let index = listAd.itemIndex(for: indexPath.row, itemCount: items.count) else { return }
         searchField.resignFirstResponder()
-        actions.open(items[indexPath.row])
+        actions.open(items[index])
     }
 }

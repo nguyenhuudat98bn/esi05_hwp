@@ -23,6 +23,7 @@ final class SelectFileViewController: AppBaseViewController {
         actionTitle: L10n.toolsImportFromFiles
     )
     private var items: [FileItem] = []
+    private let listAd = ListAdInserter(place: .selectFileListInline)
     private lazy var actions = FileActionsCoordinator(presenter: self, viewModel: viewModel)
 
     init(tool: ToolKind) {
@@ -47,9 +48,11 @@ final class SelectFileViewController: AppBaseViewController {
         tableView.backgroundColor = .clear
         tableView.separatorStyle = .none
         tableView.register(FileCell.self, forCellReuseIdentifier: FileCell.identifier)
+        tableView.register(NativeAdTableCell.self, forCellReuseIdentifier: NativeAdTableCell.identifier)
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.rowHeight = AppMetrics.cellHeight + AppMetrics.cellSpacing
+        listAd.onChange = { [weak self] in self?.tableView.reloadData() }
+        listAd.attachIfNeeded()
         tableView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 100, right: 0)
 
         emptyView.isHidden = true
@@ -137,16 +140,27 @@ final class SelectFileViewController: AppBaseViewController {
 }
 
 extension SelectFileViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { items.count }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        listAd.rowCount(itemCount: items.count)
+    }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let index = listAd.itemIndex(for: indexPath.row, itemCount: items.count) else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: NativeAdTableCell.identifier, for: indexPath) as! NativeAdTableCell
+            cell.host(listAd.slot)
+            return cell
+        }
         let cell = tableView.dequeueReusableCell(withIdentifier: FileCell.identifier, for: indexPath) as! FileCell
-        let item = items[indexPath.row]
-        cell.configure(item, showsBookmark: false, showsMore: false)
+        cell.configure(items[index], showsBookmark: false, showsMore: false)
         return cell
     }
 
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        listAd.isAdRow(indexPath.row, itemCount: items.count) ? listAd.adRowHeight : AppMetrics.cellHeight + AppMetrics.cellSpacing
+    }
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        handle(items[indexPath.row])
+        guard let index = listAd.itemIndex(for: indexPath.row, itemCount: items.count) else { return }
+        handle(items[index])
     }
 }
