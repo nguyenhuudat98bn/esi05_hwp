@@ -38,8 +38,17 @@ enum OnboardingConfigs {
         return config
     }
 
+    /// Reopen "Welcome back" screen: same art as the splash (A1) so nothing shows a bare white ground.
     static func prepareAds() -> SPNPrepareAdsConfig {
-        SPNPrepareAdsConfig(logo: Asset.Assets.Splash.logo.image)
+        var config = SPNPrepareAdsConfig(logo: Asset.Assets.Splash.logo.image)
+        config.backgroundColor = UIColor(hex: "#EEF3FC")
+        config.backgroundImage = Asset.Assets.Splash.splashBg.image
+        config.titleColor = AppColors.textPrimary
+        config.titleFont = AppFonts.semibold(18)
+        config.progressTrackColor = UIColor(hex: "#F0F0F1")
+        config.progressFillColor = AppColors.primary
+        config.logoSize = 80
+        return config
     }
 
     /// A2: title "Language", pill "Next" top-right, round flag + name + radio on a gray card;
