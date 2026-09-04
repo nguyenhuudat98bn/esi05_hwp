@@ -86,6 +86,7 @@ internal enum Asset {
       internal static let icViewerMoreVertical = ImageAsset(name: "App/ic_viewer_more_vertical")
       internal static let imgCardDocToHwpBg = ImageAsset(name: "App/img_card_doc_to_hwp_bg")
       internal static let imgCardEditHwpBg = ImageAsset(name: "App/img_card_edit_hwp_bg")
+      internal static let imgCardImportBg = ImageAsset(name: "App/img_card_import_bg")
       internal static let imgCardPdfToHwpBg = ImageAsset(name: "App/img_card_pdf_to_hwp_bg")
       internal static let imgCardPrintBg = ImageAsset(name: "App/img_card_print_bg")
       internal static let imgConvertError = ImageAsset(name: "App/img_convert_error")

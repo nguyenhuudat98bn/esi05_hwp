@@ -121,28 +121,16 @@ final class ImportSheetViewController: UIViewController {
 
 /// Wide "Import file" card: blue gradient, faded import glyph on the left, text right-aligned, round arrow button.
 final class ImportFileCard: UIControl {
-    private let gradient = CAGradientLayer()
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         layer.cornerRadius = AppMetrics.cardRadius
         clipsToBounds = true
-        gradient.colors = AppColors.gradientEdit.map(\.cgColor)
-        gradient.startPoint = CGPoint(x: 0.5, y: 0)
-        gradient.endPoint = CGPoint(x: 0.5, y: 1)
-        layer.addSublayer(gradient)
-
-        let glyph = UIImageView(image: Asset.Assets.App.icImportSolid.image.withRenderingMode(.alwaysTemplate))
-        glyph.tintColor = UIColor.white.withAlphaComponent(0.35)
-        glyph.contentMode = .scaleAspectFit
-        glyph.transform = CGAffineTransform(rotationAngle: 10.9 * .pi / 180)
-        glyph.isUserInteractionEnabled = false
-        addSubview(glyph)
-        glyph.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(-28)
-            make.top.equalToSuperview().inset(4)
-            make.size.equalTo(81)
-        }
+        // Designer card art (328×80): gradient + tilted import glyph baked in; texts and the arrow pill sit on top.
+        let background = UIImageView(image: Asset.Assets.App.imgCardImportBg.image)
+        background.contentMode = .scaleAspectFill
+        background.isUserInteractionEnabled = false
+        addSubview(background)
+        background.snp.makeConstraints { $0.edges.equalToSuperview() }
 
         let arrow = UIView()
         arrow.backgroundColor = AppColors.pillEdit
@@ -184,11 +172,6 @@ final class ImportFileCard: UIControl {
 
     @available(*, unavailable)
     required init?(coder: NSCoder) { fatalError() }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        gradient.frame = bounds
-    }
 
     override var isHighlighted: Bool {
         didSet { alpha = isHighlighted ? 0.85 : 1 }
