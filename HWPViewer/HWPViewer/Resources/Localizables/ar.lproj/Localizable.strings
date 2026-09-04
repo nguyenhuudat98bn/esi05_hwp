@@ -7,7 +7,7 @@
 */
 
 //MARK: - LoadData
-"ApplicationName" = "HWP Editor";
+"ApplicationName" = "HWP Viewer - Hangul Reader";
 "LoadData.SubTitle" = "المشروع الأساسي لشركة Nova JSC";
 "LoadData.LoadTitle" = "الإعلانات على وشك العرض...";
 "LoadData.Network.Title" = "فُقد الاتصال بالإنترنت";
@@ -142,10 +142,17 @@
 "Paywall.Feature.Print" = "Faster Processing Speed";
 "Paywall.Feature.AdFree" = "Enjoy an Ad-Free Experience";
 "Paywall.Feature.Unlimited" = "Unlock All Premium Features";
-"Paywall.Note.Trial" = "Free for %@ days, then %@ per year";
-"Paywall.Note.NoTrial" = "%@ per year. Cancel anytime.";
-"Paywall.Option.FirstMonth" = "%@ for the first month";
-"Paywall.Option.FirstMonth.Subtitle" = "then %@ per month";
+"Paywall.Title.Trial" = "Try HWP Pro free for %@ days";
+"Paywall.Note.Trial" = "Free for %@ days, then %@ per %@";
+"Paywall.Note.NoTrial" = "%@ per %@. Cancel anytime.";
+"Paywall.Option.Price" = "%@ / %@";
+"Paywall.Option.Intro" = "%@ for the first %@";
+"Paywall.Option.Intro.Subtitle" = "then %@ per %@";
+"Paywall.Period.Week" = "week";
+"Paywall.Period.Month" = "month";
+"Paywall.Period.Year" = "year";
+"Paywall.Continue.Trial" = "START FREE TRIAL";
+"Paywall.Continue.Subscribe" = "SUBSCRIBE NOW";
 "Paywall.Option.TrialEnabled" = "Free trial enabled";
 "Paywall.Option.TrialDisabled" = "Free trial disabled";
 "Paywall.Option.BestOffer" = "Best Offer";

@@ -1,0 +1,74 @@
+{
+  "identifier": "HwpEditorStoreKit",
+  "nonRenewingSubscriptions": [],
+  "products": [],
+  "settings": {
+    "_applicationInternalID": "6808507107",
+    "_developerTeamID": "",
+    "_lastSynced": 0,
+    "_locale": "en_US",
+    "_storefront": "USA",
+    "_storeKitErrors": []
+  },
+  "subscriptionGroups": [
+    {
+      "id": "HWP_PRO",
+      "localizations": [],
+      "name": "HWP Pro",
+      "subscriptions": [
+        {
+          "adHocOffers": [],
+          "codeOffers": [],
+          "displayPrice": "29.99",
+          "familyShareable": false,
+          "groupNumber": 1,
+          "internalID": "hwp.sub.yearly",
+          "introductoryOffer": null,
+          "localizations": [
+            {
+              "description": "HWP Pro yearly",
+              "displayName": "Yearly",
+              "locale": "en_US"
+            }
+          ],
+          "productID": "hwp.sub.yearly",
+          "recurringSubscriptionPeriod": "P1Y",
+          "referenceName": "Yearly",
+          "subscriptionGroupID": "HWP_PRO",
+          "type": "RecurringSubscription",
+          "winbackOffers": []
+        },
+        {
+          "adHocOffers": [],
+          "codeOffers": [],
+          "displayPrice": "29.99",
+          "familyShareable": false,
+          "groupNumber": 1,
+          "internalID": "hwp.sub.yearly.trial",
+          "introductoryOffer": {
+            "internalID": "hwp.sub.yearly.trial.intro",
+            "paymentMode": "free",
+            "subscriptionPeriod": "P3D"
+          },
+          "localizations": [
+            {
+              "description": "HWP Pro yearly with free trial",
+              "displayName": "Yearly Trial",
+              "locale": "en_US"
+            }
+          ],
+          "productID": "hwp.sub.yearly.trial",
+          "recurringSubscriptionPeriod": "P1Y",
+          "referenceName": "Yearly Trial",
+          "subscriptionGroupID": "HWP_PRO",
+          "type": "RecurringSubscription",
+          "winbackOffers": []
+        }
+      ]
+    }
+  ],
+  "version": {
+    "major": 4,
+    "minor": 0
+  }
+}

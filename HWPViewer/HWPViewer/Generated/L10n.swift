@@ -13,7 +13,7 @@ internal enum L10n {
   ///   HWPViewer
   /// 
   ///   Created by datnh on 01/4/24.
-  internal static var applicationName: String { return L10n.tr("Localizable", "ApplicationName", fallback: "HWP Editor") }
+  internal static var applicationName: String { return L10n.tr("Localizable", "ApplicationName", fallback: "HWP Viewer - Hangul Reader") }
   /// Update Now
   internal static var updateNowButton: String { return L10n.tr("Localizable", "update_now_button", fallback: "Update Now") }
   /// A newer version of this app is available. Please update to continue using the app.
@@ -156,6 +156,10 @@ internal enum L10n {
   internal static var paywallColumnBasic: String { return L10n.tr("Localizable", "Paywall.Column.Basic", fallback: "BASIC") }
   /// PRO
   internal static var paywallColumnPro: String { return L10n.tr("Localizable", "Paywall.Column.Pro", fallback: "PRO") }
+  /// SUBSCRIBE NOW
+  internal static var paywallContinueSubscribe: String { return L10n.tr("Localizable", "Paywall.Continue.Subscribe", fallback: "SUBSCRIBE NOW") }
+  /// START FREE TRIAL
+  internal static var paywallContinueTrial: String { return L10n.tr("Localizable", "Paywall.Continue.Trial", fallback: "START FREE TRIAL") }
   /// Enjoy an Ad-Free Experience
   internal static var paywallFeatureAdFree: String { return L10n.tr("Localizable", "Paywall.Feature.AdFree", fallback: "Enjoy an Ad-Free Experience") }
   /// Convert PDF or DOC to HWP
@@ -168,27 +172,41 @@ internal enum L10n {
   internal static var paywallFeaturePrint: String { return L10n.tr("Localizable", "Paywall.Feature.Print", fallback: "Faster Processing Speed") }
   /// Unlock All Premium Features
   internal static var paywallFeatureUnlimited: String { return L10n.tr("Localizable", "Paywall.Feature.Unlimited", fallback: "Unlock All Premium Features") }
-  /// %@ per year. Cancel anytime.
-  internal static func paywallNoteNoTrial(_ p1: Any) -> String {
-    return L10n.tr("Localizable", "Paywall.Note.NoTrial", String(describing: p1), fallback: "%@ per year. Cancel anytime.")
+  /// %@ per %@. Cancel anytime.
+  internal static func paywallNoteNoTrial(_ p1: Any, _ p2: Any) -> String {
+    return L10n.tr("Localizable", "Paywall.Note.NoTrial", String(describing: p1), String(describing: p2), fallback: "%@ per %@. Cancel anytime.")
   }
-  /// Free for %@ days, then %@ per year
-  internal static func paywallNoteTrial(_ p1: Any, _ p2: Any) -> String {
-    return L10n.tr("Localizable", "Paywall.Note.Trial", String(describing: p1), String(describing: p2), fallback: "Free for %@ days, then %@ per year")
+  /// Free for %@ days, then %@ per %@
+  internal static func paywallNoteTrial(_ p1: Any, _ p2: Any, _ p3: Any) -> String {
+    return L10n.tr("Localizable", "Paywall.Note.Trial", String(describing: p1), String(describing: p2), String(describing: p3), fallback: "Free for %@ days, then %@ per %@")
   }
   /// Best Offer
   internal static var paywallOptionBestOffer: String { return L10n.tr("Localizable", "Paywall.Option.BestOffer", fallback: "Best Offer") }
-  /// %@ for the first month
-  internal static func paywallOptionFirstMonth(_ p1: Any) -> String {
-    return L10n.tr("Localizable", "Paywall.Option.FirstMonth", String(describing: p1), fallback: "%@ for the first month")
+  /// %@ for the first %@
+  internal static func paywallOptionIntro(_ p1: Any, _ p2: Any) -> String {
+    return L10n.tr("Localizable", "Paywall.Option.Intro", String(describing: p1), String(describing: p2), fallback: "%@ for the first %@")
+  }
+  /// %@ / %@
+  internal static func paywallOptionPrice(_ p1: Any, _ p2: Any) -> String {
+    return L10n.tr("Localizable", "Paywall.Option.Price", String(describing: p1), String(describing: p2), fallback: "%@ / %@")
   }
   /// Free trial disabled
   internal static var paywallOptionTrialDisabled: String { return L10n.tr("Localizable", "Paywall.Option.TrialDisabled", fallback: "Free trial disabled") }
   /// Free trial enabled
   internal static var paywallOptionTrialEnabled: String { return L10n.tr("Localizable", "Paywall.Option.TrialEnabled", fallback: "Free trial enabled") }
-  /// then %@ per month
-  internal static func paywallOptionFirstMonthSubtitle(_ p1: Any) -> String {
-    return L10n.tr("Localizable", "Paywall.Option.FirstMonth.Subtitle", String(describing: p1), fallback: "then %@ per month")
+  /// then %@ per %@
+  internal static func paywallOptionIntroSubtitle(_ p1: Any, _ p2: Any) -> String {
+    return L10n.tr("Localizable", "Paywall.Option.Intro.Subtitle", String(describing: p1), String(describing: p2), fallback: "then %@ per %@")
+  }
+  /// month
+  internal static var paywallPeriodMonth: String { return L10n.tr("Localizable", "Paywall.Period.Month", fallback: "month") }
+  /// week
+  internal static var paywallPeriodWeek: String { return L10n.tr("Localizable", "Paywall.Period.Week", fallback: "week") }
+  /// year
+  internal static var paywallPeriodYear: String { return L10n.tr("Localizable", "Paywall.Period.Year", fallback: "year") }
+  /// Try HWP Pro free for %@ days
+  internal static func paywallTitleTrial(_ p1: Any) -> String {
+    return L10n.tr("Localizable", "Paywall.Title.Trial", String(describing: p1), fallback: "Try HWP Pro free for %@ days")
   }
   /// Cancel
   internal static var popupCancel: String { return L10n.tr("Localizable", "Popup.Cancel", fallback: "Cancel") }

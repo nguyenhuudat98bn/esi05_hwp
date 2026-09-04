@@ -69,7 +69,7 @@
     },
     "iap_configs": {
       "defaultValue": {
-        "value": "{\"is_show_in_tools\":true,\"is_show_in_view_file\":true,\"weekly_id\":\"com.spn.hwpviewer.editor.monthly\",\"weekly_trial_id\":\"com.spn.hwpviewer.editor.monthly\",\"yearly_id\":\"com.spn.hwpviewer.editor.yearly\",\"yearly_trial_id\":\"com.spn.hwpviewer.editor.yearly\",\"enable_trial\":true,\"continue_button_version\":1,\"time_show_button_close_purchase_since_second_time\":1,\"continue_button_at_popup_iap_version\":2,\"max_paywall_shows_per_session\":2,\"percent_show_paywall\":35,\"title_trial_version\":2,\"monthly_id\":\"com.spn.hwpviewer.editor.monthly\"}"
+        "value": "{\"plans\":[{\"id\":\"hwp.sub.yearly\",\"period\":\"year\",\"trial\":false},{\"id\":\"hwp.sub.yearly.trial\",\"period\":\"year\",\"trial\":true,\"badge\":\"best_offer\",\"selected\":true}],\"enable_trial\":true,\"show_paywall_at\":[\"after_splash\",\"after_intro\",\"tools\",\"view_file\"],\"percent_show_paywall\":35,\"max_paywall_shows_per_session\":2,\"time_show_button_close_purchase_since_second_time\":1,\"continue_button_version\":1,\"title_trial_version\":2}"
       },
       "valueType": "JSON"
     },
@@ -82,7 +82,7 @@
   },
   "version": {
     "versionNumber": "1",
-    "updateTime": "2026-09-04T07:15:34.858415Z",
+    "updateTime": "2026-09-04T07:26:50.060255Z",
     "updateUser": {
       "email": "datnh@supernovajsc.com"
     },

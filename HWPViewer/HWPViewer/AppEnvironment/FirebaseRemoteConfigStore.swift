@@ -69,30 +69,4 @@ final class FirebaseRemoteConfigStore: SPNRemoteConfigStore {
 
 // MARK: - App-only config models
 
-struct IapConfigs: Codable {
-    var monthlyId: String?
-    var weeklyId: String?
-    var weeklyTrialId: String?
-    var yearlyId: String?
-    var yearlyTrialId: String?
-    var enableTrial: Bool?
-    var continueButtonVersion: Int?
-    var timeShowButtonClosePurchaseSinceSecondTime: Int?
-    var titleTrialVersion: Int?
-
-    enum CodingKeys: String, CodingKey {
-        case monthlyId = "monthly_id"
-        case weeklyId = "weekly_id"
-        case weeklyTrialId = "weekly_trial_id"
-        case yearlyId = "yearly_id"
-        case yearlyTrialId = "yearly_trial_id"
-        case enableTrial = "enable_trial"
-        case continueButtonVersion = "continue_button_version"
-        case timeShowButtonClosePurchaseSinceSecondTime = "time_show_button_close_purchase_since_second_time"
-        case titleTrialVersion = "title_trial_version"
-    }
-
-    static func config() -> IapConfigs? {
-        FirebaseRemoteConfigStore.shared.value("iap_configs", as: IapConfigs.self)
-    }
-}
+// `IapConfigs` lives in IapConfigs.swift.

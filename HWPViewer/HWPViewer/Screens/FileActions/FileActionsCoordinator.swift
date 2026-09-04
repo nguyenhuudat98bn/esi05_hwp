@@ -28,8 +28,11 @@ final class FileActionsCoordinator: NSObject {
         guard item.kind.isHwp else { return }
         viewModel.markOpened(item)
         let viewer = HwpViewerViewController(item: item, startInEditMode: startInEditMode)
-        SPNAdsManager.shared.interstitial.show(from: presenter, place: .home) { _ in
-            presenter.navigationController?.pushViewController(viewer, animated: true)
+        // Remote `show_paywall_at` contains "view_file" → paywall (percent/max-gated) before the interstitial + viewer.
+        PaywallPresenter.shared.presentIfAllowed(at: .viewFile, from: presenter) {
+            SPNAdsManager.shared.interstitial.show(from: presenter, place: .home) { _ in
+                presenter.navigationController?.pushViewController(viewer, animated: true)
+            }
         }
     }
 

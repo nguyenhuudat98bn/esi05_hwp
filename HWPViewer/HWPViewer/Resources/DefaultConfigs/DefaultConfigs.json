@@ -274,20 +274,17 @@
         ]
     },
     "iap_configs": {
-        "is_show_in_tools": true,
-        "is_show_in_view_file": true,
-        "weekly_id": "com.spn.hwpviewer.editor.monthly",
-        "weekly_trial_id": "com.spn.hwpviewer.editor.monthly",
-        "yearly_id": "com.spn.hwpviewer.editor.yearly",
-        "yearly_trial_id": "com.spn.hwpviewer.editor.yearly",
+        "plans": [
+            { "id": "hwp.sub.yearly", "period": "year", "trial": false },
+            { "id": "hwp.sub.yearly.trial", "period": "year", "trial": true, "badge": "best_offer", "selected": true }
+        ],
         "enable_trial": true,
-        "continue_button_version": 1,
-        "time_show_button_close_purchase_since_second_time": 1,
-        "continue_button_at_popup_iap_version": 2,
-        "max_paywall_shows_per_session": 2,
+        "show_paywall_at": ["after_splash", "after_intro", "tools", "view_file"],
         "percent_show_paywall": 35,
-        "title_trial_version": 2,
-        "monthly_id": "com.spn.hwpviewer.editor.monthly"
+        "max_paywall_shows_per_session": 2,
+        "time_show_button_close_purchase_since_second_time": 1,
+        "continue_button_version": 1,
+        "title_trial_version": 2
     },
     "app_extra_configs": {
         "hwp_fonts_base_url": "https://raw.githubusercontent.com/nguyenhuudat98bn/NotoSFont/main/fonts",

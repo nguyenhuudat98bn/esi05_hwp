@@ -9,8 +9,8 @@ import UIKit
 import SPNComponent
 
 let appStoreUrl = "https://apps.apple.com/us/app/hwp-viewer-hangul-reader/id6808507107"
-let privacyUrl = "https://sites.google.com/view/supernova-privacy-policy" // TODO: confirm
-let termOfUseUrl = "https://sites.google.com/view/supernova-terms-of-use" // TODO: confirm
+let privacyUrl = "https://sites.google.com/view/hwpviewer-hangulreader-privacy"
+let termOfUseUrl = "https://sites.google.com/view/hwpviewer-hangulreader-terms"
 let actionWhenPurchaseCompleted = Notification.Name("ActionWhenPurchaseCompleted")
 
 /// Session state now lives in the package; keep the old name for feature code.

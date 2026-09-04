@@ -3,7 +3,8 @@
 //  HWPViewer
 //
 //  Paywall (Figma H2): header art + hero, X / Restore, "Go Premium with HWP Pro", PRO/BASIC table,
-//  fine print, two plan cards (monthly intro / yearly trial "Best Offer"), CONTINUE, Terms | Privacy.
+//  fine print, one plan card per remote `iap_configs.plans` entry (badge / trial from config), CONTINUE,
+//  Terms | Privacy. Close-button delay, title and CONTINUE wording variants also come from `iap_configs`.
 //
 
 import UIKit
@@ -27,8 +28,12 @@ final class PaywallViewController: UIViewController {
     private let buySubject = PassthroughSubject<String, Never>()
     private var cancellables = Set<AnyCancellable>()
 
+    private let config = IapConfigs.current
     private var products: [Product] = []
-    private var selectedPlan: PaywallPlan = .yearly
+    private lazy var plans: [PaywallPlan] = config.effectivePlans
+    private lazy var selectedPlan: PaywallPlan? = config.defaultPlan
+    /// Set by PaywallPresenter: true when this is not the first paywall of the session (X may be delayed).
+    var isRepeatShow = false
 
     // MARK: - Controls
     private let headerImage = UIImageView(image: Asset.Assets.App.imgPaywallHeaderBg.image)
@@ -36,8 +41,8 @@ final class PaywallViewController: UIViewController {
     private let closeButton = UIButton(type: .system)
     private let restoreButton = UIButton(type: .system)
     private let finePrint = UILabel()
-    private let monthlyCard = PlanCardView()
-    private let yearlyCard = PlanCardView()
+    private let titleLabel = UILabel()
+    private var planCards: [PlanCardView] = []
     private let continueButton = GradientButton(title: L10n.paywallContinue, colors: AppColors.gradientContinue)
 
     override func viewDidLoad() {
@@ -88,7 +93,7 @@ final class PaywallViewController: UIViewController {
             make.height.equalTo(40)
         }
 
-        let title = UILabel()
+        let title = titleLabel
         title.text = L10n.paywallTitle
         title.font = AppFonts.condensedBold(28)
         title.textColor = AppColors.textPrimary
@@ -128,11 +133,15 @@ final class PaywallViewController: UIViewController {
         finePrint.textAlignment = .center
         finePrint.numberOfLines = 0
 
-        let plans = UIStackView(arrangedSubviews: [monthlyCard, yearlyCard])
+        // One card per configured plan (remote order).
+        planCards = plans.map { plan in
+            let card = PlanCardView()
+            card.onTap = { [weak self] in self?.select(plan) }
+            return card
+        }
+        let plans = UIStackView(arrangedSubviews: planCards)
         plans.axis = .vertical
         plans.spacing = 16
-        monthlyCard.onTap = { [weak self] in self?.select(.monthly) }
-        yearlyCard.onTap = { [weak self] in self?.select(.yearly) }
 
         let legal = UIStackView(arrangedSubviews: [
             legalButton(L10n.purchaseTermOfUse) { [weak self] in self?.openWeb(termOfUseUrl) },
@@ -161,8 +170,22 @@ final class PaywallViewController: UIViewController {
         }
         continueButton.snp.makeConstraints { $0.height.equalTo(46) }
 
-        select(.yearly)
+        if let selectedPlan { select(selectedPlan) }
         updateTexts()
+        applyCloseDelay()
+    }
+
+    /// From the 2nd paywall of the session on, keep the X hidden for `time_show_button_close_purchase_since_second_time` s.
+    private func applyCloseDelay() {
+        let delay = config.closeDelay
+        guard isRepeatShow, delay > 0 else { return }
+        closeButton.alpha = 0
+        closeButton.isUserInteractionEnabled = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [weak self] in
+            guard let self else { return }
+            self.closeButton.isUserInteractionEnabled = true
+            UIView.animate(withDuration: 0.25) { self.closeButton.alpha = 1 }
+        }
     }
 
     private func featureRow(_ text: String?, pro: Bool?, basic: Bool?) -> UIView {
@@ -276,8 +299,8 @@ final class PaywallViewController: UIViewController {
             .throttle(for: .seconds(0.5), scheduler: RunLoop.main, latest: false)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
-                guard let self else { return }
-                buySubject.send(selectedPlan.identifier)
+                guard let self, let selectedPlan else { return }
+                buySubject.send(selectedPlan.id)
             }
             .store(in: &cancellables)
 
@@ -291,42 +314,52 @@ final class PaywallViewController: UIViewController {
 
     private func select(_ plan: PaywallPlan) {
         selectedPlan = plan
-        monthlyCard.setSelected(plan == .monthly)
-        yearlyCard.setSelected(plan == .yearly)
+        for (card, candidate) in zip(planCards, plans) {
+            card.setSelected(candidate == plan)
+        }
         updateTexts()
     }
 
+    private func product(for plan: PaywallPlan) -> Product? {
+        products.first { $0.plan == plan }
+    }
+
+    /// Card title/subtitle from the StoreKit product: trial plans say enabled/disabled, priced plans show
+    /// "<price> / <period>" (or the intro offer + regular price when the product has one).
     private func updateTexts() {
-        let monthly = products.first { $0.plan == .monthly }
-        let yearly = products.first { $0.plan == .yearly }
+        for (card, plan) in zip(planCards, plans) {
+            let product = product(for: plan)
+            if plan.trial {
+                let enabled = (product?.trialDays ?? 0) > 0
+                card.configure(title: enabled ? L10n.paywallOptionTrialEnabled : L10n.paywallOptionTrialDisabled,
+                               subtitle: nil, badge: plan.badgeText)
+            } else if let product, let intro = product.introPrice {
+                card.configure(title: L10n.paywallOptionIntro(intro, plan.periodName),
+                               subtitle: L10n.paywallOptionIntroSubtitle(product.price, plan.periodName), badge: plan.badgeText)
+            } else {
+                card.configure(title: L10n.paywallOptionPrice(product?.price ?? "—", plan.periodName),
+                               subtitle: nil, badge: plan.badgeText)
+            }
+        }
 
-        if let monthly {
-            let intro = monthly.introPrice ?? monthly.price
-            monthlyCard.configure(title: L10n.paywallOptionFirstMonth(intro), subtitle: monthly.introPrice != nil ? L10n.paywallOptionFirstMonthSubtitle(monthly.price) : nil, badge: nil)
+        guard let selectedPlan else { finePrint.text = " "; return }
+        let selected = product(for: selectedPlan)
+        let trialDays = selected?.trialDays ?? 0
+        if let selected, trialDays > 0 {
+            finePrint.text = L10n.paywallNoteTrial("\(trialDays)", selected.price, selectedPlan.periodName)
+        } else if let selected, let intro = selected.introPrice {
+            finePrint.text = "\(L10n.paywallOptionIntro(intro, selectedPlan.periodName)). \(L10n.paywallOptionIntroSubtitle(selected.price, selectedPlan.periodName))."
+        } else if let selected {
+            finePrint.text = L10n.paywallNoteNoTrial(selected.price, selectedPlan.periodName)
         } else {
-            monthlyCard.configure(title: L10n.paywallOptionFirstMonth("—"), subtitle: nil, badge: nil)
+            finePrint.text = " "
         }
-        let trialTitle = (yearly?.trialDays ?? 0) > 0 ? L10n.paywallOptionTrialEnabled : L10n.paywallOptionTrialDisabled
-        yearlyCard.configure(title: trialTitle, subtitle: nil, badge: L10n.paywallOptionBestOffer)
 
-        switch selectedPlan {
-        case .yearly:
-            if let yearly, yearly.trialDays > 0 {
-                finePrint.text = L10n.paywallNoteTrial("\(yearly.trialDays)", yearly.price)
-            } else if let yearly {
-                finePrint.text = L10n.paywallNoteNoTrial(yearly.price)
-            } else {
-                finePrint.text = " "
-            }
-        case .monthly:
-            if let monthly, let intro = monthly.introPrice {
-                finePrint.text = "\(L10n.paywallOptionFirstMonth(intro)). \(L10n.paywallOptionFirstMonthSubtitle(monthly.price))."
-            } else if let monthly {
-                finePrint.text = L10n.paywallOptionFirstMonthSubtitle(monthly.price)
-            } else {
-                finePrint.text = " "
-            }
+        // Wording variants (remote `continue_button_version` / `title_trial_version`).
+        if config.isTrialAwareContinue {
+            continueButton.setTitle(trialDays > 0 ? L10n.paywallContinueTrial : L10n.paywallContinueSubscribe)
         }
+        titleLabel.text = (config.isTrialAwareTitle && trialDays > 0) ? L10n.paywallTitleTrial("\(trialDays)") : L10n.paywallTitle
     }
 
     private func openWeb(_ string: String) {
@@ -436,6 +469,8 @@ final class PlanCardView: UIControl {
 final class GradientButton: UIControl {
     private let gradient = CAGradientLayer()
     private let label = UILabel()
+
+    func setTitle(_ title: String) { label.text = title }
 
     init(title: String, colors: [UIColor]) {
         super.init(frame: .zero)

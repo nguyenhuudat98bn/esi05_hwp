@@ -78,6 +78,12 @@ final class ToolsViewController: AppBaseViewController {
         premiumButton.isHidden = isPremium
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        // Remote `show_paywall_at` contains "tools" → paywall on the first visit of the session (percent/max-gated).
+        PaywallPresenter.shared.presentIfAllowed(at: .tools, from: self)
+    }
+
     private func open(_ tool: ToolKind) {
         navigationController?.pushViewController(SelectFileViewController(tool: tool), animated: true)
     }

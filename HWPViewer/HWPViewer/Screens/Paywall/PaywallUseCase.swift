@@ -2,7 +2,7 @@
 //  PaywallUseCase.swift
 //  HWPViewer
 //
-//  StoreKit access for the paywall: fetch the two products, buy, restore.
+//  StoreKit access for the paywall: fetch the configured products, buy, restore.
 //
 
 import SPNComponent
@@ -28,7 +28,8 @@ final class PurchaseUseCaseImpl: PurchaseUseCase {
 
     func fetchItems() -> AnyPublisher<[Product], Error> {
         Future { promise in
-            let ids = PaywallPlan.allCases.map(\.identifier)
+            let plans = PaywallPlan.configured
+            let ids = plans.map(\.id)
             var didResume = false
             StoreKitManager.shared.fetchProducts(identifiers: ids) { result in
                 guard !didResume else { return }
@@ -45,7 +46,9 @@ final class PurchaseUseCaseImpl: PurchaseUseCase {
                             trialDays: Self.trialDays(for: sk),
                             skProduct: sk
                         )
-                    }.sorted { $0.plan == .monthly && $1.plan == .yearly }
+                    }.sorted { a, b in
+                        (plans.firstIndex(of: a.plan) ?? 0) < (plans.firstIndex(of: b.plan) ?? 0)   // keep remote order
+                    }
                     promise(.success(mapped))
                 case .failure(let error):
                     promise(.failure(error))
