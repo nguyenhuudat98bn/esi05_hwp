@@ -28,6 +28,16 @@ enum ToolKind: CaseIterable {
         }
     }
 
+    /// Full-card artwork (gradient + illustration baked in, 156×88 @2x/@3x). `nil` → gradient + rotated `art`.
+    var cardBackground: UIImage? {
+        switch self {
+        case .editHwp: return Asset.Assets.App.imgCardEditHwpBg.image
+        case .pdfToHwp: return Asset.Assets.App.imgCardPdfToHwpBg.image
+        case .docToHwp: return Asset.Assets.App.imgCardDocToHwpBg.image
+        case .print: return Asset.Assets.App.imgCardPrintBg.image
+        }
+    }
+
     var art: UIImage? {
         switch self {
         case .editHwp: return Asset.Assets.App.icCardEditHwpVector.image

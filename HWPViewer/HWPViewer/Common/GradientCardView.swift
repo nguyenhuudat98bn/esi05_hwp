@@ -2,7 +2,8 @@
 //  GradientCardView.swift
 //  HWPViewer
 //
-//  Feature card (Figma Home/Tools): 156×88, vertical gradient, title / subtitle / "Go" pill, big rotated art bottom-right.
+//  Feature card (Figma Home/Tools): 156×88, title / subtitle / "Go" pill over either a full-card background image
+//  or a vertical gradient with a big rotated art bottom-right.
 //
 
 import UIKit
@@ -12,21 +13,31 @@ import SPNComponent
 
 final class GradientCardView: UIControl {
     private let gradientLayer = CAGradientLayer()
+    private let backgroundView = UIImageView()
     private let artView = UIImageView()
     private let titleLabel = UILabel()
     private let subtitleLabel = UILabel()
     private let goPill = UIView()
 
-    init(title: String, subtitle: String?, art: UIImage?, artRotation: CGFloat = -17, artSize: CGFloat = 52, colors: [UIColor], pillColor: UIColor) {
+    init(title: String, subtitle: String?, background: UIImage? = nil, art: UIImage?, artRotation: CGFloat = -17, artSize: CGFloat = 52, colors: [UIColor], pillColor: UIColor) {
         super.init(frame: .zero)
         layer.cornerRadius = AppMetrics.cardRadius
         clipsToBounds = true
-        gradientLayer.colors = colors.map(\.cgColor)
-        gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
-        gradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
-        layer.insertSublayer(gradientLayer, at: 0)
+        if let background {
+            // Designer-supplied card art: fills the card, no gradient / rotated art on top.
+            backgroundView.image = background
+            backgroundView.contentMode = .scaleAspectFill
+            backgroundView.isUserInteractionEnabled = false
+            addSubview(backgroundView)
+            backgroundView.snp.makeConstraints { $0.edges.equalToSuperview() }
+        } else {
+            gradientLayer.colors = colors.map(\.cgColor)
+            gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
+            gradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
+            layer.insertSublayer(gradientLayer, at: 0)
+        }
 
-        artView.image = art
+        artView.image = background == nil ? art : nil
         artView.contentMode = .scaleAspectFit
         artView.tintColor = .white
         artView.isUserInteractionEnabled = false
@@ -90,7 +101,7 @@ final class GradientCardView: UIControl {
     }
 
     convenience init(tool: ToolKind) {
-        self.init(title: tool.title, subtitle: tool.subtitle, art: tool.art, artRotation: tool.artRotation, artSize: tool.artSize, colors: tool.gradient, pillColor: tool.pillColor)
+        self.init(title: tool.title, subtitle: tool.subtitle, background: tool.cardBackground, art: tool.art, artRotation: tool.artRotation, artSize: tool.artSize, colors: tool.gradient, pillColor: tool.pillColor)
     }
 
     @available(*, unavailable)
