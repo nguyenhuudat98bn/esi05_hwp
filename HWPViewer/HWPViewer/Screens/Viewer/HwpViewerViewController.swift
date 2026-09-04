@@ -339,15 +339,22 @@ final class HwpViewerViewController: AppBaseViewController {
             vm.exitEditMode()
             _ = wasEditing
         }, save: { [weak self] in
-            self?.saveTapped()
+            self?.commitSave()
         })
     }
 
+    /// Header "Save": confirm with the Save Changes popup (Figma 18387:126424) before writing the file.
     private func saveTapped() {
         guard vm.canUndo else {
             vm.exitEditMode()
             return
         }
+        SaveChangesPopup.present(from: self, cancel: {}, save: { [weak self] in
+            self?.commitSave()
+        })
+    }
+
+    private func commitSave() {
         vm.endEditing()
         performSave()
     }
