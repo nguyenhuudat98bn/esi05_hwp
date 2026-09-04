@@ -69,6 +69,29 @@ final class HomeEmptyView: UIView {
         button.snp.makeConstraints { $0.height.equalTo(48) }
     }
 
+    override func didMoveToWindow() {
+        super.didMoveToWindow()
+        refreshAnimation()
+    }
+
+    override var isHidden: Bool {
+        didSet { refreshAnimation() }
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        refreshAnimation()
+    }
+
+    /// Pulse + halo on the CTA while it is visible (see UIView+Attention).
+    private func refreshAnimation() {
+        if window != nil, !isHidden, !button.isHidden, button.bounds.width > 0 {
+            button.startAttention(cornerRadius: 24)
+        } else {
+            button.stopAttention()
+        }
+    }
+
     @available(*, unavailable)
     required init?(coder: NSCoder) { fatalError() }
 
@@ -78,5 +101,6 @@ final class HomeEmptyView: UIView {
         subtitleLabel.isHidden = subtitle == nil
         button.setTitle(actionTitle, for: .normal)
         button.isHidden = actionTitle == nil
+        refreshAnimation()
     }
 }

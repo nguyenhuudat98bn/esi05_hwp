@@ -192,6 +192,7 @@ final class HomeViewController: AppBaseViewController {
         let libraryEmpty = isEmpty && viewModel.filter == .all
         tabs.isHidden = libraryEmpty
         fab.isHidden = libraryEmpty
+        if libraryEmpty { fab.stopAttention() } else { DispatchQueue.main.async { [weak self] in self?.fab.startAttention(cornerRadius: 24) } }
         switch viewModel.filter {
         case .recent: emptyView.update(title: L10n.homeEmptyRecent, subtitle: nil, actionTitle: nil)
         case .bookmark: emptyView.update(title: L10n.homeEmptyBookmark, subtitle: nil, actionTitle: nil)

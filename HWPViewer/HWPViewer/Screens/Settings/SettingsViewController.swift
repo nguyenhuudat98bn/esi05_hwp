@@ -170,7 +170,7 @@ final class SettingsRowView: UIControl {
     init(icon: UIImage, title: String) {
         super.init(frame: .zero)
         let iconView = UIImageView(image: icon.withRenderingMode(.alwaysTemplate))
-        iconView.tintColor = AppColors.primary
+        iconView.tintColor = AppColors.textPrimary   // Figma 18461-130823: row icons are #181D27, not brand blue
         iconView.contentMode = .scaleAspectFit
         let label = UILabel()
         label.text = title

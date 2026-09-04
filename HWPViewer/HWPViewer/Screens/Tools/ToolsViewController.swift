@@ -12,6 +12,9 @@ import CombineCocoa
 import SPNComponent
 
 final class ToolsViewController: AppBaseViewController {
+    /// Crown in the navigation bar → paywall (same as Home); hidden once premium.
+    private let premiumButton = UIButton(type: .system)
+
     init() {
         super.init(place: .tools, navigationConfigs: SPNNavigationConfiguration(
             title: L10n.toolsTitle, hasBackButton: false,
@@ -26,6 +29,18 @@ final class ToolsViewController: AppBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationView.snp.updateConstraints { $0.height.equalTo(52) }
+        premiumButton.setImage(Asset.Assets.App.icCrown.image.withRenderingMode(.alwaysOriginal), for: .normal)
+        premiumButton.isHidden = isPremium
+        navigationView.addSubview(premiumButton)
+        premiumButton.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().inset(12)
+            make.centerY.equalToSuperview()
+            make.size.equalTo(40)
+        }
+        premiumButton.tapPublisher.receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in self?.presentPaywall() }
+            .store(in: &cancellables)
+
         let content = UIView()
         containerStackView.addArrangedSubview(content)
         containerStackView.addArrangedSubview(nativeAdSlot)
@@ -56,6 +71,11 @@ final class ToolsViewController: AppBaseViewController {
             make.height.equalTo(12 + 2 * 88)
         }
         setupAdvertiser(on: .tools)
+    }
+
+    override func premiumStatusDidChange() {
+        super.premiumStatusDidChange()
+        premiumButton.isHidden = isPremium
     }
 
     private func open(_ tool: ToolKind) {
