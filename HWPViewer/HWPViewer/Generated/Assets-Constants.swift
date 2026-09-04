@@ -90,10 +90,7 @@ internal enum Asset {
       internal static let imgOffline = ImageAsset(name: "App/img_offline")
       internal static let imgPaywallHeaderBg = ImageAsset(name: "App/img_paywall_header_bg")
       internal static let imgPaywallHero = ImageAsset(name: "App/img_paywall_hero")
-      internal static let imgPremiumBannerBg = ImageAsset(name: "App/img_premium_banner_bg")
-      internal static let imgPremiumBannerCrown = ImageAsset(name: "App/img_premium_banner_crown")
-      internal static let imgPremiumBannerSparkle = ImageAsset(name: "App/img_premium_banner_sparkle")
-      internal static let imgPremiumBannerSparkle2 = ImageAsset(name: "App/img_premium_banner_sparkle2")
+      internal static let imgPremiumBanner = ImageAsset(name: "App/img_premium_banner")
       internal static let imgSaveChangesFolder = ImageAsset(name: "App/img_save_changes_folder")
     }
     internal enum Common {

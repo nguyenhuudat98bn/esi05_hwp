@@ -226,41 +226,17 @@ final class SettingsRowView: UIControl {
 // MARK: - Premium banner
 
 final class PremiumBannerView: UIControl {
-    private let gradient = CAGradientLayer()
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         layer.cornerRadius = 12
         clipsToBounds = true
-        gradient.colors = AppColors.gradientPremium.map(\.cgColor)
-        gradient.startPoint = CGPoint(x: 0, y: 0.5)
-        gradient.endPoint = CGPoint(x: 1, y: 0.5)
-        layer.addSublayer(gradient)
 
-        let texture = UIImageView(image: Asset.Assets.App.imgPremiumBannerBg.image)
-        texture.contentMode = .scaleAspectFill
-        texture.alpha = 0.6
-        texture.isUserInteractionEnabled = false
-        addSubview(texture)
-        texture.snp.makeConstraints { $0.edges.equalToSuperview() }
-
-        let crown = UIImageView(image: Asset.Assets.App.imgPremiumBannerCrown.image)
-        crown.contentMode = .scaleAspectFit
-        crown.isUserInteractionEnabled = false
-        addSubview(crown)
-        crown.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().inset(-22)
-            make.centerY.equalToSuperview()
-            make.size.equalTo(CGSize(width: 112, height: 114))
-        }
-        let sparkle = UIImageView(image: Asset.Assets.App.imgPremiumBannerSparkle.image)
-        sparkle.contentMode = .scaleAspectFit
-        addSubview(sparkle)
-        sparkle.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().inset(120)
-            make.top.equalToSuperview().inset(3)
-            make.size.equalTo(34)
-        }
+        // One full-bleed artwork (gradient + crown + sparkles baked in, 328×72pt @2x/@3x).
+        let background = UIImageView(image: Asset.Assets.App.imgPremiumBanner.image)
+        background.contentMode = .scaleAspectFill
+        background.isUserInteractionEnabled = false
+        addSubview(background)
+        background.snp.makeConstraints { $0.edges.equalToSuperview() }
 
         let title = UILabel()
         title.text = L10n.settingsPremiumTitle
@@ -278,17 +254,12 @@ final class PremiumBannerView: UIControl {
         stack.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(16)
             make.centerY.equalToSuperview().offset(-2)
-            make.trailing.lessThanOrEqualTo(crown.snp.leading).offset(-8)
+            make.trailing.lessThanOrEqualToSuperview().inset(120)   // keep text clear of the crown art
         }
     }
 
     @available(*, unavailable)
     required init?(coder: NSCoder) { fatalError() }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        gradient.frame = bounds
-    }
 
     override var isHighlighted: Bool {
         didSet { alpha = isHighlighted ? 0.85 : 1 }
