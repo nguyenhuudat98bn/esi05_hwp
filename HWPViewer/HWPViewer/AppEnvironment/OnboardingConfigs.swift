@@ -48,11 +48,9 @@ enum OnboardingConfigs {
         var config = SPNLanguageConfig()
         config.title = L10n.languageTitle
         config.applyButtonTitle = L10n.languageNext
-        config.applyButtonType = .text
-        config.applyTint = AppColors.primary
-        // Hand pointer on the device-language row: Lottie file (played as-is) instead of the bundled image.
-        // Forced on here because the Firebase `language_intro_configs` payload carries no `is_show_pointer_hand`.
-        config.showPointerHand = true
+        // Behaviour comes from remote `language_intro_configs`: `apply_button_type` (2 = "Next" text pill),
+        // `apply_language_color`, `is_show_pointer_hand`, `is_enable_auto_skip_language`, `time_skip_language`…
+        // Only the asset is app-side: Lottie hand pointer played as-is instead of the bundled image.
         if let url = Bundle.main.url(forResource: "hand_pointer_click", withExtension: "json") {
             config.handPointer = .lottie(url, size: 96)
         }
@@ -80,7 +78,7 @@ enum OnboardingConfigs {
         return config
     }
 
-    /// A3: mockup on Intro_BG (Korean art when the app runs in Korean), 2-line title, dots, small pill "Next".
+    /// A3: mockup on Intro_BG (Korean art when the app runs in Korean), 2-line title, dots, "Next" button.
     static func intro() -> SPNIntroConfig {
         let isKorean = SPNSession.shared.currentLanguageCode.hasPrefix("ko")
         let images: [UIImage] = isKorean
@@ -92,8 +90,9 @@ enum OnboardingConfigs {
             SPNIntroPage(image: images[2], title: L10n.introduceStep3Title),
         ])
         config.adStyle = .onboard
-        config.nextButtonStyle = .auto  // remote `is_next_button_large` decides (last page with ad stays small)
-        config.nextColor = AppColors.primary
+        // Behaviour from remote `language_intro_configs`: `is_next_button_large` (last page with ad stays small),
+        // `next_intro_color`, `is_show_pointer_hand`, `is_enable_auto_skip_intro_to_last_page`, `is_enable_intro_guidle`.
+        config.nextButtonStyle = .auto
         config.titleColor = AppColors.textPrimary
         config.titleFont = AppFonts.bold(24)
         config.pageControlNormalColor = AppColors.border

@@ -18,7 +18,11 @@
         "select_language_color": "#2E90FA",
         "apply_language_color": "#2E90FA",
         "apply_language_size": 30,
-        "is_language_default": false
+        "apply_button_type": 2,
+        "is_language_default": false,
+        "is_show_pointer_hand": true,
+        "next_intro_color": "#2E90FA",
+        "is_next_button_large": true
     },
     "banner_onboard_configs": {
         "title_color": "#FCFDFD",
