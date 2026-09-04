@@ -20,6 +20,7 @@ BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 OLD_NAME="NovaProject"
 OLD_BUNDLE_ID="com.spn.novaprojectbase"
 OLD_DISPLAY_NAME="Nova Project"
+OLD_LAUNCH_SUBTITLE="Base project of Nova JSC"   # second label on LaunchScreen.storyboard
 
 NAME=""; DISPLAY_NAME=""; BUNDLE_ID=""; AD_KEY=""; AD_IV=""; ADMOB_APP_ID=""
 DEST=""; FB_APP_ID=""; FB_CLIENT_TOKEN=""; TEAM_ID=""; GOOGLE_SERVICE=""; SPN_PATH=""; GIT_INIT=1
@@ -96,6 +97,11 @@ find "$PROJECT_DIR" -type f \( -name '*.pbxproj' -o -name '*.xcscheme' -o -name 
   | xargs -0 grep -l "$OLD_NAME" 2>/dev/null \
   | while IFS= read -r f; do sedi "s/$OLD_NAME/$NAME/g" "$f"; done
 
+# Scheme FILES still carry the old name (sed above only rewrote their content) → rename them too,
+# otherwise Xcode keeps showing a "NovaProject" scheme next to the renamed target.
+find "$PROJECT_DIR/$NAME.xcodeproj" -name "*$OLD_NAME*.xcscheme" -print0 \
+  | while IFS= read -r -d '' f; do mv "$f" "$(dirname "$f")/$(basename "$f" | sed "s/$OLD_NAME/$NAME/g")"; done
+
 # Bundle id.
 grep -rIl "$OLD_BUNDLE_ID" "$PROJECT_DIR" 2>/dev/null | while IFS= read -r f; do sedi "s/$OLD_BUNDLE_ID/$BUNDLE_ID/g" "$f"; done
 
@@ -103,6 +109,17 @@ grep -rIl "$OLD_BUNDLE_ID" "$PROJECT_DIR" 2>/dev/null | while IFS= read -r f; do
 ESCAPED_DISPLAY="$(printf '%s' "$DISPLAY_NAME" | sed 's/[&/\]/\\&/g')"
 find "$SRC_DIR/Resources/Localizables" -name 'Localizable.strings' | while IFS= read -r f; do
   sedi -E "s/^\"ApplicationName\" = \".*\";/\"ApplicationName\" = \"$ESCAPED_DISPLAY\";/" "$f"
+done
+
+# LaunchScreen: title label shows the display name, the base-project subtitle is cleared —
+# in the storyboard, its per-language LaunchScreen.strings, and the SwiftGen fallback in L10n.swift.
+LAUNCH_SCREEN="$SRC_DIR/Base.lproj/LaunchScreen.storyboard"
+if [[ -f "$LAUNCH_SCREEN" ]]; then
+  sedi "s/text=\"$OLD_DISPLAY_NAME\"/text=\"$ESCAPED_DISPLAY\"/" "$LAUNCH_SCREEN"
+  sedi "s/text=\"$OLD_LAUNCH_SUBTITLE\"/text=\"\"/" "$LAUNCH_SCREEN"
+fi
+find "$SRC_DIR" -path '*.lproj/LaunchScreen.strings' -o -path '*/Generated/L10n.swift' | while IFS= read -r f; do
+  sedi "s/\"$OLD_LAUNCH_SUBTITLE\"/\"\"/g; s/\"$OLD_DISPLAY_NAME\"/\"$ESCAPED_DISPLAY\"/g" "$f"
 done
 
 # Team id (optional).
@@ -122,6 +139,7 @@ PB="/usr/libexec/PlistBuddy"
 "$PB" -c "Set :GADApplicationIdentifier $ADMOB_APP_ID" "$INFO_PLIST" 2>/dev/null \
   || "$PB" -c "Add :GADApplicationIdentifier string $ADMOB_APP_ID" "$INFO_PLIST"
 "$PB" -c "Set :FacebookDisplayName $DISPLAY_NAME" "$INFO_PLIST" 2>/dev/null || true
+"$PB" -c "Set :CFBundleDisplayName $DISPLAY_NAME" "$INFO_PLIST" 2>/dev/null || true
 if [[ -n "$FB_APP_ID" ]]; then
   "$PB" -c "Set :FacebookAppID $FB_APP_ID" "$INFO_PLIST" 2>/dev/null || "$PB" -c "Add :FacebookAppID string $FB_APP_ID" "$INFO_PLIST"
   "$PB" -c "Set :CFBundleURLTypes:0:CFBundleURLSchemes:0 fb$FB_APP_ID" "$INFO_PLIST" 2>/dev/null || true
@@ -152,7 +170,8 @@ if [[ $GIT_INIT -eq 1 ]]; then
 fi
 
 # ---------- 9. sanity ----------
-LEFTOVER="$(grep -rIl "$OLD_NAME\|$OLD_BUNDLE_ID" "$PROJECT_DIR" 2>/dev/null | grep -v '\.git/' || true)"
+LEFTOVER="$(grep -rIl "$OLD_NAME\|$OLD_BUNDLE_ID\|$OLD_DISPLAY_NAME" "$PROJECT_DIR" 2>/dev/null | grep -v '\.git/' || true)"
+LEFTOVER="$LEFTOVER$(find "$PROJECT_DIR" -name "*$OLD_NAME*" -not -path '*/.git/*' 2>/dev/null || true)"
 [[ -z "$LEFTOVER" ]] || { echo "warning: '$OLD_NAME' still referenced in:"; echo "$LEFTOVER"; }
 if command -v xcodebuild >/dev/null 2>&1; then
   ( cd "$PROJECT_DIR" && xcodebuild -list -project "$NAME.xcodeproj" >/dev/null 2>&1 ) && echo "==> project.pbxproj parses OK" || echo "warning: xcodebuild -list failed, check project.pbxproj"
