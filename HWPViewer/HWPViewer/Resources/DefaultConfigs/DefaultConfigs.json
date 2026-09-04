@@ -113,6 +113,11 @@
             "is_enable": true
         },
         {
+            "place_name": "file_action_sheet",
+            "native_template_size": "small",
+            "is_enable": true
+        },
+        {
             "place_name": "viewer_screen",
             "native_template_size": "small",
             "is_enable": false

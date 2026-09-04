@@ -10,6 +10,8 @@ import SPNComponent
 extension SPNAdPlace {
     static let viewer: SPNAdPlace = "viewer_screen"
     static let importSheet: SPNAdPlace = "import_sheet"
+    /// "More" sheet of a file (Rename / Share / Print / Delete), native at the bottom.
+    static let fileActionSheet: SPNAdPlace = "file_action_sheet"
     static let tools: SPNAdPlace = "tools_screen"
     static let selectFile: SPNAdPlace = "select_file_screen"
     static let search: SPNAdPlace = "search_screen"
