@@ -2,21 +2,25 @@
 //  ConvertService.swift
 //  HWPViewer
 //
-//  PDF / DOC → HWP. ENGINE+: HwpEditorKit 1.1.0 does not expose `rhwp_doc_import_pdf/docx`;
-//  the real implementation lands with HwpEditorKit 1.2 (`RhwpDocument.importPDF(data:)`, `importDOCX(data:)`).
-//  Until then the service reports `.notAvailable` so the UI flow (G3 → G4 → G5) can be exercised.
+//  PDF / DOCX → HWP via HwpEditorKit 1.2 (`RhwpDocument.importPDF` / `importDOCX` + `exportHWP`).
+//  Runs the Rust importer off the main thread; the output lands in Documents and the file store is notified.
 //
 
 import Foundation
+import HwpEditorKit
+import SPNComponent
 
 enum ConvertError: LocalizedError {
-    case notAvailable
+    /// Word 97-2003 binary `.doc` (OLE) — the engine only reads DOCX (zip + XML).
+    case unsupportedLegacyDoc
+    case unsupportedKind
     case cancelled
     case failed(String)
 
     var errorDescription: String? {
         switch self {
-        case .notAvailable: return L10n.convertComingSoon
+        case .unsupportedLegacyDoc: return L10n.convertErrorLegacyDoc
+        case .unsupportedKind: return L10n.convertFailed
         case .cancelled: return nil
         case .failed(let message): return message
         }
@@ -31,26 +35,37 @@ struct ConvertResult {
 final class ConvertService {
     static let shared = ConvertService()
 
-    /// True once the engine ships the import API. Toggle here when HwpEditorKit 1.2 is integrated.
-    static let isAvailable = false
-
     /// Converts `source` to an HWP named `outputName` in Documents. `progress` is 0…1 on the main thread.
+    /// Progress is coarse (read → import → export → write): the engine reports no intermediate steps.
     func convert(source: FileItem, outputName: String, progress: @escaping (Double) -> Void) async throws -> ConvertResult {
-        guard Self.isAvailable else {
-            // Simulated progress so the loading screen can be reviewed.
-            for step in 1...4 {
-                try Task.checkCancellation()
-                try await Task.sleep(nanoseconds: 250_000_000)
-                await MainActor.run { progress(Double(step) / 5.0) }
+        let kind = source.kind
+        let url = source.url
+        await MainActor.run { progress(0.1) }
+
+        let hwp: Data = try await Task.detached(priority: .userInitiated) {
+            let data = try Data(contentsOf: url, options: [.mappedIfSafe])
+            try Task.checkCancellation()
+            let document: RhwpDocument
+            switch kind {
+            case .pdf:
+                document = try RhwpDocument.importPDF(data)
+            case .doc, .docx:
+                if data.isLegacyDoc { throw ConvertError.unsupportedLegacyDoc }
+                document = try RhwpDocument.importDOCX(data)
+            case .hwp, .hwpx:
+                throw ConvertError.unsupportedKind
             }
-            throw ConvertError.notAvailable
-        }
-        // TODO(HwpEditorKit 1.2):
-        // let data = try Data(contentsOf: source.url)
-        // let doc = source.kind == .pdf ? try RhwpDocument.importPDF(data: data) : try RhwpDocument.importDOCX(data: data)
-        // let hwp = try doc.exportHWP()
-        // let url = FileStore.shared.uniqueURL(for: "\(outputName).hwp"); try hwp.write(to: url)
-        // FileStore.shared.notifyChanged(); return ConvertResult(outputURL: url, size: Int64(hwp.count))
-        throw ConvertError.notAvailable
+            try Task.checkCancellation()
+            return try document.exportHWP()
+        }.value
+
+        await MainActor.run { progress(0.85) }
+        try Task.checkCancellation()
+        let destination = FileStore.shared.uniqueURL(for: "\(outputName).hwp")
+        try hwp.write(to: destination, options: .atomic)
+        FileStore.shared.notifyChanged()
+        await MainActor.run { progress(1.0) }
+        logger("[Convert] \(source.displayName) → \(destination.lastPathComponent) (\(hwp.count) bytes)")
+        return ConvertResult(outputURL: destination, size: Int64(hwp.count))
     }
 }

@@ -26,8 +26,6 @@ internal enum L10n {
   internal static var commonLoading: String { return L10n.tr("Localizable", "Common.Loading", fallback: "Loading...") }
   /// Next
   internal static var commonNext: String { return L10n.tr("Localizable", "Common.Next", fallback: "Next") }
-  /// This feature is coming soon.
-  internal static var convertComingSoon: String { return L10n.tr("Localizable", "Convert.ComingSoon", fallback: "This feature is coming soon.") }
   /// Converting...
   internal static var convertConverting: String { return L10n.tr("Localizable", "Convert.Converting", fallback: "Converting...") }
   /// Couldn't convert this file. Please try again.
@@ -36,6 +34,8 @@ internal enum L10n {
   internal static var convertTitle: String { return L10n.tr("Localizable", "Convert.Title", fallback: "Convert to HWP") }
   /// Back to Home
   internal static var convertErrorBackHome: String { return L10n.tr("Localizable", "Convert.Error.BackHome", fallback: "Back to Home") }
+  /// This .doc file uses the old Word 97-2003 format. Open it in Word, save it as .docx and try again.
+  internal static var convertErrorLegacyDoc: String { return L10n.tr("Localizable", "Convert.Error.LegacyDoc", fallback: "This .doc file uses the old Word 97-2003 format. Open it in Word, save it as .docx and try again.") }
   /// Oops! Something went wrong
   internal static var convertErrorMessage: String { return L10n.tr("Localizable", "Convert.Error.Message", fallback: "Oops! Something went wrong") }
   /// Back Home

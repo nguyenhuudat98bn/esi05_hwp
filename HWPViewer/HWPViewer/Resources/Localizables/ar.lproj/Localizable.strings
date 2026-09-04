@@ -119,7 +119,7 @@
 "Convert.Success.BackHome" = "Back Home";
 "Convert.Success.Open" = "Open";
 "Convert.Failed" = "Couldn't convert this file. Please try again.";
-"Convert.ComingSoon" = "This feature is coming soon.";
+"Convert.Error.LegacyDoc" = "This .doc file uses the old Word 97-2003 format. Open it in Word, save it as .docx and try again.";
 "Convert.Error.Message" = "Oops! Something went wrong";
 "Convert.Error.BackHome" = "Back to Home";
 "Settings.Title" = "Settings";

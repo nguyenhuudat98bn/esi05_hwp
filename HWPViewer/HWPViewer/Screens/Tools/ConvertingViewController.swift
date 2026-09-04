@@ -2,8 +2,8 @@
 //  ConvertingViewController.swift
 //  HWPViewer
 //
-//  G4 loading screen (no design yet): file card, progress ring, Cancel. Pushes ConvertResult on success,
-//  ConvertError (G7) on failure.
+//  G4 loading screen (no design yet): file card, progress bar, Cancel. Pushes ConvertResult on success,
+//  ConvertError (G7) on failure; legacy .doc gets an explanatory popup.
 //
 
 import UIKit
@@ -118,10 +118,10 @@ final class ConvertingViewController: AppBaseViewController {
                 navigationController?.setViewControllers(stack, animated: true)
             } catch is CancellationError {
                 return
-            } catch ConvertError.notAvailable {
-                // Engine stub (HwpEditorKit < 1.2): informational popup, not a failure screen.
+            } catch ConvertError.unsupportedLegacyDoc {
+                // Old Word 97-2003 .doc: explain how to fix instead of the generic error screen.
                 guard !Task.isCancelled else { return }
-                ErrorPopup.present(from: self, message: L10n.convertComingSoon) { [weak self] in
+                ErrorPopup.present(from: self, message: L10n.convertErrorLegacyDoc) { [weak self] in
                     self?.navigationController?.popViewController(animated: true)
                 }
             } catch {
