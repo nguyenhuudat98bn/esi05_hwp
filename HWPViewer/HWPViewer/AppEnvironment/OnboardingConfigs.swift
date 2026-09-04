@@ -93,6 +93,10 @@ enum OnboardingConfigs {
         // Behaviour from remote `language_intro_configs`: `is_next_button_large` (last page with ad stays small),
         // `next_intro_color`, `is_show_pointer_hand`, `is_enable_auto_skip_intro_to_last_page`, `is_enable_intro_guidle`.
         config.nextButtonStyle = .auto
+        // Same Lottie hand pointer as the Language screen, played as-is on the first page's Next button.
+        if let url = Bundle.main.url(forResource: "hand_pointer_click", withExtension: "json") {
+            config.handPointer = .lottie(url, size: 96)
+        }
         config.titleColor = AppColors.textPrimary
         config.titleFont = AppFonts.bold(24)
         config.pageControlNormalColor = AppColors.border
