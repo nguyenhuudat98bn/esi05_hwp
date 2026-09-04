@@ -161,8 +161,11 @@ final class HwpFormatToolbar: UIView {
         let showText = target == .text ? textColorStrip.isHidden : false
         let showHighlight = target == .highlight ? highlightStrip.isHidden : false
         UIView.animate(withDuration: 0.2) {
-            self.textColorStrip.isHidden = !showText
-            self.highlightStrip.isHidden = !showHighlight
+            // Only flip `isHidden` when it actually changes: UIStackView counts redundant hides while an
+            // animation is in flight, which left a strip "hidden twice" and the next expand drew the other
+            // strip on top of Align left/right.
+            Self.setHidden(!showText, on: self.textColorStrip)
+            Self.setHidden(!showHighlight, on: self.highlightStrip)
             self.textColorItem.isExpanded = showText
             self.highlightItem.isExpanded = showHighlight
             self.layoutIfNeeded()
@@ -176,10 +179,14 @@ final class HwpFormatToolbar: UIView {
     }
 
     func collapseStrips() {
-        textColorStrip.isHidden = true
-        highlightStrip.isHidden = true
+        Self.setHidden(true, on: textColorStrip)
+        Self.setHidden(true, on: highlightStrip)
         textColorItem.isExpanded = false
         highlightItem.isExpanded = false
+    }
+
+    private static func setHidden(_ hidden: Bool, on view: UIView) {
+        if view.isHidden != hidden { view.isHidden = hidden }
     }
 
     /// Reflects the current selection / caret state from the engine.

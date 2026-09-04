@@ -300,7 +300,7 @@ final class HwpViewerViewController: AppBaseViewController {
             case .textColor(let hex): vm.applyFormat(RhwpCharFormat(textColor: hex ?? "#000000"))
             case .fontSize(let pt): vm.applyFormat(RhwpCharFormat(fontSizePt: pt))
             case .pickColor(let target): presentColorPicker(for: target)
-            case .selectionHint: showToast(L10n.viewerSelectionRequired, bottomInset: 320)
+            case .selectionHint: showToast(L10n.viewerSelectionRequired)
             }
         }
     }
@@ -322,7 +322,7 @@ final class HwpViewerViewController: AppBaseViewController {
         if !didShowSelectionHint {
             didShowSelectionHint = true
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { [weak self] in
-                self?.showToast(L10n.viewerSelectionHint, bottomInset: 320)
+                self?.showToast(L10n.viewerSelectionHint)
             }
         }
     }
