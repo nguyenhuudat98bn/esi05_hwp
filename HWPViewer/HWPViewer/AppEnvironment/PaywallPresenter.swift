@@ -18,34 +18,43 @@ final class PaywallPresenter {
     private(set) var autoShowCount = 0
     private var firedTriggers = Set<PaywallAutoTrigger>()
 
-    /// Onboarding hook (after splash / after intro). Returns `false` when the paywall is skipped.
+    /// Onboarding hook (after splash / after intro). Returns `false` when the paywall is skipped — the
+    /// coordinator then runs `completion` itself, so it must NOT be called here (it would `goHome()` twice).
     @MainActor
     @discardableResult
     func present(trigger: SPNPaywallTrigger, from presenter: UIViewController, completion: @escaping () -> Void) -> Bool {
         let auto: PaywallAutoTrigger = trigger == .afterSplash ? .afterSplash : .afterIntro
-        return presentIfAllowed(at: auto, from: presenter, completion: completion)
+        guard consumeAutoShowSlot(for: auto) else { return false }
+        return present(from: presenter, completion: completion)
     }
 
-    /// Automatic paywall for `trigger`, subject to remote `iap_configs`: place enabled in `show_paywall_at`,
-    /// once per trigger per session, at most `max_paywall_shows_per_session`, with `percent_show_paywall` odds.
-    /// Returns `false` (and calls `completion` immediately) when nothing is shown.
+    /// Automatic paywall for `trigger` inside the app (Tools, opening a file). `completion` always runs exactly
+    /// once: after the paywall closes, or immediately when it is skipped. Returns whether it was shown.
     @MainActor
     @discardableResult
     func presentIfAllowed(at trigger: PaywallAutoTrigger, from presenter: UIViewController, completion: @escaping () -> Void = {}) -> Bool {
+        guard consumeAutoShowSlot(for: trigger), present(from: presenter, completion: completion) else {
+            completion()
+            return false
+        }
+        return true
+    }
+
+    /// Remote `iap_configs` gate: place enabled in `show_paywall_at`, once per trigger per session, at most
+    /// `max_paywall_shows_per_session`, with `percent_show_paywall` odds. Consumes a slot when it returns `true`.
+    @MainActor
+    private func consumeAutoShowSlot(for trigger: PaywallAutoTrigger) -> Bool {
         let config = IapConfigs.current
         guard !SPNSession.shared.isPremium,
               config.allowsAutoShow(trigger),
               !firedTriggers.contains(trigger),
               autoShowCount < config.autoShowsPerSession,
               Int.random(in: 0..<100) < config.autoShowPercent
-        else {
-            completion()
-            return false
-        }
+        else { return false }
         firedTriggers.insert(trigger)
         autoShowCount += 1
         logger("[Paywall] auto show at \(trigger.rawValue) (#\(autoShowCount)/\(config.autoShowsPerSession))")
-        return present(from: presenter, completion: completion)
+        return true
     }
 
     /// Feature-gated / settings entry point (no onboarding trigger).
