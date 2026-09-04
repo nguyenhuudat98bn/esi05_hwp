@@ -8,7 +8,7 @@
 import UIKit
 import SPNComponent
 
-let appStoreUrl = "https://apps.apple.com/app/id0000000000" // TODO: real App Store id
+let appStoreUrl = "https://apps.apple.com/us/app/hwp-viewer-hangul-reader/id6808507107"
 let privacyUrl = "https://sites.google.com/view/supernova-privacy-policy" // TODO: confirm
 let termOfUseUrl = "https://sites.google.com/view/supernova-terms-of-use" // TODO: confirm
 let actionWhenPurchaseCompleted = Notification.Name("ActionWhenPurchaseCompleted")
