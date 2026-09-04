@@ -50,6 +50,12 @@ enum OnboardingConfigs {
         config.applyButtonTitle = L10n.languageNext
         config.applyButtonType = .text
         config.applyTint = AppColors.primary
+        // Hand pointer on the device-language row: Lottie file (played as-is) instead of the bundled image.
+        // Forced on here because the Firebase `language_intro_configs` payload carries no `is_show_pointer_hand`.
+        config.showPointerHand = true
+        if let url = Bundle.main.url(forResource: "hand_pointer_click", withExtension: "json") {
+            config.handPointer = .lottie(url, size: 96)
+        }
         config.applyDisabledTint = AppColors.textTertiary
         config.applyFont = AppFonts.semibold(16)
         config.titleFont = AppFonts.bold(22)
