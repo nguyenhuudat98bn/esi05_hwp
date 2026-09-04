@@ -84,6 +84,7 @@ internal enum Asset {
       internal static let icToastCancel16 = ImageAsset(name: "App/ic_toast_cancel_16")
       internal static let icUpload = ImageAsset(name: "App/ic_upload")
       internal static let icViewerMoreVertical = ImageAsset(name: "App/ic_viewer_more_vertical")
+      internal static let imgConvertError = ImageAsset(name: "App/img_convert_error")
       internal static let imgEmptyNoFiles = ImageAsset(name: "App/img_empty_no_files")
       internal static let imgNoResultFoundVector = ImageAsset(name: "App/img_no_result_found_vector")
       internal static let imgOffline = ImageAsset(name: "App/img_offline")
@@ -94,6 +95,47 @@ internal enum Asset {
       internal static let imgPremiumBannerSparkle = ImageAsset(name: "App/img_premium_banner_sparkle")
       internal static let imgPremiumBannerSparkle2 = ImageAsset(name: "App/img_premium_banner_sparkle2")
       internal static let imgSaveChangesFolder = ImageAsset(name: "App/img_save_changes_folder")
+    }
+    internal enum Common {
+      internal static let icCloseCircle = ImageAsset(name: "ic_close_circle")
+    }
+    internal enum FileActions {
+      internal static let icActionDelete = ImageAsset(name: "ic_action_delete")
+      internal static let icActionPrint = ImageAsset(name: "ic_action_print")
+      internal static let icActionRename = ImageAsset(name: "ic_action_rename")
+      internal static let icActionShare = ImageAsset(name: "ic_action_share")
+    }
+    internal enum Home {
+      internal static let icArrowFilled = ImageAsset(name: "ic_arrow_filled")
+      internal static let icArrowRight = ImageAsset(name: "ic_arrow_right")
+      internal static let icBookmark = ImageAsset(name: "ic_bookmark")
+      internal static let icBookmarkFilled = ImageAsset(name: "ic_bookmark_filled")
+      internal static let icCrown = ImageAsset(name: "ic_crown")
+      internal static let icFileHwp = ImageAsset(name: "ic_file_hwp")
+      internal static let icMore = ImageAsset(name: "ic_more")
+      internal static let icPlus = ImageAsset(name: "ic_plus")
+      internal static let icSearch = ImageAsset(name: "ic_search")
+      internal static let icUpload = ImageAsset(name: "ic_upload")
+      internal static let imgCardDoc = ImageAsset(name: "img_card_doc")
+      internal static let imgCardEditHwp = ImageAsset(name: "img_card_edit_hwp")
+      internal static let imgCardImport = ImageAsset(name: "img_card_import")
+      internal static let imgCardLight = ImageAsset(name: "img_card_light")
+      internal static let imgCardLightWide = ImageAsset(name: "img_card_light_wide")
+      internal static let imgCardPdf = ImageAsset(name: "img_card_pdf")
+      internal static let imgEmptyFiles = ImageAsset(name: "img_empty_files")
+    }
+    internal enum Hwp {
+      internal static let icHwpCheck = ImageAsset(name: "ic_hwp_check")
+      internal static let icHwpFormatAlignLeft = ImageAsset(name: "ic_hwp_format_align_left")
+      internal static let icHwpFormatAlignRight = ImageAsset(name: "ic_hwp_format_align_right")
+      internal static let icHwpFormatBold = ImageAsset(name: "ic_hwp_format_bold")
+      internal static let icHwpFormatFontSize = ImageAsset(name: "ic_hwp_format_font_size")
+      internal static let icHwpFormatHighlight = ImageAsset(name: "ic_hwp_format_highlight")
+      internal static let icHwpFormatItalic = ImageAsset(name: "ic_hwp_format_italic")
+      internal static let icHwpFormatStrike = ImageAsset(name: "ic_hwp_format_strike")
+      internal static let icHwpFormatUnderline = ImageAsset(name: "ic_hwp_format_underline")
+      internal static let icHwpKeyboardDismiss = ImageAsset(name: "ic_hwp_keyboard_dismiss")
+      internal static let icHwpPenFab = ImageAsset(name: "ic_hwp_pen_fab")
     }
     internal enum Intro {
       internal static let icSwipe = ImageAsset(name: "ic_swipe")
@@ -132,6 +174,15 @@ internal enum Asset {
     internal enum Splash {
       internal static let logo = ImageAsset(name: "logo")
       internal static let splashBg = ImageAsset(name: "splash_bg")
+    }
+    internal enum TabBar {
+      internal static let icTabHome = ImageAsset(name: "ic_tab_home")
+      internal static let icTabSettings = ImageAsset(name: "ic_tab_settings")
+      internal static let icTabTools = ImageAsset(name: "ic_tab_tools")
+    }
+    internal enum Viewer {
+      internal static let icBack = ImageAsset(name: "ic_back")
+      internal static let icMoreVertical = ImageAsset(name: "ic_more_vertical")
     }
     internal static let icImageConvertCloseTip = ImageAsset(name: "ic_image_convert_close_tip")
   }

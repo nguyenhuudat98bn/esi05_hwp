@@ -34,6 +34,10 @@ internal enum L10n {
   internal static var convertFailed: String { return L10n.tr("Localizable", "Convert.Failed", fallback: "Couldn't convert this file. Please try again.") }
   /// Convert to HWP
   internal static var convertTitle: String { return L10n.tr("Localizable", "Convert.Title", fallback: "Convert to HWP") }
+  /// Back to Home
+  internal static var convertErrorBackHome: String { return L10n.tr("Localizable", "Convert.Error.BackHome", fallback: "Back to Home") }
+  /// Oops! Something went wrong
+  internal static var convertErrorMessage: String { return L10n.tr("Localizable", "Convert.Error.Message", fallback: "Oops! Something went wrong") }
   /// Back Home
   internal static var convertSuccessBackHome: String { return L10n.tr("Localizable", "Convert.Success.BackHome", fallback: "Back Home") }
   /// Name
@@ -198,8 +202,8 @@ internal enum L10n {
   internal static var popupSave: String { return L10n.tr("Localizable", "Popup.Save", fallback: "Save") }
   /// Try Again
   internal static var popupTryAgain: String { return L10n.tr("Localizable", "Popup.TryAgain", fallback: "Try Again") }
-  /// This file will be permanently deleted.
-  internal static var popupDeleteMessage: String { return L10n.tr("Localizable", "Popup.Delete.Message", fallback: "This file will be permanently deleted.") }
+  /// Are you sure you want to delete this file?
+  internal static var popupDeleteMessage: String { return L10n.tr("Localizable", "Popup.Delete.Message", fallback: "Are you sure you want to delete this file?") }
   /// Delete File?
   internal static var popupDeleteTitle: String { return L10n.tr("Localizable", "Popup.Delete.Title", fallback: "Delete File?") }
   /// Something went wrong

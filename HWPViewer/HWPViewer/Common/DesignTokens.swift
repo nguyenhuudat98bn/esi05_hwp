@@ -98,6 +98,7 @@ enum AppMetrics {
     static let tabBarHeight: CGFloat = 58
     static let tabBarWidth: CGFloat = 302
     static let popupRadius: CGFloat = 16
+    static let popupIconCircle: CGFloat = 60
     static let sheetRadius: CGFloat = 16
     static let navHeight: CGFloat = 56
 }

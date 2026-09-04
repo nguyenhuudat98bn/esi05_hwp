@@ -2,7 +2,7 @@
 //  AppAlertViewController.swift
 //  HWPViewer
 //
-//  Custom popup (Figma D1 "You're Offline", F7 "Save Changes?", delete confirm):
+//  Custom popup (Figma D1 "You're Offline", F7 "Save Changes?", E3 "Delete File?" 19108-24877):
 //  white card, icon, title, message, two pill buttons.
 //
 
@@ -29,6 +29,8 @@ final class AppAlertViewController: UIViewController {
     private let icon: UIImage?
     private let iconTint: UIColor?
     private let iconHeight: CGFloat
+    /// When set, the icon sits centered inside a 60pt circle of this color (Figma "Delete File?" popup).
+    private let iconCircleColor: UIColor?
     private let titleText: String
     private let messageText: String?
     private let actions: [AppAlertAction]
@@ -37,10 +39,11 @@ final class AppAlertViewController: UIViewController {
     private let card = UIView()
     private let dimView = UIView()
 
-    init(icon: UIImage?, iconTint: UIColor? = nil, iconHeight: CGFloat = 64, title: String, message: String?, actions: [AppAlertAction]) {
+    init(icon: UIImage?, iconTint: UIColor? = nil, iconHeight: CGFloat = 64, iconCircleColor: UIColor? = nil, title: String, message: String?, actions: [AppAlertAction]) {
         self.icon = icon
         self.iconTint = iconTint
         self.iconHeight = iconHeight
+        self.iconCircleColor = iconCircleColor
         self.titleText = title
         self.messageText = message
         self.actions = actions
@@ -71,6 +74,28 @@ final class AppAlertViewController: UIViewController {
         iconView.contentMode = .scaleAspectFit
         iconView.tintColor = iconTint ?? AppColors.primary
         iconView.isHidden = icon == nil
+
+        // Header slot: either the bare icon, or the icon centered in a tinted circle.
+        let iconSlot: UIView
+        if let iconCircleColor {
+            let circle = UIView()
+            circle.backgroundColor = iconCircleColor
+            circle.layer.cornerRadius = AppMetrics.popupIconCircle / 2
+            circle.addSubview(iconView)
+            iconView.snp.makeConstraints { make in
+                make.center.equalToSuperview()
+                make.size.equalTo(iconHeight)
+            }
+            let holder = UIView()
+            holder.addSubview(circle)
+            circle.snp.makeConstraints { make in
+                make.top.bottom.centerX.equalToSuperview()
+                make.size.equalTo(AppMetrics.popupIconCircle)
+            }
+            iconSlot = holder
+        } else {
+            iconSlot = iconView
+        }
 
         let titleLabel = UILabel()
         titleLabel.text = titleText
@@ -116,15 +141,17 @@ final class AppAlertViewController: UIViewController {
         buttonStack.spacing = 12
         buttonStack.distribution = .fillEqually
 
-        let stack = UIStackView(arrangedSubviews: [iconView, titleLabel, messageLabel, buttonStack])
+        let stack = UIStackView(arrangedSubviews: [iconSlot, titleLabel, messageLabel, buttonStack])
         stack.axis = .vertical
         stack.spacing = 12
         stack.alignment = .fill
         stack.setCustomSpacing(32, after: messageLabel)
-        stack.setCustomSpacing(16, after: iconView)
+        stack.setCustomSpacing(16, after: iconSlot)
         card.addSubview(stack)
         stack.snp.makeConstraints { $0.edges.equalToSuperview().inset(UIEdgeInsets(top: 32, left: 15, bottom: 24, right: 15)) }
-        iconView.snp.makeConstraints { $0.height.equalTo(iconHeight) }
+        if iconCircleColor == nil {
+            iconView.snp.makeConstraints { $0.height.equalTo(iconHeight) }
+        }
 
         let closeButton = UIButton(type: .system)
         closeButton.setImage(Asset.Assets.App.icCancelX.image.withRenderingMode(.alwaysTemplate), for: .normal)
@@ -167,9 +194,12 @@ enum OfflinePopup {
 enum DeleteConfirmPopup {
     @MainActor
     static func present(from presenter: UIViewController, fileName: String, confirm: @escaping () -> Void) {
+        // Figma 19108-24877: 36pt material delete glyph in a 60pt #FFEBEB circle, Cancel / Delete pills.
         let alert = AppAlertViewController(
-            icon: UIImage(systemName: "trash.circle.fill"),
+            icon: Asset.Assets.App.icMoreDelete.image.withRenderingMode(.alwaysTemplate),
             iconTint: AppColors.danger,
+            iconHeight: 36,
+            iconCircleColor: AppColors.dangerSoft,
             title: L10n.popupDeleteTitle,
             message: L10n.popupDeleteMessage,
             actions: [

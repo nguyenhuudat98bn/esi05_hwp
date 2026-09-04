@@ -300,3 +300,22 @@ All exported into `/Users/datnguyendev/Documents/Work/esi05_hwp/docs/figma-asset
 - Ad placeholder `image 171` (17787:97773) – not needed (ad SDK).
 - iOS status bar / keyboard – system.
 - Feature-card gloss is optional; if wanted, export node `Rect Light 1` (17525:119725) as PNG.
+
+---
+
+## Added 2026-09-04 — Convert error (G7) & Delete confirm (E3)
+
+### G7 Convert error — Figma `19108-24632` ("Lỗi")
+- White screen, header 56pt: X (`ic_editor_close_x`) at left inset 16, 1pt `#ECECED` divider under the header (same header as G5).
+- Column centered horizontally, centerY − 40: illustration 100×100 (`App/img_convert_error`, PNG @3x export of node 19108-24635,
+  white background baked in — fine on the white screen), gap 24, "Oops! Something went wrong" 14/Regular `#717680` in a 224pt box,
+  gap 28, pill **Back to Home** 252×48 radius 100 `#2E90FA`, 16/Semibold white.
+- Flow: `ConvertingViewController` failure → replaces itself with `ConvertErrorViewController` (X = pop to Select File,
+  Back to Home = pop to root). Engine stub `ConvertError.notAvailable` still uses the info popup (coming soon).
+
+### E3 Delete File? popup — Figma `19108-24877`
+- Card radius 16, padding top 32 / sides 15 / bottom 24, close X 28pt at top-right inset 10.
+- 60pt circle `#FFEBEB` with 36pt material delete glyph tinted `#F03F39` (`App/ic_more_delete`, same path as the More sheet icon).
+- Gap 16 → title "Delete File?" 18/Semibold black, gap 12 → "Are you sure you want to delete this file?" 14/Regular `#717680`, gap 32 →
+  buttons Cancel (`#ECECED`, text `#181D27`) / Delete (`#F03F39`, white), 48pt, radius 50, gap 12.
+- Implemented via `AppAlertViewController(iconCircleColor:)` in `DeleteConfirmPopup`.

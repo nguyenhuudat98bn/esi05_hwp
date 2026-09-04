@@ -2,7 +2,8 @@
 //  ConvertingViewController.swift
 //  HWPViewer
 //
-//  G4 loading screen (no design yet): file card, progress ring, Cancel. Pushes ConvertResult on success.
+//  G4 loading screen (no design yet): file card, progress ring, Cancel. Pushes ConvertResult on success,
+//  ConvertError (G7) on failure.
 //
 
 import UIKit
@@ -117,12 +118,20 @@ final class ConvertingViewController: AppBaseViewController {
                 navigationController?.setViewControllers(stack, animated: true)
             } catch is CancellationError {
                 return
-            } catch {
+            } catch ConvertError.notAvailable {
+                // Engine stub (HwpEditorKit < 1.2): informational popup, not a failure screen.
                 guard !Task.isCancelled else { return }
-                let message = error.localizedDescription.isEmpty ? L10n.convertFailed : error.localizedDescription
-                ErrorPopup.present(from: self, message: message) { [weak self] in
+                ErrorPopup.present(from: self, message: L10n.convertComingSoon) { [weak self] in
                     self?.navigationController?.popViewController(animated: true)
                 }
+            } catch {
+                guard !Task.isCancelled else { return }
+                // G7 (Figma 19108-24632): full-screen error replaces this loading screen in the stack.
+                let errorVC = ConvertErrorViewController()
+                var stack = navigationController?.viewControllers ?? []
+                stack.removeAll { $0 === self }
+                stack.append(errorVC)
+                navigationController?.setViewControllers(stack, animated: true)
             }
         }
     }
