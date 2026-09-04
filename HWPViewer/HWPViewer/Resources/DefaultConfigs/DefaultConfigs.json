@@ -21,6 +21,7 @@
         "apply_button_type": 2,
         "is_language_default": false,
         "is_show_pointer_hand": true,
+        "is_animate_done_button": true,
         "next_intro_color": "#2E90FA",
         "is_next_button_large": true
     },

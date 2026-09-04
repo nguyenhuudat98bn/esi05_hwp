@@ -9,7 +9,7 @@
     },
     "language_intro_configs": {
       "defaultValue": {
-        "value": "{\"is_show_language\":true,\"is_show_purchase_slide\":true,\"is_enable_auto_skip_language\":true,\"time_skip_language\":20,\"select_language_color\":\"#2E90FA\",\"apply_language_color\":\"#2E90FA\",\"apply_language_size\":30,\"apply_button_type\":2,\"is_language_default\":false,\"is_show_pointer_hand\":true,\"next_intro_color\":\"#2E90FA\",\"is_next_button_large\":true}"
+        "value": "{\"is_show_language\":true,\"is_show_purchase_slide\":true,\"is_enable_auto_skip_language\":true,\"time_skip_language\":20,\"select_language_color\":\"#2E90FA\",\"apply_language_color\":\"#2E90FA\",\"apply_language_size\":30,\"apply_button_type\":2,\"is_language_default\":false,\"is_show_pointer_hand\":true,\"is_animate_done_button\":true,\"next_intro_color\":\"#2E90FA\",\"is_next_button_large\":true}"
       },
       "valueType": "JSON"
     },
@@ -82,7 +82,7 @@
   },
   "version": {
     "versionNumber": "1",
-    "updateTime": "2026-09-04T07:47:06.658618Z",
+    "updateTime": "2026-09-04T07:51:04.077516Z",
     "updateUser": {
       "email": "datnh@supernovajsc.com"
     },
