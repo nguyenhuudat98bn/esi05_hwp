@@ -95,9 +95,8 @@ final class FileCell: UITableViewCell {
         metaLabel.text = item.metaText
         bookmarkButton.isHidden = !showsBookmark
         moreButton.isHidden = !showsMore
-        let icon = item.isBookmarked ? Asset.Assets.App.icBookmarkFilled.image : Asset.Assets.App.icBookmarkOutline.image
-        bookmarkButton.setImage(icon.withRenderingMode(.alwaysTemplate), for: .normal)
-        bookmarkButton.tintColor = item.isBookmarked ? AppColors.accentOrange : AppColors.textTertiary
+        bookmarkButton.setImage(FileItem.bookmarkIcon(filled: item.isBookmarked), for: .normal)
+        bookmarkButton.tintColor = AppColors.textTertiary
     }
 }
 

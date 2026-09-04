@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 import UniformTypeIdentifiers
 
 enum FileKind: String, CaseIterable {
@@ -84,5 +85,17 @@ struct FileItem: Identifiable, Equatable {
     static func == (lhs: FileItem, rhs: FileItem) -> Bool {
         lhs.url == rhs.url && lhs.size == rhs.size && lhs.modifiedAt == rhs.modifiedAt
             && lhs.lastOpenedAt == rhs.lastOpenedAt && lhs.isBookmarked == rhs.isBookmarked
+    }
+}
+
+// MARK: - Bookmark icon
+
+extension FileItem {
+    /// Bookmark glyph (Figma file row): enabled = orange filled vector drawn as-is,
+    /// disabled = outline template tinted by the caller.
+    static func bookmarkIcon(filled: Bool) -> UIImage {
+        filled
+            ? Asset.Assets.App.icBookmarkFilled.image.withRenderingMode(.alwaysOriginal)
+            : Asset.Assets.App.icBookmarkOutline.image.withRenderingMode(.alwaysTemplate)
     }
 }

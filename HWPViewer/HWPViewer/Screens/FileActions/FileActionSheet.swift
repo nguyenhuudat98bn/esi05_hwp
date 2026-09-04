@@ -2,7 +2,7 @@
 //  FileActionSheet.swift
 //  HWPViewer
 //
-//  "More" sheet (Figma E1): file header + Rename / Share / Print / Delete.
+//  "More" sheet (Figma E1): file header + Rename / Share / Print / Delete + native ad at the bottom.
 //
 
 import UIKit
@@ -46,6 +46,8 @@ final class FileActionSheet: UIViewController {
     private let dimView = UIView()
     private let sheet = UIView()
     private let bookmarkButton = UIButton(type: .system)
+    /// Bottom native ad (place `file_action_sheet`); collapses itself when there is no fill / premium.
+    private let adSlot = SPNNativeAdSlot()
     private var cancellables = Set<AnyCancellable>()
 
     init(item: FileItem, actions: [FileAction] = [.rename, .share, .print, .delete]) {
@@ -141,19 +143,22 @@ final class FileActionSheet: UIViewController {
             make.height.equalTo(4)
         }
 
-        let stack = UIStackView(arrangedSubviews: [grabberWrap, header, divider] + rows)
+        let stack = UIStackView(arrangedSubviews: [grabberWrap, header, divider] + rows + [adSlot])
         stack.axis = .vertical
         stack.spacing = 4
         stack.alignment = .fill
         stack.setCustomSpacing(16, after: grabberWrap)
         stack.setCustomSpacing(16, after: header)
         stack.setCustomSpacing(8, after: divider)
+        if let lastRow = rows.last { stack.setCustomSpacing(12, after: lastRow) }
         sheet.addSubview(stack)
         stack.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(10)
             make.leading.trailing.equalToSuperview().inset(AppMetrics.screenPadding)
             make.bottom.equalTo(view.safeAreaLayoutGuide).inset(12)
         }
+        adSlot.attach(place: .fileActionSheet, style: .native)
+
         sheet.transform = CGAffineTransform(translationX: 0, y: 400)
     }
 
@@ -165,8 +170,8 @@ final class FileActionSheet: UIViewController {
     }
 
     private func updateBookmark() {
-        bookmarkButton.setImage((item.isBookmarked ? Asset.Assets.App.icBookmarkFilled.image : Asset.Assets.App.icBookmarkOutline.image).withRenderingMode(.alwaysTemplate), for: .normal)
-        bookmarkButton.tintColor = item.isBookmarked ? AppColors.accentOrange : AppColors.textTertiary
+        bookmarkButton.setImage(FileItem.bookmarkIcon(filled: item.isBookmarked), for: .normal)
+        bookmarkButton.tintColor = AppColors.textTertiary
     }
 
     @objc private func close() { finish(nil) }
