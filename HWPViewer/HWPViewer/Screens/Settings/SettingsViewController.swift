@@ -186,7 +186,7 @@ final class SettingsRowView: UIControl {
         addSubview(valueLabel)
         addSubview(caret)
         iconView.snp.makeConstraints { make in
-            make.leading.equalToSuperview()
+            make.leading.equalToSuperview().inset(16)
             make.centerY.equalToSuperview()
             make.size.equalTo(24)
         }
@@ -195,7 +195,7 @@ final class SettingsRowView: UIControl {
             make.centerY.equalToSuperview()
         }
         caret.snp.makeConstraints { make in
-            make.trailing.equalToSuperview()
+            make.trailing.equalToSuperview().inset(16)
             make.centerY.equalToSuperview()
             make.size.equalTo(16)
         }

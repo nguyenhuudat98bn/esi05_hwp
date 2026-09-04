@@ -16,8 +16,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "DFCE14AE2D9E2F7E00DB3E8E"
-               BuildableName = "HWPViewer.app"
-               BlueprintName = "HWPViewer"
+               BuildableName = "HwpEditor.app"
+               BlueprintName = "HwpEditor"
                ReferencedContainer = "container:HWPViewer.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,8 +45,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DFCE14AE2D9E2F7E00DB3E8E"
-            BuildableName = "HWPViewer.app"
-            BlueprintName = "HWPViewer"
+            BuildableName = "HwpEditor.app"
+            BlueprintName = "HwpEditor"
             ReferencedContainer = "container:HWPViewer.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -56,6 +56,9 @@
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
+      <StoreKitConfigurationFileReference
+         identifier = "../HwpEditor.storekit">
+      </StoreKitConfigurationFileReference>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -68,8 +71,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DFCE14AE2D9E2F7E00DB3E8E"
-            BuildableName = "HWPViewer.app"
-            BlueprintName = "HWPViewer"
+            BuildableName = "HwpEditor.app"
+            BlueprintName = "HwpEditor"
             ReferencedContainer = "container:HWPViewer.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

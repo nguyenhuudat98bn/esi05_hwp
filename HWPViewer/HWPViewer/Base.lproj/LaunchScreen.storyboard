@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,21 +16,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash_bg" translatesAutoresizingMaskIntoConstraints="NO" id="NbI-gE-mg7">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                            </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="Yjs-dK-WI1">
-                                <rect key="frame" x="132.66666666666666" y="262" width="127.99999999999997" height="128"/>
+                                <rect key="frame" x="156.66666666666666" y="286" width="80" height="80"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="128" id="ExA-0F-97y"/>
+                                    <constraint firstAttribute="width" constant="80" id="ExA-0F-97y"/>
                                     <constraint firstAttribute="width" secondItem="Yjs-dK-WI1" secondAttribute="height" id="IN9-Fj-wDZ"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nova Project" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d5P-Zy-FvT">
-                                <rect key="frame" x="129" y="420" width="135.33333333333337" height="29"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
-                                <color key="textColor" name="ColorFF2024"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HWP Viewer - Hangul Reader" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d5P-Zy-FvT">
+                                <rect key="frame" x="65" y="396" width="263.33333333333331" height="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                <color key="textColor" red="0.094117647058823528" green="0.11372549019607843" blue="0.15294117647058825" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Base project of Nova JSC" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4AA-IZ-FuH">
-                                <rect key="frame" x="114.33333333333333" y="454" width="164.33333333333337" height="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4AA-IZ-FuH">
+                                <rect key="frame" x="196.66666666666666" y="425" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -42,22 +44,24 @@
                         <constraints>
                             <constraint firstItem="4AA-IZ-FuH" firstAttribute="top" secondItem="d5P-Zy-FvT" secondAttribute="bottom" constant="5" id="4d1-n5-oM9"/>
                             <constraint firstItem="Yjs-dK-WI1" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="5SX-pK-pka"/>
+                            <constraint firstAttribute="bottom" secondItem="NbI-gE-mg7" secondAttribute="bottom" id="7B3-xZ-5cA"/>
                             <constraint firstItem="4AA-IZ-FuH" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="8vS-8c-4LT"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="NbI-gE-mg7" secondAttribute="trailing" id="GNS-K3-cX8"/>
+                            <constraint firstItem="NbI-gE-mg7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Iet-P0-x4K"/>
                             <constraint firstItem="d5P-Zy-FvT" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Nj5-6X-YOJ"/>
                             <constraint firstItem="d5P-Zy-FvT" firstAttribute="top" secondItem="Yjs-dK-WI1" secondAttribute="bottom" constant="30" id="WSq-2d-H9P"/>
                             <constraint firstItem="Yjs-dK-WI1" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-100" id="ePP-rv-VLK"/>
+                            <constraint firstItem="NbI-gE-mg7" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="gdH-14-tw3"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52.671755725190835" y="374.64788732394368"/>
         </scene>
     </scenes>
     <resources>
-        <image name="logo" width="125" height="125"/>
-        <namedColor name="ColorFF2024">
-            <color red="1" green="0.125" blue="0.14100000262260437" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
+        <image name="logo" width="80" height="80"/>
+        <image name="splash_bg" width="329" height="712.5"/>
     </resources>
 </document>

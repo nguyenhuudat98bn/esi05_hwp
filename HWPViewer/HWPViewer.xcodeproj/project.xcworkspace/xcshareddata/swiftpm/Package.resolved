@@ -1,5 +1,5 @@
 {
-  "originHash" : "38275be31f2e865d70eb2856060d9231d4df616463d576c2ebba7ab6a7fc156a",
+  "originHash" : "01c35ed15887b797a92e5e9fee599c37ee0b45f9f19bd8c4234b493ac236aa8f",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -96,8 +96,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/googleads/googleads-mobile-ios-mediation-liftoffmonetize.git",
       "state" : {
-        "revision" : "5afbb7ba88034f5d39de49ec07f07a7ae7e41de1",
-        "version" : "7.7.400"
+        "revision" : "0671e795baf603a38516d6c98e831606a96e443f",
+        "version" : "7.7.600"
       }
     },
     {
@@ -114,8 +114,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/googleads/googleads-mobile-ios-mediation-mintegral.git",
       "state" : {
-        "revision" : "e4b46b7cb69722c491e528f1be275a214854a2d5",
-        "version" : "8.1.500"
+        "revision" : "753e1604b258057372932bd23a6bf6363c393034",
+        "version" : "8.1.700"
       }
     },
     {
@@ -177,8 +177,8 @@
       "kind" : "remoteSourceControl",
       "location" : "git@github.com:nguyenhuudat98bn/HwpEditorKit.git",
       "state" : {
-        "revision" : "747edeeab4d2abc58fb7eef212c35b1900cb56c7",
-        "version" : "1.1.0"
+        "revision" : "8173633250e96fa2d580bb6d48d25837063617b3",
+        "version" : "1.2.0"
       }
     },
     {
@@ -213,8 +213,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Mintegral-official/MintegralAdSDK-Swift-Package.git",
       "state" : {
-        "revision" : "85766287bfef7536a6da5ba101dc4da1d9d0cbc1",
-        "version" : "8.1.5"
+        "revision" : "71e78da3d6070792c2216fef333daa652411f3a7",
+        "version" : "8.1.7"
       }
     },
     {
@@ -276,8 +276,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/googleads/swift-package-manager-google-mobile-ads.git",
       "state" : {
-        "revision" : "868149fc50d1452078e83540e636cf519bac3e6a",
-        "version" : "13.7.0"
+        "revision" : "54efe6d39a7b41b84c1041f21c704a7e6a493d7a",
+        "version" : "13.9.0"
       }
     },
     {
@@ -294,8 +294,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Vungle/VungleAdsSDK-SwiftPackageManager.git",
       "state" : {
-        "revision" : "2ede5c7e5cb5407a73bfa6c74e495866080ba1ab",
-        "version" : "7.7.4"
+        "revision" : "281ce30afeedba62113cc511a42853de614e4ddb",
+        "version" : "7.7.6"
       }
     }
   ],

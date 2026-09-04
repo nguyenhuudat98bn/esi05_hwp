@@ -33,16 +33,16 @@
 /* Begin PBXFileReference section */
 		DFC109862E5C0C0B00B563C4 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		DFC109882E5C0C2B00B563C4 /* AppTrackingTransparency.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppTrackingTransparency.framework; path = System/Library/Frameworks/AppTrackingTransparency.framework; sourceTree = SDKROOT; };
-		DFCE14AF2D9E2F7E00DB3E8E /* HWPViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HWPViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DFCE14AF2D9E2F7E00DB3E8E /* HwpEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HwpEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		DFCE14C12D9E2F7F00DB3E8E /* Exceptions for "HWPViewer" folder in "HWPViewer" target */ = {
+		DFCE14C12D9E2F7F00DB3E8E /* Exceptions for "HWPViewer" folder in "HwpEditor" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = DFCE14AE2D9E2F7E00DB3E8E /* HWPViewer */;
+			target = DFCE14AE2D9E2F7E00DB3E8E /* HwpEditor */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -50,7 +50,7 @@
 		DFCE14B12D9E2F7E00DB3E8E /* HWPViewer */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				DFCE14C12D9E2F7F00DB3E8E /* Exceptions for "HWPViewer" folder in "HWPViewer" target */,
+				DFCE14C12D9E2F7F00DB3E8E /* Exceptions for "HWPViewer" folder in "HwpEditor" target */,
 			);
 			path = HWPViewer;
 			sourceTree = "<group>";
@@ -110,7 +110,7 @@
 		DFCE14B02D9E2F7E00DB3E8E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DFCE14AF2D9E2F7E00DB3E8E /* HWPViewer.app */,
+				DFCE14AF2D9E2F7E00DB3E8E /* HwpEditor.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -118,9 +118,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		DFCE14AE2D9E2F7E00DB3E8E /* HWPViewer */ = {
+		DFCE14AE2D9E2F7E00DB3E8E /* HwpEditor */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DFCE14C22D9E2F7F00DB3E8E /* Build configuration list for PBXNativeTarget "HWPViewer" */;
+			buildConfigurationList = DFCE14C22D9E2F7F00DB3E8E /* Build configuration list for PBXNativeTarget "HwpEditor" */;
 			buildPhases = (
 				DFCE14AB2D9E2F7E00DB3E8E /* Sources */,
 				DFCE14AC2D9E2F7E00DB3E8E /* Frameworks */,
@@ -133,7 +133,7 @@
 			fileSystemSynchronizedGroups = (
 				DFCE14B12D9E2F7E00DB3E8E /* HWPViewer */,
 			);
-			name = HWPViewer;
+			name = HwpEditor;
 			packageProductDependencies = (
 				DFCE14E52D9E3BB500DB3E8E /* FacebookBasics */,
 				DFCE14E72D9E3BB500DB3E8E /* FacebookCore */,
@@ -155,8 +155,8 @@
 				AADCAC3E2F6BAC25002F053F /* SPNComponent */,
 				AAFFEE00112233445566CC07 /* HwpEditorKit */,
 			);
-			productName = HWPViewer;
-			productReference = DFCE14AF2D9E2F7E00DB3E8E /* HWPViewer.app */;
+			productName = HwpEditor;
+			productReference = DFCE14AF2D9E2F7E00DB3E8E /* HwpEditor.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -225,15 +225,15 @@
 				DFCE150D2D9E3E2100DB3E8E /* XCRemoteSwiftPackageReference "CombineCocoa" */,
 				DF6B8EDE2E5C586900E6D9AE /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				DF4F975D2EA9D20F00B9FDB6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				AADCAC3D2F6BAC25002F053F /* XCLocalSwiftPackageReference "../../SPNComponent" */,
 				AAFFEE00112233445566CC06 /* XCRemoteSwiftPackageReference "HwpEditorKit" */,
+				AA028955304A5AD2003A9CC9 /* XCLocalSwiftPackageReference "../../SPNComponent" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = DFCE14B02D9E2F7E00DB3E8E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				DFCE14AE2D9E2F7E00DB3E8E /* HWPViewer */,
+				DFCE14AE2D9E2F7E00DB3E8E /* HwpEditor */,
 			);
 		};
 /* End PBXProject section */
@@ -268,7 +268,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 3FUMGRZ7LK;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 6V2NPA2JVB;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = x86_64;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -287,7 +287,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.spn.hwpviewer.editor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = baseprojectdev;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = esi05_dev;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -303,9 +303,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 6V2NPA2JVB;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = x86_64;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -324,6 +326,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.spn.hwpviewer.editor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = esi05_dis;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -465,7 +468,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DFCE14C22D9E2F7F00DB3E8E /* Build configuration list for PBXNativeTarget "HWPViewer" */ = {
+		DFCE14C22D9E2F7F00DB3E8E /* Build configuration list for PBXNativeTarget "HwpEditor" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DFCE14C32D9E2F7F00DB3E8E /* Debug */,
@@ -477,21 +480,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		AADCAC3D2F6BAC25002F053F /* XCLocalSwiftPackageReference "../../SPNComponent" */ = {
+		AA028955304A5AD2003A9CC9 /* XCLocalSwiftPackageReference "../../SPNComponent" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../../SPNComponent;
 		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		AAFFEE00112233445566CC06 /* XCRemoteSwiftPackageReference "HwpEditorKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "git@github.com:nguyenhuudat98bn/HwpEditorKit.git";
-			requirement = {
-				kind = exactVersion;
-				version = 1.1.0;
-			};
-		};
 		DF4F975D2EA9D20F00B9FDB6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -570,6 +565,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 0.4.1;
+			};
+		};
+		AAFFEE00112233445566CC06 /* XCRemoteSwiftPackageReference "HwpEditorKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:nguyenhuudat98bn/HwpEditorKit.git";
+			requirement = {
+				kind = exactVersion;
+				version = 1.2.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
