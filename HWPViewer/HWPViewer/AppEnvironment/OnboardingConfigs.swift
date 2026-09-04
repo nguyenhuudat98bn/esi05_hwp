@@ -92,7 +92,7 @@ enum OnboardingConfigs {
             SPNIntroPage(image: images[2], title: L10n.introduceStep3Title),
         ])
         config.adStyle = .onboard
-        config.nextButtonStyle = .small
+        config.nextButtonStyle = .auto  // remote `is_next_button_large` decides (last page with ad stays small)
         config.nextColor = AppColors.primary
         config.titleColor = AppColors.textPrimary
         config.titleFont = AppFonts.bold(24)
