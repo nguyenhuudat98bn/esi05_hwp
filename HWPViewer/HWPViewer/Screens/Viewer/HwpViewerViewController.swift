@@ -382,7 +382,7 @@ final class HwpViewerViewController: AppBaseViewController {
                 vm.markSaved()
                 vm.exitEditMode()
                 FileStore.shared.notifyChanged()
-                showToast(L10n.toastSaved)
+                // No "Saved" toast: the confirm popup + leaving edit mode is feedback enough.
             case .failure(let error):
                 logger("[HWP] save failed: \(error)")
                 ErrorPopup.present(from: self, message: L10n.viewerSaveFailed)
