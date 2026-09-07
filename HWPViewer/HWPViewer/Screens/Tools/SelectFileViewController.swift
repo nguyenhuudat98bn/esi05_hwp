@@ -85,7 +85,9 @@ final class SelectFileViewController: AppBaseViewController {
         view.addSubview(importButton)
         importButton.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(AppMetrics.screenPadding)
-            make.bottom.equalTo(tableView.snp.bottom).inset(16)
+            // Sits above the bottom native ad when there is one, otherwise 24pt clear of the home indicator.
+            make.bottom.equalTo(tableView.snp.bottom).inset(16).priority(.high)
+            make.bottom.lessThanOrEqualTo(view.safeAreaLayoutGuide).inset(24)
             make.height.equalTo(AppMetrics.buttonHeight)
         }
     }
