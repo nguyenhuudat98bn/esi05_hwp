@@ -36,11 +36,11 @@ final class ConvertService {
     static let shared = ConvertService()
 
     /// Converts `source` to an HWP named `outputName` in Documents. `progress` is 0…1 on the main thread.
-    /// Progress is coarse (read → import → export → write): the engine reports no intermediate steps.
+    /// PDF import reports per-page progress from the engine (5% → 80%); export/write fill the rest.
     func convert(source: FileItem, outputName: String, progress: @escaping (Double) -> Void) async throws -> ConvertResult {
         let kind = source.kind
         let url = source.url
-        await MainActor.run { progress(0.1) }
+        await MainActor.run { progress(0.05) }
 
         let hwp: Data = try await Task.detached(priority: .userInitiated) {
             let data = try Data(contentsOf: url, options: [.mappedIfSafe])
@@ -48,7 +48,10 @@ final class ConvertService {
             let document: RhwpDocument
             switch kind {
             case .pdf:
-                document = try RhwpDocument.importPDF(data)
+                document = try RhwpDocument.importPDF(data) { fraction in
+                    let value = 0.05 + 0.75 * fraction
+                    DispatchQueue.main.async { progress(value) }
+                }
             case .doc, .docx:
                 if data.isLegacyDoc { throw ConvertError.unsupportedLegacyDoc }
                 document = try RhwpDocument.importDOCX(data)
