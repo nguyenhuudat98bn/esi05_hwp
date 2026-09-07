@@ -133,6 +133,10 @@ final class HwpViewerViewController: AppBaseViewController {
                 return
             }
             if vm.pages.isEmpty { showLoadingHUD(false) }
+            // Khôi phục trang đọc lần trước (coordinator tự chờ layout xong rồi cuộn).
+            if let page = FileStore.shared.lastPage(for: item.url), page > 0, page < vm.pages.count {
+                coordinator.scrollToPage(page)
+            }
             if startInEditMode {
                 startInEditMode = false
                 enterEditMode()
@@ -445,6 +449,8 @@ final class HwpViewerViewController: AppBaseViewController {
         let current = (coordinator.currentVisiblePage() ?? 0) + 1
         pageIndicator.isHidden = false
         pageIndicator.text = "\(current)/\(total)"
+        // Lưu vị trí đọc (throttle theo scroll đã có ở publisher contentOffset).
+        FileStore.shared.setLastPage(current - 1, for: item.url)
     }
 
     // MARK: - Search

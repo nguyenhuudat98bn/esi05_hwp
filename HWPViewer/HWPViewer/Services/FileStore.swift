@@ -35,6 +35,8 @@ final class FileStore {
     private struct Meta: Codable {
         var lastOpened: Date?
         var bookmarked: Bool
+        /// Trang (0-based) đang xem khi rời viewer — mở lại cuộn về đúng trang (ni03).
+        var lastPage: Int?
     }
 
     private let defaults = UserDefaults.standard
@@ -133,6 +135,21 @@ final class FileStore {
 
     func isBookmarked(_ url: URL) -> Bool {
         index[url.lastPathComponent]?.bookmarked ?? false
+    }
+
+    // MARK: - Reading position
+
+    /// 0-based page the user was on when they last left this file (nil = never saved / page 0).
+    func lastPage(for url: URL) -> Int? {
+        index[url.lastPathComponent]?.lastPage
+    }
+
+    /// Persists the reading position. Does not emit `didChange` (lists don't show it).
+    func setLastPage(_ page: Int, for url: URL) {
+        var meta = index[url.lastPathComponent] ?? Meta(lastOpened: nil, bookmarked: false)
+        guard meta.lastPage != page else { return }
+        meta.lastPage = page
+        index[url.lastPathComponent] = meta
     }
 
     // MARK: - File mutations
