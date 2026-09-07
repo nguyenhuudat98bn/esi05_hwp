@@ -144,8 +144,20 @@ final class SelectFileViewController: AppBaseViewController {
             guard let self else { return }
             let run = { [weak self] in
                 guard let self else { return }
-                let converting = ConvertingViewController(source: item, outputName: name)
-                navigationController?.pushViewController(converting, animated: true)
+                // G4 (Figma 19334-142042): converting popup over this screen; result / error pushed when done.
+                let popup = ConvertingPopupViewController(source: item, outputName: name)
+                popup.onFinished = { [weak self] outcome in
+                    guard let self else { return }
+                    switch outcome {
+                    case .success(let result):
+                        navigationController?.pushViewController(ConvertResultViewController(outputURL: result.outputURL, size: result.size), animated: true)
+                    case .failure(ConvertError.unsupportedLegacyDoc):
+                        ErrorPopup.present(from: self, message: L10n.convertErrorLegacyDoc)
+                    case .failure:
+                        navigationController?.pushViewController(ConvertErrorViewController(), animated: true)
+                    }
+                }
+                present(popup, animated: true)
             }
             if AppRemoteConfigs.current.isConvertPremium {
                 requirePremium(run)

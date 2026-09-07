@@ -53,7 +53,7 @@ final class ConvertService {
                     DispatchQueue.main.async { progress(value) }
                 }
             case .doc, .docx:
-                if data.isLegacyDoc { throw ConvertError.unsupportedLegacyDoc }
+                // .doc (Word 97-2003, OLE) is handled by the engine's own binary-Word reader since kit 1.6.0.
                 document = try RhwpDocument.importDOCX(data)
             case .hwp, .hwpx:
                 throw ConvertError.unsupportedKind

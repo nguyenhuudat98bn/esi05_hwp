@@ -32,6 +32,8 @@ internal enum L10n {
   internal static var convertFailed: String { return L10n.tr("Localizable", "Convert.Failed", fallback: "Couldn't convert this file. Please try again.") }
   /// Convert to HWP
   internal static var convertTitle: String { return L10n.tr("Localizable", "Convert.Title", fallback: "Convert to HWP") }
+  /// Please wait while your file is being converted.
+  internal static var convertConvertingMessage: String { return L10n.tr("Localizable", "Convert.Converting.Message", fallback: "Please wait while your file is being converted.") }
   /// Back to Home
   internal static var convertErrorBackHome: String { return L10n.tr("Localizable", "Convert.Error.BackHome", fallback: "Back to Home") }
   /// This .doc file uses the old Word 97-2003 format. Open it in Word, save it as .docx and try again.
