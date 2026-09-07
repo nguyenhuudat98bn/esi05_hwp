@@ -173,6 +173,15 @@
       }
     },
     {
+      "identity": "hwpeditorkit",
+      "kind": "remoteSourceControl",
+      "location": "git@github.com:nguyenhuudat98bn/HwpEditorKit.git",
+      "state": {
+        "revision": "f0158efbac7383c31903ec4182b62182d915d9e5",
+        "version": "1.4.0"
+      }
+    },
+    {
       "identity": "interop-ios-for-google-sdks",
       "kind": "remoteSourceControl",
       "location": "https://github.com/google/interop-ios-for-google-sdks.git",
