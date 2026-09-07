@@ -116,6 +116,11 @@ final class ConvertResultViewController: AppBaseViewController {
         setupAdvertiser(on: .convert)
     }
 
+    /// Nav X behaves like "Back Home": the convert flow is finished, go back to the root.
+    override func backButtonTapped() {
+        navigationController?.popToRootViewController(animated: true)
+    }
+
     /// "**Name:** value" on one line (Figma G5).
     private func infoRow(_ key: String, _ value: String) -> UIView {
         let label = UILabel()
