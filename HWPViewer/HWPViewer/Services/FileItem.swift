@@ -48,7 +48,16 @@ enum FileFamily {
     }
 
     var utTypes: [UTType] {
-        extensions.compactMap { FileKind(rawValue: $0)?.utType }
+        var types = extensions.compactMap { FileKind(rawValue: $0)?.utType }
+        if self == .hwp {
+            // HWP has no system-wide UTI, only the one this app exports. A .hwp that reached the
+            // device from iCloud/Drive/a download is typed `public.data` or a `dyn.*` placeholder
+            // instead, which our identifiers don't match — the picker then greys the file out and
+            // the user cannot import at all. Accept any file here; `importFile(allowed:)` still
+            // rejects everything that is not .hwp/.hwpx.
+            types.append(.data)
+        }
+        return types
     }
 }
 
