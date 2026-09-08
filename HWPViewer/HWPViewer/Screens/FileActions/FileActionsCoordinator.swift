@@ -41,7 +41,17 @@ final class FileActionsCoordinator: NSObject {
     func presentMore(for item: FileItem, actions: [FileAction] = [.rename, .share, .print, .delete]) {
         guard let presenter else { return }
         let sheet = FileActionSheet(item: item, actions: actions)
-        sheet.onBookmark = { [weak self] in _ = self?.viewModel.toggleBookmark(item) }
+        sheet.onBookmark = { [weak self, weak sheet] in
+            guard let self else { return }
+            let added = viewModel.toggleBookmark(item)
+            self.presenter?.showToast(added ? L10n.toastBookmarkAdded : L10n.toastBookmarkRemoved)
+            // On the Bookmark tab the file just left the list, so the sheet is now acting on
+            // something the user can no longer see — close it instead of leaving Rename/Delete
+            // live on a row that vanished (ESI05-22).
+            if !added, viewModel.filter == .bookmark {
+                sheet?.dismiss(animated: true)
+            }
+        }
         sheet.onAction = { [weak self] action in
             guard let self else { return }
             switch action {

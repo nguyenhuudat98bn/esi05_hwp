@@ -131,6 +131,10 @@ final class HwpViewerViewController: AppBaseViewController {
             await vm.openAsync(url: item.url)
             if vm.document == nil {
                 showLoadingHUD(false)
+                // The engine says *why* it could not parse (unknown container, encrypted, bad XML).
+                // Throwing that away left every failure looking like "HWPX is not supported"
+                // (ESI05-25) with nothing to diagnose from.
+                logger("[HWP] open failed for \(item.url.lastPathComponent): \(vm.errorMessage ?? "unknown")")
                 vm.errorMessage = nil
                 ErrorPopup.present(from: self, message: L10n.viewerInvalidFile) { [weak self] in
                     self?.navigationController?.popViewController(animated: true)
@@ -269,7 +273,6 @@ final class HwpViewerViewController: AppBaseViewController {
                 switch item.id {
                 case NavItem.search:
                     toggleSearchBar(isShow: true)
-                    searchBarView.showKeyboard()
                 case NavItem.more:
                     moreTapped()
                 default: break
@@ -480,7 +483,14 @@ final class HwpViewerViewController: AppBaseViewController {
         UIView.animate(withDuration: 0.25, animations: {
             self.searchBarView.alpha = isShow ? 1 : 0
         }, completion: { _ in
-            if !isShow { self.searchBarView.isHidden = true }
+            if isShow {
+                // Take focus only once the bar is fully in place: claiming it mid-animation let a
+                // still-dismissing sheet (the More popup) resign it again and the keyboard
+                // flashed away (ESI05-27).
+                self.searchBarView.showKeyboard()
+            } else {
+                self.searchBarView.isHidden = true
+            }
         })
     }
 

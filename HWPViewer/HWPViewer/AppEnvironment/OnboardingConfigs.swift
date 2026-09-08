@@ -55,8 +55,11 @@ enum OnboardingConfigs {
     /// selected = blue card with white text.
     static func language() -> SPNLanguageConfig {
         var config = SPNLanguageConfig()
-        config.title = L10n.languageTitle
-        config.applyButtonTitle = L10n.languageNext
+        // Left to the package (`Language.Title` / `Language.ApplyButton`, same strings as L10n):
+        // baking them here froze the screen in the language it was built with, so it still read the
+        // old one after applying a new language (ESI05-21).
+        config.title = nil
+        config.applyButtonTitle = nil
         // Behaviour comes from remote `language_intro_configs`: `apply_button_type` (2 = "Next" text pill),
         // `apply_language_color`, `is_show_pointer_hand`, `is_enable_auto_skip_language`, `time_skip_language`…
         // Only the asset is app-side: Lottie hand pointer played as-is instead of the bundled image.

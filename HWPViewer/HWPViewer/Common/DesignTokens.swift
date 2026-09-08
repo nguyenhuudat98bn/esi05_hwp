@@ -51,7 +51,7 @@ enum AppColors {
     // File kinds
     static let hwp = UIColor(hex: "#2E90FA")
     static let pdf = UIColor(hex: "#F04438")
-    static let doc = UIColor(hex: "#3B34B6")
+    static let doc = UIColor(hex: "#444CE7")
 
     // Gradients top→bottom (card) or left→right (banners); `pill` = solid "Go" pill color
     static let gradientEdit: [UIColor] = [UIColor(hex: "#357DF8"), UIColor(hex: "#91C8FE")]

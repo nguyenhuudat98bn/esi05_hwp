@@ -37,9 +37,12 @@ enum FileAction: CaseIterable {
     var isDestructive: Bool { self == .delete }
 }
 
-final class FileActionSheet: UIViewController {
+final class FileActionSheet: UIViewController, ToastInsetProviding {
     var onAction: ((FileAction) -> Void)?
     var onBookmark: (() -> Void)?
+
+    /// A bookmark toast fired while this sheet is open has to sit above it (ESI05-20).
+    var toastBottomInset: CGFloat { sheet.bounds.height + 12 }
 
     private var item: FileItem
     private let actions: [FileAction]

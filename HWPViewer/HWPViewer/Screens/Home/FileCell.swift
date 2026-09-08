@@ -105,7 +105,8 @@ final class FileKindIconView: UIView {
     private let body = UIImageView(image: Asset.Assets.App.icFileBody.image.withRenderingMode(.alwaysTemplate))
     private let fold = UIImageView(image: Asset.Assets.App.icFileFold.image)
     private let glyph = UIImageView()
-    private let badge = UILabel()
+    /// DOC/DOCX glyph: four white bars drawn in code (Figma 18423:129614 has no exported asset).
+    private let lines = UIStackView()
 
     var kind: FileKind = .hwp {
         didSet { apply() }
@@ -119,7 +120,7 @@ final class FileKindIconView: UIView {
         addSubview(body)
         addSubview(fold)
         addSubview(glyph)
-        addSubview(badge)
+        addSubview(lines)
         body.snp.makeConstraints { $0.edges.equalToSuperview() }
         // Body is 33.5×40; fold is 10.7 square in the top-right corner; glyph ≈ 60% of the width, centred, slightly low.
         fold.snp.makeConstraints { make in
@@ -133,13 +134,21 @@ final class FileKindIconView: UIView {
             make.width.equalTo(self.snp.width).multipliedBy(0.62)
             make.height.equalTo(glyph.snp.width)
         }
-        badge.font = AppFonts.bold(9)
-        badge.textColor = .white
-        badge.textAlignment = .center
-        badge.snp.makeConstraints { make in
+        // 4 bars, 18×1.5 each with a 4pt gap, 12pt down from the top of the 33.53×39.92 icon.
+        lines.axis = .vertical
+        lines.spacing = 4
+        lines.alignment = .fill
+        for _ in 0..<4 {
+            let bar = UIView()
+            bar.backgroundColor = .white
+            bar.layer.cornerRadius = 0.75
+            bar.snp.makeConstraints { $0.height.equalTo(1.5) }
+            lines.addArrangedSubview(bar)
+        }
+        lines.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview().offset(4)
-            make.leading.trailing.equalToSuperview().inset(2)
+            make.top.equalTo(self.snp.bottom).multipliedBy(12.0 / 39.92)
+            make.width.equalTo(self.snp.width).multipliedBy(18.0 / 33.53)
         }
         apply()
     }
@@ -152,16 +161,15 @@ final class FileKindIconView: UIView {
         case .hwp, .hwpx:
             body.tintColor = AppColors.hwp
             glyph.image = Asset.Assets.App.icFileGlyphHwp.image
-            badge.isHidden = true
+            lines.isHidden = true
         case .pdf:
             body.tintColor = AppColors.pdf
             glyph.image = Asset.Assets.App.icFileGlyphPdf.image
-            badge.isHidden = true
+            lines.isHidden = true
         case .doc, .docx:
             body.tintColor = AppColors.doc
             glyph.image = nil
-            badge.isHidden = false
-            badge.text = kind.rawValue.uppercased()
+            lines.isHidden = false
         }
     }
 }

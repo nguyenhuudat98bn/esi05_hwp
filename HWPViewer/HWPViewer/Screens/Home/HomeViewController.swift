@@ -189,6 +189,14 @@ final class HomeViewController: AppBaseViewController {
 
     private func updateEmptyState() {
         let isEmpty = items.isEmpty
+        // Deleting the last file while on Recent/Bookmark leaves the whole library empty, but the
+        // tab kept showing its own "No recent files." message with the tab bar still up. Fall back
+        // to My File so the real empty state (Figma B2) takes over (ESI05-23).
+        if isEmpty, viewModel.filter != .all, FileStore.shared.allFiles(extensions: FileKind.hwpExtensions).isEmpty {
+            tabs.select(0, animated: false)
+            applyTab(0)
+            return
+        }
         emptyView.isHidden = !isEmpty
         updateBottomAd(isEmpty: isEmpty)
         // Figma B2: no segment tabs / FAB when the library itself is empty.

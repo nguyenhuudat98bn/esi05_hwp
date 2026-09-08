@@ -54,7 +54,8 @@ final class SearchViewController: AppBaseViewController {
         searchField.placeholder = L10n.searchPlaceholder
         searchField.font = AppFonts.regular(15)
         searchField.textColor = AppColors.textPrimary
-        searchField.clearButtonMode = .whileEditing
+        // Keep the clear button once there is text, even after the keyboard closes (ESI05-19).
+        searchField.clearButtonMode = .always
         searchField.returnKeyType = .search
         searchField.autocorrectionType = .no
         fieldContainer.addSubview(icon)

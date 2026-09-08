@@ -38,7 +38,9 @@ final class HwpSearchBar: UIView {
         textField.textColor = AppColors.textDark
         textField.returnKeyType = .search
         textField.autocorrectionType = .no
-        textField.clearButtonMode = .whileEditing
+        // `.whileEditing` hid the clear button the moment the keyboard closed, leaving no way to
+        // wipe the query without deleting it character by character.
+        textField.clearButtonMode = .always
         textField.delegate = self
         field.addSubview(icon)
         field.addSubview(textField)
@@ -55,6 +57,9 @@ final class HwpSearchBar: UIView {
         resultsLabel.text = "0"
         resultsLabel.font = AppFonts.regular(14)
         resultsLabel.textColor = AppColors.textPrimary
+        // The field would otherwise win the horizontal fight and squeeze the count down to "…".
+        resultsLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
+        resultsLabel.setContentHuggingPriority(.required, for: .horizontal)
         let prev = button(UIImage(systemName: "chevron.up")) { [weak self] in self?.onPrev?() }
         let next = button(UIImage(systemName: "chevron.down")) { [weak self] in self?.onNext?() }
 

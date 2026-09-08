@@ -26,7 +26,7 @@ extension UIViewController {
     /// their own bottom bar (the viewer's blue "Edit HWP" pill) don't get the toast laid over it.
     func showToast(_ message: String, duration: TimeInterval = 2.5, bottomInset: CGFloat? = nil) {
         guard let host = view.window ?? view else { return }
-        let inset = bottomInset ?? (self as? ToastInsetProviding)?.toastBottomInset ?? 24
+        let inset = bottomInset ?? topToastInsetProvider?.toastBottomInset ?? 24
         host.subviews.filter { $0.tag == ToastView.tag }.forEach { $0.removeFromSuperview() }
         let toast = ToastView(message: message)
         host.addSubview(toast)
@@ -53,6 +53,20 @@ extension UIViewController {
 /// Screens with their own bottom chrome declare how far up the toast must sit.
 protocol ToastInsetProviding {
     var toastBottomInset: CGFloat { get }
+}
+
+private extension UIViewController {
+    /// Deepest presented screen that declares an inset, falling back to this one. A toast fired
+    /// from Home while the More sheet is up has to clear the sheet, not Home's own bottom bar.
+    var topToastInsetProvider: ToastInsetProviding? {
+        var provider = self as? ToastInsetProviding
+        var controller: UIViewController? = self
+        while let presented = controller?.presentedViewController {
+            if let candidate = presented as? ToastInsetProviding { provider = candidate }
+            controller = presented
+        }
+        return provider
+    }
 }
 
 final class ToastView: UIView {

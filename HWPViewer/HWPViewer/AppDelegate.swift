@@ -48,6 +48,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Messaging.messaging().delegate = self
         UNUserNotificationCenter.current().delegate = self
         SKPaymentQueue.default().add(iapObserver)
+        // App-wide "You're Offline" dialog (ESI05-26).
+        NetworkMonitor.shared.start()
         return true
     }
 
