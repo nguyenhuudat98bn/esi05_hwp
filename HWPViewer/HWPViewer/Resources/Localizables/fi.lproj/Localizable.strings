@@ -98,6 +98,7 @@
 "Popup.TryAgain" = "Yritä uudelleen";
 "Popup.Cancel" = "Kumoa";
 "Popup.Ok" = "OK";
+"Popup.FileName" = "Tiedostonimi";
 "Popup.Save" = "Tallenna";
 "Popup.Delete" = "Poista";
 "Popup.Exit.Title" = "Suljetaanko sovellus?";

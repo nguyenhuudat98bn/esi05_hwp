@@ -98,6 +98,7 @@
 "Popup.TryAgain" = "Try Again";
 "Popup.Cancel" = "Cancel";
 "Popup.Ok" = "OK";
+"Popup.FileName" = "File name";
 "Popup.Save" = "Save";
 "Popup.Delete" = "Delete";
 "Popup.Exit.Title" = "Exit App?";

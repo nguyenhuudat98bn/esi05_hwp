@@ -214,6 +214,8 @@ internal enum L10n {
   internal static var popupCancel: String { return L10n.tr("Localizable", "Popup.Cancel", fallback: "Cancel") }
   /// Delete
   internal static var popupDelete: String { return L10n.tr("Localizable", "Popup.Delete", fallback: "Delete") }
+  /// File name
+  internal static var popupFileName: String { return L10n.tr("Localizable", "Popup.FileName", fallback: "File name") }
   /// Later
   internal static var popupLater: String { return L10n.tr("Localizable", "Popup.Later", fallback: "Later") }
   /// OK

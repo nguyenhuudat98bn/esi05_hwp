@@ -98,6 +98,7 @@
 "Popup.TryAgain" = "Försök igen";
 "Popup.Cancel" = "Avbryt";
 "Popup.Ok" = "OK";
+"Popup.FileName" = "Filnamn";
 "Popup.Save" = "Spara";
 "Popup.Delete" = "Radera";
 "Popup.Exit.Title" = "Avsluta appen?";

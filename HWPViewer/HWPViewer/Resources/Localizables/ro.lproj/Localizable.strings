@@ -98,6 +98,7 @@
 "Popup.TryAgain" = "Reîncearcă";
 "Popup.Cancel" = "Anulează";
 "Popup.Ok" = "OK";
+"Popup.FileName" = "Nume fișier";
 "Popup.Save" = "Salvează";
 "Popup.Delete" = "Șterge";
 "Popup.Exit.Title" = "Ieși din aplicație?";

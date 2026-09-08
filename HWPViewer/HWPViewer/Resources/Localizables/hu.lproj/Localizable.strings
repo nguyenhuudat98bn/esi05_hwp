@@ -98,6 +98,7 @@
 "Popup.TryAgain" = "Újra";
 "Popup.Cancel" = "Mégse";
 "Popup.Ok" = "OK";
+"Popup.FileName" = "Fájlnév";
 "Popup.Save" = "Mentés";
 "Popup.Delete" = "Törlés";
 "Popup.Exit.Title" = "Kilépsz az appból?";

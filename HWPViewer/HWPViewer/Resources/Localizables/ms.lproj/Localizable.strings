@@ -98,6 +98,7 @@
 "Popup.TryAgain" = "Cuba lagi";
 "Popup.Cancel" = "Batal";
 "Popup.Ok" = "OK";
+"Popup.FileName" = "Nama fail";
 "Popup.Save" = "Simpan";
 "Popup.Delete" = "Padam";
 "Popup.Exit.Title" = "Keluar dari apl?";

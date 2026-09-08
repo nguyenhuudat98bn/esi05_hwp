@@ -98,6 +98,7 @@
 "Popup.TryAgain" = "Pokušaj ponovno";
 "Popup.Cancel" = "Odustani";
 "Popup.Ok" = "OK";
+"Popup.FileName" = "Naziv datoteke";
 "Popup.Save" = "Spremi";
 "Popup.Delete" = "Izbriši";
 "Popup.Exit.Title" = "Zatvoriti aplikaciju?";

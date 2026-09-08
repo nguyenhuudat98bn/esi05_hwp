@@ -99,8 +99,11 @@ final class ImportSheetViewController: UIViewController {
         sheet.transform = CGAffineTransform(translationX: 0, y: 400)
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // Runs alongside the presentation's cross-dissolve. Doing it in viewDidAppear meant the dim
+        // faded in first and only then the sheet slid up — read as a delayed, two-step popup.
+        view.layoutIfNeeded()
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.4) {
             self.sheet.transform = .identity
         }
@@ -119,7 +122,7 @@ final class ImportSheetViewController: UIViewController {
     }
 }
 
-/// Wide "Import file" card: blue gradient, faded import glyph on the left, text right-aligned, round arrow button.
+/// Wide "Import file" card: blue gradient, faded import glyph on the left, text left-aligned beside it, round arrow button.
 final class ImportFileCard: UIControl {
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -152,20 +155,24 @@ final class ImportFileCard: UIControl {
         title.text = L10n.importFile
         title.font = AppFonts.semibold(18)
         title.textColor = .white
-        title.textAlignment = .right
+        title.textAlignment = .left
         let subtitle = UILabel()
         subtitle.text = L10n.importFileSubtitle
         subtitle.font = AppFonts.regular(12)
         subtitle.textColor = .white
-        subtitle.textAlignment = .right
+        subtitle.textAlignment = .left
+        subtitle.adjustsFontSizeToFitWidth = true
+        subtitle.minimumScaleFactor = 0.8
         let stack = UIStackView(arrangedSubviews: [title, subtitle])
         stack.axis = .vertical
+        stack.alignment = .leading
         stack.spacing = 2
         stack.isUserInteractionEnabled = false
         addSubview(stack)
         stack.snp.makeConstraints { make in
-            make.trailing.equalTo(arrow.snp.leading).offset(-12)
-            make.leading.greaterThanOrEqualToSuperview().inset(60)
+            // 72pt clears the tilted import glyph baked into the card art (Figma B3).
+            make.leading.equalToSuperview().inset(72)
+            make.trailing.lessThanOrEqualTo(arrow.snp.leading).offset(-12)
             make.centerY.equalToSuperview()
         }
     }

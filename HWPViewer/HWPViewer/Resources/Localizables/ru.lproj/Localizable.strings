@@ -98,6 +98,7 @@
 "Popup.TryAgain" = "Повторить";
 "Popup.Cancel" = "Отмена";
 "Popup.Ok" = "OK";
+"Popup.FileName" = "Имя файла";
 "Popup.Save" = "Сохранить";
 "Popup.Delete" = "Удалить";
 "Popup.Exit.Title" = "Выйти из приложения?";

@@ -62,7 +62,7 @@ final class FileActionsCoordinator: NSObject {
 
     func rename(_ item: FileItem, completion: ((URL) -> Void)? = nil) {
         guard let presenter else { return }
-        let dialog = RenameDialog(initialName: item.displayName)
+        let dialog = RenameDialog(initialName: item.displayName, requiresChange: true)
         dialog.validator = { [weak self] name in self?.viewModel.validateRename(item, to: name)?.errorDescription }
         dialog.onConfirm = { [weak self] name in
             guard let self else { return }

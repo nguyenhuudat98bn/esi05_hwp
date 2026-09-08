@@ -98,6 +98,7 @@
 "Popup.TryAgain" = "Zkusit znovu";
 "Popup.Cancel" = "Zrušit";
 "Popup.Ok" = "OK";
+"Popup.FileName" = "Název souboru";
 "Popup.Save" = "Uložit";
 "Popup.Delete" = "Smazat";
 "Popup.Exit.Title" = "Ukončit aplikaci?";

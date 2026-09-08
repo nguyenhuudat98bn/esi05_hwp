@@ -98,6 +98,7 @@
 "Popup.TryAgain" = "Спробувати ще";
 "Popup.Cancel" = "Скасувати";
 "Popup.Ok" = "OK";
+"Popup.FileName" = "Ім'я файлу";
 "Popup.Save" = "Зберегти";
 "Popup.Delete" = "Видалити";
 "Popup.Exit.Title" = "Вийти із застосунку?";

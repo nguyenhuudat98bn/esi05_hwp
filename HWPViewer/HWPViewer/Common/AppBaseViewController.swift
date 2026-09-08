@@ -34,7 +34,11 @@ class AppBaseViewController: SPNBaseViewController {
 
     /// Called after a purchase / restore: hide ads, unlock gated features.
     func premiumStatusDidChange() {
-        nativeAdSlot.isHidden = isPremium
+        guard isPremium else { return }
+        // Hiding alone leaves the loaded ad alive underneath and it reappears on the next layout;
+        // detach so the slot is really gone for a paying user.
+        nativeAdSlot.detach()
+        nativeAdSlot.isHidden = true
     }
 
     /// Runs `action` if the user is premium, otherwise presents the paywall and runs it on success.

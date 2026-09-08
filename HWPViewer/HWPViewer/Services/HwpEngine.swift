@@ -19,6 +19,7 @@ enum HwpEngine {
         HwpEditorKitConfig.copyMenuTitle = L10n.viewerMenuCopy
         HwpEditorKitConfig.cutMenuTitle = L10n.viewerMenuCut
         HwpEditorKitConfig.pasteMenuTitle = L10n.viewerMenuPaste
+        HwpEditorKitConfig.deleteMenuTitle = L10n.viewerMenuDelete
     }
 
     /// Renders the whole document to a temporary PDF (UIPrintInteractionController cannot read HWP).

@@ -142,13 +142,12 @@ final class HomeViewController: AppBaseViewController {
             }
             .store(in: &cancellables)
 
-        tabs.onSelect = { [weak self] index in
-            guard let self else { return }
-            switch index {
-            case 1: viewModel.filter = .recent
-            case 2: viewModel.filter = .bookmark
-            default: viewModel.filter = .all
-            }
+        tabs.onSelect = { [weak self] index in self?.applyTab(index) }
+
+        for direction in [UISwipeGestureRecognizer.Direction.left, .right] {
+            let swipe = UISwipeGestureRecognizer(target: self, action: #selector(handleTabSwipe(_:)))
+            swipe.direction = direction
+            tableView.addGestureRecognizer(swipe)
         }
 
         headerView.onSearch = { [weak self] in
@@ -160,7 +159,9 @@ final class HomeViewController: AppBaseViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in self?.presentImportSheet() }
             .store(in: &cancellables)
-        emptyView.onAction = { [weak self] in self?.presentImportSheet() }
+        // Figma B2: the empty-state CTA goes straight to the system picker. The "Import or convert"
+        // sheet belongs to the FAB (+) only.
+        emptyView.onAction = { [weak self] in self?.actions.pickAndImport(family: .hwp) }
 
         editCard.tapPublisher.receive(on: DispatchQueue.main)
             .sink { [weak self] _ in self?.openTool(.editHwp) }
@@ -204,6 +205,24 @@ final class HomeViewController: AppBaseViewController {
         super.premiumStatusDidChange()
         headerView.setPremiumHidden(isPremium)
         if isPremium { listAd.detach() }
+    }
+
+    /// Tab -> list filter. Shared by the segment control and the swipe gesture.
+    private func applyTab(_ index: Int) {
+        switch index {
+        case 1: viewModel.filter = .recent
+        case 2: viewModel.filter = .bookmark
+        default: viewModel.filter = .all
+        }
+    }
+
+    /// Swipe left/right moves to the next/previous tab (ESI05-16). Stops at the ends rather than wrapping.
+    @objc private func handleTabSwipe(_ gesture: UISwipeGestureRecognizer) {
+        guard !tabs.isHidden else { return }
+        let next = tabs.selectedIndex + (gesture.direction == .left ? 1 : -1)
+        guard next >= 0, next < tabs.tabCount, next != tabs.selectedIndex else { return }
+        tabs.select(next, animated: true)
+        applyTab(next)
     }
 
     // MARK: - Navigation

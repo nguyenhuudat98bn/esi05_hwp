@@ -98,6 +98,7 @@
 "Popup.TryAgain" = "Opnieuw";
 "Popup.Cancel" = "Annuleer";
 "Popup.Ok" = "OK";
+"Popup.FileName" = "Bestandsnaam";
 "Popup.Save" = "Bewaar";
 "Popup.Delete" = "Verwijder";
 "Popup.Exit.Title" = "App afsluiten?";

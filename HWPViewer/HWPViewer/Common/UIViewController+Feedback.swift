@@ -22,15 +22,18 @@ extension UIViewController {
     }
 
     /// Bottom toast (Figma 18387:124320): blue pill, 14pt white text, 16pt X that dismisses it early. Auto hides.
-    func showToast(_ message: String, duration: TimeInterval = 2.5, bottomInset: CGFloat = 24) {
+    /// `bottomInset` defaults to whatever the screen declares via `ToastInsetProviding`, so screens with
+    /// their own bottom bar (the viewer's blue "Edit HWP" pill) don't get the toast laid over it.
+    func showToast(_ message: String, duration: TimeInterval = 2.5, bottomInset: CGFloat? = nil) {
         guard let host = view.window ?? view else { return }
+        let inset = bottomInset ?? (self as? ToastInsetProviding)?.toastBottomInset ?? 24
         host.subviews.filter { $0.tag == ToastView.tag }.forEach { $0.removeFromSuperview() }
         let toast = ToastView(message: message)
         host.addSubview(toast)
         toast.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.leading.greaterThanOrEqualToSuperview().inset(24)
-            make.bottom.equalTo(host.safeAreaLayoutGuide).inset(bottomInset)
+            make.bottom.equalTo(host.safeAreaLayoutGuide).inset(inset)
         }
         let hide = { [weak toast] in
             guard let toast, toast.superview != nil else { return }
@@ -45,6 +48,11 @@ extension UIViewController {
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + duration, execute: hide)
     }
+}
+
+/// Screens with their own bottom chrome declare how far up the toast must sit.
+protocol ToastInsetProviding {
+    var toastBottomInset: CGFloat { get }
 }
 
 final class ToastView: UIView {

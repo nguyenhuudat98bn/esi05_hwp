@@ -98,6 +98,7 @@
 "Popup.TryAgain" = "Torna-ho a provar";
 "Popup.Cancel" = "Cancel·la";
 "Popup.Ok" = "OK";
+"Popup.FileName" = "Nom del fitxer";
 "Popup.Save" = "Desa";
 "Popup.Delete" = "Elimina";
 "Popup.Exit.Title" = "Vols sortir de l'app?";

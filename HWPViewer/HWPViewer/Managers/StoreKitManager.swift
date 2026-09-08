@@ -97,6 +97,10 @@ extension StoreKitManager: SKPaymentTransactionObserver, SKProductsRequestDelega
                     logger("--------->purchased logPurchaseEvent\(transaction.transactionDate?.timeIntervalSinceNow)")
                 }
                 SKPaymentQueue.default().finishTransaction(transaction)
+                // StoreKit itself is the authoritative local signal that the user paid. Receipt
+                // validation below only refines it (expiry, product id) — waiting for that round
+                // trip left paying users on the paywall with ads whenever it failed.
+                activateVipUser()
                 delegate?.didPurchaseSuccess()
             case .failed:
                 delegate?.didPurchaseFail(error: transaction.error)
@@ -111,6 +115,7 @@ extension StoreKitManager: SKPaymentTransactionObserver, SKProductsRequestDelega
                 SKPaymentQueue.default().finishTransaction(transaction)
             case .restored:
                 SKPaymentQueue.default().finishTransaction(transaction)
+                activateVipUser()
                 delegate?.didRestorePurchases()
             default:
                 break
@@ -144,16 +149,18 @@ extension StoreKitManager: SKPaymentTransactionObserver, SKProductsRequestDelega
 }
 
 extension StoreKitManager {
-    private func activateVipUser() {
-        if !ApplicationSession.shared.isVipSubscription {
-            ReminderManager.shared.fireReminder(title: L10n.purchaseTitle, message: L10n.purchaseSuccessMessage)
-        }
+    /// Idempotent: the transaction observer and receipt validation both call this for one purchase,
+    /// and the notification must fire once — `PaywallViewController` dismisses on it, so a second
+    /// post would dismiss whatever screen took its place.
+    func activateVipUser() {
+        guard !ApplicationSession.shared.isVipSubscription else { return }
+        ReminderManager.shared.fireReminder(title: L10n.purchaseTitle, message: L10n.purchaseSuccessMessage)
         ApplicationSession.shared.isVipSubscription = true
 //        SKANManager.shared.updateConversion(for: .subscription)
         NotificationCenter.default.post(name: actionWhenPurchaseCompleted, object: nil, userInfo: nil)
     }
     
-    private func inactiveUser() {
+    func inactiveUser() {
         ApplicationSession.shared.isVipSubscription = false
     }
     
@@ -182,9 +189,11 @@ extension StoreKitManager {
             case .active:
                 self?.activateVipUser()
             case .expired:
+                // Apple answered and the subscription really has lapsed — the only safe downgrade.
                 self?.inactiveUser()
-            default:
-                self?.inactiveUser()
+            case .isSandbox, .validationFailure, .invalidate:
+                // No verdict (offline, wrong shared secret, Apple error). Revoking here logged
+                // paying users back out to the paywall, so keep whatever state we already have.
                 break
             }
         }

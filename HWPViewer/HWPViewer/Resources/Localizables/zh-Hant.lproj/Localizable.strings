@@ -98,6 +98,7 @@
 "Popup.TryAgain" = "重試";
 "Popup.Cancel" = "取消";
 "Popup.Ok" = "OK";
+"Popup.FileName" = "檔案名稱";
 "Popup.Save" = "儲存";
 "Popup.Delete" = "删除";
 "Popup.Exit.Title" = "結束應用程式？";

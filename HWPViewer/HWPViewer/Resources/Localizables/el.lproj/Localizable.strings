@@ -98,6 +98,7 @@
 "Popup.TryAgain" = "Δοκιμή ξανά";
 "Popup.Cancel" = "Άκυρο";
 "Popup.Ok" = "OK";
+"Popup.FileName" = "Όνομα αρχείου";
 "Popup.Save" = "Αποθήκευση";
 "Popup.Delete" = "Διαγραφή";
 "Popup.Exit.Title" = "Έξοδος από την εφαρμογή;";

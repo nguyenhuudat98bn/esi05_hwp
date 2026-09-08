@@ -98,6 +98,7 @@
 "Popup.TryAgain" = "Thử lại";
 "Popup.Cancel" = "Huỷ";
 "Popup.Ok" = "OK";
+"Popup.FileName" = "Tên tệp";
 "Popup.Save" = "Lưu";
 "Popup.Delete" = "Xoá";
 "Popup.Exit.Title" = "Thoát ứng dụng?";

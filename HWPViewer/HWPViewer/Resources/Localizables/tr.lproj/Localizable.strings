@@ -98,6 +98,7 @@
 "Popup.TryAgain" = "Tekrar dene";
 "Popup.Cancel" = "İptal";
 "Popup.Ok" = "OK";
+"Popup.FileName" = "Dosya adı";
 "Popup.Save" = "Kaydet";
 "Popup.Delete" = "Sil";
 "Popup.Exit.Title" = "Uygulamadan çıkılsın mı?";

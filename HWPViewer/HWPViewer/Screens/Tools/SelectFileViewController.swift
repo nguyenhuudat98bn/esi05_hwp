@@ -110,10 +110,9 @@ final class SelectFileViewController: AppBaseViewController {
     }
 
     private func importFile() {
-        actions.pickAndImport(family: tool.family) { [weak self] url in
-            guard let self, let item = FileStore.shared.item(at: url) else { return }
-            handle(item)
-        }
+        // Import only adds the file to this list. Converting starts when the user picks a row —
+        // auto-opening the output-name popup right after the system picker hijacked the flow.
+        actions.pickAndImport(family: tool.family) { _ in }
     }
 
     private func handle(_ item: FileItem) {
@@ -133,7 +132,7 @@ final class SelectFileViewController: AppBaseViewController {
 
     // G3: output name → G4 convert → G5 result
     private func startConvert(_ item: FileItem) {
-        let dialog = RenameDialog(title: L10n.convertTitle, initialName: item.displayName, confirmTitle: L10n.popupOk)
+        let dialog = RenameDialog(title: L10n.popupFileName, initialName: item.displayName, confirmTitle: L10n.popupOk)
         dialog.validator = { name in
             let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
             if trimmed.rangeOfCharacter(from: FileStore.invalidNameCharacters) != nil { return L10n.renameErrorInvalid }

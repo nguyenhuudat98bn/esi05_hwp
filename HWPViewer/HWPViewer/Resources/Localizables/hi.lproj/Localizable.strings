@@ -98,6 +98,7 @@
 "Popup.TryAgain" = "पुनः प्रयास करें";
 "Popup.Cancel" = "रद्द करें";
 "Popup.Ok" = "OK";
+"Popup.FileName" = "फ़ाइल का नाम";
 "Popup.Save" = "सहेजें";
 "Popup.Delete" = "हटाएँ";
 "Popup.Exit.Title" = "ऐप बंद करें?";

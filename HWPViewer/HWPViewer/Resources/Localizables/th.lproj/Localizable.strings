@@ -98,6 +98,7 @@
 "Popup.TryAgain" = "ลองอีกครั้ง";
 "Popup.Cancel" = "ยกเลิก";
 "Popup.Ok" = "OK";
+"Popup.FileName" = "ชื่อไฟล์";
 "Popup.Save" = "บันทึก";
 "Popup.Delete" = "ลบ";
 "Popup.Exit.Title" = "ออกจากแอป?";

@@ -12,6 +12,9 @@ final class SegmentTabsView: UIView {
     var onSelect: ((Int) -> Void)?
     private(set) var selectedIndex = 0
 
+    /// Number of tabs, so callers can clamp a swipe to the ends.
+    var tabCount: Int { buttons.count }
+
     private var buttons: [UIButton] = []
     private let indicator = UIView()
     private let stack = UIStackView()

@@ -98,6 +98,7 @@
 "Popup.TryAgain" = "נסו שוב";
 "Popup.Cancel" = "ביטול";
 "Popup.Ok" = "OK";
+"Popup.FileName" = "שם הקובץ";
 "Popup.Save" = "שמירה";
 "Popup.Delete" = "מחיקה";
 "Popup.Exit.Title" = "לצאת מהאפליקציה?";

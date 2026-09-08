@@ -18,6 +18,7 @@ final class RenameDialog: UIViewController {
     var onConfirm: ((String) -> Void)?
 
     private let initialName: String
+    private let requiresChange: Bool
     private let titleText: String
     private let confirmTitle: String
     private let dimView = UIView()
@@ -29,10 +30,13 @@ final class RenameDialog: UIViewController {
     private var cancellables = Set<AnyCancellable>()
     private var cardBottomConstraint: Constraint?
 
-    init(title: String = L10n.renameTitle, initialName: String, confirmTitle: String = L10n.popupOk) {
+    /// - Parameter requiresChange: `true` (rename) keeps OK disabled until the name actually differs;
+    ///   `false` (convert output name) accepts the suggested name as-is.
+    init(title: String = L10n.renameTitle, initialName: String, confirmTitle: String = L10n.popupOk, requiresChange: Bool = false) {
         self.initialName = initialName
         self.titleText = title
         self.confirmTitle = confirmTitle
+        self.requiresChange = requiresChange
         super.init(nibName: nil, bundle: nil)
         modalPresentationStyle = .overFullScreen
         modalTransitionStyle = .crossDissolve
@@ -138,12 +142,14 @@ final class RenameDialog: UIViewController {
         } else {
             error = validator?(name)
         }
-        let enabled = !name.isEmpty && error == nil
+        let enabled = !name.isEmpty && error == nil && !(requiresChange && name == initialName)
         errorLabel.text = error
         errorLabel.isHidden = error == nil
         fieldContainer.layer.borderColor = (error != nil ? AppColors.danger : (name.isEmpty ? AppColors.border : AppColors.primary)).cgColor
         okButton.isEnabled = enabled
-        okButton.backgroundColor = enabled ? AppColors.primary : AppColors.primary.withAlphaComponent(0.35)
+        // Figma E2: the disabled OK is grey, not a faded blue.
+        okButton.backgroundColor = enabled ? AppColors.primary : AppColors.surfaceMuted
+        okButton.setTitleColor(enabled ? .white : AppColors.textTertiary, for: .normal)
     }
 
     private func confirm() {

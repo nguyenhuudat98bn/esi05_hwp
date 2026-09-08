@@ -98,6 +98,7 @@
 "Popup.TryAgain" = "再試行";
 "Popup.Cancel" = "キャンセル";
 "Popup.Ok" = "OK";
+"Popup.FileName" = "ファイル名";
 "Popup.Save" = "保存";
 "Popup.Delete" = "削除";
 "Popup.Exit.Title" = "アプリを終了しますか？";

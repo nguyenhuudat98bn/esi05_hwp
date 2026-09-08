@@ -1,303 +1,303 @@
 {
-  "originHash": "92f737edf1ade35076d727384c9d85107355710afd231dd4fa4e8b8b3edbe56c",
-  "pins": [
+  "originHash" : "01c35ed15887b797a92e5e9fee599c37ee0b45f9f19bd8c4234b493ac236aa8f",
+  "pins" : [
     {
-      "identity": "abseil-cpp-binary",
-      "kind": "remoteSourceControl",
-      "location": "https://github.com/google/abseil-cpp-binary.git",
-      "state": {
-        "revision": "bbe8b69694d7873315fd3a4ad41efe043e1c07c5",
-        "version": "1.2024072200.0"
+      "identity" : "abseil-cpp-binary",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/google/abseil-cpp-binary.git",
+      "state" : {
+        "revision" : "bbe8b69694d7873315fd3a4ad41efe043e1c07c5",
+        "version" : "1.2024072200.0"
       }
     },
     {
-      "identity": "adsglobalpackage",
-      "kind": "remoteSourceControl",
-      "location": "https://github.com/bytedance/AdsGlobalPackage.git",
-      "state": {
-        "revision": "0d62519f394ab6322dc56aa93609188e8887d076",
-        "version": "7.9.1-release.1"
+      "identity" : "adsglobalpackage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/bytedance/AdsGlobalPackage.git",
+      "state" : {
+        "revision" : "0d62519f394ab6322dc56aa93609188e8887d076",
+        "version" : "7.9.1-release.1"
       }
     },
     {
-      "identity": "app-check",
-      "kind": "remoteSourceControl",
-      "location": "https://github.com/google/app-check.git",
-      "state": {
-        "revision": "61b85103a1aeed8218f17c794687781505fbbef5",
-        "version": "11.2.0"
+      "identity" : "app-check",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/google/app-check.git",
+      "state" : {
+        "revision" : "61b85103a1aeed8218f17c794687781505fbbef5",
+        "version" : "11.2.0"
       }
     },
     {
-      "identity": "chipagecontrol",
-      "kind": "remoteSourceControl",
-      "location": "https://github.com/ChiliLabs/CHIPageControl.git",
-      "state": {
-        "revision": "2d16f651a6c885e8d7eff21b36bd1cae3130aa10",
-        "version": "0.2.1"
+      "identity" : "chipagecontrol",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ChiliLabs/CHIPageControl.git",
+      "state" : {
+        "revision" : "2d16f651a6c885e8d7eff21b36bd1cae3130aa10",
+        "version" : "0.2.1"
       }
     },
     {
-      "identity": "combinecocoa",
-      "kind": "remoteSourceControl",
-      "location": "https://github.com/CombineCommunity/CombineCocoa.git",
-      "state": {
-        "revision": "7300c75ff9e072aa7fd0fccefcc88f74aae9bf56",
-        "version": "0.4.1"
+      "identity" : "combinecocoa",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/CombineCommunity/CombineCocoa.git",
+      "state" : {
+        "revision" : "7300c75ff9e072aa7fd0fccefcc88f74aae9bf56",
+        "version" : "0.4.1"
       }
     },
     {
-      "identity": "facebook-ios-sdk",
-      "kind": "remoteSourceControl",
-      "location": "https://github.com/facebook/facebook-ios-sdk",
-      "state": {
-        "revision": "a77ba210bf6534564ad4027fce2fef65babfadf8",
-        "version": "18.0.1"
+      "identity" : "facebook-ios-sdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/facebook/facebook-ios-sdk",
+      "state" : {
+        "revision" : "a77ba210bf6534564ad4027fce2fef65babfadf8",
+        "version" : "18.0.1"
       }
     },
     {
-      "identity": "fbaudiencenetwork",
-      "kind": "remoteSourceControl",
-      "location": "https://github.com/facebook/FBAudienceNetwork.git",
-      "state": {
-        "revision": "26100d29de1cdb6753d7c602391f6fc6d29f6507",
-        "version": "6.22.0"
+      "identity" : "fbaudiencenetwork",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/facebook/FBAudienceNetwork.git",
+      "state" : {
+        "revision" : "26100d29de1cdb6753d7c602391f6fc6d29f6507",
+        "version" : "6.22.0"
       }
     },
     {
-      "identity": "firebase-ios-sdk",
-      "kind": "remoteSourceControl",
-      "location": "https://github.com/firebase/firebase-ios-sdk",
-      "state": {
-        "revision": "52548902007e7beda99fcdca31f62eccc4befe38",
-        "version": "12.11.0"
+      "identity" : "firebase-ios-sdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/firebase/firebase-ios-sdk",
+      "state" : {
+        "revision" : "52548902007e7beda99fcdca31f62eccc4befe38",
+        "version" : "12.11.0"
       }
     },
     {
-      "identity": "fspagerview",
-      "kind": "remoteSourceControl",
-      "location": "https://github.com/olbartek/FSPagerView",
-      "state": {
-        "revision": "f07d67c1d0a19cadfb94014d4d9653ccdf25169d",
-        "version": "0.8.3"
+      "identity" : "fspagerview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/olbartek/FSPagerView",
+      "state" : {
+        "revision" : "f07d67c1d0a19cadfb94014d4d9653ccdf25169d",
+        "version" : "0.8.3"
       }
     },
     {
-      "identity": "google-ads-on-device-conversion-ios-sdk",
-      "kind": "remoteSourceControl",
-      "location": "https://github.com/googleads/google-ads-on-device-conversion-ios-sdk",
-      "state": {
-        "revision": "7b722132d1f2ab421c88a2e5c384c984cebd0d00",
-        "version": "3.4.0"
+      "identity" : "google-ads-on-device-conversion-ios-sdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/googleads/google-ads-on-device-conversion-ios-sdk",
+      "state" : {
+        "revision" : "7b722132d1f2ab421c88a2e5c384c984cebd0d00",
+        "version" : "3.4.0"
       }
     },
     {
-      "identity": "googleads-mobile-ios-mediation-liftoffmonetize",
-      "kind": "remoteSourceControl",
-      "location": "https://github.com/googleads/googleads-mobile-ios-mediation-liftoffmonetize.git",
-      "state": {
-        "revision": "0671e795baf603a38516d6c98e831606a96e443f",
-        "version": "7.7.600"
+      "identity" : "googleads-mobile-ios-mediation-liftoffmonetize",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/googleads/googleads-mobile-ios-mediation-liftoffmonetize.git",
+      "state" : {
+        "revision" : "0671e795baf603a38516d6c98e831606a96e443f",
+        "version" : "7.7.600"
       }
     },
     {
-      "identity": "googleads-mobile-ios-mediation-meta",
-      "kind": "remoteSourceControl",
-      "location": "https://github.com/googleads/googleads-mobile-ios-mediation-meta.git",
-      "state": {
-        "revision": "0a3d0597402162334fb5e11816ca612478180095",
-        "version": "6.22.0"
+      "identity" : "googleads-mobile-ios-mediation-meta",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/googleads/googleads-mobile-ios-mediation-meta.git",
+      "state" : {
+        "revision" : "0a3d0597402162334fb5e11816ca612478180095",
+        "version" : "6.22.0"
       }
     },
     {
-      "identity": "googleads-mobile-ios-mediation-mintegral",
-      "kind": "remoteSourceControl",
-      "location": "https://github.com/googleads/googleads-mobile-ios-mediation-mintegral.git",
-      "state": {
-        "revision": "753e1604b258057372932bd23a6bf6363c393034",
-        "version": "8.1.700"
+      "identity" : "googleads-mobile-ios-mediation-mintegral",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/googleads/googleads-mobile-ios-mediation-mintegral.git",
+      "state" : {
+        "revision" : "753e1604b258057372932bd23a6bf6363c393034",
+        "version" : "8.1.700"
       }
     },
     {
-      "identity": "googleads-mobile-ios-mediation-pangle",
-      "kind": "remoteSourceControl",
-      "location": "https://github.com/googleads/googleads-mobile-ios-mediation-pangle.git",
-      "state": {
-        "revision": "a5845f3a60e25aaaa57548f24af374d90f5d65d1",
-        "version": "7.9.10101"
+      "identity" : "googleads-mobile-ios-mediation-pangle",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/googleads/googleads-mobile-ios-mediation-pangle.git",
+      "state" : {
+        "revision" : "a5845f3a60e25aaaa57548f24af374d90f5d65d1",
+        "version" : "7.9.10101"
       }
     },
     {
-      "identity": "googleappmeasurement",
-      "kind": "remoteSourceControl",
-      "location": "https://github.com/google/GoogleAppMeasurement.git",
-      "state": {
-        "revision": "1657f705bc70255ff9d66dfcc697a85db164998f",
-        "version": "12.11.0"
+      "identity" : "googleappmeasurement",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/google/GoogleAppMeasurement.git",
+      "state" : {
+        "revision" : "1657f705bc70255ff9d66dfcc697a85db164998f",
+        "version" : "12.11.0"
       }
     },
     {
-      "identity": "googledatatransport",
-      "kind": "remoteSourceControl",
-      "location": "https://github.com/google/GoogleDataTransport.git",
-      "state": {
-        "revision": "617af071af9aa1d6a091d59a202910ac482128f9",
-        "version": "10.1.0"
+      "identity" : "googledatatransport",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/google/GoogleDataTransport.git",
+      "state" : {
+        "revision" : "617af071af9aa1d6a091d59a202910ac482128f9",
+        "version" : "10.1.0"
       }
     },
     {
-      "identity": "googleutilities",
-      "kind": "remoteSourceControl",
-      "location": "https://github.com/google/GoogleUtilities.git",
-      "state": {
-        "revision": "60da361632d0de02786f709bdc0c4df340f7613e",
-        "version": "8.1.0"
+      "identity" : "googleutilities",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/google/GoogleUtilities.git",
+      "state" : {
+        "revision" : "60da361632d0de02786f709bdc0c4df340f7613e",
+        "version" : "8.1.0"
       }
     },
     {
-      "identity": "grpc-binary",
-      "kind": "remoteSourceControl",
-      "location": "https://github.com/google/grpc-binary.git",
-      "state": {
-        "revision": "75b31c842f664a0f46a2e590a570e370249fd8f6",
-        "version": "1.69.1"
+      "identity" : "grpc-binary",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/google/grpc-binary.git",
+      "state" : {
+        "revision" : "75b31c842f664a0f46a2e590a570e370249fd8f6",
+        "version" : "1.69.1"
       }
     },
     {
-      "identity": "gtm-session-fetcher",
-      "kind": "remoteSourceControl",
-      "location": "https://github.com/google/gtm-session-fetcher.git",
-      "state": {
-        "revision": "a2ab612cb980066ee56d90d60d8462992c07f24b",
-        "version": "3.5.0"
+      "identity" : "gtm-session-fetcher",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/google/gtm-session-fetcher.git",
+      "state" : {
+        "revision" : "a2ab612cb980066ee56d90d60d8462992c07f24b",
+        "version" : "3.5.0"
       }
     },
     {
-      "identity": "hwpeditorkit",
-      "kind": "remoteSourceControl",
-      "location": "git@github.com:nguyenhuudat98bn/HwpEditorKit.git",
-      "state": {
-        "revision": "d0bbd0c03c32e8d8363ea8fb9cee8ab92f4ac7fd",
-        "version": "1.6.0"
+      "identity" : "hwpeditorkit",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:nguyenhuudat98bn/HwpEditorKit.git",
+      "state" : {
+        "revision" : "2a56aa39652503f5878c5fafaa79c3257208c29f",
+        "version" : "1.7.0"
       }
     },
     {
-      "identity": "interop-ios-for-google-sdks",
-      "kind": "remoteSourceControl",
-      "location": "https://github.com/google/interop-ios-for-google-sdks.git",
-      "state": {
-        "revision": "040d087ac2267d2ddd4cca36c757d1c6a05fdbfe",
-        "version": "101.0.0"
+      "identity" : "interop-ios-for-google-sdks",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/google/interop-ios-for-google-sdks.git",
+      "state" : {
+        "revision" : "040d087ac2267d2ddd4cca36c757d1c6a05fdbfe",
+        "version" : "101.0.0"
       }
     },
     {
-      "identity": "leveldb",
-      "kind": "remoteSourceControl",
-      "location": "https://github.com/firebase/leveldb.git",
-      "state": {
-        "revision": "a0bc79961d7be727d258d33d5a6b2f1023270ba1",
-        "version": "1.22.5"
+      "identity" : "leveldb",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/firebase/leveldb.git",
+      "state" : {
+        "revision" : "a0bc79961d7be727d258d33d5a6b2f1023270ba1",
+        "version" : "1.22.5"
       }
     },
     {
-      "identity": "lottie-ios",
-      "kind": "remoteSourceControl",
-      "location": "https://github.com/airbnb/lottie-ios.git",
-      "state": {
-        "revision": "0cb03fd7564d27345bcd96144b811e56212949c6",
-        "version": "4.6.0"
+      "identity" : "lottie-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/airbnb/lottie-ios.git",
+      "state" : {
+        "revision" : "0cb03fd7564d27345bcd96144b811e56212949c6",
+        "version" : "4.6.0"
       }
     },
     {
-      "identity": "mintegraladsdk-swift-package",
-      "kind": "remoteSourceControl",
-      "location": "https://github.com/Mintegral-official/MintegralAdSDK-Swift-Package.git",
-      "state": {
-        "revision": "71e78da3d6070792c2216fef333daa652411f3a7",
-        "version": "8.1.7"
+      "identity" : "mintegraladsdk-swift-package",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Mintegral-official/MintegralAdSDK-Swift-Package.git",
+      "state" : {
+        "revision" : "71e78da3d6070792c2216fef333daa652411f3a7",
+        "version" : "8.1.7"
       }
     },
     {
-      "identity": "nanopb",
-      "kind": "remoteSourceControl",
-      "location": "https://github.com/firebase/nanopb.git",
-      "state": {
-        "revision": "b7e1104502eca3a213b46303391ca4d3bc8ddec1",
-        "version": "2.30910.0"
+      "identity" : "nanopb",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/firebase/nanopb.git",
+      "state" : {
+        "revision" : "b7e1104502eca3a213b46303391ca4d3bc8ddec1",
+        "version" : "2.30910.0"
       }
     },
     {
-      "identity": "panmodal",
-      "kind": "remoteSourceControl",
-      "location": "https://github.com/slackhq/PanModal.git",
-      "state": {
-        "revision": "b012aecb6b67a8e46369227f893c12544846613f",
-        "version": "1.2.7"
+      "identity" : "panmodal",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/slackhq/PanModal.git",
+      "state" : {
+        "revision" : "b012aecb6b67a8e46369227f893c12544846613f",
+        "version" : "1.2.7"
       }
     },
     {
-      "identity": "promises",
-      "kind": "remoteSourceControl",
-      "location": "https://github.com/google/promises.git",
-      "state": {
-        "revision": "540318ecedd63d883069ae7f1ed811a2df00b6ac",
-        "version": "2.4.0"
+      "identity" : "promises",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/google/promises.git",
+      "state" : {
+        "revision" : "540318ecedd63d883069ae7f1ed811a2df00b6ac",
+        "version" : "2.4.0"
       }
     },
     {
-      "identity": "skeletonview",
-      "kind": "remoteSourceControl",
-      "location": "https://github.com/Juanpe/SkeletonView.git",
-      "state": {
-        "revision": "2f5274827d310e32c09325dd3e0007120940988e",
-        "version": "1.31.0"
+      "identity" : "skeletonview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Juanpe/SkeletonView.git",
+      "state" : {
+        "revision" : "2f5274827d310e32c09325dd3e0007120940988e",
+        "version" : "1.31.0"
       }
     },
     {
-      "identity": "snapkit",
-      "kind": "remoteSourceControl",
-      "location": "https://github.com/SnapKit/SnapKit.git",
-      "state": {
-        "revision": "2842e6e84e82eb9a8dac0100ca90d9444b0307f4",
-        "version": "5.7.1"
+      "identity" : "snapkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SnapKit/SnapKit.git",
+      "state" : {
+        "revision" : "2842e6e84e82eb9a8dac0100ca90d9444b0307f4",
+        "version" : "5.7.1"
       }
     },
     {
-      "identity": "svprogresshud",
-      "kind": "remoteSourceControl",
-      "location": "https://github.com/SVProgressHUD/SVProgressHUD",
-      "state": {
-        "revision": "c33f7c775ba7feea6047a1fc3257f2e5863b44f7",
-        "version": "2.3.1"
+      "identity" : "svprogresshud",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SVProgressHUD/SVProgressHUD",
+      "state" : {
+        "revision" : "c33f7c775ba7feea6047a1fc3257f2e5863b44f7",
+        "version" : "2.3.1"
       }
     },
     {
-      "identity": "swift-package-manager-google-mobile-ads",
-      "kind": "remoteSourceControl",
-      "location": "https://github.com/googleads/swift-package-manager-google-mobile-ads.git",
-      "state": {
-        "revision": "54efe6d39a7b41b84c1041f21c704a7e6a493d7a",
-        "version": "13.9.0"
+      "identity" : "swift-package-manager-google-mobile-ads",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/googleads/swift-package-manager-google-mobile-ads.git",
+      "state" : {
+        "revision" : "54efe6d39a7b41b84c1041f21c704a7e6a493d7a",
+        "version" : "13.9.0"
       }
     },
     {
-      "identity": "swift-package-manager-google-user-messaging-platform",
-      "kind": "remoteSourceControl",
-      "location": "https://github.com/googleads/swift-package-manager-google-user-messaging-platform.git",
-      "state": {
-        "revision": "13b248eaa73b7826f0efb1bcf455e251d65ecb1b",
-        "version": "3.1.0"
+      "identity" : "swift-package-manager-google-user-messaging-platform",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/googleads/swift-package-manager-google-user-messaging-platform.git",
+      "state" : {
+        "revision" : "13b248eaa73b7826f0efb1bcf455e251d65ecb1b",
+        "version" : "3.1.0"
       }
     },
     {
-      "identity": "vungleadssdk-swiftpackagemanager",
-      "kind": "remoteSourceControl",
-      "location": "https://github.com/Vungle/VungleAdsSDK-SwiftPackageManager.git",
-      "state": {
-        "revision": "281ce30afeedba62113cc511a42853de614e4ddb",
-        "version": "7.7.6"
+      "identity" : "vungleadssdk-swiftpackagemanager",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Vungle/VungleAdsSDK-SwiftPackageManager.git",
+      "state" : {
+        "revision" : "281ce30afeedba62113cc511a42853de614e4ddb",
+        "version" : "7.7.6"
       }
     }
   ],
-  "version": 3
+  "version" : 3
 }

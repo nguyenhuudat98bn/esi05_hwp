@@ -198,6 +198,10 @@ final class HwpFormatToolbar: UIView {
         let formatItems = [boldItem, italicItem, underlineItem, strikeItem, textColorItem, highlightItem]
         formatItems.forEach { $0.isDimmed = !hasSelection }
         fontStepper.isDimmed = !hasSelection
+        // An expanded strip has to follow the same rule, otherwise its swatches stay tappable
+        // after the user taps away and clears the selection.
+        textColorStrip.isDimmed = !hasSelection
+        highlightStrip.isDimmed = !hasSelection
         [alignLeftItem, alignRightItem].forEach { $0.isDimmed = !canAlign }
 
         boldItem.isActive = charProps?.bold ?? false
@@ -376,6 +380,14 @@ final class ColorStripView: UIView {
 
     @available(*, unavailable)
     required init?(coder: NSCoder) { fatalError() }
+
+    /// Greyed out and inert while there is no selection to colour (ESI05-12).
+    var isDimmed = false {
+        didSet {
+            alpha = isDimmed ? 0.35 : 1
+            isUserInteractionEnabled = !isDimmed
+        }
+    }
 
     func setSelected(_ hex: String?) {
         let target = hex?.lowercased()

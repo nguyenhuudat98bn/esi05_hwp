@@ -98,6 +98,7 @@
 "Popup.TryAgain" = "Coba lagi";
 "Popup.Cancel" = "Batal";
 "Popup.Ok" = "OK";
+"Popup.FileName" = "Nama file";
 "Popup.Save" = "Simpan";
 "Popup.Delete" = "Hapus";
 "Popup.Exit.Title" = "Keluar dari aplikasi?";

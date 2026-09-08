@@ -63,7 +63,12 @@ final class HwpViewerViewController: AppBaseViewController {
     private var lastMode: EditorViewModel.EditorMode = .read
     private var syncScheduled = false
     private var didShowSelectionHint = false
+    private var isSearching = false
     private var pendingColorTarget: HwpFormatToolbar.ColorTarget?
+    /// Colour of the text when the current selection was made. The engine has no "clear colour"
+    /// operation (a cleared run renders white), so the default swatch re-applies this instead.
+    private var selectionOriginalTextColor: String?
+    private var hadSelection = false
     private lazy var actions = FileActionsCoordinator(presenter: self, viewModel: FileListViewModel(filter: .all))
 
     private enum NavItem {
@@ -301,7 +306,8 @@ final class HwpViewerViewController: AppBaseViewController {
             case .alignLeft: vm.applyAlignment(.left)
             case .alignRight: vm.applyAlignment(.right)
             case .highlight(let hex): vm.applyFormat(RhwpCharFormat(highlightColor: hex ?? HwpFormatToolbar.clearHighlight))
-            case .textColor(let hex): vm.applyFormat(RhwpCharFormat(textColor: hex ?? "#000000"))
+            case .textColor(let hex):
+                vm.applyFormat(RhwpCharFormat(textColor: hex ?? selectionOriginalTextColor ?? "#000000"))
             case .fontSize(let pt): vm.applyFormat(RhwpCharFormat(fontSizePt: pt))
             case .pickColor(let target): presentColorPicker(for: target)
             case .selectionHint: showToast(L10n.viewerSelectionRequired)
@@ -408,6 +414,7 @@ final class HwpViewerViewController: AppBaseViewController {
     // MARK: - Sync
     private func syncFromViewModel() {
         coordinator.sync(vm: vm)
+        captureOriginalTextColorIfNeeded()
         keyCatcher.setActive(vm.isEditing && vm.mode == .edit)
         formatToolbar.update(
             charProps: vm.charProps,
@@ -431,11 +438,21 @@ final class HwpViewerViewController: AppBaseViewController {
         updatePageIndicator()
     }
 
+    /// Snapshots the text colour the moment a selection appears; cleared when it goes away.
+    private func captureOriginalTextColorIfNeeded() {
+        if vm.hasSelection, !hadSelection {
+            selectionOriginalTextColor = vm.charProps?.textColor
+        } else if !vm.hasSelection {
+            selectionOriginalTextColor = nil
+        }
+        hadSelection = vm.hasSelection
+    }
+
     private func updateChrome() {
         let isEdit = vm.mode == .edit
         editHeader.isHidden = !isEdit
         formatToolbar.isHidden = !isEdit
-        bottomBar.isHidden = isEdit
+        bottomBar.isHidden = isEdit || isSearching
         pageIndicator.isHidden = isEdit || vm.pages.isEmpty
         if !isEdit { formatToolbar.collapseStrips() }
     }
@@ -456,6 +473,9 @@ final class HwpViewerViewController: AppBaseViewController {
     // MARK: - Search
     private func toggleSearchBar(isShow: Bool) {
         if searchBarView.isHidden == !isShow { return }
+        // Figma F1: searching replaces the whole read chrome — no "Edit HWP" CTA while it is open.
+        isSearching = isShow
+        updateChrome()
         if isShow { searchBarView.isHidden = false }
         UIView.animate(withDuration: 0.25, animations: {
             self.searchBarView.alpha = isShow ? 1 : 0
@@ -531,6 +551,17 @@ final class HwpViewerViewController: AppBaseViewController {
             }
         }
         present(sheet, animated: true)
+    }
+}
+
+// MARK: - Toast placement
+
+extension HwpViewerViewController: ToastInsetProviding {
+    /// The toast is blue like the "Edit HWP" pill, so it has to sit above the bar, not on it.
+    var toastBottomInset: CGFloat {
+        guard !bottomBar.isHidden else { return 24 }
+        // Clear the page badge too — it floats 26pt above the bar and is 25pt tall.
+        return bottomBar.bounds.height + (pageIndicator.isHidden ? 12 : 59)
     }
 }
 

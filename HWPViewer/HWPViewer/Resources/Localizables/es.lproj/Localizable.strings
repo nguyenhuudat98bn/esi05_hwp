@@ -98,6 +98,7 @@
 "Popup.TryAgain" = "Reintentar";
 "Popup.Cancel" = "Cancelar";
 "Popup.Ok" = "OK";
+"Popup.FileName" = "Nombre del archivo";
 "Popup.Save" = "Guardar";
 "Popup.Delete" = "Eliminar";
 "Popup.Exit.Title" = "¿Salir de la app?";

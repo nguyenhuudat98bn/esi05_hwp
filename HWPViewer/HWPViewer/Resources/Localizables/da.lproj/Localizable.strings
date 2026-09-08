@@ -98,6 +98,7 @@
 "Popup.TryAgain" = "Prøv igen";
 "Popup.Cancel" = "Annuller";
 "Popup.Ok" = "OK";
+"Popup.FileName" = "Filnavn";
 "Popup.Save" = "Gem";
 "Popup.Delete" = "Slet";
 "Popup.Exit.Title" = "Vil du afslutte appen?";
