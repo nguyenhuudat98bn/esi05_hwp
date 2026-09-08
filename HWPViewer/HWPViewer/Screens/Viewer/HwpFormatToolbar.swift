@@ -190,7 +190,7 @@ final class HwpFormatToolbar: UIView {
     }
 
     /// Reflects the current selection / caret state from the engine.
-    func update(charProps: RhwpCharProperties?, hasSelection: Bool, canAlign: Bool, canUndo: Bool, canRedo: Bool, isApplying: Bool) {
+    func update(charProps: RhwpCharProperties?, alignment: RhwpAlignment?, hasSelection: Bool, canAlign: Bool, canUndo: Bool, canRedo: Bool, isApplying: Bool) {
         self.hasSelection = hasSelection
         self.canAlign = canAlign
         undoItem.isEnabled = canUndo
@@ -203,6 +203,10 @@ final class HwpFormatToolbar: UIView {
         textColorStrip.isDimmed = !hasSelection
         highlightStrip.isDimmed = !hasSelection
         [alignLeftItem, alignRightItem].forEach { $0.isDimmed = !canAlign }
+        // Show which alignment the caret's paragraph already uses (ESI05-29). `justify` and
+        // `distribute` have no button, so neither lights up for them.
+        alignLeftItem.isActive = canAlign && alignment == .left
+        alignRightItem.isActive = canAlign && alignment == .right
 
         boldItem.isActive = charProps?.bold ?? false
         italicItem.isActive = charProps?.italic ?? false

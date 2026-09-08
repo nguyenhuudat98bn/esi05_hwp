@@ -309,7 +309,7 @@
         "max_paywall_shows_per_session": 2,
         "time_show_button_close_purchase_since_second_time": 1,
         "continue_button_version": 1,
-        "title_trial_version": 2
+        "title_trial_version": 1
     },
     "app_extra_configs": {
         "hwp_fonts_base_url": "https://raw.githubusercontent.com/nguyenhuudat98bn/NotoSFont/main/fonts",

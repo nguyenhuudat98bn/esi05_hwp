@@ -421,6 +421,7 @@ final class HwpViewerViewController: AppBaseViewController {
         keyCatcher.setActive(vm.isEditing && vm.mode == .edit)
         formatToolbar.update(
             charProps: vm.charProps,
+            alignment: currentParagraphAlignment(),
             hasSelection: vm.hasSelection,
             canAlign: vm.caret != nil && !(vm.caret?.position.isInCell ?? false),
             canUndo: vm.canUndo,
@@ -439,6 +440,14 @@ final class HwpViewerViewController: AppBaseViewController {
             ErrorPopup.present(from: self, message: message)
         }
         updatePageIndicator()
+    }
+
+    /// Alignment of the paragraph holding the caret, so the toolbar can light the matching button.
+    /// Read on demand — the view model does not publish paragraph properties.
+    private func currentParagraphAlignment() -> RhwpAlignment? {
+        guard vm.mode == .edit, let doc = vm.document,
+              let position = vm.caret?.position, !position.isInCell else { return nil }
+        return try? doc.paraProperties(section: position.sectionIndex, paragraph: position.paragraphIndex).align
     }
 
     /// Snapshots the text colour the moment a selection appears; cleared when it goes away.

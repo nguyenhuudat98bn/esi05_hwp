@@ -352,9 +352,10 @@ final class PaywallViewController: UIViewController {
             finePrint.text = L10n.paywallNoteTrial("\(trialDays)", selected.price, selectedPlan.periodName)
         } else if let selected, let intro = selected.introPrice {
             finePrint.text = "\(L10n.paywallOptionIntro(intro, selectedPlan.periodName)). \(L10n.paywallOptionIntroSubtitle(selected.price, selectedPlan.periodName))."
-        } else if let selected {
-            finePrint.text = L10n.paywallNoteNoTrial(selected.price, selectedPlan.periodName)
         } else {
+            // A plain plan's card already reads "<price> / <period>"; repeating it here said the
+            // same thing twice (ESI05-33). The line only earns its space when it adds something
+            // the card cannot show — the trial length or the price after an intro offer.
             finePrint.text = " "
         }
 
