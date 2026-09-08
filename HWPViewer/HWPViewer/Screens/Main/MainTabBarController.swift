@@ -66,6 +66,12 @@ final class MainTabBarController: UITabBarController {
         }
     }
 
+    /// Selects a tab and keeps the pill in sync (setting `selectedIndex` alone leaves it behind).
+    func selectTab(_ tab: Tab) {
+        selectedIndex = tab.rawValue
+        pillTabBar.select(tab, animated: false)
+    }
+
     func setPillTabBarHidden(_ hidden: Bool, animated: Bool = true) {
         let block = { self.pillTabBar.alpha = hidden ? 0 : 1 }
         animated ? UIView.animate(withDuration: 0.2, animations: block) : block()

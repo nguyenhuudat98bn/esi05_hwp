@@ -129,8 +129,10 @@ final class RenameDialog: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         textField.becomeFirstResponder()
-        // Select the name so typing replaces it (extension is not shown).
-        textField.selectAll(nil)
+        // Select the name so typing replaces it (extension is not shown). One runloop later:
+        // selecting in the same turn as becomeFirstResponder gets reset by the field's own
+        // caret placement, which left long names unselected (ESI05-39).
+        DispatchQueue.main.async { [weak self] in self?.textField.selectAll(nil) }
     }
 
     private var currentName: String { (textField.text ?? "").trimmingCharacters(in: .whitespacesAndNewlines) }

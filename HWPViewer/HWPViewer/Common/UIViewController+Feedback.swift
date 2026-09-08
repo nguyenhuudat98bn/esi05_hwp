@@ -50,6 +50,17 @@ extension UIViewController {
     }
 }
 
+extension UIViewController {
+    /// "Back to Home" means the All File list, not whichever tab the flow was started from.
+    /// Every tab shares one navigation controller, so popping to the root alone would just reveal
+    /// the tab bar still showing Tools (ESI05-35 / ESI05-36).
+    func goToAllFiles() {
+        guard let nav = navigationController else { return }
+        (nav.viewControllers.first as? MainTabBarController)?.selectTab(.home)
+        nav.popToRootViewController(animated: true)
+    }
+}
+
 /// Screens with their own bottom chrome declare how far up the toast must sit.
 protocol ToastInsetProviding {
     var toastBottomInset: CGFloat { get }

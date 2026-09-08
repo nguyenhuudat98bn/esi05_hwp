@@ -77,7 +77,7 @@ final class DocumentErrorViewController: AppBaseViewController {
         }
 
         backButton.tapPublisher.receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in self?.navigationController?.popToRootViewController(animated: true) }
+            .sink { [weak self] _ in self?.goToAllFiles() }
             .store(in: &cancellables)
     }
 }

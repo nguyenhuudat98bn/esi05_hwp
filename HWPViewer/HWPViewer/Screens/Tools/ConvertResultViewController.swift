@@ -108,7 +108,7 @@ final class ConvertResultViewController: AppBaseViewController {
             make.height.equalTo(AppMetrics.buttonHeight)
         }
         backButton.tapPublisher.receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in self?.navigationController?.popToRootViewController(animated: true) }
+            .sink { [weak self] _ in self?.goToAllFiles() }
             .store(in: &cancellables)
         openButton.tapPublisher.receive(on: DispatchQueue.main)
             .sink { [weak self] _ in self?.openResult() }
@@ -116,9 +116,9 @@ final class ConvertResultViewController: AppBaseViewController {
         setupAdvertiser(on: .convert)
     }
 
-    /// Nav X behaves like "Back Home": the convert flow is finished, go back to the root.
+    /// Nav X behaves like "Back Home": the convert flow is finished, go back to the file list.
     override func backButtonTapped() {
-        navigationController?.popToRootViewController(animated: true)
+        goToAllFiles()
     }
 
     /// "**Name:** value" on one line (Figma G5).
@@ -137,7 +137,10 @@ final class ConvertResultViewController: AppBaseViewController {
         FileStore.shared.markOpened(item.url)
         let viewer = HwpViewerViewController(item: item, startInEditMode: false)
         var stack = navigationController?.viewControllers ?? []
-        stack.removeAll { $0 === self }
+        // Drop the picker as well as this screen: the convert flow is done, so leaving the viewer
+        // (by Back or by deleting the file) should return to Tools, not back into "Select File"
+        // where the source PDF is still listed (ESI05-37 / ESI05-38).
+        stack.removeAll { $0 === self || $0 is SelectFileViewController }
         stack.append(viewer)
         navigationController?.setViewControllers(stack, animated: true)
     }
