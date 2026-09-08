@@ -28,14 +28,8 @@ final class DocumentErrorViewController: AppBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        // No divider under the header — 19108-24632 has the X sitting on a plain background.
         navigationView.snp.updateConstraints { $0.height.equalTo(AppMetrics.navHeight) }
-        let navLine = UIView()
-        navLine.backgroundColor = AppColors.divider
-        navigationView.addSubview(navLine)
-        navLine.snp.makeConstraints { make in
-            make.leading.trailing.bottom.equalToSuperview()
-            make.height.equalTo(1)
-        }
 
         let content = UIView()
         containerStackView.addArrangedSubview(content)
