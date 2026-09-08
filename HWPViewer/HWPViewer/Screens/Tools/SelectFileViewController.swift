@@ -13,6 +13,11 @@ import CombineCocoa
 import SPNComponent
 
 final class SelectFileViewController: AppBaseViewController {
+    /// Keep toasts above the blue "Import from Files" pill they would otherwise blend into.
+    override var toastBottomInset: CGFloat {
+        importButton.isHidden ? super.toastBottomInset : super.toastBottomInset + importButton.bounds.height + 12
+    }
+
     private let tool: ToolKind
     private let viewModel: FileListViewModel
     private let tableView = UITableView(frame: .zero, style: .plain)
@@ -118,10 +123,11 @@ final class SelectFileViewController: AppBaseViewController {
     private func handle(_ item: FileItem) {
         switch tool {
         case .editHwp:
+            // Opens in read mode: the viewer's own "Edit HWP" button is the way into editing.
             if AppRemoteConfigs.current.isEditPremium {
-                requirePremium { [weak self] in self?.actions.open(item, startInEditMode: true) }
+                requirePremium { [weak self] in self?.actions.open(item) }
             } else {
-                actions.open(item, startInEditMode: true)
+                actions.open(item)
             }
         case .print:
             actions.print(item)
