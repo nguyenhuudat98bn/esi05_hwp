@@ -76,9 +76,11 @@ struct FileItem: Identifiable, Equatable {
     /// "05/28/2026 12:00 · 145 MB"
     var metaText: String { "\(dateText) · \(sizeText)" }
 
+    /// Locale-aware date + 24h time (a fixed "MM/dd/yyyy" reads wrong outside the US).
     private static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "MM/dd/yyyy HH:mm"
+        formatter.locale = .current
+        formatter.setLocalizedDateFormatFromTemplate("yyyyMMdd HH:mm")
         return formatter
     }()
 

@@ -11,7 +11,7 @@ import HwpEditorKit
 import SPNComponent
 
 enum ConvertError: LocalizedError {
-    /// Word 97-2003 binary `.doc` (OLE) — the engine only reads DOCX (zip + XML).
+    /// Kept for older engines: the current one reads binary `.doc` (OLE) too.
     case unsupportedLegacyDoc
     case unsupportedKind
     case cancelled
