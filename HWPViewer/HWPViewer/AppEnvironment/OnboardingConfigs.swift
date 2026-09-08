@@ -55,11 +55,14 @@ enum OnboardingConfigs {
     /// selected = blue card with white text.
     static func language() -> SPNLanguageConfig {
         var config = SPNLanguageConfig()
-        // Left to the package (`Language.Title` / `Language.ApplyButton`, same strings as L10n):
-        // baking them here froze the screen in the language it was built with, so it still read the
-        // old one after applying a new language (ESI05-21).
-        config.title = nil
-        config.applyButtonTitle = nil
+        // Closures, not literals: the app's own copy still wins over the package defaults, but it
+        // is re-read whenever the screen repaints, so applying a new language updates the screen
+        // instead of leaving it in the language the config was built with (ESI05-21).
+        config.localizedTitle = { L10n.languageTitle }
+        config.localizedApplyButtonTitle = { L10n.languageNext }
+        // ESI05-44: the audience for a HWP reader is Korean, so Korean sits right under English
+        // instead of at the bottom of the alphabetical tail.
+        config.priorityCodes = ["ko"]
         // Behaviour comes from remote `language_intro_configs`: `apply_button_type` (2 = "Next" text pill),
         // `apply_language_color`, `is_show_pointer_hand`, `is_enable_auto_skip_language`, `time_skip_language`…
         // Only the asset is app-side: Lottie hand pointer played as-is instead of the bundled image.
