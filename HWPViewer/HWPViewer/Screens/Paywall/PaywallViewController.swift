@@ -363,7 +363,9 @@ final class PaywallViewController: UIViewController {
         if config.isTrialAwareContinue {
             continueButton.setTitle(trialDays > 0 ? L10n.paywallContinueTrial : L10n.paywallContinueSubscribe)
         }
-        titleLabel.text = (config.isTrialAwareTitle && trialDays > 0) ? L10n.paywallTitleTrial("\(trialDays)") : L10n.paywallTitle
+        // The heading stays "Go Premium with HWP Pro" whatever plan is selected (ESI05-30). It is
+        // set once in setupViews; the remote `title_trial_version` variant is no longer honoured
+        // because remote config kept overriding the default back to the per-plan wording.
     }
 
     private func openWeb(_ string: String) {

@@ -17,7 +17,7 @@
 //    "max_paywall_shows_per_session": 2,         // automatic shows per app session
 //    "time_show_button_close_purchase_since_second_time": 1,   // seconds the X stays hidden from the 2nd show on
 //    "continue_button_version": 1,               // 1 = CONTINUE, 2 = "Start free trial" / "Subscribe now"
-//    "title_trial_version": 2                    // 1 = fixed title, 2 = "Try … free for N days" when a trial is selected
+//    "title_trial_version": 2                    // parsed but ignored: the paywall heading is fixed (ESI05-30)
 //  }
 //  Legacy keys (`monthly_id`, `weekly_id`, `yearly_id`, `yearly_trial_id`, `is_show_in_tools`,
 //  `is_show_in_view_file`) are still understood when `plans` / `show_paywall_at` are absent.
@@ -155,5 +155,5 @@ struct IapConfigs: Codable {
     var autoShowsPerSession: Int { max(maxPaywallShowsPerSession ?? 2, 0) }
     var closeDelay: TimeInterval { TimeInterval(max(closeButtonDelaySeconds ?? 0, 0)) }
     var isTrialAwareContinue: Bool { (continueButtonVersion ?? 1) >= 2 }
-    var isTrialAwareTitle: Bool { (titleTrialVersion ?? 1) >= 2 }
+
 }
