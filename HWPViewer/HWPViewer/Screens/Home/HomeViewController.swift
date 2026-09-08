@@ -144,10 +144,12 @@ final class HomeViewController: AppBaseViewController {
 
         tabs.onSelect = { [weak self] index in self?.applyTab(index) }
 
+        // On the whole screen, not the table: when a tab is empty the empty-state view covers the
+        // table and would swallow the swipe, so the gesture has to live on a common ancestor.
         for direction in [UISwipeGestureRecognizer.Direction.left, .right] {
             let swipe = UISwipeGestureRecognizer(target: self, action: #selector(handleTabSwipe(_:)))
             swipe.direction = direction
-            tableView.addGestureRecognizer(swipe)
+            view.addGestureRecognizer(swipe)
         }
 
         headerView.onSearch = { [weak self] in

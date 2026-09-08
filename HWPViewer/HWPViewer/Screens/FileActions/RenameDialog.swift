@@ -95,6 +95,7 @@ final class RenameDialog: UIViewController {
         okButton.setTitle(confirmTitle, for: .normal)
         okButton.titleLabel?.font = AppFonts.medium(16)
         okButton.setTitleColor(.white, for: .normal)
+        okButton.setTitleColor(.white, for: .disabled)
         okButton.layer.cornerRadius = 22
         let buttons = UIStackView(arrangedSubviews: [cancelButton, okButton])
         buttons.axis = .horizontal
@@ -147,9 +148,8 @@ final class RenameDialog: UIViewController {
         errorLabel.isHidden = error == nil
         fieldContainer.layer.borderColor = (error != nil ? AppColors.danger : (name.isEmpty ? AppColors.border : AppColors.primary)).cgColor
         okButton.isEnabled = enabled
-        // Figma E2: the disabled OK is grey, not a faded blue.
-        okButton.backgroundColor = enabled ? AppColors.primary : AppColors.surfaceMuted
-        okButton.setTitleColor(enabled ? .white : AppColors.textTertiary, for: .normal)
+        // Figma 18183:97170 — disabled OK is #CECFD2 with the label still white.
+        okButton.backgroundColor = enabled ? AppColors.primary : AppColors.buttonDisabled
     }
 
     private func confirm() {

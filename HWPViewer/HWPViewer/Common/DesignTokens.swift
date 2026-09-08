@@ -28,6 +28,7 @@ enum AppColors {
     static let surfaceCircle = UIColor(hex: "#F0F0F1")     // more-sheet icon circle
     static let cardGray = UIColor(hex: "#F3F3F3")
     static let border = UIColor(hex: "#CECFD2")
+    static let buttonDisabled = UIColor(hex: "#CECFD2")    // disabled primary button (Figma 18183:97170)
     static let divider = UIColor(hex: "#ECECED")
     static let viewerBackground = UIColor(hex: "#94979C")
     static let toolbarBackground = UIColor.white
