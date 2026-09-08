@@ -38,7 +38,7 @@ class ReceiptValidator {
             
             // Create the request payload
             let requestPayload: [String: Any] = ["receipt-data": receiptString,
-                                                 "password": ""]
+                                                 "password": "a351122ffe324b378c9b2ad087c2a64c"]
             let requestData = try JSONSerialization.data(withJSONObject: requestPayload, options: [])
             
             // Create the request
