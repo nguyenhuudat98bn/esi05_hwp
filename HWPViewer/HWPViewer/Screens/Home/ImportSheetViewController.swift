@@ -94,6 +94,9 @@ final class ImportSheetViewController: UIViewController {
         docCard.tapPublisher.receive(on: DispatchQueue.main)
             .sink { [weak self] _ in self?.finish { self?.onConvert?(.docToHwp) } }.store(in: &cancellables)
 
+        // The slot's default 10pt inset made the ad narrower than the cards above it; the sheet
+        // already insets the whole stack by `screenPadding`, so drop it and let the edges line up.
+        adSlot.contentInset = 0
         adSlot.attach(place: .importSheet, style: .native)
 
         sheet.transform = CGAffineTransform(translationX: 0, y: 400)
