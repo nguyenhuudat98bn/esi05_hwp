@@ -1,9 +1,13 @@
 //
-//  ConvertErrorViewController.swift
+//  DocumentErrorViewController.swift
 //  HWPViewer
 //
-//  G7 convert error (Figma 19108-24632 "Lỗi"): X header, document-with-warning illustration,
-//  "Oops! Something went wrong", "Back to Home" pill. Replaces ConvertingViewController in the stack.
+//  Shared document error screen (Figma 19108-24632 "Lỗi"): X header, document-with-warning
+//  illustration, "Oops! Something went wrong", "Back to Home" pill.
+//
+//  Used by two flows, which the design covers with the same frame:
+//   - convert failed (G7): replaces the converting popup's caller in the stack;
+//   - opening a broken file: replaces the viewer, so back does not land on it again.
 //
 
 import UIKit
@@ -12,9 +16,9 @@ import Combine
 import CombineCocoa
 import SPNComponent
 
-final class ConvertErrorViewController: AppBaseViewController {
-    init() {
-        super.init(place: .convert, navigationConfigs: SPNNavigationConfiguration(
+final class DocumentErrorViewController: AppBaseViewController {
+    init(place: SPNAdPlace = .convert) {
+        super.init(place: place, navigationConfigs: SPNNavigationConfiguration(
             title: "", hasBackButton: true, backIcon: Asset.Assets.App.icEditorCloseX.image,
             tintColor: AppColors.textPrimary, backgroundColor: AppColors.background
         ))

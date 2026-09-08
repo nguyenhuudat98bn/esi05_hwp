@@ -136,9 +136,7 @@ final class HwpViewerViewController: AppBaseViewController {
                 // (ESI05-25) with nothing to diagnose from.
                 logger("[HWP] open failed for \(item.url.lastPathComponent): \(vm.errorMessage ?? "unknown")")
                 vm.errorMessage = nil
-                ErrorPopup.present(from: self, message: L10n.viewerInvalidFile) { [weak self] in
-                    self?.navigationController?.popViewController(animated: true)
-                }
+                showOpenError()
                 return
             }
             if vm.pages.isEmpty { showLoadingHUD(false) }
@@ -152,6 +150,17 @@ final class HwpViewerViewController: AppBaseViewController {
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 15) { [weak self] in self?.showLoadingHUD(false) }
         }
+    }
+
+    /// Figma 19108-24632: a broken file gets the same full error screen as a failed convert.
+    /// It replaces this controller in the stack so backing out of it cannot return to a viewer
+    /// that has no document.
+    private func showOpenError() {
+        guard let nav = navigationController else { return }
+        var stack = nav.viewControllers
+        stack.removeAll { $0 === self }
+        stack.append(DocumentErrorViewController(place: .viewer))
+        nav.setViewControllers(stack, animated: true)
     }
 
     private func showFontLoading(_ show: Bool) {

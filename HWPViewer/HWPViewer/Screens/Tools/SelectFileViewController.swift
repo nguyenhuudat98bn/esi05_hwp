@@ -153,7 +153,7 @@ final class SelectFileViewController: AppBaseViewController {
                     case .failure(ConvertError.unsupportedLegacyDoc):
                         ErrorPopup.present(from: self, message: L10n.convertErrorLegacyDoc)
                     case .failure:
-                        navigationController?.pushViewController(ConvertErrorViewController(), animated: true)
+                        navigationController?.pushViewController(DocumentErrorViewController(), animated: true)
                     }
                 }
                 present(popup, animated: true)
