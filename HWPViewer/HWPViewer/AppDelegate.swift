@@ -160,7 +160,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             makeHome: { MainTabBarController() },
             presentPaywall: { trigger, presenter, completion in
                 PaywallPresenter.shared.present(trigger: trigger, from: presenter, completion: completion)
-            }
+            },
+            // Intro copy and the Korean-only mockup art are baked into the config, so it has to be
+            // re-made once the user picks a language — otherwise Intro renders in the launch language.
+            reloadConfig: { OnboardingConfigs.make() }
         )
         return SPNOnboardingCoordinator(navigationController: navigationController, config: OnboardingConfigs.make(), hooks: hooks)
     }
