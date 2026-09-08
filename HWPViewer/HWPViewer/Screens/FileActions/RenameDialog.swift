@@ -19,6 +19,7 @@ final class RenameDialog: UIViewController {
 
     private let initialName: String
     private let requiresChange: Bool
+    private var didSelectInitialName = false
     private let titleText: String
     private let confirmTitle: String
     private let dimView = UIView()
@@ -129,10 +130,6 @@ final class RenameDialog: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         textField.becomeFirstResponder()
-        // Select the name so typing replaces it (extension is not shown). One runloop later:
-        // selecting in the same turn as becomeFirstResponder gets reset by the field's own
-        // caret placement, which left long names unselected (ESI05-39).
-        DispatchQueue.main.async { [weak self] in self?.textField.selectAll(nil) }
     }
 
     private var currentName: String { (textField.text ?? "").trimmingCharacters(in: .whitespacesAndNewlines) }
@@ -177,6 +174,18 @@ final class RenameDialog: UIViewController {
 }
 
 extension RenameDialog: UITextFieldDelegate {
+    /// Select the whole name so typing replaces it (the extension is not shown).
+    ///
+    /// Driven off the delegate rather than `viewDidAppear`: UIKit places its own caret as part of
+    /// starting an editing session, and a `selectAll` issued before that finishes is discarded —
+    /// which is what left long names unselected (ESI05-39). Hopping one runloop turn puts it
+    /// after the caret placement. Guarded so re-focusing later does not re-select.
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        guard !didSelectInitialName else { return }
+        didSelectInitialName = true
+        DispatchQueue.main.async { textField.selectAll(nil) }
+    }
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         confirm()
         return true
