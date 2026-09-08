@@ -51,6 +51,9 @@ final class PaywallViewController: UIViewController {
         setupViews()
         bind()
         fetchSubject.send()
+        // Ask here, not on purchase: the answer is in before the transaction finishes, so the
+        // success banner can fire straight away instead of the permission dialog interrupting.
+        ReminderManager.shared.requestAuthorizationIfNeeded()
     }
 
     // MARK: - Setup

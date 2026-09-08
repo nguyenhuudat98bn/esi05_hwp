@@ -15,25 +15,31 @@ class ReminderManager {
     /// One id for every reminder: a new one replaces the previous instead of stacking.
     private static let requestID = "Detected"
 
-    /// Local notification used to confirm a purchase / restore.
+    /// Asks for notification permission once, up front.
     ///
-    /// Nothing in the app ever asked for notification permission, so `center.add` was rejected
-    /// silently and no banner ever appeared. Ask the first time we actually have something to say —
-    /// at launch it would just pile onto the ATT and UMP prompts.
+    /// Called when the paywall opens: the answer is then already in by the time a purchase
+    /// succeeds, so the confirmation banner can fire immediately instead of the permission dialog
+    /// landing on top of the purchase flow. At app launch this would only pile onto the ATT and
+    /// UMP prompts, which is why it lives here and not in the AppDelegate.
+    func requestAuthorizationIfNeeded() {
+        let center = UNUserNotificationCenter.current()
+        center.getNotificationSettings { settings in
+            guard settings.authorizationStatus == .notDetermined else { return }
+            center.requestAuthorization(options: [.alert, .sound, .badge]) { _, error in
+                if let error { logger("[Reminder] authorization failed: \(error)") }
+            }
+        }
+    }
+
+    /// Local notification confirming a purchase / restore. Silently does nothing when the user
+    /// never granted permission (see `requestAuthorizationIfNeeded`).
     func fireReminder(title: String, message: String) {
         let center = UNUserNotificationCenter.current()
         center.getNotificationSettings { settings in
             switch settings.authorizationStatus {
-            case .notDetermined:
-                center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
-                    if let error { logger("[Reminder] authorization failed: \(error)") }
-                    guard granted else { return }
-                    Self.schedule(title: title, message: message, on: center)
-                }
             case .authorized, .provisional, .ephemeral:
                 Self.schedule(title: title, message: message, on: center)
             default:
-                // Denied — the user turned notifications off; nothing to do.
                 break
             }
         }
