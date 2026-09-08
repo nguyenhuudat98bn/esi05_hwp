@@ -504,7 +504,12 @@ final class HwpViewerViewController: AppBaseViewController {
         // Figma F1: searching replaces the whole read chrome — no "Edit HWP" CTA while it is open.
         isSearching = isShow
         updateChrome()
-        if isShow { searchBarView.isHidden = false }
+        if isShow {
+            searchBarView.isHidden = false
+        } else {
+            // Leaving search is the one place the keyboard should go away.
+            searchBarView.dismissKeyboard()
+        }
         UIView.animate(withDuration: 0.25, animations: {
             self.searchBarView.alpha = isShow ? 1 : 0
         }, completion: { _ in
@@ -554,10 +559,12 @@ final class HwpViewerViewController: AppBaseViewController {
         }
     }
 
+    /// Drops matches and highlighting. Focus is deliberately untouched — this also runs when the
+    /// user clears the field to type something else (ESI05: keyboard closed itself right after).
     private func clearSearch() {
         searchMatches = []
         searchIndex = 0
-        searchBarView.reset()
+        searchBarView.clearResults()
         vm.clearSearchHighlight()
     }
 

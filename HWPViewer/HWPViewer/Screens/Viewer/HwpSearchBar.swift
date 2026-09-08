@@ -112,11 +112,19 @@ final class HwpSearchBar: UIView {
 
     func setResultCount(_ count: Int) { resultsLabel.text = "\(count)" }
     func showKeyboard() { textField.becomeFirstResponder() }
+    func dismissKeyboard() { textField.resignFirstResponder() }
+
+    /// Clears the query and the result count but leaves focus alone. Emptying the field with the
+    /// clear button runs through here, and resigning there would dismiss the keyboard UIKit had
+    /// just raised for the next query.
+    func clearResults() {
+        textField.text = nil
+        resultsLabel.text = "0"
+    }
 
     func reset() {
-        textField.text = nil
-        textField.resignFirstResponder()
-        resultsLabel.text = "0"
+        clearResults()
+        dismissKeyboard()
     }
 }
 
