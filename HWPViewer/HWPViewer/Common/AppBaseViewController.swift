@@ -9,8 +9,17 @@ import UIKit
 import Combine
 import SPNComponent
 
-class AppBaseViewController: SPNBaseViewController {
+class AppBaseViewController: SPNBaseViewController, ToastInsetProviding {
     var isPremium: Bool { SPNSession.shared.isPremium }
+
+    /// Toasts are hosted in the window, whose safe area knows nothing about the space the tab
+    /// controller reserves for the floating pill tab bar — so on a tab root a plain 24pt inset put
+    /// the toast behind the pill. Add back whatever this screen had reserved.
+    var toastBottomInset: CGFloat {
+        let windowBottom = view.window?.safeAreaInsets.bottom ?? 0
+        let reserved = max(0, view.safeAreaInsets.bottom - windowBottom)
+        return 24 + reserved
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -76,6 +76,13 @@ final class HwpViewerViewController: AppBaseViewController {
         static let more = "more"
     }
 
+    /// The toast is blue like the "Edit HWP" pill, so it has to sit above the bar, not on it.
+    override var toastBottomInset: CGFloat {
+        guard !bottomBar.isHidden else { return super.toastBottomInset }
+        // Clear the page badge too — it floats 26pt above the bar and is 25pt tall.
+        return bottomBar.bounds.height + (pageIndicator.isHidden ? 12 : 59)
+    }
+
     // MARK: - Init
     init(item: FileItem, startInEditMode: Bool = false) {
         self.item = item
@@ -579,17 +586,6 @@ final class HwpViewerViewController: AppBaseViewController {
             }
         }
         present(sheet, animated: true)
-    }
-}
-
-// MARK: - Toast placement
-
-extension HwpViewerViewController: ToastInsetProviding {
-    /// The toast is blue like the "Edit HWP" pill, so it has to sit above the bar, not on it.
-    var toastBottomInset: CGFloat {
-        guard !bottomBar.isHidden else { return 24 }
-        // Clear the page badge too — it floats 26pt above the bar and is 25pt tall.
-        return bottomBar.bounds.height + (pageIndicator.isHidden ? 12 : 59)
     }
 }
 
