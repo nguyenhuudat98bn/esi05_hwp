@@ -13,6 +13,14 @@ let privacyUrl = "https://sites.google.com/view/hwpviewer-hangulreader-privacy"
 let termOfUseUrl = "https://sites.google.com/view/hwpviewer-hangulreader-terms"
 let actionWhenPurchaseCompleted = Notification.Name("ActionWhenPurchaseCompleted")
 
+/// AdMob test devices. A newly created ad unit serves nothing for a while ("No ad to show"), which
+/// looks identical to a broken integration — registering a device here makes AdMob return test ads
+/// through the *real* unit ids, so the wiring can be verified immediately. The id is printed by the
+/// SDK on launch ("To get test ads on this device, set: ...").
+///
+/// Only applied to non-App-Store builds. Leave empty to see real ads.
+let adMobTestDeviceIDs: [String] = []
+
 /// Session state now lives in the package; keep the old name for feature code.
 typealias ApplicationSession = SPNSession
 

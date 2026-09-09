@@ -41,6 +41,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SPNLogger.isEnabled = Bundle.main.appStoreReceiptURL?.lastPathComponent != "receipt"
         FirebaseApp.configure()
         MobileAds.shared.start()
+        if SPNLogger.isEnabled, !adMobTestDeviceIDs.isEmpty {
+            MobileAds.shared.requestConfiguration.testDeviceIdentifiers = adMobTestDeviceIDs
+        }
         ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         FBAdSettings.setAdvertiserTrackingEnabled(true)
         VunglePrivacySettings.setGDPRStatus(true)
