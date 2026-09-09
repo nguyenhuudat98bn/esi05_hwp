@@ -39,6 +39,8 @@
 	<string>HWP Editor</string>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-3559750835852503~1326306875</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSSupportsOpeningDocumentsInPlace</key>
 	<false/>
 	<key>UIApplicationSceneManifest</key>
