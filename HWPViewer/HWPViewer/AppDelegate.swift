@@ -33,6 +33,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        // Release builds are silent by default. Turn logging on for anything not shipped through the
+        // App Store (dev-signed, ad-hoc, TestFlight — all carry a sandbox receipt) so ad loading can
+        // be diagnosed from Console.app on a real build. App Store builds stay quiet.
+        // Only a real App Store install carries a receipt named exactly "receipt"; TestFlight and
+        // ad-hoc carry "sandboxReceipt", and dev/simulator builds have none at all.
+        SPNLogger.isEnabled = Bundle.main.appStoreReceiptURL?.lastPathComponent != "receipt"
         FirebaseApp.configure()
         MobileAds.shared.start()
         ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
@@ -142,6 +148,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 store.fetch {
                     SPNRemoteConfig.reload(from: store)
                     AppTheme.refreshFromRemote()
+                    // One line saying whether ads can load at all, and why not when they cannot.
+                    SPNAdsManager.shared.logAdGateSummary()
                     done()
                 }
             },
