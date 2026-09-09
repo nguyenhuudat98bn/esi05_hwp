@@ -19,7 +19,10 @@ final class RenameDialog: UIViewController {
 
     private let initialName: String
     private let requiresChange: Bool
-    private var didSelectInitialName = false
+    /// Cleared as soon as the user types, so the auto-selection can never wipe out their input.
+    private var canAutoSelectName = true
+    /// Auto-selection only applies while the dialog is settling; after that the caret is the user's.
+    private var autoSelectDeadline = Date.distantPast
     private let titleText: String
     private let confirmTitle: String
     private let dimView = UIView()
@@ -117,7 +120,20 @@ final class RenameDialog: UIViewController {
         okButton.tapPublisher.receive(on: DispatchQueue.main)
             .sink { [weak self] _ in self?.confirm() }.store(in: &cancellables)
         textField.textPublisher.receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in self?.validate() }.store(in: &cancellables)
+            .sink { [weak self] _ in
+                self?.canAutoSelectName = false
+                self?.validate()
+            }.store(in: &cancellables)
+
+        // iOS 16 finishes placing its caret after `textFieldDidBeginEditing` returns *and* after
+        // the runloop hop below, so the selection only survives once the keyboard is actually up.
+        NotificationCenter.default.publisher(for: UIResponder.keyboardDidShowNotification)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                guard let self, self.isAutoSelecting else { return }
+                self.selectWholeName()
+            }
+            .store(in: &cancellables)
 
         NotificationCenter.default.publisher(for: UIResponder.keyboardWillChangeFrameNotification)
             .receive(on: DispatchQueue.main)
@@ -129,7 +145,11 @@ final class RenameDialog: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        autoSelectDeadline = Date().addingTimeInterval(1)
         textField.becomeFirstResponder()
+        // Last pass once the keyboard's presentation animation is over — on iOS 16 nothing applied
+        // before that point survives.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { [weak self] in self?.selectWholeName() }
     }
 
     private var currentName: String { (textField.text ?? "").trimmingCharacters(in: .whitespacesAndNewlines) }
@@ -149,6 +169,29 @@ final class RenameDialog: UIViewController {
         okButton.isEnabled = enabled
         // Figma 18183:97170 — disabled OK is #CECFD2 with the label still white.
         okButton.backgroundColor = enabled ? AppColors.primary : AppColors.buttonDisabled
+    }
+
+    /// Selects the whole name so typing replaces it (the extension is not shown).
+    ///
+    /// Applied from several points because UIKit sets its own caret while the editing session
+    /// starts and discards anything set before that finishes: the delegate callback, the moment the
+    /// keyboard is up, once its animation has settled, and again whenever the selection collapses.
+    /// `autoSelectDeadline` limits all of that to the first second, so a user placing their own
+    /// caret afterwards is left alone.
+    ///
+    /// KNOWN GAP (ESI05-39): this holds on iOS 17+ but NOT on iOS 16, where UIKit collapses the
+    /// selection back to a caret at the end no matter which of these points sets it. Verified on an
+    /// iOS 16.4 simulator against `selectedTextRange`, `selectAll(_:)`, and both together.
+    private func selectWholeName() {
+        guard canAutoSelectName else { return }
+        let field = textField
+        field.selectedTextRange = field.textRange(from: field.beginningOfDocument,
+                                                  to: field.endOfDocument)
+        field.selectAll(nil)
+    }
+
+    private var isAutoSelecting: Bool {
+        canAutoSelectName && Date() < autoSelectDeadline
     }
 
     private func confirm() {
@@ -174,16 +217,15 @@ final class RenameDialog: UIViewController {
 }
 
 extension RenameDialog: UITextFieldDelegate {
-    /// Select the whole name so typing replaces it (the extension is not shown).
-    ///
-    /// Driven off the delegate rather than `viewDidAppear`: UIKit places its own caret as part of
-    /// starting an editing session, and a `selectAll` issued before that finishes is discarded —
-    /// which is what left long names unselected (ESI05-39). Hopping one runloop turn puts it
-    /// after the caret placement. Guarded so re-focusing later does not re-select.
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        guard !didSelectInitialName else { return }
-        didSelectInitialName = true
-        DispatchQueue.main.async { textField.selectAll(nil) }
+        selectWholeName()
+    }
+
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        // Fired when UIKit collapses the selection it just took from us; put it back.
+        guard isAutoSelecting, textField.selectedTextRange?.isEmpty ?? true,
+              !(textField.text ?? "").isEmpty else { return }
+        DispatchQueue.main.async { [weak self] in self?.selectWholeName() }
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
