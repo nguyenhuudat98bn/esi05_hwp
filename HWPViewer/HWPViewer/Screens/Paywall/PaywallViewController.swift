@@ -384,8 +384,18 @@ final class PlanCardView: UIControl {
     private let check = UIImageView(image: Asset.Assets.App.icPaywallCheckWhite.image.withRenderingMode(.alwaysTemplate))
     private let titleLabel = UILabel()
     private let subtitleLabel = UILabel()
-    private let badge = GradientView(colors: AppColors.gradientBestOffer)
+    /// Ribbon art (102×41pt): wings out to both edges, a rounded trapezoid body in the middle.
+    /// Only the flat middle of that body stretches, so a long label widens the banner without
+    /// distorting the wings or the rounded corners.
+    private let badge = UIImageView(image: PlanCardView.badgeBackground)
     private let badgeLabel = UILabel()
+
+    /// Caps sit well inside the body's straight section (the body spans ~17…84pt), so the
+    /// stretched band never touches the sloped sides.
+    private static let badgeBackground = Asset.Assets.App.imgPaywallBestOffer.image
+        .resizableImage(withCapInsets: UIEdgeInsets(top: 0, left: 44, bottom: 0, right: 44), resizingMode: .stretch)
+    /// Text is centred on the body, which is inset from the artwork's edges by the wings.
+    private static let badgeTextInset: CGFloat = 22
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -427,19 +437,25 @@ final class PlanCardView: UIControl {
         }
         snp.makeConstraints { $0.height.greaterThanOrEqualTo(52) }
 
-        badge.layer.cornerRadius = 10
-        badge.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner]
-        badge.clipsToBounds = true
         badgeLabel.font = AppFonts.semibold(10)
         badgeLabel.textColor = .white
         badgeLabel.textAlignment = .center
+        badgeLabel.adjustsFontSizeToFitWidth = true
+        badgeLabel.minimumScaleFactor = 0.8
         badge.addSubview(badgeLabel)
-        badgeLabel.snp.makeConstraints { $0.edges.equalToSuperview().inset(UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)) }
+        badgeLabel.snp.makeConstraints { make in
+            // Drives the banner's width: a longer translation widens the art rather than
+            // spilling over the wings.
+            make.leading.trailing.equalToSuperview().inset(PlanCardView.badgeTextInset)
+            make.centerY.equalToSuperview()
+        }
         addSubview(badge)
         badge.snp.makeConstraints { make in
             make.trailing.equalToSuperview().inset(24)
+            // The body straddles the card's top edge, as before; the wings and shadow overhang it.
             make.centerY.equalTo(snp.top)
-            make.height.equalTo(20)
+            make.height.equalTo(PlanCardView.badgeBackground.size.height)
+            make.width.greaterThanOrEqualTo(PlanCardView.badgeBackground.size.width)
         }
         badge.isHidden = true
         clipsToBounds = false

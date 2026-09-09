@@ -93,6 +93,7 @@ internal enum Asset {
       internal static let imgEmptyNoFiles = ImageAsset(name: "App/img_empty_no_files")
       internal static let imgNoResultFoundVector = ImageAsset(name: "App/img_no_result_found_vector")
       internal static let imgOffline = ImageAsset(name: "App/img_offline")
+      internal static let imgPaywallBestOffer = ImageAsset(name: "App/img_paywall_best_offer")
       internal static let imgPaywallHeaderBg = ImageAsset(name: "App/img_paywall_header_bg")
       internal static let imgPaywallHero = ImageAsset(name: "App/img_paywall_hero")
       internal static let imgPremiumBanner = ImageAsset(name: "App/img_premium_banner")

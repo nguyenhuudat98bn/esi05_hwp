@@ -1,0 +1,8 @@
+{
+  "images" : [
+    { "filename" : "img_paywall_best_offer.png", "idiom" : "universal", "scale" : "1x" },
+    { "filename" : "img_paywall_best_offer@2x.png", "idiom" : "universal", "scale" : "2x" },
+    { "filename" : "img_paywall_best_offer@3x.png", "idiom" : "universal", "scale" : "3x" }
+  ],
+  "info" : { "author" : "xcode", "version" : 1 }
+}
