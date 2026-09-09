@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- The app requests ATT and serves personalised ads. -->
+	<key>NSPrivacyTracking</key>
+	<true/>
+	<!-- Empty on purpose: the ad and analytics SDKs declare their own domains in their bundled
+	     manifests. Add here only if the app itself starts contacting a tracking domain. -->
+	<key>NSPrivacyTrackingDomains</key>
+	<array/>
+	<!-- TODO(team): mirror the answers given in App Store Connect's privacy questionnaire. -->
+	<key>NSPrivacyCollectedDataTypes</key>
+	<array/>
+	<key>NSPrivacyAccessedAPITypes</key>
+	<array>
+		<dict>
+			<!-- SPNSession (@DStore), FileStore's recent/bookmark index, StoreKitManager's
+			     purchase-logging keys — all this app's own defaults. -->
+			<key>NSPrivacyAccessedAPIType</key>
+			<string>NSPrivacyAccessedAPICategoryUserDefaults</string>
+			<key>NSPrivacyAccessedAPITypeReasons</key>
+			<array>
+				<string>CA92.1</string>
+			</array>
+		</dict>
+		<dict>
+			<!-- FileStore reads .contentModificationDateKey to show "date · size" on each file row. -->
+			<key>NSPrivacyAccessedAPIType</key>
+			<string>NSPrivacyAccessedAPICategoryFileTimestamp</string>
+			<key>NSPrivacyAccessedAPITypeReasons</key>
+			<array>
+				<string>C617.1</string>
+			</array>
+		</dict>
+	</array>
+</dict>
+</plist>
