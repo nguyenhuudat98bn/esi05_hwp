@@ -2,13 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<!-- The app requests ATT and serves personalised ads. -->
+	<!-- The app's own code contacts no tracking domain: everything that tracks lives in the ad and
+	     analytics frameworks, which declare it in their own manifests (FBAudienceNetwork and
+	     FBSDKCoreKit list ep1/ep6.facebook.com; GoogleMobileAds, Vungle, Pangle and Mintegral
+	     deliberately declare none, because iOS blocks every listed domain once the user denies ATT
+	     — listing an ad-serving host here would kill fill for those users). true with an empty
+	     NSPrivacyTrackingDomains is what Apple rejected as ITMS-91064. -->
 	<key>NSPrivacyTracking</key>
-	<true/>
-	<!-- Empty on purpose: the ad and analytics SDKs declare their own domains in their bundled
-	     manifests. Add here only if the app itself starts contacting a tracking domain. -->
-	<key>NSPrivacyTrackingDomains</key>
-	<array/>
+	<false/>
 	<!-- TODO(team): mirror the answers given in App Store Connect's privacy questionnaire. -->
 	<key>NSPrivacyCollectedDataTypes</key>
 	<array/>
