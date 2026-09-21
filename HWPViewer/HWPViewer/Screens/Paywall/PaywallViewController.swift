@@ -45,6 +45,11 @@ final class PaywallViewController: UIViewController {
     private var planCards: [PlanCardView] = []
     private let continueButton = GradientButton(title: L10n.paywallContinue, colors: AppColors.gradientContinue)
 
+    /// Short screens — iPhone SE, and an iPad running the app in iPhone compatibility mode (375×667,
+    /// what App Review uses). The Figma frame is 800pt tall; at 667 the full-size layout is ~95pt
+    /// over, and Auto Layout paid for it by collapsing the title, the fine print and a plan card.
+    private let isCompact = UIScreen.main.bounds.height < 700
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -62,20 +67,23 @@ final class PaywallViewController: UIViewController {
         headerImage.clipsToBounds = true
         view.addSubview(headerImage)
         headerImage.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(-60)
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(300)
+            make.height.equalTo(headerImage.snp.width).multipliedBy(350.0 / 360.0)
         }
-        let fade = GradientView(colors: [UIColor.white.withAlphaComponent(0), .white], startPoint: CGPoint(x: 0.5, y: 0.55), endPoint: CGPoint(x: 0.5, y: 0.95))
+        let fade = GradientView(colors: [UIColor.white.withAlphaComponent(0), .white], startPoint: CGPoint(x: 0.5, y: 0.657), endPoint: CGPoint(x: 0.5, y: 0.923))
         view.addSubview(fade)
         fade.snp.makeConstraints { $0.edges.equalTo(headerImage) }
 
         heroImage.contentMode = .scaleAspectFit
         view.addSubview(heroImage)
+        // The hero is the one element allowed to give: full size when there is room, smaller (same
+        // proportions) when the screen is short, so the text and controls below keep their size.
         heroImage.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(24)
-            make.size.equalTo(CGSize(width: 168, height: 150))
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(isCompact ? 8 : 24)
+            make.width.equalTo(heroImage.snp.height).multipliedBy(168.0 / 150.0)
+            make.height.lessThanOrEqualTo(150)
+            make.height.equalTo(150).priority(.low)
         }
 
         closeButton.setImage(Asset.Assets.App.icPaywallCloseTimes.image.withRenderingMode(.alwaysTemplate), for: .normal)
@@ -98,20 +106,28 @@ final class PaywallViewController: UIViewController {
 
         let title = titleLabel
         title.text = L10n.paywallTitle
-        title.font = AppFonts.condensedBold(28)
+        title.font = AppFonts.condensedBold(isCompact ? 24 : 28)
         title.textColor = AppColors.textPrimary
         title.textAlignment = .center
         title.numberOfLines = 2
+        title.setContentCompressionResistancePriority(.required, for: .vertical)
         view.addSubview(title)
         title.snp.makeConstraints { make in
-            make.top.equalTo(heroImage.snp.bottom).offset(16)
+            make.top.equalTo(heroImage.snp.bottom).offset(isCompact ? 8 : 16)
             make.leading.trailing.equalToSuperview().inset(48)
+        }
+        // Figma: art 360×350 at y -111, title at y 217 — the art ends 22pt below the title's top.
+        // Hang it off the title rather than the screen top: everything else in the header follows
+        // the safe area (62pt on a Dynamic Island phone, 28 in Figma) and the hero shrinks on short
+        // screens, so a screen-anchored art rode up behind the status bar or ran under the title.
+        headerImage.snp.makeConstraints { make in
+            make.bottom.equalTo(title.snp.top).offset(22)
         }
 
         // Feature table
         let table = UIStackView()
         table.axis = .vertical
-        table.spacing = 12
+        table.spacing = isCompact ? 8 : 12
         table.addArrangedSubview(featureRow(nil, pro: nil, basic: nil))
         let features: [(String, Bool)] = [
             (L10n.paywallFeatureOpenRead, true),
@@ -126,7 +142,7 @@ final class PaywallViewController: UIViewController {
         }
         view.addSubview(table)
         table.snp.makeConstraints { make in
-            make.top.equalTo(title.snp.bottom).offset(20)
+            make.top.equalTo(title.snp.bottom).offset(isCompact ? 10 : 20)
             make.leading.trailing.equalToSuperview().inset(15)
         }
 
@@ -135,6 +151,7 @@ final class PaywallViewController: UIViewController {
         finePrint.textColor = AppColors.textTertiary
         finePrint.textAlignment = .center
         finePrint.numberOfLines = 0
+        finePrint.setContentCompressionResistancePriority(.required, for: .vertical)
 
         // One card per configured plan (remote order).
         planCards = plans.map { plan in
@@ -163,13 +180,13 @@ final class PaywallViewController: UIViewController {
 
         let bottom = UIStackView(arrangedSubviews: [finePrint, plans, continueButton, legalWrap])
         bottom.axis = .vertical
-        bottom.spacing = 12
-        bottom.setCustomSpacing(16, after: plans)
+        bottom.spacing = isCompact ? 8 : 12
+        bottom.setCustomSpacing(isCompact ? 12 : 16, after: plans)
         view.addSubview(bottom)
         bottom.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(24)
             make.bottom.equalTo(view.safeAreaLayoutGuide).inset(8)
-            make.top.greaterThanOrEqualTo(table.snp.bottom).offset(12)
+            make.top.greaterThanOrEqualTo(table.snp.bottom).offset(isCompact ? 8 : 12)
         }
         continueButton.snp.makeConstraints { $0.height.equalTo(46) }
 
