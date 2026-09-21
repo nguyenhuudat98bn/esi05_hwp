@@ -64,8 +64,21 @@ final class HomeEmptyView: UIView {
         stack.snp.makeConstraints { make in
             make.center.equalToSuperview()
             make.leading.trailing.equalToSuperview().inset(32)
+            make.top.greaterThanOrEqualToSuperview()
+            make.bottom.lessThanOrEqualToSuperview()
         }
-        imageView.snp.makeConstraints { $0.size.equalTo(imageSize) }
+        // On a short screen (iPhone SE, iPad compatibility mode) the space between the header and
+        // the native ad is smaller than the stack; centred, it spilled over both and the ad covered
+        // the CTA. The illustration gives way instead: full size when it fits, scaled down when not.
+        imageView.setContentCompressionResistancePriority(.defaultLow - 1, for: .vertical)
+        imageView.setContentCompressionResistancePriority(.defaultLow - 1, for: .horizontal)
+        titleLabel.setContentCompressionResistancePriority(.required, for: .vertical)
+        subtitleLabel.setContentCompressionResistancePriority(.required, for: .vertical)
+        imageView.snp.makeConstraints { make in
+            make.width.equalTo(imageView.snp.height).multipliedBy(imageSize.width / imageSize.height)
+            make.height.lessThanOrEqualTo(imageSize.height)
+            make.height.equalTo(imageSize.height).priority(.low)
+        }
         button.snp.makeConstraints { $0.height.equalTo(48) }
     }
 
