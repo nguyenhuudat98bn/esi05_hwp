@@ -194,8 +194,6 @@
 "Paywall.Period.Year" = "שנה";
 "Paywall.Continue.Trial" = "התחילו תקופת ניסיון";
 "Paywall.Continue.Subscribe" = "הירשמו עכשיו";
-"Paywall.Option.TrialEnabled" = "תקופת ניסיון פעילה";
-"Paywall.Option.TrialDisabled" = "תקופת ניסיון כבויה";
 "Paywall.Option.BestOffer" = "ההצעה הכי משתלמת";
 "Paywall.Continue" = "המשך";
 "Paywall.Terms" = "אפשר לבטל בכל עת. המנוי מתחדש אוטומטית אלא אם יבוטל לפחות 24 שעות לפני תום התקופה הנוכחית.";

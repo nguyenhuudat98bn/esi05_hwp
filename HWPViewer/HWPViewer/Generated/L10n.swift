@@ -192,10 +192,6 @@ internal enum L10n {
   internal static func paywallOptionPrice(_ p1: Any, _ p2: Any) -> String {
     return L10n.tr("Localizable", "Paywall.Option.Price", String(describing: p1), String(describing: p2), fallback: "%@ / %@")
   }
-  /// Free trial disabled
-  internal static var paywallOptionTrialDisabled: String { return L10n.tr("Localizable", "Paywall.Option.TrialDisabled", fallback: "Free trial disabled") }
-  /// Free trial enabled
-  internal static var paywallOptionTrialEnabled: String { return L10n.tr("Localizable", "Paywall.Option.TrialEnabled", fallback: "Free trial enabled") }
   /// then %@ per %@
   internal static func paywallOptionIntroSubtitle(_ p1: Any, _ p2: Any) -> String {
     return L10n.tr("Localizable", "Paywall.Option.Intro.Subtitle", String(describing: p1), String(describing: p2), fallback: "then %@ per %@")

@@ -194,8 +194,6 @@
 "Paywall.Period.Year" = "an";
 "Paywall.Continue.Trial" = "ÎNCEPE PERIOADA GRATUITĂ";
 "Paywall.Continue.Subscribe" = "ABONEAZĂ-TE ACUM";
-"Paywall.Option.TrialEnabled" = "Probă gratuită activată";
-"Paywall.Option.TrialDisabled" = "Probă gratuită dezactivată";
 "Paywall.Option.BestOffer" = "Cea mai bună ofertă";
 "Paywall.Continue" = "CONTINUĂ";
 "Paywall.Terms" = "Anulezi oricând. Abonamentul se reînnoiește automat dacă nu este anulat cu cel puțin 24 de ore înainte de sfârșitul perioadei curente.";

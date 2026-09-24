@@ -194,8 +194,6 @@
 "Paywall.Period.Year" = "år";
 "Paywall.Continue.Trial" = "START GRATIS PRØVEPERIODE";
 "Paywall.Continue.Subscribe" = "ABONNER NU";
-"Paywall.Option.TrialEnabled" = "Gratis prøveperiode slået til";
-"Paywall.Option.TrialDisabled" = "Gratis prøveperiode slået fra";
 "Paywall.Option.BestOffer" = "Bedste tilbud";
 "Paywall.Continue" = "FORTSÆT";
 "Paywall.Terms" = "Opsig når som helst. Abonnementet fornyes automatisk, medmindre det opsiges mindst 24 timer før den nuværende periode slutter.";

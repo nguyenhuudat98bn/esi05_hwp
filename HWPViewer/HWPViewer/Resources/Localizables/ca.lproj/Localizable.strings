@@ -194,8 +194,6 @@
 "Paywall.Period.Year" = "any";
 "Paywall.Continue.Trial" = "COMENÇA LA PROVA GRATUÏTA";
 "Paywall.Continue.Subscribe" = "SUBSCRIU-T'HI ARA";
-"Paywall.Option.TrialEnabled" = "Prova gratuïta activada";
-"Paywall.Option.TrialDisabled" = "Prova gratuïta desactivada";
 "Paywall.Option.BestOffer" = "Millor oferta";
 "Paywall.Continue" = "CONTINUA";
 "Paywall.Terms" = "Cancel·la quan vulguis. La subscripció es renova automàticament si no es cancel·la almenys 24 hores abans que acabi el període actual.";

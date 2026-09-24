@@ -194,8 +194,6 @@
 "Paywall.Period.Year" = "yıl";
 "Paywall.Continue.Trial" = "ÜCRETSİZ DENEMEYİ BAŞLAT";
 "Paywall.Continue.Subscribe" = "HEMEN ABONE OL";
-"Paywall.Option.TrialEnabled" = "Ücretsiz deneme açık";
-"Paywall.Option.TrialDisabled" = "Ücretsiz deneme kapalı";
 "Paywall.Option.BestOffer" = "En iyi teklif";
 "Paywall.Continue" = "DEVAM";
 "Paywall.Terms" = "İstediğiniz zaman iptal edin. Mevcut dönem bitmeden en az 24 saat önce iptal edilmezse abonelik otomatik olarak yenilenir.";

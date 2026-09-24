@@ -3,8 +3,12 @@
 //  HWPViewer
 //
 //  Paywall (Figma H2): header art + hero, X / Restore, "Go Premium with HWP Pro", PRO/BASIC table,
-//  fine print, one plan card per remote `iap_configs.plans` entry (badge / trial from config), CONTINUE,
-//  Terms | Privacy. Close-button delay, title and CONTINUE wording variants also come from `iap_configs`.
+//  fine print, one plan card per remote `iap_configs.plans` entry (badge from config), CONTINUE,
+//  Terms | Privacy. Close-button delay and CONTINUE wording variants also come from `iap_configs`.
+//
+//  Trial wording comes from the StoreKit product, never from the config, and only one card per
+//  billing period is shown (see PaywallPlanVisibility) — App Review 3.1.2(c) rejected the earlier
+//  "Free trial enabled / disabled" pair of yearly cards as a misleading trial toggle.
 //
 
 import UIKit
@@ -30,7 +34,9 @@ final class PaywallViewController: UIViewController {
 
     private let config = IapConfigs.current
     private var products: [Product] = []
+    /// Every configured plan; one card is built per entry, cards not in `visiblePlans` are hidden.
     private lazy var plans: [PaywallPlan] = config.effectivePlans
+    private lazy var visiblePlans: [PaywallPlan] = plans
     private lazy var selectedPlan: PaywallPlan? = config.defaultPlan
     /// Set by PaywallPresenter: true when this is not the first paywall of the session (X may be delayed).
     var isRepeatShow = false
@@ -293,7 +299,7 @@ final class PaywallViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] products in
                 self?.products = products
-                self?.updateTexts()
+                self?.applyPlanVisibility()
             }
             .store(in: &cancellables)
         output.$isLoading.compactMap { $0 }
@@ -340,19 +346,35 @@ final class PaywallViewController: UIViewController {
         updateTexts()
     }
 
+    /// Once products are known, hide the cards that must not show (one per period, product loaded)
+    /// and move the selection if it landed on a hidden card.
+    private func applyPlanVisibility() {
+        visiblePlans = PaywallPlanVisibility.visiblePlans(plans: plans, products: products)
+        for (card, plan) in zip(planCards, plans) {
+            card.isHidden = !visiblePlans.contains(plan)
+        }
+        if let plan = PaywallPlanVisibility.selection(current: selectedPlan, visible: visiblePlans) {
+            select(plan)
+        } else {
+            selectedPlan = nil
+            updateTexts()
+        }
+    }
+
     private func product(for plan: PaywallPlan) -> Product? {
         products.first { $0.plan == plan }
     }
 
-    /// Card title/subtitle from the StoreKit product: trial plans say enabled/disabled, priced plans show
-    /// "<price> / <period>" (or the intro offer + regular price when the product has one).
+    /// Card title/subtitle from the StoreKit product, so the card states exactly what the store
+    /// will charge: "<n>-day free trial / then <price> per <period>" when the product carries a
+    /// free-trial intro offer, "<intro> for the first <period> / then <price>" for a paid intro
+    /// offer, "<price> / <period>" otherwise. The config's `trial` flag never drives the wording.
     private func updateTexts() {
         for (card, plan) in zip(planCards, plans) {
             let product = product(for: plan)
-            if plan.trial {
-                let enabled = (product?.trialDays ?? 0) > 0
-                card.configure(title: enabled ? L10n.paywallOptionTrialEnabled : L10n.paywallOptionTrialDisabled,
-                               subtitle: nil, badge: plan.badgeText)
+            if let product, product.trialDays > 0 {
+                card.configure(title: L10n.purchaseFreeTrial("\(product.trialDays)"),
+                               subtitle: L10n.paywallOptionIntroSubtitle(product.price, plan.periodName), badge: plan.badgeText)
             } else if let product, let intro = product.introPrice {
                 card.configure(title: L10n.paywallOptionIntro(intro, plan.periodName),
                                subtitle: L10n.paywallOptionIntroSubtitle(product.price, plan.periodName), badge: plan.badgeText)

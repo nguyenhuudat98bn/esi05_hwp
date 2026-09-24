@@ -194,8 +194,6 @@
 "Paywall.Period.Year" = "वर्ष";
 "Paywall.Continue.Trial" = "मुफ़्त ट्रायल शुरू करें";
 "Paywall.Continue.Subscribe" = "अभी सदस्यता लें";
-"Paywall.Option.TrialEnabled" = "मुफ़्त ट्रायल चालू";
-"Paywall.Option.TrialDisabled" = "मुफ़्त ट्रायल बंद";
 "Paywall.Option.BestOffer" = "सर्वोत्तम ऑफ़र";
 "Paywall.Continue" = "जारी रखें";
 "Paywall.Terms" = "कभी भी रद्द करें। यदि मौजूदा अवधि समाप्त होने से कम से कम 24 घंटे पहले रद्द नहीं किया गया तो सदस्यता स्वतः नवीनीकृत हो जाएगी।";

@@ -194,8 +194,6 @@
 "Paywall.Period.Year" = "рік";
 "Paywall.Continue.Trial" = "ПОЧАТИ БЕЗКОШТОВНИЙ ПЕРІОД";
 "Paywall.Continue.Subscribe" = "ОФОРМИТИ ПІДПИСКУ";
-"Paywall.Option.TrialEnabled" = "Пробний період увімкнено";
-"Paywall.Option.TrialDisabled" = "Пробний період вимкнено";
 "Paywall.Option.BestOffer" = "Найкраща пропозиція";
 "Paywall.Continue" = "ПРОДОВЖИТИ";
 "Paywall.Terms" = "Скасування будь-коли. Підписка поновлюється автоматично, якщо не скасувати її щонайменше за 24 години до кінця поточного періоду.";

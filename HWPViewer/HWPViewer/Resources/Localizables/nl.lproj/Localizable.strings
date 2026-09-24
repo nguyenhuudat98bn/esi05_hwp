@@ -194,8 +194,6 @@
 "Paywall.Period.Year" = "jaar";
 "Paywall.Continue.Trial" = "START GRATIS PROEFPERIODE";
 "Paywall.Continue.Subscribe" = "NU ABONNEREN";
-"Paywall.Option.TrialEnabled" = "Gratis proefperiode aan";
-"Paywall.Option.TrialDisabled" = "Gratis proefperiode uit";
 "Paywall.Option.BestOffer" = "Beste aanbod";
 "Paywall.Continue" = "DOORGAAN";
 "Paywall.Terms" = "Altijd opzegbaar. Het abonnement wordt automatisch verlengd, tenzij je minstens 24 uur voor het einde van de huidige periode opzegt.";

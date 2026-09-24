@@ -194,8 +194,6 @@
 "Paywall.Period.Year" = "سنة";
 "Paywall.Continue.Trial" = "ابدأ التجربة المجانية";
 "Paywall.Continue.Subscribe" = "اشترك الآن";
-"Paywall.Option.TrialEnabled" = "التجربة المجانية مفعّلة";
-"Paywall.Option.TrialDisabled" = "التجربة المجانية غير مفعّلة";
 "Paywall.Option.BestOffer" = "أفضل عرض";
 "Paywall.Continue" = "متابعة";
 "Paywall.Terms" = "يمكنك الإلغاء في أي وقت. يتجدد الاشتراك تلقائيًا ما لم يتم إلغاؤه قبل 24 ساعة على الأقل من نهاية الفترة الحالية.";

@@ -194,8 +194,6 @@
 "Paywall.Period.Year" = "έτος";
 "Paywall.Continue.Trial" = "ΕΝΑΡΞΗ ΔΩΡΕΑΝ ΔΟΚΙΜΗΣ";
 "Paywall.Continue.Subscribe" = "ΕΓΓΡΑΦΗ ΤΩΡΑ";
-"Paywall.Option.TrialEnabled" = "Δωρεάν δοκιμή ενεργή";
-"Paywall.Option.TrialDisabled" = "Δωρεάν δοκιμή ανενεργή";
 "Paywall.Option.BestOffer" = "Καλύτερη προσφορά";
 "Paywall.Continue" = "ΣΥΝΕΧΕΙΑ";
 "Paywall.Terms" = "Ακύρωση οποτεδήποτε. Η συνδρομή ανανεώνεται αυτόματα εκτός αν ακυρωθεί τουλάχιστον 24 ώρες πριν από το τέλος της τρέχουσας περιόδου.";

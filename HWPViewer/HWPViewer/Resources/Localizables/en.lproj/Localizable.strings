@@ -194,8 +194,6 @@
 "Paywall.Period.Year" = "year";
 "Paywall.Continue.Trial" = "START FREE TRIAL";
 "Paywall.Continue.Subscribe" = "SUBSCRIBE NOW";
-"Paywall.Option.TrialEnabled" = "Free trial enabled";
-"Paywall.Option.TrialDisabled" = "Free trial disabled";
 "Paywall.Option.BestOffer" = "Best Offer";
 "Paywall.Continue" = "CONTINUE";
 "Paywall.Terms" = "Cancel anytime. Subscription auto-renews unless cancelled at least 24 hours before the end of the current period.";

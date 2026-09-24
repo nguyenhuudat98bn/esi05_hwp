@@ -194,8 +194,6 @@
 "Paywall.Period.Year" = "год";
 "Paywall.Continue.Trial" = "НАЧАТЬ БЕСПЛАТНЫЙ ПЕРИОД";
 "Paywall.Continue.Subscribe" = "ОФОРМИТЬ ПОДПИСКУ";
-"Paywall.Option.TrialEnabled" = "Пробный период включён";
-"Paywall.Option.TrialDisabled" = "Пробный период отключён";
 "Paywall.Option.BestOffer" = "Лучшее предложение";
 "Paywall.Continue" = "ПРОДОЛЖИТЬ";
 "Paywall.Terms" = "Отмена в любое время. Подписка продлевается автоматически, если не отменить её минимум за 24 часа до конца текущего периода.";

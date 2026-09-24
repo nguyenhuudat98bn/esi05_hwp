@@ -194,8 +194,6 @@
 "Paywall.Period.Year" = "év";
 "Paywall.Continue.Trial" = "INGYENES PRÓBA INDÍTÁSA";
 "Paywall.Continue.Subscribe" = "ELŐFIZETEK";
-"Paywall.Option.TrialEnabled" = "Ingyenes próba bekapcsolva";
-"Paywall.Option.TrialDisabled" = "Ingyenes próba kikapcsolva";
 "Paywall.Option.BestOffer" = "Legjobb ajánlat";
 "Paywall.Continue" = "TOVÁBB";
 "Paywall.Terms" = "Bármikor lemondható. Az előfizetés automatikusan megújul, hacsak legalább 24 órával az aktuális időszak vége előtt le nem mondod.";

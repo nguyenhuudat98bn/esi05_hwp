@@ -194,8 +194,6 @@
 "Paywall.Period.Year" = "rok";
 "Paywall.Continue.Trial" = "ROZPOCZNIJ OKRES PRÓBNY";
 "Paywall.Continue.Subscribe" = "SUBSKRYBUJ TERAZ";
-"Paywall.Option.TrialEnabled" = "Okres próbny włączony";
-"Paywall.Option.TrialDisabled" = "Okres próbny wyłączony";
 "Paywall.Option.BestOffer" = "Najlepsza oferta";
 "Paywall.Continue" = "DALEJ";
 "Paywall.Terms" = "Anuluj w dowolnym momencie. Subskrypcja odnawia się automatycznie, jeśli nie zostanie anulowana co najmniej 24 godziny przed końcem bieżącego okresu.";

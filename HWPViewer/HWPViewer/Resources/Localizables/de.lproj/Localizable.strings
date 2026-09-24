@@ -194,8 +194,6 @@
 "Paywall.Period.Year" = "Jahr";
 "Paywall.Continue.Trial" = "GRATIS TESTEN";
 "Paywall.Continue.Subscribe" = "JETZT ABONNIEREN";
-"Paywall.Option.TrialEnabled" = "Gratis-Test aktiviert";
-"Paywall.Option.TrialDisabled" = "Gratis-Test deaktiviert";
 "Paywall.Option.BestOffer" = "Bestes Angebot";
 "Paywall.Continue" = "WEITER";
 "Paywall.Terms" = "Jederzeit kündbar. Das Abo verlängert sich automatisch, sofern es nicht mindestens 24 Stunden vor Ende des aktuellen Zeitraums gekündigt wird.";

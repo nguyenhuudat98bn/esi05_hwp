@@ -194,8 +194,6 @@
 "Paywall.Period.Year" = "godinu";
 "Paywall.Continue.Trial" = "POKRENI BESPLATNO RAZDOBLJE";
 "Paywall.Continue.Subscribe" = "PRETPLATI SE";
-"Paywall.Option.TrialEnabled" = "Besplatno razdoblje uključeno";
-"Paywall.Option.TrialDisabled" = "Besplatno razdoblje isključeno";
 "Paywall.Option.BestOffer" = "Najbolja ponuda";
 "Paywall.Continue" = "NASTAVI";
 "Paywall.Terms" = "Otkažite bilo kada. Pretplata se automatski obnavlja ako se ne otkaže najmanje 24 sata prije isteka trenutnog razdoblja.";

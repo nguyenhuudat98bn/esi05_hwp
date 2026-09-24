@@ -194,8 +194,6 @@
 "Paywall.Period.Year" = "年";
 "Paywall.Continue.Trial" = "開始免費試用";
 "Paywall.Continue.Subscribe" = "立即訂閱";
-"Paywall.Option.TrialEnabled" = "已啟用免費試用";
-"Paywall.Option.TrialDisabled" = "未啟用免費試用";
 "Paywall.Option.BestOffer" = "最超值";
 "Paywall.Continue" = "繼續";
 "Paywall.Terms" = "可隨時取消。若未在目前訂閱期結束前至少 24 小時取消，訂閱將自動續訂。";

@@ -4,7 +4,9 @@
 //
 //  Remote `iap_configs` (Firebase Remote Config, JSON parameter). Plans are data, not code:
 //  the paywall renders one card per entry of `plans`, so adding a weekly/monthly/lifetime product
-//  or swapping the trial product needs no app update.
+//  or swapping the trial product needs no app update. Trial wording on a card comes from the StoreKit
+//  product's introductory offer, not from the `trial` flag, and the paywall shows one card per period
+//  (PaywallPlanVisibility) — a trial and a plain variant of the same period never appear side by side.
 //
 //  {
 //    "plans": [

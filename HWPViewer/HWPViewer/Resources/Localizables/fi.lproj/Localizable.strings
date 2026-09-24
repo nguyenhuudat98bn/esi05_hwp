@@ -194,8 +194,6 @@
 "Paywall.Period.Year" = "vuosi";
 "Paywall.Continue.Trial" = "ALOITA ILMAINEN KOKEILU";
 "Paywall.Continue.Subscribe" = "TILAA NYT";
-"Paywall.Option.TrialEnabled" = "Ilmainen kokeilu käytössä";
-"Paywall.Option.TrialDisabled" = "Ilmainen kokeilu pois käytöstä";
 "Paywall.Option.BestOffer" = "Paras tarjous";
 "Paywall.Continue" = "JATKA";
 "Paywall.Terms" = "Peruuta milloin tahansa. Tilaus uusitaan automaattisesti, ellei sitä peruuteta vähintään 24 tuntia ennen nykyisen jakson päättymistä.";

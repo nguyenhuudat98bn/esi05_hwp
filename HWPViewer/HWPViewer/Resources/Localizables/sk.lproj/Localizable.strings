@@ -194,8 +194,6 @@
 "Paywall.Period.Year" = "rok";
 "Paywall.Continue.Trial" = "ZAČAŤ SKÚŠOBNÉ OBDOBIE";
 "Paywall.Continue.Subscribe" = "PREDPLATIŤ";
-"Paywall.Option.TrialEnabled" = "Skúšobné obdobie zapnuté";
-"Paywall.Option.TrialDisabled" = "Skúšobné obdobie vypnuté";
 "Paywall.Option.BestOffer" = "Najlepšia ponuka";
 "Paywall.Continue" = "POKRAČOVAŤ";
 "Paywall.Terms" = "Zrušiť môžete kedykoľvek. Predplatné sa automaticky obnovuje, ak ho nezrušíte aspoň 24 hodín pred koncom aktuálneho obdobia.";

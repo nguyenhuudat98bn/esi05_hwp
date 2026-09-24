@@ -194,8 +194,6 @@
 "Paywall.Period.Year" = "anno";
 "Paywall.Continue.Trial" = "INIZIA LA PROVA GRATUITA";
 "Paywall.Continue.Subscribe" = "ABBONATI ORA";
-"Paywall.Option.TrialEnabled" = "Prova gratuita attiva";
-"Paywall.Option.TrialDisabled" = "Prova gratuita non attiva";
 "Paywall.Option.BestOffer" = "Offerta migliore";
 "Paywall.Continue" = "CONTINUA";
 "Paywall.Terms" = "Disdici quando vuoi. L'abbonamento si rinnova automaticamente se non viene annullato almeno 24 ore prima della fine del periodo in corso.";

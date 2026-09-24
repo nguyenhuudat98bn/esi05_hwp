@@ -194,8 +194,6 @@
 "Paywall.Period.Year" = "tahun";
 "Paywall.Continue.Trial" = "MULAI UJI COBA GRATIS";
 "Paywall.Continue.Subscribe" = "BERLANGGANAN SEKARANG";
-"Paywall.Option.TrialEnabled" = "Uji coba gratis aktif";
-"Paywall.Option.TrialDisabled" = "Uji coba gratis nonaktif";
 "Paywall.Option.BestOffer" = "Penawaran terbaik";
 "Paywall.Continue" = "LANJUT";
 "Paywall.Terms" = "Batalkan kapan saja. Langganan diperpanjang otomatis kecuali dibatalkan minimal 24 jam sebelum periode berjalan berakhir.";

@@ -194,8 +194,6 @@
 "Paywall.Period.Year" = "年";
 "Paywall.Continue.Trial" = "無料トライアルを開始";
 "Paywall.Continue.Subscribe" = "今すぐ登録";
-"Paywall.Option.TrialEnabled" = "無料トライアルあり";
-"Paywall.Option.TrialDisabled" = "無料トライアルなし";
 "Paywall.Option.BestOffer" = "いちばんお得";
 "Paywall.Continue" = "続ける";
 "Paywall.Terms" = "いつでもキャンセルできます。現在の期間終了の24時間前までにキャンセルしない限り、サブスクリプションは自動更新されます。";

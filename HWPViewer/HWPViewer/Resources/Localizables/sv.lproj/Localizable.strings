@@ -194,8 +194,6 @@
 "Paywall.Period.Year" = "år";
 "Paywall.Continue.Trial" = "STARTA GRATIS PROVPERIOD";
 "Paywall.Continue.Subscribe" = "PRENUMERERA NU";
-"Paywall.Option.TrialEnabled" = "Gratis provperiod på";
-"Paywall.Option.TrialDisabled" = "Gratis provperiod av";
 "Paywall.Option.BestOffer" = "Bästa erbjudandet";
 "Paywall.Continue" = "FORTSÄTT";
 "Paywall.Terms" = "Avsluta när du vill. Prenumerationen förnyas automatiskt om den inte avslutas minst 24 timmar innan den aktuella perioden tar slut.";
