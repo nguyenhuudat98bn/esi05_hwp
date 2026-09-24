@@ -6,9 +6,8 @@
 //  fine print, one plan card per remote `iap_configs.plans` entry (badge from config), CONTINUE,
 //  Terms | Privacy. Close-button delay and CONTINUE wording variants also come from `iap_configs`.
 //
-//  Trial wording comes from the StoreKit product, never from the config, and only one card per
-//  billing period is shown (see PaywallPlanVisibility) — App Review 3.1.2(c) rejected the earlier
-//  "Free trial enabled / disabled" pair of yearly cards as a misleading trial toggle.
+//  Trial wording comes from the StoreKit product, never from the config — App Review 3.1.2(c)
+//  rejected the earlier "Free trial enabled / disabled" card titles as a misleading trial toggle.
 //
 
 import UIKit
@@ -34,9 +33,7 @@ final class PaywallViewController: UIViewController {
 
     private let config = IapConfigs.current
     private var products: [Product] = []
-    /// Every configured plan; one card is built per entry, cards not in `visiblePlans` are hidden.
     private lazy var plans: [PaywallPlan] = config.effectivePlans
-    private lazy var visiblePlans: [PaywallPlan] = plans
     private lazy var selectedPlan: PaywallPlan? = config.defaultPlan
     /// Set by PaywallPresenter: true when this is not the first paywall of the session (X may be delayed).
     var isRepeatShow = false
@@ -299,7 +296,7 @@ final class PaywallViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] products in
                 self?.products = products
-                self?.applyPlanVisibility()
+                self?.updateTexts()
             }
             .store(in: &cancellables)
         output.$isLoading.compactMap { $0 }
@@ -344,21 +341,6 @@ final class PaywallViewController: UIViewController {
             card.setSelected(candidate == plan)
         }
         updateTexts()
-    }
-
-    /// Once products are known, hide the cards that must not show (one per period, product loaded)
-    /// and move the selection if it landed on a hidden card.
-    private func applyPlanVisibility() {
-        visiblePlans = PaywallPlanVisibility.visiblePlans(plans: plans, products: products)
-        for (card, plan) in zip(planCards, plans) {
-            card.isHidden = !visiblePlans.contains(plan)
-        }
-        if let plan = PaywallPlanVisibility.selection(current: selectedPlan, visible: visiblePlans) {
-            select(plan)
-        } else {
-            selectedPlan = nil
-            updateTexts()
-        }
     }
 
     private func product(for plan: PaywallPlan) -> Product? {
