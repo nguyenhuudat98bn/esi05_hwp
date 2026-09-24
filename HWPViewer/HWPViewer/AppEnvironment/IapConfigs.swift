@@ -12,7 +12,7 @@
 //      {"id": "hwp.sub.yearly",       "period": "year", "trial": false},
 //      {"id": "hwp.sub.yearly.trial", "period": "year", "trial": true, "badge": "best_offer", "selected": true}
 //    ],
-//    "enable_trial": true,                       // false → trial plans are dropped
+//    "enable_trial": false,                      // false → trial plans are dropped (see also `trialOptionsEnabled`)
 //    "show_paywall_at": ["after_splash", "after_intro", "tools", "view_file"],
 //    "percent_show_paywall": 35,                 // chance (0–100) an automatic show actually happens
 //    "max_paywall_shows_per_session": 2,         // automatic shows per app session
@@ -106,6 +106,15 @@ struct IapConfigs: Codable {
         IapPlan(id: "hwp.sub.yearly.trial", period: .year, trial: true, badge: "best_offer", selected: true),
     ]
 
+    /// Build-time kill switch for every plan flagged `trial`, whatever remote config says.
+    /// Off since App Review 3.1.2(c) rejected 1.0 (6): the paywall shows the plain yearly price
+    /// only, one clear "<price> / year" offer. Flip to true (and add the introductory offer in
+    /// App Store Connect) to let `enable_trial` / `plans[].trial` bring the trial option back.
+    static let trialOptionsEnabled = false
+
+    /// `enable_trial` from config, gated by the build-time switch.
+    private var trialAllowed: Bool { Self.trialOptionsEnabled && enableTrial != false }
+
     static var current: IapConfigs {
         FirebaseRemoteConfigStore.shared.value("iap_configs", as: IapConfigs.self) ?? IapConfigs()
     }
@@ -113,11 +122,11 @@ struct IapConfigs: Codable {
     // MARK: - Derived
 
     /// Plans to show, in order: remote `plans` → legacy ids → compiled fallback; trial plans dropped when
-    /// `enable_trial` is false (a card whose product fails to load is skipped by the paywall).
+    /// `enable_trial` is false or `trialOptionsEnabled` is off.
     var effectivePlans: [IapPlan] {
         var list = plans ?? legacyPlans
         if list.isEmpty { list = Self.fallbackPlans }
-        if enableTrial == false { list = list.filter { !$0.trial } }
+        if !trialAllowed { list = list.filter { !$0.trial } }
         if list.isEmpty { list = Self.fallbackPlans.filter { !$0.trial } }
         // Same product twice (e.g. legacy monthly == weekly) → keep the first.
         var seen = Set<String>()
@@ -135,7 +144,7 @@ struct IapConfigs: Codable {
         if let monthlyId, !monthlyId.isEmpty { list.append(IapPlan(id: monthlyId, period: .month)) }
         // Legacy apps ship both a trial and a plain yearly id; the trial one is used only while
         // `enable_trial` is on, otherwise the plain yearly product takes its place.
-        if enableTrial != false, let yearlyTrialId, !yearlyTrialId.isEmpty {
+        if trialAllowed, let yearlyTrialId, !yearlyTrialId.isEmpty {
             list.append(IapPlan(id: yearlyTrialId, period: .year, trial: true, badge: "best_offer", selected: true))
         } else if let yearlyId, !yearlyId.isEmpty {
             list.append(IapPlan(id: yearlyId, period: .year, badge: "best_offer", selected: true))

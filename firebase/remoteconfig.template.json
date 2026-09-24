@@ -39,13 +39,13 @@
     },
     "native_advertiser_units": {
       "defaultValue": {
-        "value": "[{\"place_name\":\"onboarding\",\"enc_high_ad_id\":\"4PuvMSaoJZBdkLlayaXEyCgNmcDDycDUYM8Ib5nrZOO7NQL5mkmI7WSrrUTWR1Yq\",\"enc_medium_ad_id\":\"4PuvMSaoJZBdkLlayaXEyCgNmcDDycDUYM8Ib5nrZOO7NQL5mkmI7WSrrUTWR1Yq\",\"enc_ad_id\":\"4PuvMSaoJZBdkLlayaXEyCgNmcDDycDUYM8Ib5nrZOO7NQL5mkmI7WSrrUTWR1Yq\",\"countries\":[{\"code\":\"tier1\",\"enc_high_ad_id\":\"4PuvMSaoJZBdkLlayaXEyCgNmcDDycDUYM8Ib5nrZOO7NQL5mkmI7WSrrUTWR1Yq\",\"enc_medium_ad_id\":\"4PuvMSaoJZBdkLlayaXEyCgNmcDDycDUYM8Ib5nrZOO7NQL5mkmI7WSrrUTWR1Yq\",\"enc_ad_id\":\"4PuvMSaoJZBdkLlayaXEyCgNmcDDycDUYM8Ib5nrZOO7NQL5mkmI7WSrrUTWR1Yq\"}]},{\"place_name\":\"others\",\"enc_high_ad_id\":\"4PuvMSaoJZBdkLlayaXEyBSiznHmVs9R8xSuWwNm8vMCZxxCMF6cupt4Esq4MMWm\",\"enc_medium_ad_id\":\"4PuvMSaoJZBdkLlayaXEyBSiznHmVs9R8xSuWwNm8vMCZxxCMF6cupt4Esq4MMWm\",\"enc_ad_id\":\"4PuvMSaoJZBdkLlayaXEyBSiznHmVs9R8xSuWwNm8vMCZxxCMF6cupt4Esq4MMWm\",\"countries\":[{\"code\":\"tier1\",\"enc_high_ad_id\":\"4PuvMSaoJZBdkLlayaXEyBSiznHmVs9R8xSuWwNm8vMCZxxCMF6cupt4Esq4MMWm\",\"enc_medium_ad_id\":\"4PuvMSaoJZBdkLlayaXEyBSiznHmVs9R8xSuWwNm8vMCZxxCMF6cupt4Esq4MMWm\",\"enc_ad_id\":\"4PuvMSaoJZBdkLlayaXEyBSiznHmVs9R8xSuWwNm8vMCZxxCMF6cupt4Esq4MMWm\"}]}]"
+        "value": "[{\"place_name\":\"onboarding\",\"enc_high_ad_id\":\"aJMnnMq7NRUa4nhVDW6Jq23jy165dI12gcfJj6IcXO9blqZQEoDKsuy08wmNu6A5\",\"enc_medium_ad_id\":\"aJMnnMq7NRUa4nhVDW6Jq23jy165dI12gcfJj6IcXO9blqZQEoDKsuy08wmNu6A5\",\"enc_ad_id\":\"aJMnnMq7NRUa4nhVDW6Jq23jy165dI12gcfJj6IcXO9blqZQEoDKsuy08wmNu6A5\",\"countries\":[{\"code\":\"tier1\",\"enc_high_ad_id\":\"aJMnnMq7NRUa4nhVDW6Jq23jy165dI12gcfJj6IcXO9blqZQEoDKsuy08wmNu6A5\",\"enc_medium_ad_id\":\"aJMnnMq7NRUa4nhVDW6Jq23jy165dI12gcfJj6IcXO9blqZQEoDKsuy08wmNu6A5\",\"enc_ad_id\":\"aJMnnMq7NRUa4nhVDW6Jq23jy165dI12gcfJj6IcXO9blqZQEoDKsuy08wmNu6A5\"}]},{\"place_name\":\"others\",\"enc_high_ad_id\":\"aJMnnMq7NRUa4nhVDW6Jq1X1BDS0vBBNBGSfn1DCAv//EI3b2e3wSBF4xMoB3WDK\",\"enc_medium_ad_id\":\"aJMnnMq7NRUa4nhVDW6Jq1X1BDS0vBBNBGSfn1DCAv//EI3b2e3wSBF4xMoB3WDK\",\"enc_ad_id\":\"aJMnnMq7NRUa4nhVDW6Jq1X1BDS0vBBNBGSfn1DCAv//EI3b2e3wSBF4xMoB3WDK\",\"countries\":[{\"code\":\"tier1\",\"enc_high_ad_id\":\"aJMnnMq7NRUa4nhVDW6Jq1X1BDS0vBBNBGSfn1DCAv//EI3b2e3wSBF4xMoB3WDK\",\"enc_medium_ad_id\":\"aJMnnMq7NRUa4nhVDW6Jq1X1BDS0vBBNBGSfn1DCAv//EI3b2e3wSBF4xMoB3WDK\",\"enc_ad_id\":\"aJMnnMq7NRUa4nhVDW6Jq1X1BDS0vBBNBGSfn1DCAv//EI3b2e3wSBF4xMoB3WDK\"}]}]"
       },
       "valueType": "JSON"
     },
     "interstitial_advertiser": {
       "defaultValue": {
-        "value": "{\"units\":[\"Se9LiUWNDycaQOKP0PDGCZ8wQdmTipTD7ic1M6pI45V3LfW/Gr0Esj3B6A1R3VuX\"],\"places\":[{\"place_name\":\"language_screen\",\"is_enable\":true},{\"place_name\":\"introduce_screen\",\"is_enable\":true},{\"place_name\":\"home_screen\",\"is_enable\":true}]}"
+        "value": "{\"units\":[\"aJMnnMq7NRUa4nhVDW6Jq4BPtGcOo8+c+8m9P1UiwzTnzySGutGDLETttxB7HHw4\"],\"places\":[{\"place_name\":\"language_screen\",\"is_enable\":true},{\"place_name\":\"introduce_screen\",\"is_enable\":true},{\"place_name\":\"home_screen\",\"is_enable\":true}]}"
       },
       "valueType": "JSON"
     },
@@ -57,7 +57,7 @@
     },
     "open_app_advertiser_units": {
       "defaultValue": {
-        "value": "[{\"place_name\":\"first_open_app\",\"enc_high_ad_id\":\"4PuvMSaoJZBdkLlayaXEyHsWoD/Kusr12brHgWNpAF/3VpA2BZgdk38QmWsMBPG+\",\"enc_medium_ad_id\":\"4PuvMSaoJZBdkLlayaXEyHsWoD/Kusr12brHgWNpAF/3VpA2BZgdk38QmWsMBPG+\",\"enc_ad_id\":\"4PuvMSaoJZBdkLlayaXEyHsWoD/Kusr12brHgWNpAF/3VpA2BZgdk38QmWsMBPG+\",\"countries\":[{\"code\":\"tier1\",\"enc_high_ad_id\":\"4PuvMSaoJZBdkLlayaXEyHsWoD/Kusr12brHgWNpAF/3VpA2BZgdk38QmWsMBPG+\",\"enc_medium_ad_id\":\"4PuvMSaoJZBdkLlayaXEyHsWoD/Kusr12brHgWNpAF/3VpA2BZgdk38QmWsMBPG+\",\"enc_ad_id\":\"4PuvMSaoJZBdkLlayaXEyHsWoD/Kusr12brHgWNpAF/3VpA2BZgdk38QmWsMBPG+\"}]},{\"place_name\":\"open_app\",\"enc_high_ad_id\":\"4PuvMSaoJZBdkLlayaXEyHsWoD/Kusr12brHgWNpAF/3VpA2BZgdk38QmWsMBPG+\",\"enc_medium_ad_id\":\"4PuvMSaoJZBdkLlayaXEyHsWoD/Kusr12brHgWNpAF/3VpA2BZgdk38QmWsMBPG+\",\"enc_ad_id\":\"4PuvMSaoJZBdkLlayaXEyHsWoD/Kusr12brHgWNpAF/3VpA2BZgdk38QmWsMBPG+\",\"countries\":[{\"code\":\"tier1\",\"enc_high_ad_id\":\"4PuvMSaoJZBdkLlayaXEyHsWoD/Kusr12brHgWNpAF/3VpA2BZgdk38QmWsMBPG+\",\"enc_medium_ad_id\":\"4PuvMSaoJZBdkLlayaXEyHsWoD/Kusr12brHgWNpAF/3VpA2BZgdk38QmWsMBPG+\",\"enc_ad_id\":\"4PuvMSaoJZBdkLlayaXEyHsWoD/Kusr12brHgWNpAF/3VpA2BZgdk38QmWsMBPG+\"}]},{\"place_name\":\"reopen_app\",\"enc_high_ad_id\":\"4PuvMSaoJZBdkLlayaXEyHsWoD/Kusr12brHgWNpAF/3VpA2BZgdk38QmWsMBPG+\",\"enc_medium_ad_id\":\"4PuvMSaoJZBdkLlayaXEyHsWoD/Kusr12brHgWNpAF/3VpA2BZgdk38QmWsMBPG+\",\"enc_ad_id\":\"4PuvMSaoJZBdkLlayaXEyHsWoD/Kusr12brHgWNpAF/3VpA2BZgdk38QmWsMBPG+\",\"countries\":[{\"code\":\"tier1\",\"enc_high_ad_id\":\"4PuvMSaoJZBdkLlayaXEyHsWoD/Kusr12brHgWNpAF/3VpA2BZgdk38QmWsMBPG+\",\"enc_medium_ad_id\":\"4PuvMSaoJZBdkLlayaXEyHsWoD/Kusr12brHgWNpAF/3VpA2BZgdk38QmWsMBPG+\",\"enc_ad_id\":\"4PuvMSaoJZBdkLlayaXEyHsWoD/Kusr12brHgWNpAF/3VpA2BZgdk38QmWsMBPG+\"}]}]"
+        "value": "[{\"place_name\":\"first_open_app\",\"enc_high_ad_id\":\"aJMnnMq7NRUa4nhVDW6Jq72uEyb6Bka+pFq+4wuUe2l6q/9wyvvig8acMworff5Q\",\"enc_medium_ad_id\":\"aJMnnMq7NRUa4nhVDW6Jq72uEyb6Bka+pFq+4wuUe2l6q/9wyvvig8acMworff5Q\",\"enc_ad_id\":\"aJMnnMq7NRUa4nhVDW6Jq72uEyb6Bka+pFq+4wuUe2l6q/9wyvvig8acMworff5Q\",\"countries\":[{\"code\":\"tier1\",\"enc_high_ad_id\":\"aJMnnMq7NRUa4nhVDW6Jq72uEyb6Bka+pFq+4wuUe2l6q/9wyvvig8acMworff5Q\",\"enc_medium_ad_id\":\"aJMnnMq7NRUa4nhVDW6Jq72uEyb6Bka+pFq+4wuUe2l6q/9wyvvig8acMworff5Q\",\"enc_ad_id\":\"aJMnnMq7NRUa4nhVDW6Jq72uEyb6Bka+pFq+4wuUe2l6q/9wyvvig8acMworff5Q\"}]},{\"place_name\":\"open_app\",\"enc_high_ad_id\":\"aJMnnMq7NRUa4nhVDW6Jq9AmUx7u+MVqDt84RYt05LyHi0cbWNjVHeNwvN0BZ4ne\",\"enc_medium_ad_id\":\"aJMnnMq7NRUa4nhVDW6Jq9AmUx7u+MVqDt84RYt05LyHi0cbWNjVHeNwvN0BZ4ne\",\"enc_ad_id\":\"aJMnnMq7NRUa4nhVDW6Jq9AmUx7u+MVqDt84RYt05LyHi0cbWNjVHeNwvN0BZ4ne\",\"countries\":[{\"code\":\"tier1\",\"enc_high_ad_id\":\"aJMnnMq7NRUa4nhVDW6Jq9AmUx7u+MVqDt84RYt05LyHi0cbWNjVHeNwvN0BZ4ne\",\"enc_medium_ad_id\":\"aJMnnMq7NRUa4nhVDW6Jq9AmUx7u+MVqDt84RYt05LyHi0cbWNjVHeNwvN0BZ4ne\",\"enc_ad_id\":\"aJMnnMq7NRUa4nhVDW6Jq9AmUx7u+MVqDt84RYt05LyHi0cbWNjVHeNwvN0BZ4ne\"}]},{\"place_name\":\"reopen_app\",\"enc_high_ad_id\":\"aJMnnMq7NRUa4nhVDW6Jq9AmUx7u+MVqDt84RYt05LyHi0cbWNjVHeNwvN0BZ4ne\",\"enc_medium_ad_id\":\"aJMnnMq7NRUa4nhVDW6Jq9AmUx7u+MVqDt84RYt05LyHi0cbWNjVHeNwvN0BZ4ne\",\"enc_ad_id\":\"aJMnnMq7NRUa4nhVDW6Jq9AmUx7u+MVqDt84RYt05LyHi0cbWNjVHeNwvN0BZ4ne\",\"countries\":[{\"code\":\"tier1\",\"enc_high_ad_id\":\"aJMnnMq7NRUa4nhVDW6Jq9AmUx7u+MVqDt84RYt05LyHi0cbWNjVHeNwvN0BZ4ne\",\"enc_medium_ad_id\":\"aJMnnMq7NRUa4nhVDW6Jq9AmUx7u+MVqDt84RYt05LyHi0cbWNjVHeNwvN0BZ4ne\",\"enc_ad_id\":\"aJMnnMq7NRUa4nhVDW6Jq9AmUx7u+MVqDt84RYt05LyHi0cbWNjVHeNwvN0BZ4ne\"}]}]"
       },
       "valueType": "JSON"
     },
@@ -69,7 +69,7 @@
     },
     "iap_configs": {
       "defaultValue": {
-        "value": "{\"plans\":[{\"id\":\"hwp.sub.yearly\",\"period\":\"year\",\"trial\":false},{\"id\":\"hwp.sub.yearly.trial\",\"period\":\"year\",\"trial\":true,\"badge\":\"best_offer\",\"selected\":true}],\"enable_trial\":true,\"show_paywall_at\":[\"after_splash\",\"after_intro\",\"tools\",\"view_file\"],\"percent_show_paywall\":35,\"max_paywall_shows_per_session\":2,\"time_show_button_close_purchase_since_second_time\":1,\"continue_button_version\":1,\"title_trial_version\":2}"
+        "value": "{\"plans\":[{\"id\":\"hwp.sub.yearly\",\"period\":\"year\",\"trial\":false},{\"id\":\"hwp.sub.yearly.trial\",\"period\":\"year\",\"trial\":true,\"badge\":\"best_offer\",\"selected\":true}],\"enable_trial\":false,\"show_paywall_at\":[\"after_splash\",\"after_intro\",\"tools\",\"view_file\"],\"percent_show_paywall\":35,\"max_paywall_shows_per_session\":2,\"time_show_button_close_purchase_since_second_time\":1,\"continue_button_version\":1,\"title_trial_version\":1}"
       },
       "valueType": "JSON"
     },
@@ -82,7 +82,7 @@
   },
   "version": {
     "versionNumber": "1",
-    "updateTime": "2026-09-04T08:15:34.711989Z",
+    "updateTime": "2026-09-24T07:44:03.110415Z",
     "updateUser": {
       "email": "datnh@supernovajsc.com"
     },
