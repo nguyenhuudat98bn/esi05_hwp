@@ -38,7 +38,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // be diagnosed from Console.app on a real build. App Store builds stay quiet.
         // Only a real App Store install carries a receipt named exactly "receipt"; TestFlight and
         // ad-hoc carry "sandboxReceipt", and dev/simulator builds have none at all.
-        SPNLogger.isEnabled = Bundle.main.appStoreReceiptURL?.lastPathComponent != "receipt"
+        // The URL is named "receipt" even when no file exists (dev/simulator), so check the file too.
+        let receiptURL = Bundle.main.appStoreReceiptURL
+        let isAppStoreInstall = receiptURL?.lastPathComponent == "receipt"
+            && receiptURL.map { FileManager.default.fileExists(atPath: $0.path) } == true
+        SPNLogger.isEnabled = !isAppStoreInstall
         SPNAppsFlyerManager.shared.setupSDK(devKey: appsFlyerDevKey, appleAppID: appleAppID)
         FirebaseApp.configure()
         MobileAds.shared.start()
