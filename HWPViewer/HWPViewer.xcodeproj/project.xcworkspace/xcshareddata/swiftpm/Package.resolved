@@ -29,6 +29,15 @@
       }
     },
     {
+      "identity" : "appsflyerframework-dynamic",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/AppsFlyerSDK/AppsFlyerFramework-Dynamic",
+      "state" : {
+        "revision" : "39d89f139c362e7e3a7ba5b582a7894254e5ebd8",
+        "version" : "7.0.1"
+      }
+    },
+    {
       "identity" : "chipagecontrol",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ChiliLabs/CHIPageControl.git",

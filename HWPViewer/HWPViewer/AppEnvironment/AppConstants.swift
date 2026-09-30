@@ -9,6 +9,10 @@ import UIKit
 import SPNComponent
 
 let appStoreUrl = "https://apps.apple.com/us/app/hwp-viewer-hangul-reader/id6808507107"
+/// App Store id (numeric part of `appStoreUrl`), used by AppsFlyer.
+let appleAppID = "6808507107"
+/// AppsFlyer dev key — shared with the other Supernova apps (ni10).
+let appsFlyerDevKey = "Z2ty7rjatUSWqcybH48vGU"
 let privacyUrl = "https://sites.google.com/view/hwpviewer-hangulreader-privacy"
 let termOfUseUrl = "https://sites.google.com/view/hwpviewer-hangulreader-terms"
 let actionWhenPurchaseCompleted = Notification.Name("ActionWhenPurchaseCompleted")

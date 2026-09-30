@@ -72,6 +72,9 @@ extension StoreKitManager: SKPaymentTransactionObserver, SKProductsRequestDelega
         for transaction in transactions {
             switch transaction.transactionState {
             case .purchased:
+                if let product = availableProducts[transaction.payment.productIdentifier] {
+                    SPNAppsFlyerManager.shared.logPurchase(product: product, transaction: transaction)
+                }
                 let productId = transaction.payment.productIdentifier
                 let transactionTime = transaction.transactionDate?.timeIntervalSinceNow ?? 0
 

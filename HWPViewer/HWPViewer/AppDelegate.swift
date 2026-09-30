@@ -39,6 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Only a real App Store install carries a receipt named exactly "receipt"; TestFlight and
         // ad-hoc carry "sandboxReceipt", and dev/simulator builds have none at all.
         SPNLogger.isEnabled = Bundle.main.appStoreReceiptURL?.lastPathComponent != "receipt"
+        SPNAppsFlyerManager.shared.setupSDK(devKey: appsFlyerDevKey, appleAppID: appleAppID)
         FirebaseApp.configure()
         MobileAds.shared.start()
         if SPNLogger.isEnabled, !adMobTestDeviceIDs.isEmpty {
@@ -137,6 +138,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 adSecret: AppSecrets.adSecret,
                 isPremium: { SPNSession.shared.isPremium || AppDelegate.adsDisabledForDebug },
                 analytics: TrackingManager.shared,
+                revenueReporter: SPNAppsFlyerManager.shared,
                 appStoreURL: URL(string: appStoreUrl)
             ),
             defaultsStore: store.defaultsStore
