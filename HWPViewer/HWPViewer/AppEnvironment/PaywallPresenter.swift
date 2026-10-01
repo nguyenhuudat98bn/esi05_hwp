@@ -25,7 +25,7 @@ final class PaywallPresenter {
     func present(trigger: SPNPaywallTrigger, from presenter: UIViewController, completion: @escaping () -> Void) -> Bool {
         let auto: PaywallAutoTrigger = trigger == .afterSplash ? .afterSplash : .afterIntro
         guard consumeAutoShowSlot(for: auto) else { return false }
-        return present(from: presenter, completion: completion)
+        return present(from: presenter, placement: PaywallPlacement(auto), completion: completion)
     }
 
     /// Automatic paywall for `trigger` inside the app (Tools, opening a file). `completion` always runs exactly
@@ -33,7 +33,8 @@ final class PaywallPresenter {
     @MainActor
     @discardableResult
     func presentIfAllowed(at trigger: PaywallAutoTrigger, from presenter: UIViewController, completion: @escaping () -> Void = {}) -> Bool {
-        guard consumeAutoShowSlot(for: trigger), present(from: presenter, completion: completion) else {
+        guard consumeAutoShowSlot(for: trigger),
+              present(from: presenter, placement: PaywallPlacement(trigger), completion: completion) else {
             completion()
             return false
         }
@@ -57,11 +58,12 @@ final class PaywallPresenter {
         return true
     }
 
-    /// Feature-gated / settings entry point (no onboarding trigger).
+    /// Feature-gated / settings entry point (no onboarding trigger). `placement` is the `where` of the IAP events.
     @MainActor
     @discardableResult
-    func present(from presenter: UIViewController, completion: @escaping () -> Void = {}) -> Bool {
+    func present(from presenter: UIViewController, placement: PaywallPlacement, completion: @escaping () -> Void = {}) -> Bool {
         guard !SPNSession.shared.isPremium else { return false }
+        IapTracking.shared.paywallPresented(at: placement)
         let purchaseVC = PaywallViewController()
         purchaseVC.isRepeatShow = showCount > 0
         showCount += 1

@@ -125,7 +125,7 @@ final class SelectFileViewController: AppBaseViewController {
         case .editHwp:
             // Opens in read mode: the viewer's own "Edit HWP" button is the way into editing.
             if AppRemoteConfigs.current.isEditPremium {
-                requirePremium { [weak self] in self?.actions.open(item) }
+                requirePremium(at: .edit) { [weak self] in self?.actions.open(item) }
             } else {
                 actions.open(item)
             }
@@ -165,7 +165,7 @@ final class SelectFileViewController: AppBaseViewController {
                 present(popup, animated: true)
             }
             if AppRemoteConfigs.current.isConvertPremium {
-                requirePremium(run)
+                requirePremium(at: .convert, run)
             } else {
                 run()
             }

@@ -72,6 +72,7 @@ extension StoreKitManager: SKPaymentTransactionObserver, SKProductsRequestDelega
         for transaction in transactions {
             switch transaction.transactionState {
             case .purchased:
+                IapTracking.shared.transactionPurchased(productID: transaction.payment.productIdentifier)
                 if let product = availableProducts[transaction.payment.productIdentifier] {
                     SPNAppsFlyerManager.shared.logPurchase(product: product, transaction: transaction)
                 }
@@ -106,6 +107,7 @@ extension StoreKitManager: SKPaymentTransactionObserver, SKProductsRequestDelega
                 activateVipUser()
                 delegate?.didPurchaseSuccess()
             case .failed:
+                IapTracking.shared.transactionFailed(productID: transaction.payment.productIdentifier, error: transaction.error)
                 delegate?.didPurchaseFail(error: transaction.error)
                 ReminderManager.shared.fireReminder(title: L10n.applicationName, message: L10n.purchaseFailedMessage)
                 

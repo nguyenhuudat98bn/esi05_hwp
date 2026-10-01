@@ -338,7 +338,7 @@ final class HwpViewerViewController: AppBaseViewController {
     private func editTapped() {
         let run: () -> Void = { [weak self] in self?.enterEditMode() }
         if AppRemoteConfigs.current.isEditPremium {
-            requirePremium(run)
+            requirePremium(at: .edit, run)
         } else {
             run()
         }

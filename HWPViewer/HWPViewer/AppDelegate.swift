@@ -43,6 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let isAppStoreInstall = receiptURL?.lastPathComponent == "receipt"
             && receiptURL.map { FileManager.default.fileExists(atPath: $0.path) } == true
         SPNLogger.isEnabled = !isAppStoreInstall
+        IapTracking.shared.markLaunch()
         SPNAppsFlyerManager.shared.setupSDK(devKey: appsFlyerDevKey, appleAppID: appleAppID)
         FirebaseApp.configure()
         MobileAds.shared.start()

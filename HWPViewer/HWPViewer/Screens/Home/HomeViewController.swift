@@ -155,7 +155,7 @@ final class HomeViewController: AppBaseViewController {
         headerView.onSearch = { [weak self] in
             self?.navigationController?.pushViewController(SearchViewController(), animated: true)
         }
-        headerView.onPremium = { [weak self] in self?.presentPaywall() }
+        headerView.onPremium = { [weak self] in self?.presentPaywall(at: .homeCrown) }
 
         fab.tapPublisher.throttle(for: .seconds(0.4), scheduler: RunLoop.main, latest: false)
             .receive(on: DispatchQueue.main)

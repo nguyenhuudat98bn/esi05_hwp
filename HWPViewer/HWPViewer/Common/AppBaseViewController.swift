@@ -51,18 +51,18 @@ class AppBaseViewController: SPNBaseViewController, ToastInsetProviding {
     }
 
     /// Runs `action` if the user is premium, otherwise presents the paywall and runs it on success.
-    func requirePremium(_ action: @escaping () -> Void) {
+    func requirePremium(at placement: PaywallPlacement, _ action: @escaping () -> Void) {
         if isPremium {
             action()
             return
         }
-        PaywallPresenter.shared.present(from: self) { [weak self] in
+        PaywallPresenter.shared.present(from: self, placement: placement) { [weak self] in
             guard let self, self.isPremium else { return }
             action()
         }
     }
 
-    func presentPaywall() {
-        PaywallPresenter.shared.present(from: self)
+    func presentPaywall(at placement: PaywallPlacement) {
+        PaywallPresenter.shared.present(from: self, placement: placement)
     }
 }

@@ -38,7 +38,7 @@ final class ToolsViewController: AppBaseViewController {
             make.size.equalTo(40)
         }
         premiumButton.tapPublisher.receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in self?.presentPaywall() }
+            .sink { [weak self] _ in self?.presentPaywall(at: .toolsCrown) }
             .store(in: &cancellables)
 
         let content = UIView()

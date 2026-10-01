@@ -95,7 +95,7 @@ final class SettingsViewController: AppBaseViewController {
         }
         premiumBanner.snp.makeConstraints { $0.height.equalTo(72) }
         premiumBanner.tapPublisher.receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in self?.presentPaywall() }
+            .sink { [weak self] _ in self?.presentPaywall(at: .setting) }
             .store(in: &cancellables)
 
         NotificationCenter.default.publisher(for: .languageChanged)

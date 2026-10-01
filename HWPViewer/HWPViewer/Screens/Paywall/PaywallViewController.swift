@@ -37,6 +37,8 @@ final class PaywallViewController: UIViewController {
     private lazy var selectedPlan: PaywallPlan? = config.defaultPlan
     /// Set by PaywallPresenter: true when this is not the first paywall of the session (X may be delayed).
     var isRepeatShow = false
+    /// `iap_purchase_show` goes out once, when the products arrive (or fail to).
+    private var didLogShow = false
 
     // MARK: - Controls
     private let headerImage = UIImageView(image: Asset.Assets.App.imgPaywallHeaderBg.image)
@@ -297,6 +299,7 @@ final class PaywallViewController: UIViewController {
             .sink { [weak self] products in
                 self?.products = products
                 self?.updateTexts()
+                self?.logShowOnce()
             }
             .store(in: &cancellables)
         output.$isLoading.compactMap { $0 }
@@ -305,7 +308,10 @@ final class PaywallViewController: UIViewController {
             .store(in: &cancellables)
         output.$errorMessage.compactMap { $0 }
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] in self?.showToast($0) }
+            .sink { [weak self] in
+                self?.showToast($0)
+                self?.logShowOnce()
+            }
             .store(in: &cancellables)
 
         closeButton.tapPublisher
@@ -323,6 +329,7 @@ final class PaywallViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 guard let self, let selectedPlan else { return }
+                IapTracking.shared.logContinueClick(plan: selectedPlan, product: product(for: selectedPlan)?.skProduct)
                 buySubject.send(selectedPlan.id)
             }
             .store(in: &cancellables)
@@ -333,6 +340,12 @@ final class PaywallViewController: UIViewController {
                 self?.dismiss(animated: true) { self?.delegate?.dismissWhenPurchased() }
             }
             .store(in: &cancellables)
+    }
+
+    private func logShowOnce() {
+        guard !didLogShow else { return }
+        didLogShow = true
+        IapTracking.shared.logShow(plan: selectedPlan, product: selectedPlan.flatMap { product(for: $0) }?.skProduct)
     }
 
     private func select(_ plan: PaywallPlan) {
