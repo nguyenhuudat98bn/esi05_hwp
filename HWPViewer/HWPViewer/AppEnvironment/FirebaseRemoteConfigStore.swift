@@ -56,6 +56,15 @@ final class FirebaseRemoteConfigStore: SPNRemoteConfigStore {
             } else {
                 logger("[RemoteConfig] fetched")
             }
+            // Source tells whether the server value won (remote) or the bundled default is still in use.
+            let appConfigs = self.remoteConfig.configValue(forKey: "appconfigs")
+            let source: String
+            switch appConfigs.source {
+            case .remote: source = "remote"
+            case .default: source = "default"
+            default: source = "static"
+            }
+            logger("[RemoteConfig] appconfigs source=\(source) value=\(appConfigs.stringValue)")
             DispatchQueue.main.async { completion() }
         }
     }
