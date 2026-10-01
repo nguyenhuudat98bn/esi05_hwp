@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDisplayName</key>
-	<string>HWP Viewer - Hangul Reader</string>
+	<string>HWP Viewer - Hangul Editor</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>

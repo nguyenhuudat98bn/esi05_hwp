@@ -7,7 +7,7 @@
 */
 
 //MARK: - LoadData
-"ApplicationName" = "HWP Viewer - Hangul Reader";
+"ApplicationName" = "HWP Viewer - Hangul Editor";
 "LoadData.SubTitle" = "Ouvrez, modifiez et convertissez vos fichiers HWP";
 "LoadData.LoadTitle" = "Une publicité va s'afficher...";
 "LoadData.Network.Title" = "Connexion Internet perdue";
