@@ -8,7 +8,9 @@
         "main_color": "#2E90FA",
         "is_enable_purchase_after_loading": true,
         "time_show_button_close_purchase": 0,
-        "force_update_version": "0.9.0"
+        "force_update_version": "0.9.0",
+        "max_interstitial_per_session": 3,
+        "max_interstitial_per_day": 6
     },
     "language_intro_configs": {
         "is_show_language": true,
