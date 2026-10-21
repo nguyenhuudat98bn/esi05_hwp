@@ -13,6 +13,9 @@ let appStoreUrl = "https://apps.apple.com/us/app/hwp-viewer-hangul-reader/id6808
 let appleAppID = "6808507107"
 /// AppsFlyer dev key — shared with the other Supernova apps (ni10).
 let appsFlyerDevKey = "Z2ty7rjatUSWqcybH48vGU"
+/// IAP hub (S2S purchase attribution → AppsFlyer). `iapHubSlug` is this app's slug on the hub.
+let iapHubBaseUrl = "https://in-app-purchases-hub-api.xfotoai.com"
+let iapHubSlug = "esi05"
 let privacyUrl = "https://sites.google.com/view/hwpviewer-hangulreader-privacy"
 let termOfUseUrl = "https://sites.google.com/view/hwpviewer-hangulreader-terms"
 let actionWhenPurchaseCompleted = Notification.Name("ActionWhenPurchaseCompleted")

@@ -37,9 +37,16 @@ final class StoreKitManager: NSObject {
             DispatchQueue.main.async {
                 SVProgressHUD.show()
             }
-            let paymentRequest = SKMutablePayment()
-            paymentRequest.productIdentifier = productID
-            SKPaymentQueue.default().add(paymentRequest)
+            // S2S attribution: make sure the hub has token → appsflyer_id BEFORE Apple's notification
+            // can arrive, then tag the payment. `applicationUsername` must be a UUID string or Apple
+            // drops it from `appAccountToken`. Registration has a 5s timeout and never blocks the buy.
+            Task { @MainActor in
+                let token = await AttributionAPI.register()
+                let paymentRequest = SKMutablePayment()
+                paymentRequest.productIdentifier = productID
+                paymentRequest.applicationUsername = token.uuidString
+                SKPaymentQueue.default().add(paymentRequest)
+            }
         } else {
             delegate?.didPurchaseFail(error: nil)
         }
@@ -73,9 +80,8 @@ extension StoreKitManager: SKPaymentTransactionObserver, SKProductsRequestDelega
             switch transaction.transactionState {
             case .purchased:
                 IapTracking.shared.transactionPurchased(productID: transaction.payment.productIdentifier)
-                if let product = availableProducts[transaction.payment.productIdentifier] {
-                    SPNAppsFlyerManager.shared.logPurchase(product: product, transaction: transaction)
-                }
+                // AppsFlyer purchase/revenue is reported server-side by the IAP hub (see
+                // AppsFlyerAttributionHub.swift) — no client `logPurchase`, or revenue counts twice.
                 let productId = transaction.payment.productIdentifier
                 let transactionTime = transaction.transactionDate?.timeIntervalSinceNow ?? 0
 

@@ -105,6 +105,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// Forwarded from `SceneDelegate` (the app-delegate variants are not called under the scene lifecycle).
     func sceneDidBecomeActive() {
         AppEvents.shared.activateApp()
+        // S2S attribution: keep the appAccountToken → appsflyer_id mapping fresh on every foreground.
+        AttributionAPI.registerInBackground()
         onboarding?.lifecycleHandler.applicationDidBecomeActive()
     }
 
