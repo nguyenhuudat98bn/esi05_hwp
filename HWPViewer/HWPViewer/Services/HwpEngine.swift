@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseCrashlytics
 import HwpEditorKit
 import SPNComponent
 
@@ -16,6 +17,17 @@ enum HwpEngine {
         try await HwpFontManager.shared.ensureFonts()
         HwpEngineBootstrap.setupIfNeeded()
         HwpEditorKitConfig.log = { logger($0) }
+        // Engine panic (caught, command fails) -> Crashlytics log + non-fatal so the
+        // Rust message/location shows up in the report instead of only on stderr.
+        HwpEditorKitConfig.onEnginePanic = { message in
+            let crashlytics = Crashlytics.crashlytics()
+            crashlytics.log("rhwp panic: \(message)")
+            crashlytics.setCustomValue(message, forKey: "rhwp_last_panic")
+            crashlytics.record(error: NSError(
+                domain: "rhwp.panic", code: 1,
+                userInfo: [NSLocalizedDescriptionKey: message]
+            ))
+        }
         HwpEditorKitConfig.copyMenuTitle = L10n.viewerMenuCopy
         HwpEditorKitConfig.cutMenuTitle = L10n.viewerMenuCut
         HwpEditorKitConfig.pasteMenuTitle = L10n.viewerMenuPaste

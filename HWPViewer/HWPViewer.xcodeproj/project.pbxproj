@@ -520,7 +520,7 @@
 			repositoryURL = "git@github.com:nguyenhuudat98bn/HwpEditorKit.git";
 			requirement = {
 				kind = exactVersion;
-				version = 1.8.1;
+				version = 1.11.3;
 			};
 		};
 		DF4F975D2EA9D20F00B9FDB6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
