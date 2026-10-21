@@ -26,6 +26,9 @@ enum EventTracking: String {
     case firstOpen3IntroToBackground = "first_open_3_intro_to_background"
     case firstOpen3IntroToForeground = "first_open_3_intro_to_foreground"
     case firstOpen4OpenHome = "first_open_4_open_home"
+    case ratePromptSkipped = "rate_prompt_skipped"
+    case ratePromptRequested = "rate_prompt_requested"
+    case rateManualTapped = "rate_manual_tapped"
     
     var isFirstTimeEvent: Bool {
         switch self {

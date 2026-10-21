@@ -318,6 +318,18 @@
         "edit_requires_premium": false,
         "convert_requires_premium": true,
         "gift_box_enabled": false,
-        "gift_box_countdown_seconds": 180
+        "gift_box_countdown_seconds": 180,
+    "rate_prompt": {
+      "enabled": true,
+      "version": 1,
+      "min_sessions": 3,
+      "min_days_since_install": 1,
+      "min_success_events": 2,
+      "max_prompts_total": 3,
+      "cooldown_days": 30,
+      "ad_gap_seconds": 10,
+      "delay_seconds": 2,
+      "triggers": ["convert_success", "save_success"]
+    }
     }
 }

@@ -117,6 +117,12 @@ final class ConvertResultViewController: AppBaseViewController {
     }
 
     /// Nav X behaves like "Back Home": the convert flow is finished, go back to the file list.
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        // Strongest success moment in the app: the user just got a converted file.
+        RatePromptManager.shared.recordSuccess(.convertSuccess, from: self)
+    }
+
     override func backButtonTapped() {
         goToAllFiles()
     }

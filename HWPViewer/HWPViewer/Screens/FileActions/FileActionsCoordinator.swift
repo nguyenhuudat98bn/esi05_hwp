@@ -30,7 +30,8 @@ final class FileActionsCoordinator: NSObject {
         let viewer = HwpViewerViewController(item: item, startInEditMode: startInEditMode)
         // Remote `show_paywall_at` contains "view_file" → paywall (percent/max-gated) before the interstitial + viewer.
         PaywallPresenter.shared.presentIfAllowed(at: .viewFile, from: presenter) {
-            SPNAdsManager.shared.interstitial.show(from: presenter, place: .home) { _ in
+            SPNAdsManager.shared.interstitial.show(from: presenter, place: .home) { result in
+                if case .didDismiss = result { RatePromptManager.shared.noteFullScreenAdDismissed() }
                 presenter.navigationController?.pushViewController(viewer, animated: true)
             }
         }

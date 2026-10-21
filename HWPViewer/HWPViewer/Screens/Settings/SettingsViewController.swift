@@ -128,11 +128,7 @@ final class SettingsViewController: AppBaseViewController {
             let vc = SPNLanguageViewController(config: OnboardingConfigs.language(), source: .settings)
             navigationController?.pushViewController(vc, animated: true)
         case .rate:
-            if let scene = view.window?.windowScene {
-                SKStoreReviewController.requestReview(in: scene)
-            } else if let url = URL(string: appStoreUrl) {
-                UIApplication.shared.open(url)
-            }
+            RatePromptManager.shared.manualRateTapped(from: self)
         case .share:
             var items: [Any] = [L10n.settingsShareMessage]
             if let url = URL(string: appStoreUrl) { items.append(url) }

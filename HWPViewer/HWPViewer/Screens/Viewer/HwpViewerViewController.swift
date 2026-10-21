@@ -134,7 +134,11 @@ final class HwpViewerViewController: AppBaseViewController {
             }
             showFontLoading(false)
             showLoadingHUD(true)
-            coordinator.onFirstRender = { [weak self] in self?.showLoadingHUD(false) }
+            coordinator.onFirstRender = { [weak self] in
+                guard let self else { return }
+                showLoadingHUD(false)
+                RatePromptManager.shared.recordSuccess(.openSuccess, from: self)
+            }
             await vm.openAsync(url: item.url)
             if vm.document == nil {
                 showLoadingHUD(false)
@@ -412,6 +416,7 @@ final class HwpViewerViewController: AppBaseViewController {
                 vm.exitEditMode()
                 FileStore.shared.notifyChanged()
                 // No "Saved" toast: the confirm popup + leaving edit mode is feedback enough.
+                RatePromptManager.shared.recordSuccess(.saveSuccess, from: self)
             case .failure(let error):
                 logger("[HWP] save failed: \(error)")
                 ErrorPopup.present(from: self, message: L10n.viewerSaveFailed)

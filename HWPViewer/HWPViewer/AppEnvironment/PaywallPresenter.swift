@@ -17,6 +17,8 @@ final class PaywallPresenter {
     /// Automatic (non user-initiated) shows this session — capped by `max_paywall_shows_per_session`.
     private(set) var autoShowCount = 0
     private var firedTriggers = Set<PaywallAutoTrigger>()
+    /// A paywall is on screen right now (rate prompt must not stack on it).
+    var isPresenting: Bool { !activeBridges.isEmpty }
 
     /// Onboarding hook (after splash / after intro). Returns `false` when the paywall is skipped — the
     /// coordinator then runs `completion` itself, so it must NOT be called here (it would `goHome()` twice).

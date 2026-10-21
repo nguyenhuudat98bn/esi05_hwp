@@ -1,13 +1,15 @@
 # Rate app prompt (xin đánh giá trên App Store)
 
-> **Status**: Draft
+> **Status**: Implemented (v1, mode `system` only)
 > **Owner**: datnh
 > **Last updated**: 2026-10-21
-> **Related code** (hiện trạng, chưa có flow tự động):
-> `HWPViewer/HWPViewer/Screens/Settings/SettingsViewController.swift` (row "Rate app" thủ công),
-> `HWPViewer/HWPViewer/AppEnvironment/AppRemoteConfigs.swift` (`app_extra_configs`),
-> `HWPViewer/HWPViewer/Managers/TrackingManager.swift`,
-> `HWPViewer/HWPViewer/Screens/FileActions/AppAlertViewController.swift` (popup chuẩn của app)
+> **Related code**:
+> `HWPViewer/HWPViewer/Managers/RatePromptManager.swift` (gate + requestReview + tracking),
+> `HWPViewer/HWPViewer/AppEnvironment/AppRemoteConfigs.swift` (`RatePromptConfig` = `app_extra_configs.rate_prompt`),
+> `Resources/DefaultConfigs/DefaultConfigs.json` (giá trị mặc định),
+> điểm gọi: `ConvertResultViewController.viewDidAppear`, `HwpViewerViewController.performSave` / `onFirstRender`,
+> `FileActionsCoordinator.open` (ghi thời điểm interstitial đóng), `SettingsViewController` (row Rate → `manualRateTapped`),
+> `AppDelegate.didFinishLaunching` (`markLaunch` đếm session)
 
 ## 1. Summary
 
@@ -228,6 +230,20 @@ Không dùng: print (không có completion), share (không có `completionWithIt
 Kết quả thực (user chấm mấy sao) **không đo được** trong app; đo qua App Store Connect
 (Ratings theo ngày) đối chiếu với `rate_prompt_requested`.
 
+## 10b. Ghi chú triển khai (v1, 2026-10-21)
+
+- Chỉ có mode `system`; `pre_prompt` chưa làm (không có key `mode` trong config).
+- `triggers` mặc định `["convert_success", "save_success"]`: `open_success` vẫn được đếm vào `success_count`
+  nhưng không prompt, trừ khi remote thêm vào `triggers`.
+- Trong code, thiếu key `rate_prompt` → `enabled = false`. `DefaultConfigs.json` đặt `enabled = true`,
+  nhưng Remote Config fetch về sẽ **đè** `app_extra_configs`; vì vậy phải thêm object `rate_prompt` vào
+  key `app_extra_configs` trên Firebase console (chạy `scripts/make-remoteconfig-template.py` để lấy JSON) thì
+  flow mới chạy trên production.
+- `ad_gap` tính từ lần interstitial đóng (`FileActionsCoordinator.open`) và từ mọi lần app quay lại
+  foreground (app-open ad hiện ở đó), không cần sửa SPNComponent.
+- `PaywallPresenter.isPresenting` mới thêm để gate paywall.
+- Event `rate_prompt_skipped` có thêm reason `trigger_off` và `no_scene`.
+
 ## 11. Glossary
 
 | Term | Definition |
@@ -252,9 +268,9 @@ Kết quả thực (user chấm mấy sao) **không đo được** trong app; đ
 
 ## 13. Open questions
 
-- [ ] **Mode mặc định**: `system` (đúng Apple HIG: "Don't use a custom prompt") hay `pre_prompt` (lọc user chưa hài lòng sang góp ý, nhưng Apple có thể reject nếu review viên để ý)? Đề xuất: ship `system`, giữ `pre_prompt` sau remote flag để thử.
+- [x] **Mode mặc định**: chốt `system` (quyết định 2026-10-21). `pre_prompt` để sau nếu cần.
 - [ ] **Ngưỡng ban đầu**: `min_sessions = 3`, `min_days = 1`, `min_success_events = 2`, `cooldown = 30 ngày` có hợp với retention thực tế không? Cần số liệu D1/D7 từ Firebase.
-- [ ] `open_success` có nên là trigger hay chỉ đếm? Mở file là hành động thường xuyên nhất nhưng cũng là lúc vừa có interstitial.
+- [x] `open_success`: v1 chỉ đếm (không có trong `triggers` mặc định); bật bằng remote nếu muốn.
 - [x] Deployment target = iOS 15.0 (pbxproj) → dùng `SKStoreReviewController.requestReview(in: windowScene)`; `AppStore.requestReview(in:)` (iOS 16+) chỉ là tuỳ chọn `#available`.
 - [ ] Email góp ý: `AppConstants.swift` chưa có hằng số email hỗ trợ nào → cần bổ sung nếu bật `pre_prompt`.
 

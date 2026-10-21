@@ -44,6 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             && receiptURL.map { FileManager.default.fileExists(atPath: $0.path) } == true
         SPNLogger.isEnabled = !isAppStoreInstall
         IapTracking.shared.markLaunch()
+        RatePromptManager.shared.markLaunch()
         SPNAppsFlyerManager.shared.setupSDK(devKey: appsFlyerDevKey, appleAppID: appleAppID)
         FirebaseApp.configure()
         MobileAds.shared.start()
