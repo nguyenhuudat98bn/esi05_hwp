@@ -12,7 +12,7 @@ import Combine
 import CombineCocoa
 import SPNComponent
 
-final class SelectFileViewController: AppBaseViewController {
+final class SelectFileViewController: AppBaseViewController, ToolFlowScreen {
     /// Keep toasts above the blue "Import from Files" pill they would otherwise blend into.
     override var toastBottomInset: CGFloat {
         importButton.isHidden ? super.toastBottomInset : super.toastBottomInset + importButton.bounds.height + 12
@@ -133,10 +133,8 @@ final class SelectFileViewController: AppBaseViewController {
             actions.print(item)
         case .pdfToHwp, .docToHwp:
             startConvert(item)
-        case .splitHwp:
-            navigationController?.pushViewController(SplitViewController(item: item), animated: true)
-        case .mergeHwp:
-            break // has its own multi-select screen (MergeSelectViewController)
+        case .mergeHwp, .splitHwp:
+            break // own pickers: HwpFilePickerViewController (MergeSplitFlow)
         }
     }
 

@@ -26,6 +26,7 @@ internal typealias AssetImageTypeAlias = ImageAsset.Image
 internal enum Asset {
   internal enum Assets {
     internal enum App {
+      internal static let animLoadingArc = DataAsset(name: "App/anim_loading_arc")
       internal static let icAngleLeft = ImageAsset(name: "App/ic_angle_left")
       internal static let icArrowFilledRight = ImageAsset(name: "App/ic_arrow_filled_right")
       internal static let icArrowRightOutline = ImageAsset(name: "App/ic_arrow_right_outline")
@@ -37,9 +38,12 @@ internal enum Asset {
       internal static let icCardPrint = ImageAsset(name: "App/ic_card_print")
       internal static let icCardWordDoc = ImageAsset(name: "App/ic_card_word_doc")
       internal static let icCaretDown = ImageAsset(name: "App/ic_caret_down")
+      internal static let icCheckboxOff = ImageAsset(name: "App/ic_checkbox_off")
+      internal static let icCheckboxOn = ImageAsset(name: "App/ic_checkbox_on")
       internal static let icCloseCircle = ImageAsset(name: "App/ic_close_circle")
       internal static let icCrown = ImageAsset(name: "App/ic_crown")
       internal static let icEditorCloseX = ImageAsset(name: "App/ic_editor_close_x")
+      internal static let icFabAdd = ImageAsset(name: "App/ic_fab_add")
       internal static let icFileBody = ImageAsset(name: "App/ic_file_body")
       internal static let icFileFold = ImageAsset(name: "App/ic_file_fold")
       internal static let icFileGlyphHwp = ImageAsset(name: "App/ic_file_glyph_hwp")
@@ -50,6 +54,8 @@ internal enum Asset {
       internal static let icMorePrint = ImageAsset(name: "App/ic_more_print")
       internal static let icMoreRenameEdit = ImageAsset(name: "App/ic_more_rename_edit")
       internal static let icMoreShare = ImageAsset(name: "App/ic_more_share")
+      internal static let icPageCheckOff = ImageAsset(name: "App/ic_page_check_off")
+      internal static let icPageCheckOn = ImageAsset(name: "App/ic_page_check_on")
       internal static let icPaywallArrowRight = ImageAsset(name: "App/ic_paywall_arrow_right")
       internal static let icPaywallBestOfferRibbon = ImageAsset(name: "App/ic_paywall_best_offer_ribbon")
       internal static let icPaywallCheckWhite = ImageAsset(name: "App/ic_paywall_check_white")
@@ -58,6 +64,8 @@ internal enum Asset {
       internal static let icPaywallFeatureCross = ImageAsset(name: "App/ic_paywall_feature_cross")
       internal static let icRoundPlus = ImageAsset(name: "App/ic_round_plus")
       internal static let icSearch = ImageAsset(name: "App/ic_search")
+      internal static let icSelectAllOff = ImageAsset(name: "App/ic_select_all_off")
+      internal static let icSelectAllOn = ImageAsset(name: "App/ic_select_all_on")
       internal static let icSettingsCertificate = ImageAsset(name: "App/ic_settings_certificate")
       internal static let icSettingsLanguage = ImageAsset(name: "App/ic_settings_language")
       internal static let icSettingsShare = ImageAsset(name: "App/ic_settings_share")
@@ -65,6 +73,7 @@ internal enum Asset {
       internal static let icSettingsShieldUser = ImageAsset(name: "App/ic_settings_shield_user")
       internal static let icSettingsStar = ImageAsset(name: "App/ic_settings_star")
       internal static let icSettingsWallet = ImageAsset(name: "App/ic_settings_wallet")
+      internal static let icSortHint = ImageAsset(name: "App/ic_sort_hint")
       internal static let icTabHomeFilled = ImageAsset(name: "App/ic_tab_home_filled")
       internal static let icTabSettingsFilled = ImageAsset(name: "App/ic_tab_settings_filled")
       internal static let icTabTools = ImageAsset(name: "App/ic_tab_tools")
@@ -82,14 +91,18 @@ internal enum Asset {
       internal static let icTbUnderline = ImageAsset(name: "App/ic_tb_underline")
       internal static let icTbUndo = ImageAsset(name: "App/ic_tb_undo")
       internal static let icToastCancel16 = ImageAsset(name: "App/ic_toast_cancel_16")
+      internal static let icTrashRed = ImageAsset(name: "App/ic_trash_red")
       internal static let icUpload = ImageAsset(name: "App/ic_upload")
       internal static let icViewerMoreVertical = ImageAsset(name: "App/ic_viewer_more_vertical")
       internal static let imgCardDocToHwpBg = ImageAsset(name: "App/img_card_doc_to_hwp_bg")
       internal static let imgCardEditHwpBg = ImageAsset(name: "App/img_card_edit_hwp_bg")
       internal static let imgCardImportBg = ImageAsset(name: "App/img_card_import_bg")
+      internal static let imgCardMergeBg = ImageAsset(name: "App/img_card_merge_bg")
       internal static let imgCardPdfToHwpBg = ImageAsset(name: "App/img_card_pdf_to_hwp_bg")
       internal static let imgCardPrintBg = ImageAsset(name: "App/img_card_print_bg")
+      internal static let imgCardSplitBg = ImageAsset(name: "App/img_card_split_bg")
       internal static let imgConvertError = ImageAsset(name: "App/img_convert_error")
+      internal static let imgEmptyMergeFiles = ImageAsset(name: "App/img_empty_merge_files")
       internal static let imgEmptyNoFiles = ImageAsset(name: "App/img_empty_no_files")
       internal static let imgNoResultFoundVector = ImageAsset(name: "App/img_no_result_found_vector")
       internal static let imgOffline = ImageAsset(name: "App/img_offline")
@@ -260,6 +273,30 @@ internal extension SwiftUI.Color {
   }
 }
 #endif
+
+internal struct DataAsset {
+  internal fileprivate(set) var name: String
+
+  @available(iOS 9.0, tvOS 9.0, watchOS 6.0, macOS 10.11, *)
+  internal var data: NSDataAsset {
+    guard let data = NSDataAsset(asset: self) else {
+      fatalError("Unable to load data asset named \(name).")
+    }
+    return data
+  }
+}
+
+@available(iOS 9.0, tvOS 9.0, watchOS 6.0, macOS 10.11, *)
+internal extension NSDataAsset {
+  convenience init?(asset: DataAsset) {
+    let bundle = BundleToken.bundle
+    #if os(iOS) || os(tvOS) || os(watchOS)
+    self.init(name: asset.name, bundle: bundle)
+    #elseif os(macOS)
+    self.init(name: NSDataAsset.Name(asset.name), bundle: bundle)
+    #endif
+  }
+}
 
 internal struct ImageAsset {
   internal fileprivate(set) var name: String

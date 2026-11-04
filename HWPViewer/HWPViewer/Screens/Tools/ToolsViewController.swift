@@ -85,8 +85,11 @@ final class ToolsViewController: AppBaseViewController {
     }
 
     private func open(_ tool: ToolKind) {
-        // Merge picks several files at once, so it has its own selection screen.
-        let next: UIViewController = tool == .mergeHwp ? MergeSelectViewController() : SelectFileViewController(tool: tool)
-        navigationController?.pushViewController(next, animated: true)
+        guard let navigationController else { return }
+        switch tool {
+        case .mergeHwp: MergeSplitFlow.startMerge(on: navigationController)
+        case .splitHwp: MergeSplitFlow.startSplit(on: navigationController)
+        default: navigationController.pushViewController(SelectFileViewController(tool: tool), animated: true)
+        }
     }
 }

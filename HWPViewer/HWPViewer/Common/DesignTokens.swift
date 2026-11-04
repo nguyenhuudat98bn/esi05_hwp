@@ -63,12 +63,13 @@ enum AppColors {
     static let gradientPrint: [UIColor] = [UIColor(hex: "#9226EF"), UIColor(hex: "#95BEF3")]
     static let pillPrint = UIColor(hex: "#7523D8")
     // Merge / Split HWP (POC, Claude Design canvas "HWP Merge & Split – POC flows")
-    static let gradientMerge: [UIColor] = [UIColor(hex: "#C2560F"), UIColor(hex: "#FFB27A")]
-    static let pillMerge = UIColor(hex: "#A84A0C")
-    static let gradientSplit: [UIColor] = [UIColor(hex: "#0A6F86"), UIColor(hex: "#7FD8E8")]
-    static let pillSplit = UIColor(hex: "#075A6D")
-    /// Split parts, cycled: dark teal / blue / amber differ in lightness, not only hue.
-    static let splitParts: [UIColor] = [UIColor(hex: "#075A6D"), UIColor(hex: "#2E90FA"), UIColor(hex: "#FDB022"), UIColor(hex: "#A84A0C")]
+    // Merge / Split cards (Figma 6976:103778 / 6976:103802); the card art itself is img_card_*_bg.
+    static let gradientMerge: [UIColor] = [UIColor(hex: "#FF7716"), UIColor(hex: "#FBC2A5")]
+    static let pillMerge = UIColor(hex: "#E9721D")
+    static let gradientSplit: [UIColor] = [UIColor(hex: "#FF5D5F"), UIColor(hex: "#FFBFCA")]
+    static let pillSplit = UIColor(hex: "#F25E61")
+    static let hintBarBackground = UIColor(hex: "#F5F5F6")  // "Long press to sort" strip (Figma 6978:108411)
+    static let bottomBarBorder = UIColor(hex: "#F0F0F1")    // top hairline of the bottom action bar
     static let gradientPremium: [UIColor] = [UIColor(hex: "#56CCF2"), UIColor(hex: "#2F80ED")]
     static let gradientContinue: [UIColor] = [UIColor(hex: "#1673FF"), UIColor(hex: "#69C5FB")]
     static let gradientBestOffer: [UIColor] = [UIColor(hex: "#FF9966"), UIColor(hex: "#FF5E62")]

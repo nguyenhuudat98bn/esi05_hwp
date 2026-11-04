@@ -1,30 +1,45 @@
-# Merge / Split HWP – POC
+# Merge / Split HWP
 
-Branch `poc/hwp-merge-split` (on top of `feat/storekit2`). UI design: Claude Design canvas
-"HWP Merge & Split – POC flows" — https://claude.ai/artifact/JW3jFaSXE39L8DG3onkJH5
+Branch `poc/hwp-merge-split`. UI from Figma "🈯 HWP Edit": section **Merge HWP** (`6978:109459`) and
+**Split HWP** (`6978:110902`). (The earlier Claude Design canvas "HWP Merge & Split – POC flows" is
+superseded by these designs.)
 
 ## Flows
 
 ```mermaid
 flowchart LR
-  T[Tools tab] -->|Merge HWP| MS[Merge 1: select files<br/>tap order = merge order]
-  MS -->|Next, 2+ files| MO[Merge 2: reorder / remove,<br/>name, HWP or HWPX]
-  MO -->|Merge| MP[progress popup] --> MD[result: open / share]
-  T -->|Split HWP| SF[Select File: one HWP] --> SP[Split: Page ranges / Pick pages / Every N<br/>page thumbnails]
-  SP -->|Split / Extract| SPP[progress popup] --> SD[result: N files]
+  T[Tools: Merge card] --> MS[Select Files<br/>search · checkbox · select all<br/>Continue n]
+  MS --> MF[Merge Files<br/>long press to sort · trash · + add<br/>Merge n, needs 2+]
+  MF -->|+| MS2[Select Files<br/>current files pre-checked] --> MF
+  MF -->|all removed| ME[empty: No files yet. Add file to merge]
+  MF -->|Merge| N1[Filename dialog] --> L1[Loading] --> D1[Merge HWP Successfully]
+  T2[Tools: Split card] --> SF[Select a file<br/>search] --> SP[Selected n<br/>page grid · select all<br/>Continue n]
+  SP --> N2[Filename dialog] --> L2[Loading] --> D2[Split HWP Successfully]
 ```
 
-Outputs are written to Documents next to the originals (`<name>.hwp`, `<source>_part<n>`,
-`<source>_pages`); originals are never changed.
+- Merge output is always `.hwp` (HWPX inputs are converted by the engine); the merge order is the
+  pick order, then whatever the user drags.
+- Split = the picked pages go into **one** new file named in the dialog, in the source's format.
+- Outputs land in Documents (My Files); originals are never changed. Result screen = the convert
+  result screen (Name / Size / Path, Back Home / Open) with its own title.
 
 ## App code
 
 | File | Role |
 |---|---|
-| `Services/HwpMergeSplitService.swift` | merge (`RhwpDocument.append`), split (`extractPages(from:to:)` on a fresh copy per part), pick (`extractPages(_:)`), save + `FileStore.notifyChanged` |
+| `Screens/MergeSplit/MergeSplitFlow.swift` | entry points used by the Tools cards |
+| `Screens/MergeSplit/HwpFilePickerViewController.swift` | Select Files (multi, tap order) / Select a file (single), search |
+| `Screens/MergeSplit/MergeFilesViewController.swift` | merge list: drag reorder, delete, add, empty state, name → merge |
+| `Screens/MergeSplit/SplitPagesViewController.swift`, `SplitPageCell.swift` | page grid with thumbnails, select all, name → extract |
+| `Screens/MergeSplit/LoadingOverlayViewController.swift` | dim + design spinner GIF (`anim_loading_arc` data asset) while the engine works |
+| `Screens/MergeSplit/HwpFileRowCell.swift`, `MergeSplitUIKit.swift` | file row (checkbox / trash), search pill, primary button, bottom bar, select-all |
+| `Screens/Tools/ConvertResultViewController.swift` | shared success screen (`title`, `place`); drops `ToolFlowScreen`s from the stack on Open |
+| `Services/HwpMergeSplitService.swift` | `merge(_:outputName:)`, `extract(_:pages:outputName:)` |
 | `Services/HwpPageThumbnailRenderer.swift` | page thumbnails (`renderPDF(page:)` → PDFKit), serial queue + cache |
-| `Screens/MergeSplit/*` | Merge 1/2, Split, progress popup, result, shared UI bits, `SplitPlan` (pure logic) |
-| `Screens/Tools/ToolKind.swift`, `ToolsViewController.swift` | two new cards (3rd row) |
+
+Assets (from Figma, `Assets.xcassets/App`): `img_card_merge_bg`, `img_card_split_bg`,
+`ic_checkbox_off/on`, `ic_select_all_off/on`, `ic_trash_red`, `ic_sort_hint`, `ic_fab_add`,
+`ic_page_check_off/on`, `img_empty_merge_files`, `anim_loading_arc` (GIF).
 
 ## Engine (HwpEditorKit, local)
 
@@ -32,29 +47,18 @@ The app points at the local clone `../../HwpEditorKit` (branch `poc/merge-split`
 remote `exactVersion 1.11.3` — switch back before any release build.
 
 - Engine `rhwp_editor_mobile-ios` branch `poc/merge-split`: `34cc109` (core `append_document` +
-  `extract_pages`, FFI `rhwp_doc_append_document` / `rhwp_doc_extract_page_range` /
-  `rhwp_doc_extract_pages`, tests, local core patch regenerated), `8155d0e` (xcframework).
-- Kit `HwpEditorKit` branch `poc/merge-split`: `90390ff`.
-- Swift: `append(_:) -> RhwpAppendReport`, `extractPages(from:to:)`, `extractPages(_:)` →
-  `RhwpPageExtractReport` (1-based pages).
+  `extract_pages`, FFI, tests), `8155d0e` (xcframework).
+- Kit `HwpEditorKit` branch `poc/merge-split`: `90390ff` — `append(_:)`, `extractPages(_:)`.
 
-Merge appends the other document's sections and DocInfo tables with ID offsets (shapes, styles,
-fonts, border fills, numbering, images, fields, OLE/chart ids, headers/footers, master pages…);
-same-name styles are reused (style id is one byte). Mixed HWP/HWPX inputs are converted to the
-target format first. Tests (cargo + kit on simulator) pass; page drift 0 on the samples.
+## Known limits
 
-## Known limits (POC)
-
-- Split keeps whole paragraphs: a paragraph crossing a cut goes to both parts (picking page 4 can
-  give 2 pages).
-- Merge: list numbering restarts per source; page/footnote numbers continue; page-number position and
-  master pages of the first document carry onto appended parts that have none; field/bookmark names
-  can repeat; memo shapes, track changes and extra DocInfo records of appended docs are not carried.
-- Not yet opened in Hancom (HWP and HWPX output, master pages, headers/footers).
-- Strings English only; card art uses SF Symbols placeholders; no premium gate; no remote ad place.
-
-## Open questions
-
-- Appended parts: block or continue the first document's page numbers / master pages?
-- Split: keep paragraph cutting, or invest in exact page-level cutting?
-- Premium gate for merge / split, and where?
+- Extract keeps whole paragraphs: a paragraph running across a page edge comes along whole, so the
+  output can be a page longer than the pages picked.
+- Merge: list numbering restarts per source; page numbers continue; page-number position and master
+  pages of the first document carry onto appended parts that have none; field/bookmark names can repeat.
+- Not yet opened in Hancom.
+- Strings English only. Figma card subtitles are placeholders ("Convert DOC to HWP" / "Print
+  document"); the app uses "Combine files into one" / "Extract pages to a new file".
+- Figma hint text says "Long press to short manually" — shipped as "sort".
+- The loading animation is the design's 150 px GIF; ask design for the source animation (the
+  "Loading LINK" note in Figma points to a Drive file) if it looks soft on 3x screens.

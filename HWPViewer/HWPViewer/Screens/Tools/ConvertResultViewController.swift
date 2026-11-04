@@ -3,6 +3,8 @@
 //  HWPViewer
 //
 //  G5: green check, "Convert HWP Successfully", Name / Size / Path card, Back Home / Open.
+//  Also the "Successful" screen of Merge / Split (Figma 6978:109412 / 6978:110855): same layout,
+//  their own title (18pt semibold) and ad place.
 //
 
 import UIKit
@@ -14,11 +16,18 @@ import SPNComponent
 final class ConvertResultViewController: AppBaseViewController {
     private let outputURL: URL
     private let size: Int64
+    private let titleText: String
+    private let titleFont: UIFont
+    private let place: SPNAdPlace
 
-    init(outputURL: URL, size: Int64) {
+    init(outputURL: URL, size: Int64, title: String = L10n.convertSuccessTitle,
+         titleFont: UIFont = AppFonts.bold(20), place: SPNAdPlace = .convert) {
         self.outputURL = outputURL
         self.size = size
-        super.init(place: .convert, navigationConfigs: SPNNavigationConfiguration(
+        self.titleText = title
+        self.titleFont = titleFont
+        self.place = place
+        super.init(place: place, navigationConfigs: SPNNavigationConfiguration(
             title: "", hasBackButton: true, backIcon: Asset.Assets.App.icEditorCloseX.image,
             tintColor: AppColors.textPrimary, backgroundColor: AppColors.background
         ))
@@ -42,8 +51,8 @@ final class ConvertResultViewController: AppBaseViewController {
 
         let check = SuccessBadgeView()
         let title = UILabel()
-        title.text = L10n.convertSuccessTitle
-        title.font = AppFonts.bold(20)
+        title.text = titleText
+        title.font = titleFont
         title.textColor = AppColors.textPrimary
         title.textAlignment = .center
 
@@ -113,7 +122,7 @@ final class ConvertResultViewController: AppBaseViewController {
         openButton.tapPublisher.receive(on: DispatchQueue.main)
             .sink { [weak self] _ in self?.openResult() }
             .store(in: &cancellables)
-        setupAdvertiser(on: .convert)
+        setupAdvertiser(on: place)
     }
 
     /// Nav X behaves like "Back Home": the convert flow is finished, go back to the file list.
@@ -143,10 +152,10 @@ final class ConvertResultViewController: AppBaseViewController {
         FileStore.shared.markOpened(item.url)
         let viewer = HwpViewerViewController(item: item, startInEditMode: false)
         var stack = navigationController?.viewControllers ?? []
-        // Drop the picker as well as this screen: the convert flow is done, so leaving the viewer
-        // (by Back or by deleting the file) should return to Tools, not back into "Select File"
-        // where the source PDF is still listed (ESI05-37 / ESI05-38).
-        stack.removeAll { $0 === self || $0 is SelectFileViewController }
+        // Drop the flow screens as well as this one: the convert / merge / split flow is done, so
+        // leaving the viewer (by Back or by deleting the file) should return to Tools, not back into
+        // "Select File" where the source is still listed (ESI05-37 / ESI05-38).
+        stack.removeAll { $0 === self || $0 is ToolFlowScreen }
         stack.append(viewer)
         navigationController?.setViewControllers(stack, animated: true)
     }

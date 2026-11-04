@@ -39,7 +39,8 @@ enum ToolKind: CaseIterable {
         case .pdfToHwp: return Asset.Assets.App.imgCardPdfToHwpBg.image
         case .docToHwp: return Asset.Assets.App.imgCardDocToHwpBg.image
         case .print: return Asset.Assets.App.imgCardPrintBg.image
-        case .mergeHwp, .splitHwp: return nil
+        case .mergeHwp: return Asset.Assets.App.imgCardMergeBg.image
+        case .splitHwp: return Asset.Assets.App.imgCardSplitBg.image
         }
     }
 
@@ -49,9 +50,8 @@ enum ToolKind: CaseIterable {
         case .pdfToHwp: return Asset.Assets.App.icCardPdfReader.image
         case .docToHwp: return Asset.Assets.App.icCardWordDoc.image
         case .print: return Asset.Assets.App.icCardPrint.image
-        // POC placeholders until the card artwork is exported from the design.
-        case .mergeHwp: return UIImage(systemName: "doc.on.doc.fill")?.withTintColor(.white, renderingMode: .alwaysOriginal)
-        case .splitHwp: return UIImage(systemName: "scissors")?.withTintColor(.white, renderingMode: .alwaysOriginal)
+        // Art baked into the card background (img_card_merge_bg / img_card_split_bg).
+        case .mergeHwp, .splitHwp: return nil
         }
     }
 

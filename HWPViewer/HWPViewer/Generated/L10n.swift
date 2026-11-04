@@ -148,48 +148,32 @@ internal enum L10n {
   internal static var mainTabSettings: String { return L10n.tr("Localizable", "MainTab.Settings", fallback: "Settings") }
   /// Tools
   internal static var mainTabTools: String { return L10n.tr("Localizable", "MainTab.Tools", fallback: "Tools") }
-  /// Merge %d files
+  /// Merge (%d)
   internal static func mergeAction(_ p1: Int) -> String {
-    return L10n.tr("Localizable", "Merge.Action", p1, fallback: "Merge %d files")
+    return L10n.tr("Localizable", "Merge.Action", p1, fallback: "Merge (%d)")
   }
   /// Add files
   internal static var mergeAddFiles: String { return L10n.tr("Localizable", "Merge.AddFiles", fallback: "Add files") }
-  /// Merged Successfully
-  internal static var mergeDone: String { return L10n.tr("Localizable", "Merge.Done", fallback: "Merged Successfully") }
-  /// %d files combined into one document
-  internal static func mergeDoneSubtitle(_ p1: Int) -> String {
-    return L10n.tr("Localizable", "Merge.DoneSubtitle", p1, fallback: "%d files combined into one document")
+  /// Continue (%d)
+  internal static func mergeContinue(_ p1: Int) -> String {
+    return L10n.tr("Localizable", "Merge.Continue", p1, fallback: "Continue (%d)")
   }
-  /// Drag to reorder
-  internal static var mergeDragHint: String { return L10n.tr("Localizable", "Merge.DragHint", fallback: "Drag to reorder") }
-  /// File name
-  internal static var mergeFileName: String { return L10n.tr("Localizable", "Merge.FileName", fallback: "File name") }
-  /// Each file starts on a new page. The originals are kept.
-  internal static var mergeNewPageNote: String { return L10n.tr("Localizable", "Merge.NewPageNote", fallback: "Each file starts on a new page. The originals are kept.") }
-  /// Next
-  internal static var mergeNext: String { return L10n.tr("Localizable", "Merge.Next", fallback: "Next") }
-  /// Order
-  internal static var mergeOrder: String { return L10n.tr("Localizable", "Merge.Order", fallback: "Order") }
-  /// Output
-  internal static var mergeOutput: String { return L10n.tr("Localizable", "Merge.Output", fallback: "Output") }
-  /// Merging files…
-  internal static var mergeProgress: String { return L10n.tr("Localizable", "Merge.Progress", fallback: "Merging files…") }
-  /// Adding %@ (%d of %d)
-  internal static func mergeProgressStep(_ p1: Any, _ p2: Int, _ p3: Int) -> String {
-    return L10n.tr("Localizable", "Merge.ProgressStep", String(describing: p1), p2, p3, fallback: "Adding %@ (%d of %d)")
-  }
-  /// %d files selected
-  internal static func mergeSelectedCount(_ p1: Int) -> String {
-    return L10n.tr("Localizable", "Merge.SelectedCount", p1, fallback: "%d files selected")
-  }
-  /// Choose 2 or more files. They are merged in the order you tap them.
-  internal static var mergeSelectHint: String { return L10n.tr("Localizable", "Merge.SelectHint", fallback: "Choose 2 or more files. They are merged in the order you tap them.") }
-  /// Step %d of 2
-  internal static func mergeStep(_ p1: Int) -> String {
-    return L10n.tr("Localizable", "Merge.Step", p1, fallback: "Step %d of 2")
-  }
-  /// Merge HWP
-  internal static var mergeTitle: String { return L10n.tr("Localizable", "Merge.Title", fallback: "Merge HWP") }
+  /// No files yet. Add file to merge
+  internal static var mergeEmpty: String { return L10n.tr("Localizable", "Merge.Empty", fallback: "No files yet. Add file to merge") }
+  /// Filename
+  internal static var mergeFileNameTitle: String { return L10n.tr("Localizable", "Merge.FileNameTitle", fallback: "Filename") }
+  /// Merge Files
+  internal static var mergeFilesTitle: String { return L10n.tr("Localizable", "Merge.FilesTitle", fallback: "Merge Files") }
+  /// Add at least 2 files to merge.
+  internal static var mergeNeedTwoFiles: String { return L10n.tr("Localizable", "Merge.NeedTwoFiles", fallback: "Add at least 2 files to merge.") }
+  /// Select Files
+  internal static var mergeSelectFiles: String { return L10n.tr("Localizable", "Merge.SelectFiles", fallback: "Select Files") }
+  /// Long press to sort manually
+  internal static var mergeSortHint: String { return L10n.tr("Localizable", "Merge.SortHint", fallback: "Long press to sort manually") }
+  /// Merge HWP Successfully
+  internal static var mergeSuccessTitle: String { return L10n.tr("Localizable", "Merge.SuccessTitle", fallback: "Merge HWP Successfully") }
+  /// Loading
+  internal static var mergeSplitLoading: String { return L10n.tr("Localizable", "MergeSplit.Loading", fallback: "Loading") }
   /// CONTINUE
   internal static var paywallContinue: String { return L10n.tr("Localizable", "Paywall.Continue", fallback: "CONTINUE") }
   /// Cancel anytime. Subscription auto-renews unless cancelled at least 24 hours before the end of the current period.
@@ -394,66 +378,18 @@ internal enum L10n {
   internal static var settingsPremiumTitle: String { return L10n.tr("Localizable", "Settings.Premium.Title", fallback: "Upgrade to Premium") }
   /// Check out HWP Viewer - the easiest way to open, edit and convert HWP files on iPhone!
   internal static var settingsShareMessage: String { return L10n.tr("Localizable", "Settings.Share.Message", fallback: "Check out HWP Viewer - the easiest way to open, edit and convert HWP files on iPhone!") }
-  /// Split into %d files
-  internal static func splitAction(_ p1: Int) -> String {
-    return L10n.tr("Localizable", "Split.Action", p1, fallback: "Split into %d files")
+  /// Page %d
+  internal static func splitPageA11y(_ p1: Int) -> String {
+    return L10n.tr("Localizable", "Split.PageA11y", p1, fallback: "Page %d")
   }
-  /// Add range
-  internal static var splitAddRange: String { return L10n.tr("Localizable", "Split.AddRange", fallback: "Add range") }
-  /// Split into %d files
-  internal static func splitDone(_ p1: Int) -> String {
-    return L10n.tr("Localizable", "Split.Done", p1, fallback: "Split into %d files")
+  /// Selected (%d)
+  internal static func splitSelected(_ p1: Int) -> String {
+    return L10n.tr("Localizable", "Split.Selected", p1, fallback: "Selected (%d)")
   }
-  /// From %@ • saved in My Files
-  internal static func splitDoneSubtitle(_ p1: Any) -> String {
-    return L10n.tr("Localizable", "Split.DoneSubtitle", String(describing: p1), fallback: "From %@ • saved in My Files")
-  }
-  /// Pages per file: %d
-  internal static func splitEveryLabel(_ p1: Int) -> String {
-    return L10n.tr("Localizable", "Split.EveryLabel", p1, fallback: "Pages per file: %d")
-  }
-  /// Extract %d pages
-  internal static func splitExtractAction(_ p1: Int) -> String {
-    return L10n.tr("Localizable", "Split.ExtractAction", p1, fallback: "Extract %d pages")
-  }
-  /// Check the page numbers: each part needs a first page ≤ last page within the document.
-  internal static var splitInvalidRange: String { return L10n.tr("Localizable", "Split.InvalidRange", fallback: "Check the page numbers: each part needs a first page ≤ last page within the document.") }
-  /// Every N
-  internal static var splitModeEvery: String { return L10n.tr("Localizable", "Split.ModeEvery", fallback: "Every N") }
-  /// Pick pages
-  internal static var splitModePick: String { return L10n.tr("Localizable", "Split.ModePick", fallback: "Pick pages") }
-  /// Page ranges
-  internal static var splitModeRanges: String { return L10n.tr("Localizable", "Split.ModeRanges", fallback: "Page ranges") }
-  /// One file per page
-  internal static var splitOnePerPage: String { return L10n.tr("Localizable", "Split.OnePerPage", fallback: "One file per page") }
-  /// Off: the picked pages go into one file
-  internal static var splitOnePerPageHint: String { return L10n.tr("Localizable", "Split.OnePerPageHint", fallback: "Off: the picked pages go into one file") }
-  /// %d pages selected
-  internal static func splitPagesSelected(_ p1: Int) -> String {
-    return L10n.tr("Localizable", "Split.PagesSelected", p1, fallback: "%d pages selected")
-  }
-  /// Pages are cut between paragraphs, so a part can end up a page longer or shorter.
-  internal static var splitParagraphNote: String { return L10n.tr("Localizable", "Split.ParagraphNote", fallback: "Pages are cut between paragraphs, so a part can end up a page longer or shorter.") }
-  /// Part %d
-  internal static func splitPart(_ p1: Int) -> String {
-    return L10n.tr("Localizable", "Split.Part", p1, fallback: "Part %d")
-  }
-  /// Pages %@ • %@
-  internal static func splitPartMeta(_ p1: Any, _ p2: Any) -> String {
-    return L10n.tr("Localizable", "Split.PartMeta", String(describing: p1), String(describing: p2), fallback: "Pages %@ • %@")
-  }
-  /// Parts
-  internal static var splitParts: String { return L10n.tr("Localizable", "Split.Parts", fallback: "Parts") }
-  /// Tap the pages to keep
-  internal static var splitPickHint: String { return L10n.tr("Localizable", "Split.PickHint", fallback: "Tap the pages to keep") }
-  /// Splitting file…
-  internal static var splitProgress: String { return L10n.tr("Localizable", "Split.Progress", fallback: "Splitting file…") }
-  /// Saving part %d of %d
-  internal static func splitProgressStep(_ p1: Int, _ p2: Int) -> String {
-    return L10n.tr("Localizable", "Split.ProgressStep", p1, p2, fallback: "Saving part %d of %d")
-  }
-  /// Split HWP
-  internal static var splitTitle: String { return L10n.tr("Localizable", "Split.Title", fallback: "Split HWP") }
+  /// Select a file
+  internal static var splitSelectFile: String { return L10n.tr("Localizable", "Split.SelectFile", fallback: "Select a file") }
+  /// Split HWP Successfully
+  internal static var splitSuccessTitle: String { return L10n.tr("Localizable", "Split.SuccessTitle", fallback: "Split HWP Successfully") }
   /// Added to Bookmark
   internal static var toastBookmarkAdded: String { return L10n.tr("Localizable", "Toast.BookmarkAdded", fallback: "Added to Bookmark") }
   /// Removed from Bookmark
@@ -486,16 +422,16 @@ internal enum L10n {
   internal static var toolbarUndo: String { return L10n.tr("Localizable", "Toolbar.Undo", fallback: "Undo") }
   /// Import from Files
   internal static var toolsImportFromFiles: String { return L10n.tr("Localizable", "Tools.ImportFromFiles", fallback: "Import from Files") }
-  /// Merge HWP
-  internal static var toolsMergeHwp: String { return L10n.tr("Localizable", "Tools.MergeHwp", fallback: "Merge HWP") }
+  /// Merge
+  internal static var toolsMergeHwp: String { return L10n.tr("Localizable", "Tools.MergeHwp", fallback: "Merge") }
   /// Combine files into one
   internal static var toolsMergeHwpSubtitle: String { return L10n.tr("Localizable", "Tools.MergeHwpSubtitle", fallback: "Combine files into one") }
   /// Select File
   internal static var toolsSelectFile: String { return L10n.tr("Localizable", "Tools.SelectFile", fallback: "Select File") }
-  /// Split HWP
-  internal static var toolsSplitHwp: String { return L10n.tr("Localizable", "Tools.SplitHwp", fallback: "Split HWP") }
-  /// Extract pages into files
-  internal static var toolsSplitHwpSubtitle: String { return L10n.tr("Localizable", "Tools.SplitHwpSubtitle", fallback: "Extract pages into files") }
+  /// Split
+  internal static var toolsSplitHwp: String { return L10n.tr("Localizable", "Tools.SplitHwp", fallback: "Split") }
+  /// Extract pages to a new file
+  internal static var toolsSplitHwpSubtitle: String { return L10n.tr("Localizable", "Tools.SplitHwpSubtitle", fallback: "Extract pages to a new file") }
   /// Tools
   internal static var toolsTitle: String { return L10n.tr("Localizable", "Tools.Title", fallback: "Tools") }
   /// No files found. Import a file to get started.
