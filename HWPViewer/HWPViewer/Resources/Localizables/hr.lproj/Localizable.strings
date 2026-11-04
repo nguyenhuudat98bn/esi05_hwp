@@ -208,3 +208,24 @@
 "Home.Card.Print.Subtitle" = "Ispis dokumenta";
 "Home.Header.Hwp" = "HWP";
 "Home.Header.Editor" = " Editor";
+
+/* Merge / Split HWP */
+"Tools.MergeHwp" = "Spoji";
+"Tools.MergeHwpSubtitle" = "Spojite datoteke u jednu";
+"Tools.SplitHwp" = "Podijeli";
+"Tools.SplitHwpSubtitle" = "Stranice u novu datoteku";
+"Merge.SelectFiles" = "Odaberi datoteke";
+"Merge.Continue" = "Nastavi (%d)";
+"Merge.FilesTitle" = "Spajanje datoteka";
+"Merge.SortHint" = "Dugo pritisnite za ručno razvrstavanje";
+"Merge.Action" = "Spoji (%d)";
+"Merge.AddFiles" = "Dodaj datoteke";
+"Merge.Empty" = "Još nema datoteka. Dodajte datoteku za spajanje";
+"Merge.NeedTwoFiles" = "Dodajte barem 2 datoteke za spajanje.";
+"Merge.SuccessTitle" = "HWP uspješno spojen";
+"MergeSplit.Loading" = "Učitavanje";
+"Split.Selected" = "Odabrano (%d)";
+"Split.PageA11y" = "Stranica %d";
+"Split.SuccessTitle" = "HWP uspješno podijeljen";
+"Merge.FileNameTitle" = "Naziv datoteke";
+"Split.SelectFile" = "Odaberi datoteku";

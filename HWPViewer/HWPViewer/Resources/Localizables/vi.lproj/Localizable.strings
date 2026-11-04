@@ -208,3 +208,24 @@
 "Home.Card.Print.Subtitle" = "In tài liệu";
 "Home.Header.Hwp" = "HWP";
 "Home.Header.Editor" = " Editor";
+
+/* Merge / Split HWP */
+"Tools.MergeHwp" = "Gộp";
+"Tools.MergeHwpSubtitle" = "Gộp nhiều tệp thành một";
+"Tools.SplitHwp" = "Tách";
+"Tools.SplitHwpSubtitle" = "Tách trang ra tệp mới";
+"Merge.SelectFiles" = "Chọn tệp";
+"Merge.Continue" = "Tiếp tục (%d)";
+"Merge.FilesTitle" = "Gộp tệp";
+"Merge.SortHint" = "Nhấn giữ để sắp xếp thủ công";
+"Merge.Action" = "Gộp (%d)";
+"Merge.AddFiles" = "Thêm tệp";
+"Merge.Empty" = "Chưa có tệp nào. Thêm tệp để gộp";
+"Merge.NeedTwoFiles" = "Thêm ít nhất 2 tệp để gộp.";
+"Merge.SuccessTitle" = "Gộp HWP thành công";
+"MergeSplit.Loading" = "Đang tải";
+"Split.Selected" = "Đã chọn (%d)";
+"Split.PageA11y" = "Trang %d";
+"Split.SuccessTitle" = "Tách HWP thành công";
+"Merge.FileNameTitle" = "Tên tệp";
+"Split.SelectFile" = "Chọn tệp";

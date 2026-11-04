@@ -208,3 +208,24 @@
 "Home.Card.Print.Subtitle" = "文書を印刷";
 "Home.Header.Hwp" = "HWP";
 "Home.Header.Editor" = " Editor";
+
+/* Merge / Split HWP */
+"Tools.MergeHwp" = "結合";
+"Tools.MergeHwpSubtitle" = "複数のファイルを1つに";
+"Tools.SplitHwp" = "分割";
+"Tools.SplitHwpSubtitle" = "ページを新しいファイルに抽出";
+"Merge.SelectFiles" = "ファイルを選択";
+"Merge.Continue" = "続ける (%d)";
+"Merge.FilesTitle" = "ファイルを結合";
+"Merge.SortHint" = "長押しで並べ替え";
+"Merge.Action" = "結合 (%d)";
+"Merge.AddFiles" = "ファイルを追加";
+"Merge.Empty" = "ファイルがありません。結合するファイルを追加してください";
+"Merge.NeedTwoFiles" = "結合するには2つ以上のファイルを追加してください。";
+"Merge.SuccessTitle" = "HWPの結合が完了しました";
+"MergeSplit.Loading" = "読み込み中";
+"Split.Selected" = "選択中 (%d)";
+"Split.PageA11y" = "%dページ";
+"Split.SuccessTitle" = "HWPの分割が完了しました";
+"Merge.FileNameTitle" = "ファイル名";
+"Split.SelectFile" = "ファイルを選択";

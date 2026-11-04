@@ -208,3 +208,24 @@
 "Home.Card.Print.Subtitle" = "Vytisknout dokument";
 "Home.Header.Hwp" = "HWP";
 "Home.Header.Editor" = " Editor";
+
+/* Merge / Split HWP */
+"Tools.MergeHwp" = "Sloučit";
+"Tools.MergeHwpSubtitle" = "Spojte soubory do jednoho";
+"Tools.SplitHwp" = "Rozdělit";
+"Tools.SplitHwpSubtitle" = "Stránky do nového souboru";
+"Merge.SelectFiles" = "Vybrat soubory";
+"Merge.Continue" = "Pokračovat (%d)";
+"Merge.FilesTitle" = "Sloučit soubory";
+"Merge.SortHint" = "Dlouhým stisknutím změníte pořadí";
+"Merge.Action" = "Sloučit (%d)";
+"Merge.AddFiles" = "Přidat soubory";
+"Merge.Empty" = "Zatím žádné soubory. Přidejte soubor ke sloučení";
+"Merge.NeedTwoFiles" = "Ke sloučení přidejte alespoň 2 soubory.";
+"Merge.SuccessTitle" = "HWP úspěšně sloučeno";
+"MergeSplit.Loading" = "Načítání";
+"Split.Selected" = "Vybráno (%d)";
+"Split.PageA11y" = "Stránka %d";
+"Split.SuccessTitle" = "HWP úspěšně rozděleno";
+"Merge.FileNameTitle" = "Název souboru";
+"Split.SelectFile" = "Vybrat soubor";

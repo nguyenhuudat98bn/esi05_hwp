@@ -208,3 +208,24 @@
 "Home.Card.Print.Subtitle" = "Tulosta asiakirja";
 "Home.Header.Hwp" = "HWP";
 "Home.Header.Editor" = " Editor";
+
+/* Merge / Split HWP */
+"Tools.MergeHwp" = "Yhdistä";
+"Tools.MergeHwpSubtitle" = "Yhdistä tiedostot yhdeksi";
+"Tools.SplitHwp" = "Jaa";
+"Tools.SplitHwpSubtitle" = "Sivut uuteen tiedostoon";
+"Merge.SelectFiles" = "Valitse tiedostot";
+"Merge.Continue" = "Jatka (%d)";
+"Merge.FilesTitle" = "Yhdistä tiedostot";
+"Merge.SortHint" = "Järjestä käsin painamalla pitkään";
+"Merge.Action" = "Yhdistä (%d)";
+"Merge.AddFiles" = "Lisää tiedostoja";
+"Merge.Empty" = "Ei vielä tiedostoja. Lisää yhdistettävä tiedosto";
+"Merge.NeedTwoFiles" = "Lisää vähintään 2 tiedostoa yhdistettäväksi.";
+"Merge.SuccessTitle" = "HWP yhdistetty";
+"MergeSplit.Loading" = "Ladataan";
+"Split.Selected" = "Valittu (%d)";
+"Split.PageA11y" = "Sivu %d";
+"Split.SuccessTitle" = "HWP jaettu";
+"Merge.FileNameTitle" = "Tiedostonimi";
+"Split.SelectFile" = "Valitse tiedosto";

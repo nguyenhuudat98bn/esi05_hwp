@@ -208,3 +208,24 @@
 "Home.Card.Print.Subtitle" = "Εκτύπωση εγγράφου";
 "Home.Header.Hwp" = "HWP";
 "Home.Header.Editor" = " Editor";
+
+/* Merge / Split HWP */
+"Tools.MergeHwp" = "Συγχώνευση";
+"Tools.MergeHwpSubtitle" = "Ενώστε αρχεία σε ένα";
+"Tools.SplitHwp" = "Διαχωρισμός";
+"Tools.SplitHwpSubtitle" = "Σελίδες σε νέο αρχείο";
+"Merge.SelectFiles" = "Επιλογή αρχείων";
+"Merge.Continue" = "Συνέχεια (%d)";
+"Merge.FilesTitle" = "Συγχώνευση αρχείων";
+"Merge.SortHint" = "Πατήστε παρατεταμένα για χειροκίνητη ταξινόμηση";
+"Merge.Action" = "Συγχώνευση (%d)";
+"Merge.AddFiles" = "Προσθήκη αρχείων";
+"Merge.Empty" = "Δεν υπάρχουν αρχεία ακόμα. Προσθέστε αρχείο για συγχώνευση";
+"Merge.NeedTwoFiles" = "Προσθέστε τουλάχιστον 2 αρχεία για συγχώνευση.";
+"Merge.SuccessTitle" = "Η συγχώνευση HWP ολοκληρώθηκε";
+"MergeSplit.Loading" = "Φόρτωση";
+"Split.Selected" = "Επιλεγμένες (%d)";
+"Split.PageA11y" = "Σελίδα %d";
+"Split.SuccessTitle" = "Ο διαχωρισμός HWP ολοκληρώθηκε";
+"Merge.FileNameTitle" = "Όνομα αρχείου";
+"Split.SelectFile" = "Επιλογή αρχείου";

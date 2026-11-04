@@ -208,3 +208,24 @@
 "Home.Card.Print.Subtitle" = "Dokumentum nyomtatása";
 "Home.Header.Hwp" = "HWP";
 "Home.Header.Editor" = " Editor";
+
+/* Merge / Split HWP */
+"Tools.MergeHwp" = "Egyesítés";
+"Tools.MergeHwpSubtitle" = "Fájlok egyesítése egybe";
+"Tools.SplitHwp" = "Felosztás";
+"Tools.SplitHwpSubtitle" = "Oldalak kinyerése új fájlba";
+"Merge.SelectFiles" = "Fájlok kiválasztása";
+"Merge.Continue" = "Tovább (%d)";
+"Merge.FilesTitle" = "Fájlok egyesítése";
+"Merge.SortHint" = "Hosszan nyomva kézzel rendezhet";
+"Merge.Action" = "Egyesítés (%d)";
+"Merge.AddFiles" = "Fájlok hozzáadása";
+"Merge.Empty" = "Még nincsenek fájlok. Adjon hozzá egyesítendő fájlt";
+"Merge.NeedTwoFiles" = "Az egyesítéshez legalább 2 fájl kell.";
+"Merge.SuccessTitle" = "HWP sikeresen egyesítve";
+"MergeSplit.Loading" = "Betöltés";
+"Split.Selected" = "Kijelölve (%d)";
+"Split.PageA11y" = "%d. oldal";
+"Split.SuccessTitle" = "HWP sikeresen felosztva";
+"Merge.FileNameTitle" = "Fájlnév";
+"Split.SelectFile" = "Fájl kiválasztása";

@@ -208,3 +208,24 @@
 "Home.Card.Print.Subtitle" = "Udskriv dokumentet";
 "Home.Header.Hwp" = "HWP";
 "Home.Header.Editor" = " Editor";
+
+/* Merge / Split HWP */
+"Tools.MergeHwp" = "Flet";
+"Tools.MergeHwpSubtitle" = "Saml filer i én fil";
+"Tools.SplitHwp" = "Opdel";
+"Tools.SplitHwpSubtitle" = "Udtræk sider til en ny fil";
+"Merge.SelectFiles" = "Vælg filer";
+"Merge.Continue" = "Fortsæt (%d)";
+"Merge.FilesTitle" = "Flet filer";
+"Merge.SortHint" = "Tryk længe for at sortere manuelt";
+"Merge.Action" = "Flet (%d)";
+"Merge.AddFiles" = "Tilføj filer";
+"Merge.Empty" = "Ingen filer endnu. Tilføj en fil for at flette";
+"Merge.NeedTwoFiles" = "Tilføj mindst 2 filer for at flette.";
+"Merge.SuccessTitle" = "HWP er flettet";
+"MergeSplit.Loading" = "Indlæser";
+"Split.Selected" = "Valgt (%d)";
+"Split.PageA11y" = "Side %d";
+"Split.SuccessTitle" = "HWP er opdelt";
+"Merge.FileNameTitle" = "Filnavn";
+"Split.SelectFile" = "Vælg fil";

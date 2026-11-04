@@ -26,7 +26,6 @@ internal typealias AssetImageTypeAlias = ImageAsset.Image
 internal enum Asset {
   internal enum Assets {
     internal enum App {
-      internal static let animLoadingArc = DataAsset(name: "App/anim_loading_arc")
       internal static let icAngleLeft = ImageAsset(name: "App/ic_angle_left")
       internal static let icArrowFilledRight = ImageAsset(name: "App/ic_arrow_filled_right")
       internal static let icArrowRightOutline = ImageAsset(name: "App/ic_arrow_right_outline")
@@ -273,30 +272,6 @@ internal extension SwiftUI.Color {
   }
 }
 #endif
-
-internal struct DataAsset {
-  internal fileprivate(set) var name: String
-
-  @available(iOS 9.0, tvOS 9.0, watchOS 6.0, macOS 10.11, *)
-  internal var data: NSDataAsset {
-    guard let data = NSDataAsset(asset: self) else {
-      fatalError("Unable to load data asset named \(name).")
-    }
-    return data
-  }
-}
-
-@available(iOS 9.0, tvOS 9.0, watchOS 6.0, macOS 10.11, *)
-internal extension NSDataAsset {
-  convenience init?(asset: DataAsset) {
-    let bundle = BundleToken.bundle
-    #if os(iOS) || os(tvOS) || os(watchOS)
-    self.init(name: asset.name, bundle: bundle)
-    #elseif os(macOS)
-    self.init(name: NSDataAsset.Name(asset.name), bundle: bundle)
-    #endif
-  }
-}
 
 internal struct ImageAsset {
   internal fileprivate(set) var name: String

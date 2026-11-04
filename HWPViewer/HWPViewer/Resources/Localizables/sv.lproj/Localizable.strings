@@ -208,3 +208,24 @@
 "Home.Card.Print.Subtitle" = "Skriv ut dokumentet";
 "Home.Header.Hwp" = "HWP";
 "Home.Header.Editor" = " Editor";
+
+/* Merge / Split HWP */
+"Tools.MergeHwp" = "Slå ihop";
+"Tools.MergeHwpSubtitle" = "Slå ihop filer till en";
+"Tools.SplitHwp" = "Dela";
+"Tools.SplitHwpSubtitle" = "Extrahera sidor till en ny fil";
+"Merge.SelectFiles" = "Välj filer";
+"Merge.Continue" = "Fortsätt (%d)";
+"Merge.FilesTitle" = "Slå ihop filer";
+"Merge.SortHint" = "Tryck länge för att sortera manuellt";
+"Merge.Action" = "Slå ihop (%d)";
+"Merge.AddFiles" = "Lägg till filer";
+"Merge.Empty" = "Inga filer än. Lägg till en fil att slå ihop";
+"Merge.NeedTwoFiles" = "Lägg till minst 2 filer att slå ihop.";
+"Merge.SuccessTitle" = "HWP har slagits ihop";
+"MergeSplit.Loading" = "Läser in";
+"Split.Selected" = "Valda (%d)";
+"Split.PageA11y" = "Sida %d";
+"Split.SuccessTitle" = "HWP har delats";
+"Merge.FileNameTitle" = "Filnamn";
+"Split.SelectFile" = "Välj fil";

@@ -208,3 +208,24 @@
 "Home.Card.Print.Subtitle" = "Печать документа";
 "Home.Header.Hwp" = "HWP";
 "Home.Header.Editor" = " Editor";
+
+/* Merge / Split HWP */
+"Tools.MergeHwp" = "Объединить";
+"Tools.MergeHwpSubtitle" = "Объедините файлы в один";
+"Tools.SplitHwp" = "Разделить";
+"Tools.SplitHwpSubtitle" = "Страницы в новый файл";
+"Merge.SelectFiles" = "Выбрать файлы";
+"Merge.Continue" = "Продолжить (%d)";
+"Merge.FilesTitle" = "Объединение файлов";
+"Merge.SortHint" = "Удерживайте, чтобы изменить порядок";
+"Merge.Action" = "Объединить (%d)";
+"Merge.AddFiles" = "Добавить файлы";
+"Merge.Empty" = "Файлов пока нет. Добавьте файл для объединения";
+"Merge.NeedTwoFiles" = "Добавьте хотя бы 2 файла для объединения.";
+"Merge.SuccessTitle" = "HWP успешно объединён";
+"MergeSplit.Loading" = "Загрузка";
+"Split.Selected" = "Выбрано (%d)";
+"Split.PageA11y" = "Страница %d";
+"Split.SuccessTitle" = "HWP успешно разделён";
+"Merge.FileNameTitle" = "Имя файла";
+"Split.SelectFile" = "Выбрать файл";

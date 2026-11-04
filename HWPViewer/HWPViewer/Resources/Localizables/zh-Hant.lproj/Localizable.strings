@@ -208,3 +208,24 @@
 "Home.Card.Print.Subtitle" = "列印文件";
 "Home.Header.Hwp" = "HWP";
 "Home.Header.Editor" = " Editor";
+
+/* Merge / Split HWP */
+"Tools.MergeHwp" = "合併";
+"Tools.MergeHwpSubtitle" = "將多個檔案合併為一個";
+"Tools.SplitHwp" = "分割";
+"Tools.SplitHwpSubtitle" = "將頁面擷取為新檔案";
+"Merge.SelectFiles" = "選擇檔案";
+"Merge.Continue" = "繼續 (%d)";
+"Merge.FilesTitle" = "合併檔案";
+"Merge.SortHint" = "長按可手動排序";
+"Merge.Action" = "合併 (%d)";
+"Merge.AddFiles" = "新增檔案";
+"Merge.Empty" = "還沒有檔案。新增要合併的檔案";
+"Merge.NeedTwoFiles" = "請至少新增 2 個檔案進行合併。";
+"Merge.SuccessTitle" = "HWP 合併成功";
+"MergeSplit.Loading" = "載入中";
+"Split.Selected" = "已選 (%d)";
+"Split.PageA11y" = "第 %d 頁";
+"Split.SuccessTitle" = "HWP 分割成功";
+"Merge.FileNameTitle" = "檔案名稱";
+"Split.SelectFile" = "選擇檔案";

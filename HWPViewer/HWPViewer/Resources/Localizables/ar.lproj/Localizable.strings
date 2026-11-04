@@ -208,3 +208,24 @@
 "Home.Card.Print.Subtitle" = "طباعة المستند";
 "Home.Header.Hwp" = "HWP";
 "Home.Header.Editor" = " Editor";
+
+/* Merge / Split HWP */
+"Tools.MergeHwp" = "دمج";
+"Tools.MergeHwpSubtitle" = "دمج الملفات في ملف واحد";
+"Tools.SplitHwp" = "تقسيم";
+"Tools.SplitHwpSubtitle" = "استخراج الصفحات إلى ملف جديد";
+"Merge.SelectFiles" = "اختيار الملفات";
+"Merge.Continue" = "متابعة (%d)";
+"Merge.FilesTitle" = "دمج الملفات";
+"Merge.SortHint" = "اضغط مطولاً لإعادة الترتيب يدويًا";
+"Merge.Action" = "دمج (%d)";
+"Merge.AddFiles" = "إضافة ملفات";
+"Merge.Empty" = "لا توجد ملفات بعد. أضف ملفًا لدمجه";
+"Merge.NeedTwoFiles" = "أضف ملفين على الأقل للدمج.";
+"Merge.SuccessTitle" = "تم دمج HWP بنجاح";
+"MergeSplit.Loading" = "جارٍ التحميل";
+"Split.Selected" = "المحدد (%d)";
+"Split.PageA11y" = "الصفحة %d";
+"Split.SuccessTitle" = "تم تقسيم HWP بنجاح";
+"Merge.FileNameTitle" = "اسم الملف";
+"Split.SelectFile" = "اختيار ملف";

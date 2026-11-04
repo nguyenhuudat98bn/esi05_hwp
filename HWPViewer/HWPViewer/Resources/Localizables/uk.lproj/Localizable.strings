@@ -209,3 +209,24 @@
 "Home.Header.Hwp" = "HWP";
 "Home.Header.Editor" = " Editor";
   
+
+/* Merge / Split HWP */
+"Tools.MergeHwp" = "Об'єднати";
+"Tools.MergeHwpSubtitle" = "Об'єднайте файли в один";
+"Tools.SplitHwp" = "Розділити";
+"Tools.SplitHwpSubtitle" = "Сторінки в новий файл";
+"Merge.SelectFiles" = "Вибрати файли";
+"Merge.Continue" = "Продовжити (%d)";
+"Merge.FilesTitle" = "Об'єднання файлів";
+"Merge.SortHint" = "Утримуйте, щоб змінити порядок";
+"Merge.Action" = "Об'єднати (%d)";
+"Merge.AddFiles" = "Додати файли";
+"Merge.Empty" = "Файлів поки немає. Додайте файл для об'єднання";
+"Merge.NeedTwoFiles" = "Додайте щонайменше 2 файли для об'єднання.";
+"Merge.SuccessTitle" = "HWP успішно об'єднано";
+"MergeSplit.Loading" = "Завантаження";
+"Split.Selected" = "Вибрано (%d)";
+"Split.PageA11y" = "Сторінка %d";
+"Split.SuccessTitle" = "HWP успішно розділено";
+"Merge.FileNameTitle" = "Ім'я файлу";
+"Split.SelectFile" = "Вибрати файл";

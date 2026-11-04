@@ -31,7 +31,7 @@ flowchart LR
 | `Screens/MergeSplit/HwpFilePickerViewController.swift` | Select Files (multi, tap order) / Select a file (single), search |
 | `Screens/MergeSplit/MergeFilesViewController.swift` | merge list: drag reorder, delete, add, empty state, name → merge |
 | `Screens/MergeSplit/SplitPagesViewController.swift`, `SplitPageCell.swift` | page grid with thumbnails, select all, name → extract |
-| `Screens/MergeSplit/LoadingOverlayViewController.swift` | dim + design spinner GIF (`anim_loading_arc` data asset) while the engine works |
+| `Screens/MergeSplit/LoadingOverlayViewController.swift` | dim + the shared loading Lottie (`converting_loading.json`) while the engine works |
 | `Screens/MergeSplit/HwpFileRowCell.swift`, `MergeSplitUIKit.swift` | file row (checkbox / trash), search pill, primary button, bottom bar, select-all |
 | `Screens/Tools/ConvertResultViewController.swift` | shared success screen (`title`, `place`); drops `ToolFlowScreen`s from the stack on Open |
 | `Services/HwpMergeSplitService.swift` | `merge(_:outputName:)`, `extract(_:pages:outputName:)` |
@@ -39,7 +39,7 @@ flowchart LR
 
 Assets (from Figma, `Assets.xcassets/App`): `img_card_merge_bg`, `img_card_split_bg`,
 `ic_checkbox_off/on`, `ic_select_all_off/on`, `ic_trash_red`, `ic_sort_hint`, `ic_fab_add`,
-`ic_page_check_off/on`, `img_empty_merge_files`, `anim_loading_arc` (GIF).
+`ic_page_check_off/on`, `img_empty_merge_files`.
 
 ## Engine (HwpEditorKit, local)
 
@@ -57,8 +57,7 @@ remote `exactVersion 1.11.3` — switch back before any release build.
 - Merge: list numbering restarts per source; page numbers continue; page-number position and master
   pages of the first document carry onto appended parts that have none; field/bookmark names can repeat.
 - Not yet opened in Hancom.
-- Strings English only. Figma card subtitles are placeholders ("Convert DOC to HWP" / "Print
+- Strings translated into all 32 app languages. Figma card subtitles are placeholders ("Convert DOC to HWP" / "Print
   document"); the app uses "Combine files into one" / "Extract pages to a new file".
 - Figma hint text says "Long press to short manually" — shipped as "sort".
-- The loading animation is the design's 150 px GIF; ask design for the source animation (the
-  "Loading LINK" note in Figma points to a Drive file) if it looks soft on 3x screens.
+- Loading uses the project's shared Lottie spinner instead of the Figma GIF ("loading (4)").

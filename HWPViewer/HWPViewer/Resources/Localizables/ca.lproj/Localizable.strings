@@ -208,3 +208,24 @@
 "Home.Card.Print.Subtitle" = "Imprimeix el document";
 "Home.Header.Hwp" = "HWP";
 "Home.Header.Editor" = " Editor";
+
+/* Merge / Split HWP */
+"Tools.MergeHwp" = "Combinar";
+"Tools.MergeHwpSubtitle" = "Uneix fitxers en un de sol";
+"Tools.SplitHwp" = "Dividir";
+"Tools.SplitHwpSubtitle" = "Pàgines a un fitxer nou";
+"Merge.SelectFiles" = "Tria fitxers";
+"Merge.Continue" = "Continua (%d)";
+"Merge.FilesTitle" = "Combinar fitxers";
+"Merge.SortHint" = "Mantén premut per ordenar manualment";
+"Merge.Action" = "Combina (%d)";
+"Merge.AddFiles" = "Afegeix fitxers";
+"Merge.Empty" = "Encara no hi ha fitxers. Afegeix-ne per combinar";
+"Merge.NeedTwoFiles" = "Afegeix almenys 2 fitxers per combinar.";
+"Merge.SuccessTitle" = "HWP combinat correctament";
+"MergeSplit.Loading" = "S'està carregant";
+"Split.Selected" = "Seleccionades (%d)";
+"Split.PageA11y" = "Pàgina %d";
+"Split.SuccessTitle" = "HWP dividit correctament";
+"Merge.FileNameTitle" = "Nom del fitxer";
+"Split.SelectFile" = "Tria un fitxer";

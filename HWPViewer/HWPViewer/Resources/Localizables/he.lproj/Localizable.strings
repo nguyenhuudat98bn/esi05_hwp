@@ -208,3 +208,24 @@
 "Home.Card.Print.Subtitle" = "הדפסת המסמך";
 "Home.Header.Hwp" = "HWP";
 "Home.Header.Editor" = " Editor";
+
+/* Merge / Split HWP */
+"Tools.MergeHwp" = "מיזוג";
+"Tools.MergeHwpSubtitle" = "איחוד קבצים לקובץ אחד";
+"Tools.SplitHwp" = "פיצול";
+"Tools.SplitHwpSubtitle" = "חילוץ עמודים לקובץ חדש";
+"Merge.SelectFiles" = "בחירת קבצים";
+"Merge.Continue" = "המשך (%d)";
+"Merge.FilesTitle" = "מיזוג קבצים";
+"Merge.SortHint" = "לחיצה ארוכה למיון ידני";
+"Merge.Action" = "מיזוג (%d)";
+"Merge.AddFiles" = "הוספת קבצים";
+"Merge.Empty" = "אין קבצים עדיין. הוסיפו קובץ למיזוג";
+"Merge.NeedTwoFiles" = "יש להוסיף לפחות 2 קבצים למיזוג.";
+"Merge.SuccessTitle" = "מיזוג HWP הושלם";
+"MergeSplit.Loading" = "טוען";
+"Split.Selected" = "נבחרו (%d)";
+"Split.PageA11y" = "עמוד %d";
+"Split.SuccessTitle" = "פיצול HWP הושלם";
+"Merge.FileNameTitle" = "שם הקובץ";
+"Split.SelectFile" = "בחירת קובץ";

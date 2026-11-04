@@ -208,3 +208,24 @@
 "Home.Card.Print.Subtitle" = "Belgeyi yazdır";
 "Home.Header.Hwp" = "HWP";
 "Home.Header.Editor" = " Editor";
+
+/* Merge / Split HWP */
+"Tools.MergeHwp" = "Birleştir";
+"Tools.MergeHwpSubtitle" = "Dosyaları tek dosyada topla";
+"Tools.SplitHwp" = "Böl";
+"Tools.SplitHwpSubtitle" = "Sayfaları yeni dosyaya çıkar";
+"Merge.SelectFiles" = "Dosyaları seç";
+"Merge.Continue" = "Devam (%d)";
+"Merge.FilesTitle" = "Dosyaları Birleştir";
+"Merge.SortHint" = "Sıralamak için basılı tutun";
+"Merge.Action" = "Birleştir (%d)";
+"Merge.AddFiles" = "Dosya ekle";
+"Merge.Empty" = "Henüz dosya yok. Birleştirmek için dosya ekleyin";
+"Merge.NeedTwoFiles" = "Birleştirmek için en az 2 dosya ekleyin.";
+"Merge.SuccessTitle" = "HWP başarıyla birleştirildi";
+"MergeSplit.Loading" = "Yükleniyor";
+"Split.Selected" = "Seçilen (%d)";
+"Split.PageA11y" = "Sayfa %d";
+"Split.SuccessTitle" = "HWP başarıyla bölündü";
+"Merge.FileNameTitle" = "Dosya adı";
+"Split.SelectFile" = "Dosya seç";

@@ -208,3 +208,24 @@
 "Home.Card.Print.Subtitle" = "Cetak dokumen";
 "Home.Header.Hwp" = "HWP";
 "Home.Header.Editor" = " Editor";
+
+/* Merge / Split HWP */
+"Tools.MergeHwp" = "Gabung";
+"Tools.MergeHwpSubtitle" = "Gabung file jadi satu";
+"Tools.SplitHwp" = "Pisah";
+"Tools.SplitHwpSubtitle" = "Ambil halaman ke file baru";
+"Merge.SelectFiles" = "Pilih file";
+"Merge.Continue" = "Lanjutkan (%d)";
+"Merge.FilesTitle" = "Gabungkan File";
+"Merge.SortHint" = "Tekan lama untuk mengurutkan manual";
+"Merge.Action" = "Gabung (%d)";
+"Merge.AddFiles" = "Tambah file";
+"Merge.Empty" = "Belum ada file. Tambahkan file untuk digabung";
+"Merge.NeedTwoFiles" = "Tambahkan minimal 2 file untuk digabung.";
+"Merge.SuccessTitle" = "HWP berhasil digabung";
+"MergeSplit.Loading" = "Memuat";
+"Split.Selected" = "Dipilih (%d)";
+"Split.PageA11y" = "Halaman %d";
+"Split.SuccessTitle" = "HWP berhasil dipisah";
+"Merge.FileNameTitle" = "Nama file";
+"Split.SelectFile" = "Pilih file";

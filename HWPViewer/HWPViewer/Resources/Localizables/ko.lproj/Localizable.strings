@@ -208,3 +208,24 @@
 "Home.Card.Print.Subtitle" = "문서 인쇄";
 "Home.Header.Hwp" = "HWP";
 "Home.Header.Editor" = " Editor";
+
+/* Merge / Split HWP */
+"Tools.MergeHwp" = "병합";
+"Tools.MergeHwpSubtitle" = "여러 파일을 하나로";
+"Tools.SplitHwp" = "분할";
+"Tools.SplitHwpSubtitle" = "페이지를 새 파일로 추출";
+"Merge.SelectFiles" = "파일 선택";
+"Merge.Continue" = "계속 (%d)";
+"Merge.FilesTitle" = "파일 병합";
+"Merge.SortHint" = "길게 눌러 순서 변경";
+"Merge.Action" = "병합 (%d)";
+"Merge.AddFiles" = "파일 추가";
+"Merge.Empty" = "아직 파일이 없습니다. 병합할 파일을 추가하세요";
+"Merge.NeedTwoFiles" = "병합하려면 파일을 2개 이상 추가하세요.";
+"Merge.SuccessTitle" = "HWP 병합 완료";
+"MergeSplit.Loading" = "불러오는 중";
+"Split.Selected" = "선택됨 (%d)";
+"Split.PageA11y" = "%d페이지";
+"Split.SuccessTitle" = "HWP 분할 완료";
+"Merge.FileNameTitle" = "파일 이름";
+"Split.SelectFile" = "파일 선택";

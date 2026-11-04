@@ -208,3 +208,24 @@
 "Home.Card.Print.Subtitle" = "दस्तावेज़ प्रिंट करें";
 "Home.Header.Hwp" = "HWP";
 "Home.Header.Editor" = " Editor";
+
+/* Merge / Split HWP */
+"Tools.MergeHwp" = "मर्ज करें";
+"Tools.MergeHwpSubtitle" = "फ़ाइलों को एक में जोड़ें";
+"Tools.SplitHwp" = "विभाजित करें";
+"Tools.SplitHwpSubtitle" = "पेज नई फ़ाइल में निकालें";
+"Merge.SelectFiles" = "फ़ाइलें चुनें";
+"Merge.Continue" = "जारी रखें (%d)";
+"Merge.FilesTitle" = "फ़ाइलें मर्ज करें";
+"Merge.SortHint" = "क्रम बदलने के लिए देर तक दबाएँ";
+"Merge.Action" = "मर्ज करें (%d)";
+"Merge.AddFiles" = "फ़ाइलें जोड़ें";
+"Merge.Empty" = "अभी कोई फ़ाइल नहीं। मर्ज करने के लिए फ़ाइल जोड़ें";
+"Merge.NeedTwoFiles" = "मर्ज करने के लिए कम से कम 2 फ़ाइलें जोड़ें।";
+"Merge.SuccessTitle" = "HWP सफलतापूर्वक मर्ज हुआ";
+"MergeSplit.Loading" = "लोड हो रहा है";
+"Split.Selected" = "चयनित (%d)";
+"Split.PageA11y" = "पेज %d";
+"Split.SuccessTitle" = "HWP सफलतापूर्वक विभाजित हुआ";
+"Merge.FileNameTitle" = "फ़ाइल का नाम";
+"Split.SelectFile" = "फ़ाइल चुनें";

@@ -208,3 +208,24 @@
 "Home.Card.Print.Subtitle" = "Printează documentul";
 "Home.Header.Hwp" = "HWP";
 "Home.Header.Editor" = " Editor";
+
+/* Merge / Split HWP */
+"Tools.MergeHwp" = "Combină";
+"Tools.MergeHwpSubtitle" = "Unește fișiere într-unul";
+"Tools.SplitHwp" = "Împarte";
+"Tools.SplitHwpSubtitle" = "Pagini într-un fișier nou";
+"Merge.SelectFiles" = "Alege fișiere";
+"Merge.Continue" = "Continuă (%d)";
+"Merge.FilesTitle" = "Combină fișiere";
+"Merge.SortHint" = "Apasă lung pentru a sorta manual";
+"Merge.Action" = "Combină (%d)";
+"Merge.AddFiles" = "Adaugă fișiere";
+"Merge.Empty" = "Încă nu există fișiere. Adaugă un fișier pentru combinare";
+"Merge.NeedTwoFiles" = "Adaugă cel puțin 2 fișiere pentru combinare.";
+"Merge.SuccessTitle" = "HWP combinat cu succes";
+"MergeSplit.Loading" = "Se încarcă";
+"Split.Selected" = "Selectate (%d)";
+"Split.PageA11y" = "Pagina %d";
+"Split.SuccessTitle" = "HWP împărțit cu succes";
+"Merge.FileNameTitle" = "Nume fișier";
+"Split.SelectFile" = "Alege fișier";

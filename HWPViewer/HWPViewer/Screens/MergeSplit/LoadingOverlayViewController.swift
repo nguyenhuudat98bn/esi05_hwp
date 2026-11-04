@@ -4,13 +4,13 @@
 //
 //  "Loading" state of Merge / Split (Figma 6978:109119 / 6978:110688): the screen dimmed with the
 //  app overlay colour and a 160pt spinner in the middle — no card, no text, not cancellable.
-//  The spinner is the design's own animation ("loading (4) 1", a 60-frame / 2 s GIF of a growing
-//  blue arc), kept as the data asset `anim_loading_arc`.
+//  The spinner is the project's shared loading Lottie (`converting_loading.json`, also used by the
+//  Convert popup).
 //
 
 import UIKit
 import SnapKit
-import ImageIO
+import SPNComponent
 
 final class LoadingOverlayViewController: UIViewController {
     private let work: () async throws -> [DocumentOutput]
@@ -32,10 +32,8 @@ final class LoadingOverlayViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = AppColors.dim
         let spinner: UIView
-        if let animation = Self.loadingAnimation() {
-            let imageView = UIImageView(image: animation)
-            imageView.contentMode = .scaleAspectFit
-            spinner = imageView
+        if let url = Bundle.main.url(forResource: "converting_loading", withExtension: "json") {
+            spinner = SPNLottieView(url: url)
         } else {
             let indicator = UIActivityIndicatorView(style: .large)
             indicator.color = .white
@@ -50,23 +48,6 @@ final class LoadingOverlayViewController: UIViewController {
         view.accessibilityViewIsModal = true
         spinner.isAccessibilityElement = true
         spinner.accessibilityLabel = L10n.mergeSplitLoading
-    }
-
-    /// Frames + total duration of the design GIF.
-    private static func loadingAnimation() -> UIImage? {
-        guard let data = NSDataAsset(name: Asset.Assets.App.animLoadingArc.name)?.data,
-              let source = CGImageSourceCreateWithData(data as CFData, nil) else { return nil }
-        var frames: [UIImage] = []
-        var duration: Double = 0
-        for index in 0..<CGImageSourceGetCount(source) {
-            guard let frame = CGImageSourceCreateImageAtIndex(source, index, nil) else { continue }
-            frames.append(UIImage(cgImage: frame))
-            let properties = CGImageSourceCopyPropertiesAtIndex(source, index, nil) as? [CFString: Any]
-            let gif = properties?[kCGImagePropertyGIFDictionary] as? [CFString: Any]
-            let delay = (gif?[kCGImagePropertyGIFUnclampedDelayTime] as? Double) ?? (gif?[kCGImagePropertyGIFDelayTime] as? Double) ?? 0
-            duration += delay > 0.01 ? delay : 0.033
-        }
-        return frames.isEmpty ? nil : UIImage.animatedImage(with: frames, duration: duration)
     }
 
     override func viewDidAppear(_ animated: Bool) {

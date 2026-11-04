@@ -208,3 +208,24 @@
 "Home.Card.Print.Subtitle" = "Imprimir documento";
 "Home.Header.Hwp" = "HWP";
 "Home.Header.Editor" = " Editor";
+
+/* Merge / Split HWP */
+"Tools.MergeHwp" = "Combinar";
+"Tools.MergeHwpSubtitle" = "Une archivos en uno";
+"Tools.SplitHwp" = "Dividir";
+"Tools.SplitHwpSubtitle" = "Páginas a un archivo nuevo";
+"Merge.SelectFiles" = "Seleccionar archivos";
+"Merge.Continue" = "Continuar (%d)";
+"Merge.FilesTitle" = "Combinar archivos";
+"Merge.SortHint" = "Mantén pulsado para ordenar manualmente";
+"Merge.Action" = "Combinar (%d)";
+"Merge.AddFiles" = "Añadir archivos";
+"Merge.Empty" = "Aún no hay archivos. Añade uno para combinar";
+"Merge.NeedTwoFiles" = "Añade al menos 2 archivos para combinar.";
+"Merge.SuccessTitle" = "HWP combinado correctamente";
+"MergeSplit.Loading" = "Cargando";
+"Split.Selected" = "Seleccionadas (%d)";
+"Split.PageA11y" = "Página %d";
+"Split.SuccessTitle" = "HWP dividido correctamente";
+"Merge.FileNameTitle" = "Nombre del archivo";
+"Split.SelectFile" = "Seleccionar archivo";

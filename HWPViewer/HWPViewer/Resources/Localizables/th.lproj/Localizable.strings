@@ -208,3 +208,24 @@
 "Home.Card.Print.Subtitle" = "พิมพ์เอกสาร";
 "Home.Header.Hwp" = "HWP";
 "Home.Header.Editor" = " Editor";
+
+/* Merge / Split HWP */
+"Tools.MergeHwp" = "รวม";
+"Tools.MergeHwpSubtitle" = "รวมหลายไฟล์เป็นไฟล์เดียว";
+"Tools.SplitHwp" = "แยก";
+"Tools.SplitHwpSubtitle" = "ดึงหน้าออกเป็นไฟล์ใหม่";
+"Merge.SelectFiles" = "เลือกไฟล์";
+"Merge.Continue" = "ดำเนินการต่อ (%d)";
+"Merge.FilesTitle" = "รวมไฟล์";
+"Merge.SortHint" = "กดค้างเพื่อจัดเรียงเอง";
+"Merge.Action" = "รวม (%d)";
+"Merge.AddFiles" = "เพิ่มไฟล์";
+"Merge.Empty" = "ยังไม่มีไฟล์ เพิ่มไฟล์เพื่อรวม";
+"Merge.NeedTwoFiles" = "เพิ่มอย่างน้อย 2 ไฟล์เพื่อรวม";
+"Merge.SuccessTitle" = "รวม HWP สำเร็จ";
+"MergeSplit.Loading" = "กำลังโหลด";
+"Split.Selected" = "เลือกแล้ว (%d)";
+"Split.PageA11y" = "หน้า %d";
+"Split.SuccessTitle" = "แยก HWP สำเร็จ";
+"Merge.FileNameTitle" = "ชื่อไฟล์";
+"Split.SelectFile" = "เลือกไฟล์";
