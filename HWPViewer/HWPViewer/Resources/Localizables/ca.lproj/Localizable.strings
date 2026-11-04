@@ -229,3 +229,20 @@
 "Split.SuccessTitle" = "HWP dividit correctament";
 "Merge.FileNameTitle" = "Nom del fitxer";
 "Split.SelectFile" = "Tria un fitxer";
+
+/* OCR to HWP */
+"Tools.Ocr" = "OCR";
+"Tools.OcrSubtitle" = "Foto o escaneig a HWP";
+"Ocr.ErrorMessage" = "S'ha produït un error inesperat.";
+"Ocr.Close" = "Tanca";
+"Ocr.TakePhoto" = "Fes una foto";
+"Ocr.ChoosePhoto" = "Tria de Fotos";
+"Ocr.Permission.Title" = "Permet l'accés a la càmera";
+"Ocr.Permission.Message" = "L'accés a la càmera està desactivat. Activa'l a Configuració per escanejar documents.";
+"Ocr.Permission.Step1" = "Toca Obre la configuració";
+"Ocr.Permission.Step2" = "Permisos";
+"Ocr.Permission.Step3" = "Permet l'ús de la càmera";
+"Ocr.Permission.OpenSettings" = "Obre la configuració";
+"Ocr.ConvertToHwp" = "Converteix a HWP";
+"Ocr.AdBadge" = "AD";
+"Ocr.TryAgain" = "Torna-ho a provar";

@@ -229,3 +229,20 @@
 "Split.SuccessTitle" = "HWP er opdelt";
 "Merge.FileNameTitle" = "Filnavn";
 "Split.SelectFile" = "Vælg fil";
+
+/* OCR to HWP */
+"Tools.Ocr" = "OCR";
+"Tools.OcrSubtitle" = "Foto eller scan til HWP";
+"Ocr.ErrorMessage" = "Der opstod en uventet fejl.";
+"Ocr.Close" = "Luk";
+"Ocr.TakePhoto" = "Tag foto";
+"Ocr.ChoosePhoto" = "Vælg fra Fotos";
+"Ocr.Permission.Title" = "Tillad kameraadgang";
+"Ocr.Permission.Message" = "Kameraadgang er slået fra. Slå den til i Indstillinger for at scanne dokumenter.";
+"Ocr.Permission.Step1" = "Tryk på Åbn indstillinger";
+"Ocr.Permission.Step2" = "Tilladelser";
+"Ocr.Permission.Step3" = "Tillad brug af kameraet";
+"Ocr.Permission.OpenSettings" = "Åbn indstillinger";
+"Ocr.ConvertToHwp" = "Konvertér til HWP";
+"Ocr.AdBadge" = "AD";
+"Ocr.TryAgain" = "Prøv igen";

@@ -229,3 +229,20 @@
 "Split.SuccessTitle" = "HWP har delats";
 "Merge.FileNameTitle" = "Filnamn";
 "Split.SelectFile" = "Välj fil";
+
+/* OCR to HWP */
+"Tools.Ocr" = "OCR";
+"Tools.OcrSubtitle" = "Foto eller skanning till HWP";
+"Ocr.ErrorMessage" = "Ett oväntat fel uppstod.";
+"Ocr.Close" = "Stäng";
+"Ocr.TakePhoto" = "Ta bild";
+"Ocr.ChoosePhoto" = "Välj från Bilder";
+"Ocr.Permission.Title" = "Tillåt kameraåtkomst";
+"Ocr.Permission.Message" = "Kameraåtkomst är avstängd. Slå på den i Inställningar för att skanna dokument.";
+"Ocr.Permission.Step1" = "Tryck på Öppna inställningar";
+"Ocr.Permission.Step2" = "Behörigheter";
+"Ocr.Permission.Step3" = "Tillåt användning av kameran";
+"Ocr.Permission.OpenSettings" = "Öppna inställningar";
+"Ocr.ConvertToHwp" = "Konvertera till HWP";
+"Ocr.AdBadge" = "AD";
+"Ocr.TryAgain" = "Försök igen";

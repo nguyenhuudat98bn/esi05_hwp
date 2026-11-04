@@ -229,3 +229,20 @@
 "Split.SuccessTitle" = "HWP berjaya dipisahkan";
 "Merge.FileNameTitle" = "Nama fail";
 "Split.SelectFile" = "Pilih fail";
+
+/* OCR to HWP */
+"Tools.Ocr" = "OCR";
+"Tools.OcrSubtitle" = "Foto atau imbasan ke HWP";
+"Ocr.ErrorMessage" = "Ralat yang tidak dijangka berlaku.";
+"Ocr.Close" = "Tutup";
+"Ocr.TakePhoto" = "Ambil foto";
+"Ocr.ChoosePhoto" = "Pilih daripada Foto";
+"Ocr.Permission.Title" = "Benarkan Akses Kamera";
+"Ocr.Permission.Message" = "Akses kamera dinyahdayakan. Dayakannya dalam Tetapan untuk mengimbas dokumen.";
+"Ocr.Permission.Step1" = "Ketik Buka tetapan";
+"Ocr.Permission.Step2" = "Kebenaran";
+"Ocr.Permission.Step3" = "Benarkan penggunaan kamera";
+"Ocr.Permission.OpenSettings" = "Buka Tetapan";
+"Ocr.ConvertToHwp" = "Tukar kepada HWP";
+"Ocr.AdBadge" = "AD";
+"Ocr.TryAgain" = "Cuba lagi";

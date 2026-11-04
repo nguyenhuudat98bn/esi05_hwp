@@ -229,3 +229,20 @@
 "Split.SuccessTitle" = "HWP jaettu";
 "Merge.FileNameTitle" = "Tiedostonimi";
 "Split.SelectFile" = "Valitse tiedosto";
+
+/* OCR to HWP */
+"Tools.Ocr" = "OCR";
+"Tools.OcrSubtitle" = "Kuva tai skannaus HWP:ksi";
+"Ocr.ErrorMessage" = "Tapahtui odottamaton virhe.";
+"Ocr.Close" = "Sulje";
+"Ocr.TakePhoto" = "Ota kuva";
+"Ocr.ChoosePhoto" = "Valitse Kuvista";
+"Ocr.Permission.Title" = "Salli kameran käyttö";
+"Ocr.Permission.Message" = "Kameran käyttö on estetty. Salli se Asetuksissa, jotta voit skannata asiakirjoja.";
+"Ocr.Permission.Step1" = "Napauta Avaa asetukset";
+"Ocr.Permission.Step2" = "Käyttöoikeudet";
+"Ocr.Permission.Step3" = "Salli kameran käyttö";
+"Ocr.Permission.OpenSettings" = "Avaa asetukset";
+"Ocr.ConvertToHwp" = "Muunna HWP:ksi";
+"Ocr.AdBadge" = "AD";
+"Ocr.TryAgain" = "Yritä uudelleen";

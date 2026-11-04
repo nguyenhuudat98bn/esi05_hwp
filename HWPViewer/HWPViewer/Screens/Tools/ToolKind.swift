@@ -8,7 +8,7 @@
 import UIKit
 
 enum ToolKind: CaseIterable {
-    case editHwp, pdfToHwp, docToHwp, print, mergeHwp, splitHwp
+    case editHwp, pdfToHwp, docToHwp, print, mergeHwp, splitHwp, ocr
 
     var title: String {
         switch self {
@@ -18,6 +18,7 @@ enum ToolKind: CaseIterable {
         case .print: return L10n.homeCardPrint
         case .mergeHwp: return L10n.toolsMergeHwp
         case .splitHwp: return L10n.toolsSplitHwp
+        case .ocr: return L10n.toolsOcr
         }
     }
 
@@ -29,6 +30,7 @@ enum ToolKind: CaseIterable {
         case .print: return L10n.homeCardPrintSubtitle
         case .mergeHwp: return L10n.toolsMergeHwpSubtitle
         case .splitHwp: return L10n.toolsSplitHwpSubtitle
+        case .ocr: return L10n.toolsOcrSubtitle
         }
     }
 
@@ -41,6 +43,8 @@ enum ToolKind: CaseIterable {
         case .print: return Asset.Assets.App.imgCardPrintBg.image
         case .mergeHwp: return Asset.Assets.App.imgCardMergeBg.image
         case .splitHwp: return Asset.Assets.App.imgCardSplitBg.image
+        // Figma 7011:115391: gradient + Rect Light + scanner glyph, composed into one image.
+        case .ocr: return Asset.Assets.App.imgCardOcrBg.image
         }
     }
 
@@ -50,8 +54,8 @@ enum ToolKind: CaseIterable {
         case .pdfToHwp: return Asset.Assets.App.icCardPdfReader.image
         case .docToHwp: return Asset.Assets.App.icCardWordDoc.image
         case .print: return Asset.Assets.App.icCardPrint.image
-        // Art baked into the card background (img_card_merge_bg / img_card_split_bg).
-        case .mergeHwp, .splitHwp: return nil
+        // Art baked into the card background (img_card_merge_bg / _split_bg / _ocr_bg).
+        case .mergeHwp, .splitHwp, .ocr: return nil
         }
     }
 
@@ -61,7 +65,7 @@ enum ToolKind: CaseIterable {
         case .pdfToHwp: return 0
         case .docToHwp: return -17.4
         case .print: return -13.5
-        case .mergeHwp, .splitHwp: return -12
+        case .mergeHwp, .splitHwp, .ocr: return -12
         }
     }
 
@@ -71,7 +75,7 @@ enum ToolKind: CaseIterable {
         case .pdfToHwp: return 51
         case .docToHwp: return 62
         case .print: return 80
-        case .mergeHwp, .splitHwp: return 50
+        case .mergeHwp, .splitHwp, .ocr: return 50
         }
     }
 
@@ -83,6 +87,7 @@ enum ToolKind: CaseIterable {
         case .print: return AppColors.pillPrint
         case .mergeHwp: return AppColors.pillMerge
         case .splitHwp: return AppColors.pillSplit
+        case .ocr: return AppColors.pillOcr
         }
     }
 
@@ -94,13 +99,14 @@ enum ToolKind: CaseIterable {
         case .print: return AppColors.gradientPrint
         case .mergeHwp: return AppColors.gradientMerge
         case .splitHwp: return AppColors.gradientSplit
+        case .ocr: return AppColors.gradientOcr
         }
     }
 
     /// Which files the Select File screen lists.
     var family: FileFamily {
         switch self {
-        case .editHwp, .print, .mergeHwp, .splitHwp: return .hwp
+        case .editHwp, .print, .mergeHwp, .splitHwp, .ocr: return .hwp
         case .pdfToHwp: return .pdf
         case .docToHwp: return .doc
         }

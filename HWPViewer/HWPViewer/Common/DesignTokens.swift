@@ -68,6 +68,9 @@ enum AppColors {
     static let pillMerge = UIColor(hex: "#E9721D")
     static let gradientSplit: [UIColor] = [UIColor(hex: "#FF5D5F"), UIColor(hex: "#FFBFCA")]
     static let pillSplit = UIColor(hex: "#F25E61")
+    // OCR card (Figma 7011:115391).
+    static let gradientOcr: [UIColor] = [UIColor(hex: "#0241FF"), UIColor(hex: "#A5E7FB")]
+    static let pillOcr = UIColor(hex: "#1151FE")
     static let hintBarBackground = UIColor(hex: "#F5F5F6")  // "Long press to sort" strip (Figma 6978:108411)
     static let bottomBarBorder = UIColor(hex: "#F0F0F1")    // top hairline of the bottom action bar
     static let gradientPremium: [UIColor] = [UIColor(hex: "#56CCF2"), UIColor(hex: "#2F80ED")]

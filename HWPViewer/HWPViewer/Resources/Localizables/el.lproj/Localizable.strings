@@ -229,3 +229,20 @@
 "Split.SuccessTitle" = "Ο διαχωρισμός HWP ολοκληρώθηκε";
 "Merge.FileNameTitle" = "Όνομα αρχείου";
 "Split.SelectFile" = "Επιλογή αρχείου";
+
+/* OCR to HWP */
+"Tools.Ocr" = "OCR";
+"Tools.OcrSubtitle" = "Φωτό ή σάρωση σε HWP";
+"Ocr.ErrorMessage" = "Παρουσιάστηκε απρόσμενο σφάλμα.";
+"Ocr.Close" = "Κλείσιμο";
+"Ocr.TakePhoto" = "Λήψη φωτογραφίας";
+"Ocr.ChoosePhoto" = "Επιλογή από Φωτογραφίες";
+"Ocr.Permission.Title" = "Να επιτρέπεται η πρόσβαση στην κάμερα";
+"Ocr.Permission.Message" = "Η πρόσβαση στην κάμερα είναι απενεργοποιημένη. Ενεργοποιήστε τη στις Ρυθμίσεις για να σαρώνετε έγγραφα.";
+"Ocr.Permission.Step1" = "Πατήστε Άνοιγμα ρυθμίσεων";
+"Ocr.Permission.Step2" = "Άδειες";
+"Ocr.Permission.Step3" = "Επιτρέψτε τη χρήση της κάμερας";
+"Ocr.Permission.OpenSettings" = "Άνοιγμα ρυθμίσεων";
+"Ocr.ConvertToHwp" = "Μετατροπή σε HWP";
+"Ocr.AdBadge" = "AD";
+"Ocr.TryAgain" = "Δοκιμή ξανά";

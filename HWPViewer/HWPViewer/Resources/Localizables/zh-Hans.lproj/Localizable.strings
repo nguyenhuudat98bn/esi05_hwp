@@ -229,3 +229,20 @@
 "Split.SuccessTitle" = "HWP 拆分成功";
 "Merge.FileNameTitle" = "文件名";
 "Split.SelectFile" = "选择文件";
+
+/* OCR to HWP */
+"Tools.Ocr" = "OCR";
+"Tools.OcrSubtitle" = "照片或扫描件转 HWP";
+"Ocr.ErrorMessage" = "发生意外错误。";
+"Ocr.Close" = "关闭";
+"Ocr.TakePhoto" = "拍照";
+"Ocr.ChoosePhoto" = "从照片中选择";
+"Ocr.Permission.Title" = "允许访问相机";
+"Ocr.Permission.Message" = "相机访问已关闭。请在设置中开启以扫描文档。";
+"Ocr.Permission.Step1" = "轻点“打开设置”";
+"Ocr.Permission.Step2" = "权限";
+"Ocr.Permission.Step3" = "允许使用相机";
+"Ocr.Permission.OpenSettings" = "打开设置";
+"Ocr.ConvertToHwp" = "转换为 HWP";
+"Ocr.AdBadge" = "AD";
+"Ocr.TryAgain" = "重试";

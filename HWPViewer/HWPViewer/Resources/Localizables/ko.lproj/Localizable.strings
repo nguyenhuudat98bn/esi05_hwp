@@ -229,3 +229,20 @@
 "Split.SuccessTitle" = "HWP 분할 완료";
 "Merge.FileNameTitle" = "파일 이름";
 "Split.SelectFile" = "파일 선택";
+
+/* OCR to HWP */
+"Tools.Ocr" = "OCR";
+"Tools.OcrSubtitle" = "사진·스캔을 HWP로";
+"Ocr.ErrorMessage" = "예기치 않은 오류가 발생했습니다.";
+"Ocr.Close" = "닫기";
+"Ocr.TakePhoto" = "사진 촬영";
+"Ocr.ChoosePhoto" = "사진에서 선택";
+"Ocr.Permission.Title" = "카메라 접근 허용";
+"Ocr.Permission.Message" = "카메라 접근이 꺼져 있습니다. 문서를 스캔하려면 설정에서 허용해 주세요.";
+"Ocr.Permission.Step1" = "설정 열기를 탭하세요";
+"Ocr.Permission.Step2" = "권한";
+"Ocr.Permission.Step3" = "카메라 사용 허용";
+"Ocr.Permission.OpenSettings" = "설정 열기";
+"Ocr.ConvertToHwp" = "HWP로 변환";
+"Ocr.AdBadge" = "AD";
+"Ocr.TryAgain" = "다시 시도";

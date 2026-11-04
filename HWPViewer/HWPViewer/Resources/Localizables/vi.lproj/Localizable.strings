@@ -229,3 +229,20 @@
 "Split.SuccessTitle" = "Tách HWP thành công";
 "Merge.FileNameTitle" = "Tên tệp";
 "Split.SelectFile" = "Chọn tệp";
+
+/* OCR to HWP */
+"Tools.Ocr" = "OCR";
+"Tools.OcrSubtitle" = "Ảnh, bản quét sang HWP";
+"Ocr.ErrorMessage" = "Đã xảy ra lỗi không mong muốn.";
+"Ocr.Close" = "Đóng";
+"Ocr.TakePhoto" = "Chụp ảnh";
+"Ocr.ChoosePhoto" = "Chọn từ Ảnh";
+"Ocr.Permission.Title" = "Cho phép truy cập camera";
+"Ocr.Permission.Message" = "Quyền truy cập camera đang tắt. Hãy bật trong Cài đặt để quét tài liệu.";
+"Ocr.Permission.Step1" = "Nhấn Mở cài đặt";
+"Ocr.Permission.Step2" = "Quyền";
+"Ocr.Permission.Step3" = "Cho phép sử dụng camera";
+"Ocr.Permission.OpenSettings" = "Mở cài đặt";
+"Ocr.ConvertToHwp" = "Chuyển sang HWP";
+"Ocr.AdBadge" = "AD";
+"Ocr.TryAgain" = "Thử lại";

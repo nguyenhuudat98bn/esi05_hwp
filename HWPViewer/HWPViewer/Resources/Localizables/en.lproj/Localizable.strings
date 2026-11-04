@@ -229,4 +229,19 @@
 "Split.Selected" = "Selected (%d)";
 "Split.PageA11y" = "Page %d";
 "Split.SuccessTitle" = "Split HWP Successfully";
+"Tools.Ocr" = "OCR";
+"Tools.OcrSubtitle" = "Photo or scan to HWP";
+"Ocr.ConvertToHwp" = "Convert to HWP";
+"Ocr.AdBadge" = "AD";
+"Ocr.ErrorMessage" = "An unexpected error occurred.";
+"Ocr.TryAgain" = "Try Again";
+"Ocr.Close" = "Close";
+"Ocr.TakePhoto" = "Take photo";
+"Ocr.ChoosePhoto" = "Choose from Photos";
+"Ocr.Permission.Title" = "Allow Camera Access";
+"Ocr.Permission.Message" = "Camera access is disabled. Please enable it in Settings to scan documents.";
+"Ocr.Permission.Step1" = "Tap on Open settings";
+"Ocr.Permission.Step2" = "Permissions";
+"Ocr.Permission.Step3" = "Allow to use the camera";
+"Ocr.Permission.OpenSettings" = "Open Settings";
 

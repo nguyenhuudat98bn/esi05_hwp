@@ -229,3 +229,20 @@
 "Split.SuccessTitle" = "HWPの分割が完了しました";
 "Merge.FileNameTitle" = "ファイル名";
 "Split.SelectFile" = "ファイルを選択";
+
+/* OCR to HWP */
+"Tools.Ocr" = "OCR";
+"Tools.OcrSubtitle" = "写真・スキャンをHWPに";
+"Ocr.ErrorMessage" = "予期しないエラーが発生しました。";
+"Ocr.Close" = "閉じる";
+"Ocr.TakePhoto" = "写真を撮る";
+"Ocr.ChoosePhoto" = "写真から選ぶ";
+"Ocr.Permission.Title" = "カメラへのアクセスを許可";
+"Ocr.Permission.Message" = "カメラへのアクセスがオフになっています。書類をスキャンするには設定でオンにしてください。";
+"Ocr.Permission.Step1" = "「設定を開く」をタップ";
+"Ocr.Permission.Step2" = "アクセス許可";
+"Ocr.Permission.Step3" = "カメラの使用を許可";
+"Ocr.Permission.OpenSettings" = "設定を開く";
+"Ocr.ConvertToHwp" = "HWPに変換";
+"Ocr.AdBadge" = "AD";
+"Ocr.TryAgain" = "再試行";

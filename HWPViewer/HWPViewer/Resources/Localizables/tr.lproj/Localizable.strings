@@ -229,3 +229,20 @@
 "Split.SuccessTitle" = "HWP başarıyla bölündü";
 "Merge.FileNameTitle" = "Dosya adı";
 "Split.SelectFile" = "Dosya seç";
+
+/* OCR to HWP */
+"Tools.Ocr" = "OCR";
+"Tools.OcrSubtitle" = "Fotoğraf/tarama → HWP";
+"Ocr.ErrorMessage" = "Beklenmeyen bir hata oluştu.";
+"Ocr.Close" = "Kapat";
+"Ocr.TakePhoto" = "Fotoğraf çek";
+"Ocr.ChoosePhoto" = "Fotoğraflar'dan seç";
+"Ocr.Permission.Title" = "Kamera Erişimine İzin Ver";
+"Ocr.Permission.Message" = "Kamera erişimi kapalı. Belge taramak için Ayarlar'dan açın.";
+"Ocr.Permission.Step1" = "Ayarları aç'a dokunun";
+"Ocr.Permission.Step2" = "İzinler";
+"Ocr.Permission.Step3" = "Kamera kullanımına izin verin";
+"Ocr.Permission.OpenSettings" = "Ayarları Aç";
+"Ocr.ConvertToHwp" = "HWP'ye dönüştür";
+"Ocr.AdBadge" = "AD";
+"Ocr.TryAgain" = "Tekrar dene";

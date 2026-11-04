@@ -229,3 +229,20 @@
 "Split.SuccessTitle" = "HWP erfolgreich geteilt";
 "Merge.FileNameTitle" = "Dateiname";
 "Split.SelectFile" = "Datei auswählen";
+
+/* OCR to HWP */
+"Tools.Ocr" = "OCR";
+"Tools.OcrSubtitle" = "Foto oder Scan zu HWP";
+"Ocr.ErrorMessage" = "Ein unerwarteter Fehler ist aufgetreten.";
+"Ocr.Close" = "Schließen";
+"Ocr.TakePhoto" = "Foto aufnehmen";
+"Ocr.ChoosePhoto" = "Aus Fotos wählen";
+"Ocr.Permission.Title" = "Kamerazugriff erlauben";
+"Ocr.Permission.Message" = "Der Kamerazugriff ist deaktiviert. Aktiviere ihn in den Einstellungen, um Dokumente zu scannen.";
+"Ocr.Permission.Step1" = "Tippe auf Einstellungen öffnen";
+"Ocr.Permission.Step2" = "Berechtigungen";
+"Ocr.Permission.Step3" = "Kameranutzung erlauben";
+"Ocr.Permission.OpenSettings" = "Einstellungen öffnen";
+"Ocr.ConvertToHwp" = "In HWP umwandeln";
+"Ocr.AdBadge" = "AD";
+"Ocr.TryAgain" = "Erneut versuchen";

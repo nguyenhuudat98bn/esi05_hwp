@@ -229,3 +229,20 @@
 "Split.SuccessTitle" = "HWP सफलतापूर्वक विभाजित हुआ";
 "Merge.FileNameTitle" = "फ़ाइल का नाम";
 "Split.SelectFile" = "फ़ाइल चुनें";
+
+/* OCR to HWP */
+"Tools.Ocr" = "OCR";
+"Tools.OcrSubtitle" = "फ़ोटो या स्कैन से HWP";
+"Ocr.ErrorMessage" = "एक अनपेक्षित त्रुटि हुई।";
+"Ocr.Close" = "बंद करें";
+"Ocr.TakePhoto" = "फ़ोटो लें";
+"Ocr.ChoosePhoto" = "फ़ोटो से चुनें";
+"Ocr.Permission.Title" = "कैमरा एक्सेस की अनुमति दें";
+"Ocr.Permission.Message" = "कैमरा एक्सेस बंद है। दस्तावेज़ स्कैन करने के लिए इसे सेटिंग्स में चालू करें।";
+"Ocr.Permission.Step1" = "सेटिंग्स खोलें पर टैप करें";
+"Ocr.Permission.Step2" = "अनुमतियाँ";
+"Ocr.Permission.Step3" = "कैमरा इस्तेमाल करने की अनुमति दें";
+"Ocr.Permission.OpenSettings" = "सेटिंग्स खोलें";
+"Ocr.ConvertToHwp" = "HWP में बदलें";
+"Ocr.AdBadge" = "AD";
+"Ocr.TryAgain" = "पुनः प्रयास करें";

@@ -229,3 +229,20 @@
 "Split.SuccessTitle" = "פיצול HWP הושלם";
 "Merge.FileNameTitle" = "שם הקובץ";
 "Split.SelectFile" = "בחירת קובץ";
+
+/* OCR to HWP */
+"Tools.Ocr" = "OCR";
+"Tools.OcrSubtitle" = "תמונה או סריקה ל-HWP";
+"Ocr.ErrorMessage" = "אירעה שגיאה בלתי צפויה.";
+"Ocr.Close" = "סגירה";
+"Ocr.TakePhoto" = "צילום תמונה";
+"Ocr.ChoosePhoto" = "בחירה מהתמונות";
+"Ocr.Permission.Title" = "אפשרו גישה למצלמה";
+"Ocr.Permission.Message" = "הגישה למצלמה מושבתת. הפעילו אותה בהגדרות כדי לסרוק מסמכים.";
+"Ocr.Permission.Step1" = "הקישו על פתיחת ההגדרות";
+"Ocr.Permission.Step2" = "הרשאות";
+"Ocr.Permission.Step3" = "אפשרו שימוש במצלמה";
+"Ocr.Permission.OpenSettings" = "פתיחת ההגדרות";
+"Ocr.ConvertToHwp" = "המרה ל-HWP";
+"Ocr.AdBadge" = "AD";
+"Ocr.TryAgain" = "נסו שוב";

@@ -229,3 +229,20 @@
 "Split.SuccessTitle" = "تم تقسيم HWP بنجاح";
 "Merge.FileNameTitle" = "اسم الملف";
 "Split.SelectFile" = "اختيار ملف";
+
+/* OCR to HWP */
+"Tools.Ocr" = "OCR";
+"Tools.OcrSubtitle" = "صورة أو مسح إلى HWP";
+"Ocr.ErrorMessage" = "حدث خطأ غير متوقع.";
+"Ocr.Close" = "إغلاق";
+"Ocr.TakePhoto" = "التقاط صورة";
+"Ocr.ChoosePhoto" = "اختيار من الصور";
+"Ocr.Permission.Title" = "السماح بالوصول إلى الكاميرا";
+"Ocr.Permission.Message" = "الوصول إلى الكاميرا معطّل. يُرجى تفعيله من الإعدادات لمسح المستندات.";
+"Ocr.Permission.Step1" = "اضغط على فتح الإعدادات";
+"Ocr.Permission.Step2" = "الأذونات";
+"Ocr.Permission.Step3" = "اسمح باستخدام الكاميرا";
+"Ocr.Permission.OpenSettings" = "فتح الإعدادات";
+"Ocr.ConvertToHwp" = "التحويل إلى HWP";
+"Ocr.AdBadge" = "AD";
+"Ocr.TryAgain" = "إعادة المحاولة";

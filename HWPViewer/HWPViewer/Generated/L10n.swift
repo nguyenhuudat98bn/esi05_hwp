@@ -174,6 +174,32 @@ internal enum L10n {
   internal static var mergeSuccessTitle: String { return L10n.tr("Localizable", "Merge.SuccessTitle", fallback: "Merge HWP Successfully") }
   /// Loading
   internal static var mergeSplitLoading: String { return L10n.tr("Localizable", "MergeSplit.Loading", fallback: "Loading") }
+  /// AD
+  internal static var ocrAdBadge: String { return L10n.tr("Localizable", "Ocr.AdBadge", fallback: "AD") }
+  /// Choose from Photos
+  internal static var ocrChoosePhoto: String { return L10n.tr("Localizable", "Ocr.ChoosePhoto", fallback: "Choose from Photos") }
+  /// Close
+  internal static var ocrClose: String { return L10n.tr("Localizable", "Ocr.Close", fallback: "Close") }
+  /// Convert to HWP
+  internal static var ocrConvertToHwp: String { return L10n.tr("Localizable", "Ocr.ConvertToHwp", fallback: "Convert to HWP") }
+  /// An unexpected error occurred.
+  internal static var ocrErrorMessage: String { return L10n.tr("Localizable", "Ocr.ErrorMessage", fallback: "An unexpected error occurred.") }
+  /// Take photo
+  internal static var ocrTakePhoto: String { return L10n.tr("Localizable", "Ocr.TakePhoto", fallback: "Take photo") }
+  /// Try Again
+  internal static var ocrTryAgain: String { return L10n.tr("Localizable", "Ocr.TryAgain", fallback: "Try Again") }
+  /// Camera access is disabled. Please enable it in Settings to scan documents.
+  internal static var ocrPermissionMessage: String { return L10n.tr("Localizable", "Ocr.Permission.Message", fallback: "Camera access is disabled. Please enable it in Settings to scan documents.") }
+  /// Open Settings
+  internal static var ocrPermissionOpenSettings: String { return L10n.tr("Localizable", "Ocr.Permission.OpenSettings", fallback: "Open Settings") }
+  /// Tap on Open settings
+  internal static var ocrPermissionStep1: String { return L10n.tr("Localizable", "Ocr.Permission.Step1", fallback: "Tap on Open settings") }
+  /// Permissions
+  internal static var ocrPermissionStep2: String { return L10n.tr("Localizable", "Ocr.Permission.Step2", fallback: "Permissions") }
+  /// Allow to use the camera
+  internal static var ocrPermissionStep3: String { return L10n.tr("Localizable", "Ocr.Permission.Step3", fallback: "Allow to use the camera") }
+  /// Allow Camera Access
+  internal static var ocrPermissionTitle: String { return L10n.tr("Localizable", "Ocr.Permission.Title", fallback: "Allow Camera Access") }
   /// CONTINUE
   internal static var paywallContinue: String { return L10n.tr("Localizable", "Paywall.Continue", fallback: "CONTINUE") }
   /// Cancel anytime. Subscription auto-renews unless cancelled at least 24 hours before the end of the current period.
@@ -426,6 +452,10 @@ internal enum L10n {
   internal static var toolsMergeHwp: String { return L10n.tr("Localizable", "Tools.MergeHwp", fallback: "Merge") }
   /// Combine files into one
   internal static var toolsMergeHwpSubtitle: String { return L10n.tr("Localizable", "Tools.MergeHwpSubtitle", fallback: "Combine files into one") }
+  /// OCR
+  internal static var toolsOcr: String { return L10n.tr("Localizable", "Tools.Ocr", fallback: "OCR") }
+  /// Photo or scan to HWP
+  internal static var toolsOcrSubtitle: String { return L10n.tr("Localizable", "Tools.OcrSubtitle", fallback: "Photo or scan to HWP") }
   /// Select File
   internal static var toolsSelectFile: String { return L10n.tr("Localizable", "Tools.SelectFile", fallback: "Select File") }
   /// Split

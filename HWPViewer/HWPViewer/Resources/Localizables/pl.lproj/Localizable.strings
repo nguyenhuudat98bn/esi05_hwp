@@ -229,3 +229,20 @@
 "Split.SuccessTitle" = "Podzielono plik HWP";
 "Merge.FileNameTitle" = "Nazwa pliku";
 "Split.SelectFile" = "Wybierz plik";
+
+/* OCR to HWP */
+"Tools.Ocr" = "OCR";
+"Tools.OcrSubtitle" = "Zdjęcie lub skan do HWP";
+"Ocr.ErrorMessage" = "Wystąpił nieoczekiwany błąd.";
+"Ocr.Close" = "Zamknij";
+"Ocr.TakePhoto" = "Zrób zdjęcie";
+"Ocr.ChoosePhoto" = "Wybierz ze Zdjęć";
+"Ocr.Permission.Title" = "Zezwól na dostęp do aparatu";
+"Ocr.Permission.Message" = "Dostęp do aparatu jest wyłączony. Włącz go w Ustawieniach, aby skanować dokumenty.";
+"Ocr.Permission.Step1" = "Stuknij Otwórz ustawienia";
+"Ocr.Permission.Step2" = "Uprawnienia";
+"Ocr.Permission.Step3" = "Zezwól na używanie aparatu";
+"Ocr.Permission.OpenSettings" = "Otwórz ustawienia";
+"Ocr.ConvertToHwp" = "Konwertuj na HWP";
+"Ocr.AdBadge" = "AD";
+"Ocr.TryAgain" = "Spróbuj ponownie";

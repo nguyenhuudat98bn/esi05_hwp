@@ -229,3 +229,20 @@
 "Split.SuccessTitle" = "HWP împărțit cu succes";
 "Merge.FileNameTitle" = "Nume fișier";
 "Split.SelectFile" = "Alege fișier";
+
+/* OCR to HWP */
+"Tools.Ocr" = "OCR";
+"Tools.OcrSubtitle" = "Foto sau scanare în HWP";
+"Ocr.ErrorMessage" = "A apărut o eroare neașteptată.";
+"Ocr.Close" = "Închide";
+"Ocr.TakePhoto" = "Fă o fotografie";
+"Ocr.ChoosePhoto" = "Alege din Poze";
+"Ocr.Permission.Title" = "Permite accesul la cameră";
+"Ocr.Permission.Message" = "Accesul la cameră este dezactivat. Activează-l în Configurări pentru a scana documente.";
+"Ocr.Permission.Step1" = "Atinge Deschide configurările";
+"Ocr.Permission.Step2" = "Permisiuni";
+"Ocr.Permission.Step3" = "Permite utilizarea camerei";
+"Ocr.Permission.OpenSettings" = "Deschide configurările";
+"Ocr.ConvertToHwp" = "Conversie în HWP";
+"Ocr.AdBadge" = "AD";
+"Ocr.TryAgain" = "Reîncearcă";

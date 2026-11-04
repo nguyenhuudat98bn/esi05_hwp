@@ -229,3 +229,20 @@
 "Split.SuccessTitle" = "HWP úspěšně rozděleno";
 "Merge.FileNameTitle" = "Název souboru";
 "Split.SelectFile" = "Vybrat soubor";
+
+/* OCR to HWP */
+"Tools.Ocr" = "OCR";
+"Tools.OcrSubtitle" = "Fotka či sken do HWP";
+"Ocr.ErrorMessage" = "Došlo k neočekávané chybě.";
+"Ocr.Close" = "Zavřít";
+"Ocr.TakePhoto" = "Vyfotit";
+"Ocr.ChoosePhoto" = "Vybrat z Fotek";
+"Ocr.Permission.Title" = "Povolit přístup ke kameře";
+"Ocr.Permission.Message" = "Přístup ke kameře je vypnutý. Pro skenování dokumentů ho povolte v Nastavení.";
+"Ocr.Permission.Step1" = "Klepněte na Otevřít nastavení";
+"Ocr.Permission.Step2" = "Oprávnění";
+"Ocr.Permission.Step3" = "Povolte používání kamery";
+"Ocr.Permission.OpenSettings" = "Otevřít nastavení";
+"Ocr.ConvertToHwp" = "Převést na HWP";
+"Ocr.AdBadge" = "AD";
+"Ocr.TryAgain" = "Zkusit znovu";

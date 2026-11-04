@@ -229,3 +229,20 @@
 "Split.SuccessTitle" = "HWP sikeresen felosztva";
 "Merge.FileNameTitle" = "Fájlnév";
 "Split.SelectFile" = "Fájl kiválasztása";
+
+/* OCR to HWP */
+"Tools.Ocr" = "OCR";
+"Tools.OcrSubtitle" = "Fotó, szken → HWP";
+"Ocr.ErrorMessage" = "Váratlan hiba történt.";
+"Ocr.Close" = "Bezárás";
+"Ocr.TakePhoto" = "Fotó készítése";
+"Ocr.ChoosePhoto" = "Választás a Fotókból";
+"Ocr.Permission.Title" = "Kamera-hozzáférés engedélyezése";
+"Ocr.Permission.Message" = "A kamera-hozzáférés ki van kapcsolva. Dokumentumok szkenneléséhez engedélyezze a Beállításokban.";
+"Ocr.Permission.Step1" = "Koppintson a Beállítások megnyitására";
+"Ocr.Permission.Step2" = "Engedélyek";
+"Ocr.Permission.Step3" = "Engedélyezze a kamera használatát";
+"Ocr.Permission.OpenSettings" = "Beállítások megnyitása";
+"Ocr.ConvertToHwp" = "Átalakítás HWP-vé";
+"Ocr.AdBadge" = "AD";
+"Ocr.TryAgain" = "Újra";

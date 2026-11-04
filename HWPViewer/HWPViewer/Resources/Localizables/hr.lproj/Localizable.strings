@@ -229,3 +229,20 @@
 "Split.SuccessTitle" = "HWP uspješno podijeljen";
 "Merge.FileNameTitle" = "Naziv datoteke";
 "Split.SelectFile" = "Odaberi datoteku";
+
+/* OCR to HWP */
+"Tools.Ocr" = "OCR";
+"Tools.OcrSubtitle" = "Fotografija ili sken u HWP";
+"Ocr.ErrorMessage" = "Došlo je do neočekivane pogreške.";
+"Ocr.Close" = "Zatvori";
+"Ocr.TakePhoto" = "Snimi fotografiju";
+"Ocr.ChoosePhoto" = "Odaberi iz Fotografija";
+"Ocr.Permission.Title" = "Dopusti pristup kameri";
+"Ocr.Permission.Message" = "Pristup kameri je isključen. Uključite ga u Postavkama za skeniranje dokumenata.";
+"Ocr.Permission.Step1" = "Dodirnite Otvori postavke";
+"Ocr.Permission.Step2" = "Dopuštenja";
+"Ocr.Permission.Step3" = "Dopustite korištenje kamere";
+"Ocr.Permission.OpenSettings" = "Otvori postavke";
+"Ocr.ConvertToHwp" = "Pretvori u HWP";
+"Ocr.AdBadge" = "AD";
+"Ocr.TryAgain" = "Pokušaj ponovno";

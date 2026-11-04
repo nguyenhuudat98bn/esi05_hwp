@@ -229,3 +229,20 @@
 "Split.SuccessTitle" = "แยก HWP สำเร็จ";
 "Merge.FileNameTitle" = "ชื่อไฟล์";
 "Split.SelectFile" = "เลือกไฟล์";
+
+/* OCR to HWP */
+"Tools.Ocr" = "OCR";
+"Tools.OcrSubtitle" = "ภาพถ่ายหรือสแกนเป็น HWP";
+"Ocr.ErrorMessage" = "เกิดข้อผิดพลาดที่ไม่คาดคิด";
+"Ocr.Close" = "ปิด";
+"Ocr.TakePhoto" = "ถ่ายภาพ";
+"Ocr.ChoosePhoto" = "เลือกจากรูปภาพ";
+"Ocr.Permission.Title" = "อนุญาตให้เข้าถึงกล้อง";
+"Ocr.Permission.Message" = "การเข้าถึงกล้องถูกปิดอยู่ โปรดเปิดในการตั้งค่าเพื่อสแกนเอกสาร";
+"Ocr.Permission.Step1" = "แตะเปิดการตั้งค่า";
+"Ocr.Permission.Step2" = "การอนุญาต";
+"Ocr.Permission.Step3" = "อนุญาตให้ใช้กล้อง";
+"Ocr.Permission.OpenSettings" = "เปิดการตั้งค่า";
+"Ocr.ConvertToHwp" = "แปลงเป็น HWP";
+"Ocr.AdBadge" = "AD";
+"Ocr.TryAgain" = "ลองอีกครั้ง";

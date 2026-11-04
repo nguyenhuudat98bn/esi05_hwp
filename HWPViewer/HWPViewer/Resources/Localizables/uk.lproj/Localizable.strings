@@ -230,3 +230,20 @@
 "Split.SuccessTitle" = "HWP успішно розділено";
 "Merge.FileNameTitle" = "Ім'я файлу";
 "Split.SelectFile" = "Вибрати файл";
+
+/* OCR to HWP */
+"Tools.Ocr" = "OCR";
+"Tools.OcrSubtitle" = "Фото чи скан у HWP";
+"Ocr.ErrorMessage" = "Сталася неочікувана помилка.";
+"Ocr.Close" = "Закрити";
+"Ocr.TakePhoto" = "Зробити фото";
+"Ocr.ChoosePhoto" = "Вибрати з Фото";
+"Ocr.Permission.Title" = "Дозвольте доступ до камери";
+"Ocr.Permission.Message" = "Доступ до камери вимкнено. Увімкніть його в Параметрах, щоб сканувати документи.";
+"Ocr.Permission.Step1" = "Торкніться «Відкрити параметри»";
+"Ocr.Permission.Step2" = "Дозволи";
+"Ocr.Permission.Step3" = "Дозвольте використання камери";
+"Ocr.Permission.OpenSettings" = "Відкрити параметри";
+"Ocr.ConvertToHwp" = "Конвертувати у HWP";
+"Ocr.AdBadge" = "AD";
+"Ocr.TryAgain" = "Спробувати ще";

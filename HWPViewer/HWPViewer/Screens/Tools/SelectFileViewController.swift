@@ -133,8 +133,8 @@ final class SelectFileViewController: AppBaseViewController, ToolFlowScreen {
             actions.print(item)
         case .pdfToHwp, .docToHwp:
             startConvert(item)
-        case .mergeHwp, .splitHwp:
-            break // own pickers: HwpFilePickerViewController (MergeSplitFlow)
+        case .mergeHwp, .splitHwp, .ocr:
+            break // own flows: MergeSplitFlow / OcrFlow
         }
     }
 

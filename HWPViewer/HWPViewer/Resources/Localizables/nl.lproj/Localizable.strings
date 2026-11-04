@@ -229,3 +229,20 @@
 "Split.SuccessTitle" = "HWP gesplitst";
 "Merge.FileNameTitle" = "Bestandsnaam";
 "Split.SelectFile" = "Bestand kiezen";
+
+/* OCR to HWP */
+"Tools.Ocr" = "OCR";
+"Tools.OcrSubtitle" = "Foto of scan naar HWP";
+"Ocr.ErrorMessage" = "Er is een onverwachte fout opgetreden.";
+"Ocr.Close" = "Sluiten";
+"Ocr.TakePhoto" = "Foto maken";
+"Ocr.ChoosePhoto" = "Kiezen uit Foto's";
+"Ocr.Permission.Title" = "Cameratoegang toestaan";
+"Ocr.Permission.Message" = "Cameratoegang staat uit. Zet hem aan in Instellingen om documenten te scannen.";
+"Ocr.Permission.Step1" = "Tik op Open instellingen";
+"Ocr.Permission.Step2" = "Machtigingen";
+"Ocr.Permission.Step3" = "Sta gebruik van de camera toe";
+"Ocr.Permission.OpenSettings" = "Open instellingen";
+"Ocr.ConvertToHwp" = "Omzetten naar HWP";
+"Ocr.AdBadge" = "AD";
+"Ocr.TryAgain" = "Opnieuw";

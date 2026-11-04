@@ -229,3 +229,20 @@
 "Split.SuccessTitle" = "HWP berhasil dipisah";
 "Merge.FileNameTitle" = "Nama file";
 "Split.SelectFile" = "Pilih file";
+
+/* OCR to HWP */
+"Tools.Ocr" = "OCR";
+"Tools.OcrSubtitle" = "Foto atau pindaian ke HWP";
+"Ocr.ErrorMessage" = "Terjadi kesalahan yang tidak terduga.";
+"Ocr.Close" = "Tutup";
+"Ocr.TakePhoto" = "Ambil foto";
+"Ocr.ChoosePhoto" = "Pilih dari Foto";
+"Ocr.Permission.Title" = "Izinkan Akses Kamera";
+"Ocr.Permission.Message" = "Akses kamera dinonaktifkan. Aktifkan di Pengaturan untuk memindai dokumen.";
+"Ocr.Permission.Step1" = "Ketuk Buka pengaturan";
+"Ocr.Permission.Step2" = "Izin";
+"Ocr.Permission.Step3" = "Izinkan penggunaan kamera";
+"Ocr.Permission.OpenSettings" = "Buka Pengaturan";
+"Ocr.ConvertToHwp" = "Konversi ke HWP";
+"Ocr.AdBadge" = "AD";
+"Ocr.TryAgain" = "Coba lagi";

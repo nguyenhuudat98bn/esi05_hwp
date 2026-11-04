@@ -49,7 +49,7 @@ final class ToolsViewController: AppBaseViewController {
         grid.axis = .vertical
         grid.spacing = 12
         grid.distribution = .fillEqually
-        let pairs: [[ToolKind]] = [[.editHwp, .pdfToHwp], [.docToHwp, .print], [.mergeHwp, .splitHwp]]
+        let pairs: [[ToolKind]] = [[.editHwp, .pdfToHwp], [.docToHwp, .print], [.mergeHwp, .splitHwp], [.ocr]]
         for pair in pairs {
             let row = UIStackView()
             row.axis = .horizontal
@@ -62,6 +62,8 @@ final class ToolsViewController: AppBaseViewController {
                     .store(in: &cancellables)
                 row.addArrangedSubview(card)
             }
+            // A row with a single card keeps the card half-width, on the left (Figma 7011:115388).
+            if pair.count == 1 { row.addArrangedSubview(UIView()) }
             grid.addArrangedSubview(row)
         }
         content.addSubview(grid)
@@ -89,6 +91,7 @@ final class ToolsViewController: AppBaseViewController {
         switch tool {
         case .mergeHwp: MergeSplitFlow.startMerge(on: navigationController)
         case .splitHwp: MergeSplitFlow.startSplit(on: navigationController)
+        case .ocr: OcrFlow.start(from: self)
         default: navigationController.pushViewController(SelectFileViewController(tool: tool), animated: true)
         }
     }
