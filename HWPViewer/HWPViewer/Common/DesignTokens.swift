@@ -62,6 +62,13 @@ enum AppColors {
     static let pillDoc = UIColor(hex: "#3B35B6")
     static let gradientPrint: [UIColor] = [UIColor(hex: "#9226EF"), UIColor(hex: "#95BEF3")]
     static let pillPrint = UIColor(hex: "#7523D8")
+    // Merge / Split HWP (POC, Claude Design canvas "HWP Merge & Split – POC flows")
+    static let gradientMerge: [UIColor] = [UIColor(hex: "#C2560F"), UIColor(hex: "#FFB27A")]
+    static let pillMerge = UIColor(hex: "#A84A0C")
+    static let gradientSplit: [UIColor] = [UIColor(hex: "#0A6F86"), UIColor(hex: "#7FD8E8")]
+    static let pillSplit = UIColor(hex: "#075A6D")
+    /// Split parts, cycled: dark teal / blue / amber differ in lightness, not only hue.
+    static let splitParts: [UIColor] = [UIColor(hex: "#075A6D"), UIColor(hex: "#2E90FA"), UIColor(hex: "#FDB022"), UIColor(hex: "#A84A0C")]
     static let gradientPremium: [UIColor] = [UIColor(hex: "#56CCF2"), UIColor(hex: "#2F80ED")]
     static let gradientContinue: [UIColor] = [UIColor(hex: "#1673FF"), UIColor(hex: "#69C5FB")]
     static let gradientBestOffer: [UIColor] = [UIColor(hex: "#FF9966"), UIColor(hex: "#FF5E62")]

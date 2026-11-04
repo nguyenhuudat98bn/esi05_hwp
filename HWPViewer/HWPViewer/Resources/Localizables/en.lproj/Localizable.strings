@@ -208,3 +208,47 @@
 "Home.Card.Print.Subtitle" = "Print document";
 "Home.Header.Hwp" = "HWP";
 "Home.Header.Editor" = " Editor";
+
+//MARK: - Merge / Split HWP (POC — English only until the flow is approved)
+"Tools.MergeHwp" = "Merge HWP";
+"Tools.MergeHwpSubtitle" = "Combine files into one";
+"Tools.SplitHwp" = "Split HWP";
+"Tools.SplitHwpSubtitle" = "Extract pages into files";
+"Merge.Title" = "Merge HWP";
+"Merge.Step" = "Step %d of 2";
+"Merge.SelectHint" = "Choose 2 or more files. They are merged in the order you tap them.";
+"Merge.SelectedCount" = "%d files selected";
+"Merge.Next" = "Next";
+"Merge.Order" = "Order";
+"Merge.DragHint" = "Drag to reorder";
+"Merge.AddFiles" = "Add files";
+"Merge.Output" = "Output";
+"Merge.FileName" = "File name";
+"Merge.NewPageNote" = "Each file starts on a new page. The originals are kept.";
+"Merge.Action" = "Merge %d files";
+"Merge.Progress" = "Merging files…";
+"Merge.ProgressStep" = "Adding %@ (%d of %d)";
+"Merge.Done" = "Merged Successfully";
+"Merge.DoneSubtitle" = "%d files combined into one document";
+"Split.Title" = "Split HWP";
+"Split.ModeRanges" = "Page ranges";
+"Split.ModePick" = "Pick pages";
+"Split.ModeEvery" = "Every N";
+"Split.Parts" = "Parts";
+"Split.Part" = "Part %d";
+"Split.AddRange" = "Add range";
+"Split.ParagraphNote" = "Pages are cut between paragraphs, so a part can end up a page longer or shorter.";
+"Split.Action" = "Split into %d files";
+"Split.PickHint" = "Tap the pages to keep";
+"Split.OnePerPage" = "One file per page";
+"Split.OnePerPageHint" = "Off: the picked pages go into one file";
+"Split.PagesSelected" = "%d pages selected";
+"Split.ExtractAction" = "Extract %d pages";
+"Split.EveryLabel" = "Pages per file: %d";
+"Split.Progress" = "Splitting file…";
+"Split.ProgressStep" = "Saving part %d of %d";
+"Split.Done" = "Split into %d files";
+"Split.DoneSubtitle" = "From %@ • saved in My Files";
+"Split.PartMeta" = "Pages %@ • %@";
+"Split.InvalidRange" = "Check the page numbers: each part needs a first page ≤ last page within the document.";
+

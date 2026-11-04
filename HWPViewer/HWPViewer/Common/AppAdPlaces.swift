@@ -16,6 +16,8 @@ extension SPNAdPlace {
     static let selectFile: SPNAdPlace = "select_file_screen"
     static let search: SPNAdPlace = "search_screen"
     static let convert: SPNAdPlace = "convert_screen"
+    /// Merge / Split HWP screens (POC). No remote ad config yet, so nothing is shown there.
+    static let mergeSplit: SPNAdPlace = "merge_split_screen"
     /// Native inline rows (2nd item of a file list).
     static let homeListInline: SPNAdPlace = "home_list_inline"
     static let searchListInline: SPNAdPlace = "search_list_inline"

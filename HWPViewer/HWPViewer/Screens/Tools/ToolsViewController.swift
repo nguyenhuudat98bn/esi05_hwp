@@ -49,7 +49,7 @@ final class ToolsViewController: AppBaseViewController {
         grid.axis = .vertical
         grid.spacing = 12
         grid.distribution = .fillEqually
-        let pairs: [[ToolKind]] = [[.editHwp, .pdfToHwp], [.docToHwp, .print]]
+        let pairs: [[ToolKind]] = [[.editHwp, .pdfToHwp], [.docToHwp, .print], [.mergeHwp, .splitHwp]]
         for pair in pairs {
             let row = UIStackView()
             row.axis = .horizontal
@@ -68,7 +68,7 @@ final class ToolsViewController: AppBaseViewController {
         grid.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(8)
             make.leading.trailing.equalToSuperview().inset(AppMetrics.screenPadding)
-            make.height.equalTo(12 + 2 * 88)
+            make.height.equalTo(CGFloat(pairs.count - 1) * 12 + CGFloat(pairs.count) * 88)
         }
         setupAdvertiser(on: .tools)
     }
@@ -85,6 +85,8 @@ final class ToolsViewController: AppBaseViewController {
     }
 
     private func open(_ tool: ToolKind) {
-        navigationController?.pushViewController(SelectFileViewController(tool: tool), animated: true)
+        // Merge picks several files at once, so it has its own selection screen.
+        let next: UIViewController = tool == .mergeHwp ? MergeSelectViewController() : SelectFileViewController(tool: tool)
+        navigationController?.pushViewController(next, animated: true)
     }
 }
