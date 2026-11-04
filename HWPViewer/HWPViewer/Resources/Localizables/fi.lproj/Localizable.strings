@@ -47,6 +47,7 @@
 "Purchase.Title" = "PREMIUM-VERSIO";
 "Purchase.SuccessMessage" = "Onnittelut, olet päivittänyt PREMIUM-versioon. Nauti käytöstä!";
 "Purchase.RestoreSuccessMessage" = "PREMIUM-versio palautettiin";
+"Purchase.RestoreNothingMessage" = "Palautettavia aiempia ostoksia ei löytynyt.";
 "Purchase.FailedMessage" = "Maksu epäonnistui, yritä myöhemmin uudelleen";
 "Purchase.Benefit1" = "PDF-tekstin muokkaus";
 "Purchase.Benefit2" = "ASIAKIRJOJEN ALLEKIRJOITUS";

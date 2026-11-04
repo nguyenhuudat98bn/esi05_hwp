@@ -15,7 +15,9 @@ NovaProject/NovaProject/
 │   └── PaywallPresenter.swift     Bridge PurchaseViewController ↔ hook presentPaywall
 ├── ViewControllers/Home           HomeViewController: SPNBaseViewController
 ├── ViewControllers/Purchase       Paywall (VC/VM/UseCase/cells)
-├── Managers/                      StoreKitManager, ReceiptValidator, TrackingManager (: SPNAnalyticsLogging), SKAN, Reminder
+├── Managers/                      PurchaseService (StoreKit 2: products, buy + appAccountToken, restore, premium =
+│                                  Transaction.currentEntitlements), IapTracking, AppsFlyerAttributionHub,
+│                                  TrackingManager (: SPNAnalyticsLogging), Reminder
 ├── Extensions/PDFView+Ext.swift
 ├── Generated/                     SwiftGen (Assets, L10n) + NSCustomLocalizedString → String.localized (SPNCore)
 └── Resources/                     Assets, Colors, Localizables (32 lang), DefaultConfigs.json, GoogleService-Info

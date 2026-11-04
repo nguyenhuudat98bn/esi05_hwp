@@ -47,6 +47,7 @@
 "Purchase.Title" = "PREMIUM VERSION";
 "Purchase.SuccessMessage" = "Congratulations, you have successfully upgraded to the PREMIUM version. Enjoy your experience!";
 "Purchase.RestoreSuccessMessage" = "Successfully restored the PREMIUM version";
+"Purchase.RestoreNothingMessage" = "No previous purchases found to restore.";
 "Purchase.FailedMessage" = "Transaction failed, please try again later";
 "Purchase.Benefit1" = "Edit PDF Text";
 "Purchase.Benefit2" = "E-SIGN DOCUMENTS";

@@ -47,6 +47,7 @@
 "Purchase.Title" = "高级版";
 "Purchase.SuccessMessage" = "恭喜，您已成功升级到高级版，祝您使用愉快！";
 "Purchase.RestoreSuccessMessage" = "已成功恢复高级版";
+"Purchase.RestoreNothingMessage" = "未找到可恢复的购买项目。";
 "Purchase.FailedMessage" = "交易失败，请稍后再试";
 "Purchase.Benefit1" = "编辑 PDF 文本";
 "Purchase.Benefit2" = "电子签署文件";

@@ -47,6 +47,7 @@
 "Purchase.Title" = "プレミアム版";
 "Purchase.SuccessMessage" = "おめでとうございます。プレミアム版へのアップグレードが完了しました。ぜひお楽しみください！";
 "Purchase.RestoreSuccessMessage" = "プレミアム版を復元しました";
+"Purchase.RestoreNothingMessage" = "復元できる購入履歴が見つかりませんでした。";
 "Purchase.FailedMessage" = "購入に失敗しました。しばらくしてからもう一度お試しください";
 "Purchase.Benefit1" = "PDFのテキストを編集";
 "Purchase.Benefit2" = "書類に電子署名";

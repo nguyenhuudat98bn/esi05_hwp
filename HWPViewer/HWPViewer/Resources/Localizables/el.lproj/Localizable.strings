@@ -47,6 +47,7 @@
 "Purchase.Title" = "ΕΚΔΟΣΗ PREMIUM";
 "Purchase.SuccessMessage" = "Συγχαρητήρια, αναβαθμιστήκατε στην έκδοση PREMIUM. Καλή διασκέδαση!";
 "Purchase.RestoreSuccessMessage" = "Η έκδοση PREMIUM αποκαταστάθηκε";
+"Purchase.RestoreNothingMessage" = "Δεν βρέθηκαν προηγούμενες αγορές για επαναφορά.";
 "Purchase.FailedMessage" = "Η συναλλαγή απέτυχε, δοκιμάστε ξανά αργότερα";
 "Purchase.Benefit1" = "Επεξεργασία κειμένου PDF";
 "Purchase.Benefit2" = "ΗΛΕΚΤΡΟΝΙΚΗ ΥΠΟΓΡΑΦΗ";

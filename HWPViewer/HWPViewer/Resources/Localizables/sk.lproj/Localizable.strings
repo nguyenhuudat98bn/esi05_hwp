@@ -47,6 +47,7 @@
 "Purchase.Title" = "VERZIA PREMIUM";
 "Purchase.SuccessMessage" = "Gratulujeme, prešli ste na verziu PREMIUM. Užite si ju!";
 "Purchase.RestoreSuccessMessage" = "Verzia PREMIUM bola obnovená";
+"Purchase.RestoreNothingMessage" = "Nenašli sa žiadne predchádzajúce nákupy na obnovenie.";
 "Purchase.FailedMessage" = "Platba zlyhala, skúste to neskôr";
 "Purchase.Benefit1" = "Úprava textu v PDF";
 "Purchase.Benefit2" = "ELEKTRONICKÝ PODPIS";

@@ -47,6 +47,7 @@
 "Purchase.Title" = "VERSIUNEA PREMIUM";
 "Purchase.SuccessMessage" = "Felicitări, ai trecut la versiunea PREMIUM. Utilizare plăcută!";
 "Purchase.RestoreSuccessMessage" = "Versiunea PREMIUM a fost restaurată";
+"Purchase.RestoreNothingMessage" = "Nu au fost găsite achiziții anterioare de restaurat.";
 "Purchase.FailedMessage" = "Tranzacția a eșuat, încearcă din nou mai târziu";
 "Purchase.Benefit1" = "Editare text PDF";
 "Purchase.Benefit2" = "SEMNARE ELECTRONICĂ";

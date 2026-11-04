@@ -47,6 +47,7 @@
 "Purchase.Title" = "PREMIUMVERSION";
 "Purchase.SuccessMessage" = "Grattis, du har uppgraderat till PREMIUM-versionen. Mycket nöje!";
 "Purchase.RestoreSuccessMessage" = "PREMIUM-versionen har återställts";
+"Purchase.RestoreNothingMessage" = "Inga tidigare köp hittades att återställa.";
 "Purchase.FailedMessage" = "Transaktionen misslyckades, försök igen senare";
 "Purchase.Benefit1" = "Redigera PDF-text";
 "Purchase.Benefit2" = "SIGNERA DOKUMENT";

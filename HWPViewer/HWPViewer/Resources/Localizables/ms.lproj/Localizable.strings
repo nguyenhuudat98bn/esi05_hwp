@@ -47,6 +47,7 @@
 "Purchase.Title" = "VERSI PREMIUM";
 "Purchase.SuccessMessage" = "Tahniah, anda telah menaik taraf kepada versi PREMIUM. Selamat menggunakan!";
 "Purchase.RestoreSuccessMessage" = "Versi PREMIUM berjaya dipulihkan";
+"Purchase.RestoreNothingMessage" = "Tiada pembelian terdahulu ditemui untuk dipulihkan.";
 "Purchase.FailedMessage" = "Transaksi gagal, sila cuba lagi nanti";
 "Purchase.Benefit1" = "Edit teks PDF";
 "Purchase.Benefit2" = "TANDATANGAN ELEKTRONIK";

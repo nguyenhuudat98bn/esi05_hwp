@@ -25,14 +25,14 @@ protocol IAPVCEvent: AnyObject {
 final class PaywallViewController: UIViewController {
     weak var delegate: IAPVCEvent?
 
-    private let viewModel = PurchaseViewModel(useCase: PurchaseUseCaseImpl())
-    private let fetchSubject = PassthroughSubject<Void, Never>()
+    private let viewModel = PaywallViewModel(useCase: StoreKitPaywallUseCase())
+    private let loadSubject = PassthroughSubject<Void, Never>()
     private let restoreSubject = PassthroughSubject<Void, Never>()
     private let buySubject = PassthroughSubject<String, Never>()
     private var cancellables = Set<AnyCancellable>()
 
     private let config = IapConfigs.current
-    private var products: [Product] = []
+    private var products: [PaywallProduct] = []
     private lazy var plans: [PaywallPlan] = config.effectivePlans
     private lazy var selectedPlan: PaywallPlan? = config.defaultPlan
     /// Set by PaywallPresenter: true when this is not the first paywall of the session (X may be delayed).
@@ -60,7 +60,7 @@ final class PaywallViewController: UIViewController {
         view.backgroundColor = .white
         setupViews()
         bind()
-        fetchSubject.send()
+        loadSubject.send()
         // Ask here, not on purchase: the answer is in before the transaction finishes, so the
         // success banner can fire straight away instead of the permission dialog interrupting.
         ReminderManager.shared.requestAuthorizationIfNeeded()
@@ -289,12 +289,12 @@ final class PaywallViewController: UIViewController {
 
     // MARK: - Bind
     private func bind() {
-        let output = viewModel.transform(PurchaseViewModel.Input(
-            fetchFiles: fetchSubject.eraseToAnyPublisher(),
-            restore: restoreSubject.eraseToAnyPublisher(),
-            buy: buySubject.eraseToAnyPublisher()
+        let output = viewModel.transform(PaywallViewModel.Input(
+            load: loadSubject.eraseToAnyPublisher(),
+            buy: buySubject.eraseToAnyPublisher(),
+            restore: restoreSubject.eraseToAnyPublisher()
         ))
-        output.$listItems.compactMap { $0 }
+        output.$products.compactMap { $0 }
             .receive(on: DispatchQueue.main)
             .sink { [weak self] products in
                 self?.products = products
@@ -302,11 +302,11 @@ final class PaywallViewController: UIViewController {
                 self?.logShowOnce()
             }
             .store(in: &cancellables)
-        output.$isLoading.compactMap { $0 }
+        output.$isBusy.compactMap { $0 }
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in self?.showLoadingHUD($0) }
             .store(in: &cancellables)
-        output.$errorMessage.compactMap { $0 }
+        output.$message.compactMap { $0 }
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in
                 self?.showToast($0)
@@ -329,7 +329,7 @@ final class PaywallViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 guard let self, let selectedPlan else { return }
-                IapTracking.shared.logContinueClick(plan: selectedPlan, product: product(for: selectedPlan)?.skProduct)
+                IapTracking.shared.logContinueClick(plan: selectedPlan, product: product(for: selectedPlan))
                 buySubject.send(selectedPlan.id)
             }
             .store(in: &cancellables)
@@ -345,7 +345,7 @@ final class PaywallViewController: UIViewController {
     private func logShowOnce() {
         guard !didLogShow else { return }
         didLogShow = true
-        IapTracking.shared.logShow(plan: selectedPlan, product: selectedPlan.flatMap { product(for: $0) }?.skProduct)
+        IapTracking.shared.logShow(plan: selectedPlan, product: selectedPlan.flatMap { product(for: $0) })
     }
 
     private func select(_ plan: PaywallPlan) {
@@ -356,7 +356,7 @@ final class PaywallViewController: UIViewController {
         updateTexts()
     }
 
-    private func product(for plan: PaywallPlan) -> Product? {
+    private func product(for plan: PaywallPlan) -> PaywallProduct? {
         products.first { $0.plan == plan }
     }
 

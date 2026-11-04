@@ -47,6 +47,7 @@
 "Purchase.Title" = "PREMIUM VERZIJA";
 "Purchase.SuccessMessage" = "Čestitamo, prešli ste na PREMIUM verziju. Uživajte!";
 "Purchase.RestoreSuccessMessage" = "PREMIUM verzija je vraćena";
+"Purchase.RestoreNothingMessage" = "Nisu pronađene prethodne kupnje za vraćanje.";
 "Purchase.FailedMessage" = "Transakcija nije uspjela, pokušajte kasnije";
 "Purchase.Benefit1" = "Uređivanje teksta u PDF-u";
 "Purchase.Benefit2" = "ELEKTRONIČKI POTPIS";

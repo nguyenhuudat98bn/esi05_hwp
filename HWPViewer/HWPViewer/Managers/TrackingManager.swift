@@ -77,24 +77,25 @@ class TrackingManager: SPNAnalyticsLogging {
 }
 
 import FacebookCore
+import StoreKit
+
 extension AppEvents {
-    static func logPurchaseEvent(product: SKProduct ,amount: Double, currency: String = "USD", additionalParams: [AppEvents.ParameterName: Any]? = nil) {
-        guard SPNUtils.isProduction() else {
-            return
-        }
-        guard currency.count == 3 else {
-            return
-        }
-        
+    /// `fb_mobile_purchase` for a purchase made in the app (production builds only). Value is the
+    /// product's regular price, as before the StoreKit 2 move — also for a free-trial start.
+    static func logPurchaseEvent(product: StoreKit.Product, transactionID: UInt64) {
+        guard SPNUtils.isProduction() else { return }
+        let currency = product.priceFormatStyle.currencyCode
+        guard currency.count == 3 else { return }
+        let price = NSDecimalNumber(decimal: product.price)
         let params: [AppEvents.ParameterName: Any] = [
-            AppEvents.ParameterName.init("fb_content_id"): product.productIdentifier,
-            AppEvents.ParameterName.init("fb_content_type"): "inapp",
-            AppEvents.ParameterName.init("fb_currency"): currency,
-            AppEvents.ParameterName.init("fb_num_items"): 1,
-          ]
-        
-        let event = AppEvents.Name.init(rawValue: "fb_mobile_purchase")
-        
-        AppEvents.shared.logEvent(event, valueToSum: amount, parameters: params)
+            AppEvents.ParameterName("fb_content_id"): product.id,
+            AppEvents.ParameterName("fb_content_type"): "inapp",
+            AppEvents.ParameterName("fb_currency"): currency,
+            AppEvents.ParameterName("fb_num_items"): 1,
+            AppEvents.ParameterName("fb_order_id"): String(transactionID),
+        ]
+        AppEvents.shared.logEvent(AppEvents.Name("fb_mobile_purchase"),
+                                  valueToSum: Double(price.stringValue) ?? price.doubleValue,
+                                  parameters: params)
     }
 }

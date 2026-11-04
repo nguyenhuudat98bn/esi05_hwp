@@ -47,6 +47,7 @@
 "Purchase.Title" = "ВЕРСІЯ PREMIUM";
 "Purchase.SuccessMessage" = "Вітаємо! Ви перейшли на версію PREMIUM. Приємного користування!";
 "Purchase.RestoreSuccessMessage" = "Версію PREMIUM успішно відновлено";
+"Purchase.RestoreNothingMessage" = "Не знайдено попередніх покупок для відновлення.";
 "Purchase.FailedMessage" = "Не вдалося виконати оплату, спробуйте пізніше";
 "Purchase.Benefit1" = "Редагування тексту PDF";
 "Purchase.Benefit2" = "ЕЛЕКТРОННИЙ ПІДПИС";

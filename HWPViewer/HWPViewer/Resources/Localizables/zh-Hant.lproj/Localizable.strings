@@ -47,6 +47,7 @@
 "Purchase.Title" = "進階版";
 "Purchase.SuccessMessage" = "恭喜，您已成功升級為進階版，祝您使用愉快！";
 "Purchase.RestoreSuccessMessage" = "已成功恢復進階版";
+"Purchase.RestoreNothingMessage" = "找不到可回復的購買項目。";
 "Purchase.FailedMessage" = "交易失敗，請稍後再試";
 "Purchase.Benefit1" = "編輯 PDF 文字";
 "Purchase.Benefit2" = "電子簽署文件";

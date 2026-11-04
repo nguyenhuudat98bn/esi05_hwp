@@ -47,6 +47,7 @@
 "Purchase.Title" = "प्रीमियम संस्करण";
 "Purchase.SuccessMessage" = "बधाई हो, आपने प्रीमियम संस्करण में अपग्रेड कर लिया है। आनंद लें!";
 "Purchase.RestoreSuccessMessage" = "प्रीमियम संस्करण सफलतापूर्वक पुनर्स्थापित";
+"Purchase.RestoreNothingMessage" = "पुनर्स्थापित करने के लिए कोई पिछली खरीदारी नहीं मिली।";
 "Purchase.FailedMessage" = "लेन-देन विफल रहा, कृपया बाद में पुनः प्रयास करें";
 "Purchase.Benefit1" = "PDF टेक्स्ट संपादित करें";
 "Purchase.Benefit2" = "दस्तावेज़ों पर ई-हस्ताक्षर";

@@ -47,6 +47,7 @@
 "Purchase.Title" = "גרסת פרימיום";
 "Purchase.SuccessMessage" = "מזל טוב, שדרגתם לגרסת הפרימיום. תיהנו!";
 "Purchase.RestoreSuccessMessage" = "גרסת הפרימיום שוחזרה בהצלחה";
+"Purchase.RestoreNothingMessage" = "לא נמצאו רכישות קודמות לשחזור.";
 "Purchase.FailedMessage" = "העסקה נכשלה, נסו שוב מאוחר יותר";
 "Purchase.Benefit1" = "עריכת טקסט ב-PDF";
 "Purchase.Benefit2" = "חתימה דיגיטלית על מסמכים";

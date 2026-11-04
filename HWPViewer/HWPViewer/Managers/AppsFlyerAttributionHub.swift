@@ -3,7 +3,8 @@
 //  HWPViewer
 //
 //  S2S purchase attribution: the app maps an `appAccountToken` (UUID per install) to the device's
-//  `appsflyer_id` on the IAP hub, and tags every StoreKit purchase with that token. Apple's server
+//  `appsflyer_id` on the IAP hub, and tags every purchase with that token (StoreKit 2
+//  `.appAccountToken` purchase option, see PurchaseService). Apple's server
 //  notifications then reach the hub, which resolves the token back to the appsflyer_id and sends
 //  af_subscribe / af_start_trial / af_renewal / af_refund / af_purchase to AppsFlyer itself.
 //  Because of that, the client-side `SPNAppsFlyerManager.logPurchase` must stay off (double revenue).

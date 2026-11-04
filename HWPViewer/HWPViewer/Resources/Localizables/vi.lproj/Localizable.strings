@@ -47,6 +47,7 @@
 "Purchase.Title" = "PHIÊN BẢN PREMIUM";
 "Purchase.SuccessMessage" = "Chúc mừng, bạn đã nâng cấp lên phiên bản PREMIUM thành công. Chúc bạn có trải nghiệm tuyệt vời!";
 "Purchase.RestoreSuccessMessage" = "Đã khôi phục phiên bản PREMIUM thành công";
+"Purchase.RestoreNothingMessage" = "Không tìm thấy giao dịch mua trước đó để khôi phục.";
 "Purchase.FailedMessage" = "Giao dịch thất bại, vui lòng thử lại sau";
 "Purchase.Benefit1" = "Chỉnh sửa văn bản PDF";
 "Purchase.Benefit2" = "KÝ ĐIỆN TỬ TÀI LIỆU";

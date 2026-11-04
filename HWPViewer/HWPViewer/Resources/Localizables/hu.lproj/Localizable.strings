@@ -47,6 +47,7 @@
 "Purchase.Title" = "PRÉMIUM VERZIÓ";
 "Purchase.SuccessMessage" = "Gratulálunk, sikeresen átálltál a PRÉMIUM verzióra. Jó használatot!";
 "Purchase.RestoreSuccessMessage" = "A PRÉMIUM verzió visszaállítva";
+"Purchase.RestoreNothingMessage" = "Nem található visszaállítható korábbi vásárlás.";
 "Purchase.FailedMessage" = "A tranzakció nem sikerült, próbáld újra később";
 "Purchase.Benefit1" = "PDF-szöveg szerkesztése";
 "Purchase.Benefit2" = "DOKUMENTUMOK ALÁÍRÁSA";

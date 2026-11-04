@@ -47,6 +47,7 @@
 "Purchase.Title" = "VERSIÓ PREMIUM";
 "Purchase.SuccessMessage" = "Enhorabona, has passat a la versió PREMIUM. Gaudeix-la!";
 "Purchase.RestoreSuccessMessage" = "S'ha restaurat la versió PREMIUM";
+"Purchase.RestoreNothingMessage" = "No s'han trobat compres anteriors per restaurar.";
 "Purchase.FailedMessage" = "La transacció ha fallat, torna-ho a provar més tard";
 "Purchase.Benefit1" = "Edita text de PDF";
 "Purchase.Benefit2" = "SIGNA DOCUMENTS";

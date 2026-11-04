@@ -47,6 +47,7 @@
 "Purchase.Title" = "VERSIÓN PREMIUM";
 "Purchase.SuccessMessage" = "¡Enhorabuena! Has actualizado a la versión PREMIUM. ¡Disfruta de la experiencia!";
 "Purchase.RestoreSuccessMessage" = "Versión PREMIUM restaurada correctamente";
+"Purchase.RestoreNothingMessage" = "No se encontraron compras anteriores para restaurar.";
 "Purchase.FailedMessage" = "La transacción falló, inténtalo de nuevo más tarde";
 "Purchase.Benefit1" = "Editar texto de PDF";
 "Purchase.Benefit2" = "FIRMAR DOCUMENTOS";

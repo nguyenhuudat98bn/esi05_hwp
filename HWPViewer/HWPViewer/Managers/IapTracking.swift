@@ -77,32 +77,33 @@ final class IapTracking {
         self.placement = placement
     }
 
-    /// Once per paywall, when its products arrive (`product` = preselected plan, nil if StoreKit failed).
-    func logShow(plan: IapPlan?, product: SKProduct?) {
+    /// Once per paywall, when its products arrive (`product` = preselected plan, nil if the store failed).
+    func logShow(plan: IapPlan?, product: PaywallProduct?) {
         log(.show, params(plan: plan, product: product))
     }
 
-    func logContinueClick(plan: IapPlan, product: SKProduct?) {
+    func logContinueClick(plan: IapPlan, product: PaywallProduct?) {
         let params = params(plan: plan, product: product)
         pending = (plan.id, params)
         log(.continueClick, params)
     }
 
-    // MARK: - StoreKit outcomes
+    // MARK: - Purchase outcomes (PurchaseService)
 
-    func transactionPurchased(productID: String) {
+    func purchaseSucceeded(productID: String) {
         guard let params = consumePending(productID) else { return }
         log(.success, params)
     }
 
-    func transactionFailed(productID: String, error: Error?) {
+    func purchaseCancelled(productID: String) {
+        guard let params = consumePending(productID) else { return }
+        log(.cancelled, params)
+    }
+
+    func purchaseFailed(productID: String, error: Error) {
         guard var params = consumePending(productID) else { return }
-        if let skError = error as? SKError, skError.code == .paymentCancelled {
-            log(.cancelled, params)
-        } else {
-            if let error = error as NSError? { params["error_code"] = error.code }
-            log(.failed, params)
-        }
+        params["error_code"] = (error as NSError).code
+        log(.failed, params)
     }
 
     // MARK: - Helpers
@@ -113,7 +114,7 @@ final class IapTracking {
         return pending.params
     }
 
-    private func params(plan: IapPlan?, product: SKProduct?) -> [String: Any] {
+    private func params(plan: IapPlan?, product: PaywallProduct?) -> [String: Any] {
         var params: [String: Any] = [
             "where": placement?.rawValue ?? "unknown",
             "when": isFirstOpenSession ? "1st_open" : "returning_open",
@@ -121,17 +122,19 @@ final class IapTracking {
         ]
         if let plan { params["sub_id"] = Self.subID(plan: plan, product: product) }
         if let product {
-            // Via the decimal string: NSDecimalNumber.doubleValue gives 19.990000000000002 for 19.99.
-            params["value"] = Double(product.price.stringValue) ?? product.price.doubleValue
-            params["currency"] = product.priceLocale.currencyCode ?? "USD"
+            // Via the decimal string: Double(truncating:) gives 19.990000000000002 for 19.99.
+            let price = NSDecimalNumber(decimal: product.storeProduct.price)
+            params["value"] = Double(price.stringValue) ?? price.doubleValue
+            params["currency"] = product.storeProduct.priceFormatStyle.currencyCode
         }
         return params
     }
 
-    /// "<period>[_<n>d]": period from the StoreKit product when loaded, else from the config plan.
-    static func subID(plan: IapPlan, product: SKProduct?) -> String {
+    /// "<period>[_<n>d]": period from the StoreKit product when loaded, else from the config plan;
+    /// n = free-trial days this user is offered (none when not eligible for the intro offer).
+    static func subID(plan: IapPlan, product: PaywallProduct?) -> String {
         var period = plan.period.rawValue
-        if let unit = product?.subscriptionPeriod?.unit {
+        if let unit = product?.storeProduct.subscription?.subscriptionPeriod.unit {
             switch unit {
             case .day: period = "day"
             case .week: period = "week"
@@ -140,16 +143,7 @@ final class IapTracking {
             @unknown default: break
             }
         }
-        guard let offer = product?.introductoryPrice, offer.paymentMode == .freeTrial else { return period }
-        let units = offer.subscriptionPeriod.numberOfUnits
-        let days: Int
-        switch offer.subscriptionPeriod.unit {
-        case .day: days = units
-        case .week: days = units * 7
-        case .month: days = units * 30
-        case .year: days = units * 365
-        @unknown default: days = units
-        }
+        guard let days = product?.trialDays, days > 0 else { return period }
         return "\(period)_\(days)d"
     }
 

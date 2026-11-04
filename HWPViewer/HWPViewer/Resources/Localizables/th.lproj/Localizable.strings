@@ -47,6 +47,7 @@
 "Purchase.Title" = "เวอร์ชันพรีเมียม";
 "Purchase.SuccessMessage" = "ยินดีด้วย คุณอัปเกรดเป็นเวอร์ชันพรีเมียมแล้ว ขอให้สนุก!";
 "Purchase.RestoreSuccessMessage" = "กู้คืนเวอร์ชันพรีเมียมเรียบร้อยแล้ว";
+"Purchase.RestoreNothingMessage" = "ไม่พบรายการซื้อก่อนหน้าที่จะกู้คืน";
 "Purchase.FailedMessage" = "ทำรายการไม่สำเร็จ โปรดลองใหม่ภายหลัง";
 "Purchase.Benefit1" = "แก้ไขข้อความใน PDF";
 "Purchase.Benefit2" = "ลงลายเซ็นอิเล็กทรอนิกส์";

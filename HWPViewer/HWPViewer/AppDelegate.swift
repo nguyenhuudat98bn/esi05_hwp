@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import StoreKit
 import GoogleMobileAds
 import FirebaseCore
 import FirebaseMessaging
@@ -20,7 +19,6 @@ import SPNComponent
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
-    let iapObserver = StoreKitManager.shared
     private var onboarding: SPNOnboardingCoordinator?
 
     /// DEBUG only: launch with env `SPN_DISABLE_ADS=1` to run the flow without ads (UI smoke tests).
@@ -63,14 +61,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         Messaging.messaging().delegate = self
         UNUserNotificationCenter.current().delegate = self
-        SKPaymentQueue.default().add(iapObserver)
+        // StoreKit 2: transaction listener + premium flag from the App Store entitlements.
+        PurchaseService.shared.start()
         // App-wide "You're Offline" dialog (ESI05-26).
         NetworkMonitor.shared.start()
         return true
-    }
-
-    func applicationWillTerminate(_ application: UIApplication) {
-        SKPaymentQueue.default().remove(iapObserver)
     }
 
     // MARK: - UIScene (iOS 26 SDK requires the scene lifecycle; SceneDelegate calls back here)
@@ -107,6 +102,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AppEvents.shared.activateApp()
         // S2S attribution: keep the appAccountToken → appsflyer_id mapping fresh on every foreground.
         AttributionAPI.registerInBackground()
+        // A subscription can lapse or be refunded while the app sits in the background.
+        Task { await PurchaseService.shared.refreshEntitlements() }
         onboarding?.lifecycleHandler.applicationDidBecomeActive()
     }
 

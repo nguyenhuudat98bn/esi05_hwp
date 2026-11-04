@@ -47,6 +47,7 @@
 "Purchase.Title" = "PREMIUM-VERSION";
 "Purchase.SuccessMessage" = "Tillykke, du er opgraderet til PREMIUM-versionen. God fornøjelse!";
 "Purchase.RestoreSuccessMessage" = "PREMIUM-versionen er gendannet";
+"Purchase.RestoreNothingMessage" = "Der blev ikke fundet tidligere køb at gendanne.";
 "Purchase.FailedMessage" = "Transaktionen mislykkedes, prøv igen senere";
 "Purchase.Benefit1" = "Rediger PDF-tekst";
 "Purchase.Benefit2" = "UNDERSKRIV DOKUMENTER";

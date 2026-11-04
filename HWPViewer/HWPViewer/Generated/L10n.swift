@@ -272,6 +272,8 @@ internal enum L10n {
   }
   /// Privacy Policy
   internal static var purchasePrivacyPolicy: String { return L10n.tr("Localizable", "Purchase.PrivacyPolicy", fallback: "Privacy Policy") }
+  /// No previous purchases found to restore.
+  internal static var purchaseRestoreNothingMessage: String { return L10n.tr("Localizable", "Purchase.RestoreNothingMessage", fallback: "No previous purchases found to restore.") }
   /// Successfully restored the PREMIUM version
   internal static var purchaseRestoreSuccessMessage: String { return L10n.tr("Localizable", "Purchase.RestoreSuccessMessage", fallback: "Successfully restored the PREMIUM version") }
   /// Congratulations, you have successfully upgraded to the PREMIUM version. Enjoy your experience!

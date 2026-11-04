@@ -11,16 +11,51 @@ import StoreKit
 
 typealias PaywallPlan = IapPlan
 
-struct Product {
-    let id: String
+/// One plan card: the remote plan joined with its StoreKit 2 product.
+struct PaywallProduct {
     let plan: PaywallPlan
-    /// Regular price, e.g. "₫1,159,000".
-    let price: String
-    /// Introductory price string (e.g. "₫99,000") when the product has a pay-as-you-go / pay-up-front intro offer.
-    let introPrice: String?
-    /// Free-trial length in days (0 = none).
+    let storeProduct: StoreKit.Product
+    /// Free-trial length in days this user would actually get (0 = none / not eligible).
     let trialDays: Int
-    let skProduct: SKProduct
+    /// Paid intro price (pay-as-you-go / pay-up-front) this user would actually get, e.g. "₫99,000".
+    let introPrice: String?
+
+    var id: String { storeProduct.id }
+    /// Regular price, localized by the App Store, e.g. "₫1,159,000".
+    var price: String { storeProduct.displayPrice }
+
+    /// Intro wording follows eligibility: someone who already used the intro offer of this
+    /// subscription group is charged full price, so the card must not promise them a trial
+    /// (App Review 3.1.2). StoreKit 1 could not tell, and showed the trial to everyone.
+    init(plan: PaywallPlan, storeProduct: StoreKit.Product) async {
+        self.plan = plan
+        self.storeProduct = storeProduct
+        let eligible = await storeProduct.subscription?.isEligibleForIntroOffer ?? false
+        let offer = eligible ? storeProduct.subscription?.introductoryOffer : nil
+        if let offer, offer.paymentMode == .freeTrial {
+            trialDays = offer.period.approximateDays
+            introPrice = nil
+        } else if let offer, offer.paymentMode == .payAsYouGo || offer.paymentMode == .payUpFront {
+            trialDays = 0
+            introPrice = offer.displayPrice
+        } else {
+            trialDays = 0
+            introPrice = nil
+        }
+    }
+}
+
+extension StoreKit.Product.SubscriptionPeriod {
+    /// Length in days (months as 30, years as 365) — used for "<n>-day free trial" and `sub_id`.
+    var approximateDays: Int {
+        switch unit {
+        case .day: return value
+        case .week: return value * 7
+        case .month: return value * 30
+        case .year: return value * 365
+        @unknown default: return value
+        }
+    }
 }
 
 extension PaywallPlan {

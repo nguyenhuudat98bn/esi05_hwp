@@ -47,6 +47,7 @@
 "Purchase.Title" = "PREMIUMVERSIE";
 "Purchase.SuccessMessage" = "Gefeliciteerd, je gebruikt nu de PREMIUM-versie. Veel plezier!";
 "Purchase.RestoreSuccessMessage" = "PREMIUM-versie hersteld";
+"Purchase.RestoreNothingMessage" = "Geen eerdere aankopen gevonden om te herstellen.";
 "Purchase.FailedMessage" = "Transactie mislukt, probeer het later opnieuw";
 "Purchase.Benefit1" = "PDF-tekst bewerken";
 "Purchase.Benefit2" = "DOCUMENTEN ONDERTEKENEN";

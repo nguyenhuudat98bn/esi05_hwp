@@ -47,6 +47,7 @@
 "Purchase.Title" = "النسخة المميزة";
 "Purchase.SuccessMessage" = "تهانينا، لقد تمت ترقيتك إلى النسخة المميزة. استمتع بالتجربة!";
 "Purchase.RestoreSuccessMessage" = "تمت استعادة النسخة المميزة بنجاح";
+"Purchase.RestoreNothingMessage" = "لم يتم العثور على مشتريات سابقة لاستعادتها.";
 "Purchase.FailedMessage" = "فشلت عملية الشراء، يُرجى المحاولة لاحقًا";
 "Purchase.Benefit1" = "تحرير نص PDF";
 "Purchase.Benefit2" = "توقيع المستندات إلكترونيًا";

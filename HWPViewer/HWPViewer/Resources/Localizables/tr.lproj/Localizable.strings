@@ -47,6 +47,7 @@
 "Purchase.Title" = "PREMIUM SÜRÜM";
 "Purchase.SuccessMessage" = "Tebrikler, PREMIUM sürüme geçtiniz. İyi kullanımlar!";
 "Purchase.RestoreSuccessMessage" = "PREMIUM sürüm geri yüklendi";
+"Purchase.RestoreNothingMessage" = "Geri yüklenecek önceki satın alma bulunamadı.";
 "Purchase.FailedMessage" = "İşlem başarısız oldu, lütfen daha sonra tekrar deneyin";
 "Purchase.Benefit1" = "PDF metnini düzenle";
 "Purchase.Benefit2" = "BELGELERİ İMZALA";
