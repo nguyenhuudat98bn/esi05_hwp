@@ -27,7 +27,7 @@ final class RenameDialog: UIViewController {
     private let confirmTitle: String
     private let dimView = UIView()
     private let card = UIView()
-    private let textField = UITextField()
+    private let textField = ReplaceOnTypeTextField()
     private let fieldContainer = UIView()
     private let errorLabel = UILabel()
     private let okButton = UIButton(type: .system)
@@ -120,9 +120,12 @@ final class RenameDialog: UIViewController {
         okButton.tapPublisher.receive(on: DispatchQueue.main)
             .sink { [weak self] _ in self?.confirm() }.store(in: &cancellables)
         textField.textPublisher.receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
-                self?.canAutoSelectName = false
-                self?.validate()
+            .sink { [weak self] text in
+                guard let self else { return }
+                // The publisher also fires when editing merely *begins*: only a real change of the
+                // name ends the auto-selection, or the later passes never ran (ESI05-39).
+                if (text ?? "") != initialName { canAutoSelectName = false }
+                validate()
             }.store(in: &cancellables)
 
         // iOS 16 finishes placing its caret after `textFieldDidBeginEditing` returns *and* after
@@ -150,6 +153,19 @@ final class RenameDialog: UIViewController {
         // Last pass once the keyboard's presentation animation is over — on iOS 16 nothing applied
         // before that point survives.
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { [weak self] in self?.selectWholeName() }
+        // Still a bare caret (iOS 16 collapses every selection): show the name as selected and let
+        // the first keystroke replace it, like a real selection would (ESI05-39).
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) { [weak self] in
+            guard let self, canAutoSelectName, !isWholeNameSelected else { return }
+            canAutoSelectName = false
+            textField.showsWholeTextSelected()
+        }
+    }
+
+    private var isWholeNameSelected: Bool {
+        guard let range = textField.selectedTextRange, !range.isEmpty else { return false }
+        return textField.offset(from: range.start, to: textField.beginningOfDocument) == 0
+            && textField.offset(from: range.end, to: textField.endOfDocument) == 0
     }
 
     private var currentName: String { (textField.text ?? "").trimmingCharacters(in: .whitespacesAndNewlines) }
@@ -179,9 +195,9 @@ final class RenameDialog: UIViewController {
     /// `autoSelectDeadline` limits all of that to the first second, so a user placing their own
     /// caret afterwards is left alone.
     ///
-    /// KNOWN GAP (ESI05-39): this holds on iOS 17+ but NOT on iOS 16, where UIKit collapses the
-    /// selection back to a caret at the end no matter which of these points sets it. Verified on an
-    /// iOS 16.4 simulator against `selectedTextRange`, `selectAll(_:)`, and both together.
+    /// iOS 16 collapses the selection back to a caret at the end no matter which of these points sets
+    /// it; there `ReplaceOnTypeTextField` takes over after 0.7 s (painted selection, first input
+    /// replaces the name) — see `viewDidAppear`.
     private func selectWholeName() {
         guard canAutoSelectName else { return }
         let field = textField
@@ -222,10 +238,18 @@ extension RenameDialog: UITextFieldDelegate {
     }
 
     func textFieldDidChangeSelection(_ textField: UITextField) {
+        self.textField.selectionDidChangeByUser()
         // Fired when UIKit collapses the selection it just took from us; put it back.
         guard isAutoSelecting, textField.selectedTextRange?.isEmpty ?? true,
               !(textField.text ?? "").isEmpty else { return }
         DispatchQueue.main.async { [weak self] in self?.selectWholeName() }
+    }
+
+    /// Any edit by the user ends auto-selection on the spot — the Combine text publisher is a runloop
+    /// late, and a quick typist's first letters got selected again by a pass still pending.
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        canAutoSelectName = false
+        return true
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
