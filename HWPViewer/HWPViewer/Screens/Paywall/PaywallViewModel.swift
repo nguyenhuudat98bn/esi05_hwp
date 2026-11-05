@@ -36,12 +36,15 @@ final class PaywallViewModel: ViewModelType {
         self.useCase = useCase
     }
 
+    /// The sinks hold `output` strongly: the screen keeps only the `$products` / `$isBusy` / `$message`
+    /// publishers, which do not retain it. With a weak capture `output` was gone as soon as `bind()`
+    /// returned — load, buy and restore all silently did nothing (no prices, dead buttons).
     func transform(_ input: Input) -> Output {
         let output = Output()
 
         input.load
-            .sink { [weak self, weak output] in
-                guard let self, let output else { return }
+            .sink { [weak self] in
+                guard let self else { return }
                 self.run(output) { output in
                     do {
                         output.products = try await self.useCase.loadProducts()
@@ -54,8 +57,8 @@ final class PaywallViewModel: ViewModelType {
             .store(in: &cancellables)
 
         input.buy
-            .sink { [weak self, weak output] productID in
-                guard let self, let output else { return }
+            .sink { [weak self] productID in
+                guard let self else { return }
                 self.run(output) { output in
                     do {
                         // purchased → PurchaseService turns premium on and the paywall dismisses;
@@ -69,8 +72,8 @@ final class PaywallViewModel: ViewModelType {
             .store(in: &cancellables)
 
         input.restore
-            .sink { [weak self, weak output] in
-                guard let self, let output else { return }
+            .sink { [weak self] in
+                guard let self else { return }
                 self.run(output) { output in
                     do {
                         let isPremium = try await self.useCase.restore()

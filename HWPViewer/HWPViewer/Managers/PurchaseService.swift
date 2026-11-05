@@ -76,6 +76,10 @@ final class PurchaseService {
         for product in products {
             catalog[product.id] = product
         }
+        // StoreKit drops ids it cannot find without an error (not in App Store Connect / StoreKit
+        // configuration, agreement or bundle id mismatch) — the paywall then shows "—".
+        let missing = Set(ids).subtracting(products.map(\.id))
+        logger("[IAP] products \(products.map { "\($0.id)=\($0.displayPrice)" })\(missing.isEmpty ? "" : " missing \(missing.sorted())")")
         return products
     }
 
