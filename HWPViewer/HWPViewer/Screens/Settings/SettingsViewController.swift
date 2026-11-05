@@ -115,7 +115,12 @@ final class SettingsViewController: AppBaseViewController {
 
     private func languageDidChange() {
         // Package strings re-resolve on next screen build; rebuild the tab bar so every title updates.
-        guard let window = view.window else { return }
+        // Not `view.window`: the Language screen is pushed over Settings, which takes this view out of
+        // the window — it was nil every time and the app stayed in the old language (ESI05-45).
+        let keyWindow = UIApplication.shared.connectedScenes
+            .compactMap { ($0 as? UIWindowScene)?.windows.first(where: \.isKeyWindow) }
+            .first
+        guard let window = navigationController?.view.window ?? view.window ?? keyWindow else { return }
         let nav = UINavigationController(rootViewController: MainTabBarController())
         nav.isNavigationBarHidden = true
         window.rootViewController = nav
