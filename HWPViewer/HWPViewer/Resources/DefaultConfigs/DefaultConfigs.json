@@ -127,7 +127,7 @@
         {
             "place_name": "tools_screen",
             "native_template_size": "small",
-            "is_enable": false
+            "is_enable": true
         },
         {
             "place_name": "search_screen",
@@ -188,6 +188,44 @@
                     "enc_ad_id": "aJMnnMq7NRUa4nhVDW6Jq1X1BDS0vBBNBGSfn1DCAv//EI3b2e3wSBF4xMoB3WDK"
                 }
             ]
+        }
+    ],
+    "banner_advertiser_places": [
+        {
+            "place_name": "home_screen",
+            "is_enable": true
+        },
+        {
+            "place_name": "viewer_screen",
+            "is_enable": true
+        },
+        {
+            "place_name": "tools_screen",
+            "is_enable": false
+        },
+        {
+            "place_name": "setting_screen",
+            "is_enable": false
+        },
+        {
+            "place_name": "search_screen",
+            "is_enable": false
+        },
+        {
+            "place_name": "select_file_screen",
+            "is_enable": false
+        },
+        {
+            "place_name": "convert_screen",
+            "is_enable": false
+        },
+        {
+            "place_name": "merge_split_screen",
+            "is_enable": false
+        },
+        {
+            "place_name": "ocr_screen",
+            "is_enable": false
         }
     ],
     "interstitial_advertiser": {

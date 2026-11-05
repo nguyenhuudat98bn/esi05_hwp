@@ -12,6 +12,12 @@ import SPNComponent
 class AppBaseViewController: SPNBaseViewController, ToastInsetProviding {
     var isPremium: Bool { SPNSession.shared.isPremium }
 
+    /// Anchored banner under the screen's content, on every screen: shown where remote
+    /// `banner_advertiser_places` enables this screen's place (`interstitialPlace`, e.g. "home_screen"),
+    /// collapsed elsewhere. Its height is added to the bottom safe area, so everything laid out
+    /// against the safe area (bottom bars, the content stack) ends above it.
+    let bannerAdSlot = SPNBannerAdSlot()
+
     /// Toasts are hosted in the window, whose safe area knows nothing about the space the tab
     /// controller reserves for the floating pill tab bar — so on a tab root a plain 24pt inset put
     /// the toast behind the pill. Add back whatever this screen had reserved.
@@ -25,22 +31,64 @@ class AppBaseViewController: SPNBaseViewController, ToastInsetProviding {
         super.viewDidLoad()
         view.backgroundColor = AppColors.background
         statusBarView.backgroundColor = navigationView.configuration.backgroundColor
-        if !hidesBottomBarByDefault {
-            // Tab roots: content (including the native ad slot) must end above the floating tab bar.
-            // The tab controller reserves that space through `additionalSafeAreaInsets`.
-            // Ads covered by other UI violate AdMob policy.
-            containerStackView.snp.remakeConstraints { make in
-                make.top.equalTo(statusBarView.snp.bottom)
-                make.leading.trailing.equalToSuperview()
-                make.bottom.equalTo(view.safeAreaLayoutGuide)
-            }
-        }
+        layoutContainer()
+        setupBanner()
         // Premium on (purchase / restore) or off (expired / refunded subscription).
         NotificationCenter.default.publisher(for: actionWhenPurchaseCompleted)
             .merge(with: NotificationCenter.default.publisher(for: premiumDidEnd))
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in self?.premiumStatusDidChange() }
             .store(in: &cancellables)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // Screens add their own views after this base (bottom bars pinned to the screen's bottom edge
+        // with a background running under the safe area): the banner must stay on top of them —
+        // a covered ad violates AdMob policy. Their controls sit above it through the safe area.
+        view.bringSubviewToFront(bannerAdSlot)
+    }
+
+    /// Tab roots: content (including the native ad slot) must end above the floating tab bar — the tab
+    /// controller reserves that space through `additionalSafeAreaInsets`. Pushed screens run to the
+    /// bottom edge, except above a banner. Ads covered by other UI violate AdMob policy.
+    private func layoutContainer() {
+        let endsAtSafeArea = !hidesBottomBarByDefault || bannerAdSlot.currentHeight > 0
+        containerStackView.snp.remakeConstraints { make in
+            make.top.equalTo(statusBarView.snp.bottom)
+            make.leading.trailing.equalToSuperview()
+            if endsAtSafeArea {
+                make.bottom.equalTo(view.safeAreaLayoutGuide)
+            } else {
+                make.bottom.equalToSuperview()
+            }
+        }
+    }
+
+    private func setupBanner() {
+        view.addSubview(bannerAdSlot)
+        // The banner sits in the band its own height adds under the safe area (above the home
+        // indicator / the floating tab bar).
+        bannerAdSlot.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+        }
+        bannerAdSlot.onHeightChanged = { [weak self] height in
+            guard let self else { return }
+            additionalSafeAreaInsets.bottom = height
+            layoutContainer()
+            view.bringSubviewToFront(bannerAdSlot)
+        }
+        // The keyboard covers the bottom of the screen: keep the banner's room, hide the ad meanwhile
+        // (an ad under the keyboard would count as obscured).
+        NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)
+            .sink { [weak self] _ in self?.bannerAdSlot.alpha = 0 }
+            .store(in: &cancellables)
+        NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)
+            .sink { [weak self] _ in self?.bannerAdSlot.alpha = 1 }
+            .store(in: &cancellables)
+        guard !isPremium else { return }
+        bannerAdSlot.attach(place: interstitialPlace, rootViewController: self)
     }
 
     /// Called after a purchase / restore, and when a subscription ends: hide ads, unlock gated
@@ -51,6 +99,7 @@ class AppBaseViewController: SPNBaseViewController, ToastInsetProviding {
         // detach so the slot is really gone for a paying user.
         nativeAdSlot.detach()
         nativeAdSlot.isHidden = true
+        bannerAdSlot.detach()
     }
 
     /// Runs `action` if the user is premium, otherwise presents the paywall and runs it on success.

@@ -112,6 +112,8 @@ enum OnboardingConfigs {
         // Same Lottie hand pointer as the Language screen, played as-is on the first page's Next button.
         if let url = Bundle.main.url(forResource: "hand_pointer_click", withExtension: "json") {
             config.handPointer = .lottie(url, size: 96)
+            // Centred, the hand covers "Next"; a little to the right it points at the word instead.
+            config.handPointerOffset = CGPoint(x: 24, y: 0)
         }
         config.titleColor = AppColors.textPrimary
         config.titleFont = AppFonts.bold(24)
