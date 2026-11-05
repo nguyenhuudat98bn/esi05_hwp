@@ -101,12 +101,7 @@ final class SplitPagesViewController: AppBaseViewController, ToolFlowScreen {
         guard !selected.isEmpty else { return }
         let ext = item.kind.rawValue
         let dialog = RenameDialog(title: L10n.mergeFileNameTitle, initialName: "", confirmTitle: L10n.popupOk)
-        dialog.validator = { name in
-            let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
-            if trimmed.rangeOfCharacter(from: FileStore.invalidNameCharacters) != nil { return L10n.renameErrorInvalid }
-            if FileStore.shared.fileExists(named: "\(trimmed).\(ext)") { return L10n.renameErrorExists }
-            return nil
-        }
+        dialog.validator = { FileStore.shared.validateNewName($0, ext: ext)?.errorDescription }
         dialog.onConfirm = { [weak self] name in
             self?.runSplit(outputName: name.trimmingCharacters(in: .whitespacesAndNewlines))
         }

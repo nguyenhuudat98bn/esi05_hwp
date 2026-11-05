@@ -208,6 +208,16 @@ final class FileStore {
         return nil
     }
 
+    /// Validates the name of a new `<name>.<ext>` file in Documents (merge / split / convert / OCR output).
+    /// A leading "." is refused like in rename: it would make a hidden file the list never shows.
+    func validateNewName(_ name: String, ext: String) -> FileStoreError? {
+        let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        if trimmed.isEmpty || trimmed.hasPrefix(".") || trimmed.rangeOfCharacter(from: Self.invalidNameCharacters) != nil {
+            return .invalidName
+        }
+        return fileExists(named: "\(trimmed).\(ext)") ? .nameExists : nil
+    }
+
     /// Renames keeping the extension; moves the index entry along.
     @discardableResult
     func rename(_ item: FileItem, to newDisplayName: String) throws -> URL {

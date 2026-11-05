@@ -55,23 +55,3 @@ enum OcrBackgroundCleaner {
         }
     }
 }
-
-extension OcrInkSampler {
-    /// Median colour of a thin ring `margin` outside `box` (normalised, top-left) — the paper / cell
-    /// colour behind the text. Kept tight so a shaded table cell is sampled, not the page around it.
-    func paperColor(around box: CGRect, margin: CGFloat) -> UIColor {
-        let ring = box.insetBy(dx: -margin, dy: -margin)
-        var samples: [(Int, Int, Int)] = []
-        let steps = 24
-        for i in 0...steps {
-            let t = CGFloat(i) / CGFloat(steps)
-            for point in [CGPoint(x: ring.minX + t * ring.width, y: ring.minY), CGPoint(x: ring.minX + t * ring.width, y: ring.maxY),
-                          CGPoint(x: ring.minX, y: ring.minY + t * ring.height), CGPoint(x: ring.maxX, y: ring.minY + t * ring.height)] {
-                if let rgb = rgb(at: point) { samples.append(rgb) }
-            }
-        }
-        guard !samples.isEmpty else { return .white }
-        func median(_ values: [Int]) -> CGFloat { CGFloat(values.sorted()[values.count / 2]) / 255 }
-        return UIColor(red: median(samples.map(\.0)), green: median(samples.map(\.1)), blue: median(samples.map(\.2)), alpha: 1)
-    }
-}

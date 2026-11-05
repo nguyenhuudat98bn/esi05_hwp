@@ -141,12 +141,7 @@ final class SelectFileViewController: AppBaseViewController, ToolFlowScreen {
     // G3: output name → G4 convert → G5 result
     private func startConvert(_ item: FileItem) {
         let dialog = RenameDialog(title: L10n.popupFileName, initialName: item.displayName, confirmTitle: L10n.popupOk)
-        dialog.validator = { name in
-            let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
-            if trimmed.rangeOfCharacter(from: FileStore.invalidNameCharacters) != nil { return L10n.renameErrorInvalid }
-            if FileStore.shared.fileExists(named: "\(trimmed).hwp") { return L10n.renameErrorExists }
-            return nil
-        }
+        dialog.validator = { FileStore.shared.validateNewName($0, ext: "hwp")?.errorDescription }
         dialog.onConfirm = { [weak self] name in
             guard let self else { return }
             let run = { [weak self] in

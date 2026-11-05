@@ -36,8 +36,9 @@ final class OcrToHwpService {
     func convert(_ image: UIImage) async throws -> OcrConversion {
         try await HwpEngine.prepare()
         return try await Task.detached(priority: .userInitiated) {
-            guard let page = image.uprightCGImage() else { throw OcrError.unreadableImage }
-            let lines = try OcrTextRecognizer.recognize(page)
+            guard let picture = image.uprightCGImage() else { throw OcrError.unreadableImage }
+            // Sideways / upside-down pages come back turned so the text reads left → right.
+            let (page, lines) = try OcrTextRecognizer.recognizeUpright(picture)
             guard !lines.isEmpty else { throw OcrError.noText }
             try Task.checkCancellation()
 

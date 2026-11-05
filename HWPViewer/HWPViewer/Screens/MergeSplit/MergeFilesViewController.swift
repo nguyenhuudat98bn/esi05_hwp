@@ -154,12 +154,7 @@ final class MergeFilesViewController: AppBaseViewController, ToolFlowScreen {
     private func askFileName() {
         guard files.count >= 2 else { return }
         let dialog = RenameDialog(title: L10n.mergeFileNameTitle, initialName: "", confirmTitle: L10n.popupOk)
-        dialog.validator = { name in
-            let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
-            if trimmed.rangeOfCharacter(from: FileStore.invalidNameCharacters) != nil { return L10n.renameErrorInvalid }
-            if FileStore.shared.fileExists(named: "\(trimmed).hwp") { return L10n.renameErrorExists }
-            return nil
-        }
+        dialog.validator = { FileStore.shared.validateNewName($0, ext: "hwp")?.errorDescription }
         dialog.onConfirm = { [weak self] name in
             self?.runMerge(outputName: name.trimmingCharacters(in: .whitespacesAndNewlines))
         }

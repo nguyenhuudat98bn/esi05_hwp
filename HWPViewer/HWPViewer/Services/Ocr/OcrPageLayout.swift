@@ -49,6 +49,7 @@ enum OcrPageLayout {
             let em = emWidth(of: pair.0.text)
             return em > 0 ? max(4, min(size, pair.1.width * 1.04 / em)) : size
         }
+        let inks = unifyColors(lines.map { colors?.inkHex(in: $0.box) })
         return lines.indices.map { index in
             let box = boxes[index]
             let size = sizes[index]
@@ -58,7 +59,7 @@ enum OcrPageLayout {
                 "baseline": round2(box.maxY - size * 0.18),
                 "size": size,
             ]
-            if let hex = colors?.inkHex(in: lines[index].box) { entry["color"] = hex }
+            if let hex = inks[index] { entry["color"] = hex }
             return entry
         }
     }
@@ -114,62 +115,18 @@ enum OcrPageLayout {
         return result
     }
 
+    /// Ink colours close to one already used on the page reuse it (sum of channel differences ≤ 48), so a
+    /// paragraph of white or blue text is one colour — one char shape in the file — not a dozen near-equal ones.
+    static func unifyColors(_ hexes: [String?]) -> [String?] {
+        var palette: [(hex: String, rgb: [Int])] = []
+        return hexes.map { hex in
+            guard let hex, let value = Int(hex.dropFirst(), radix: 16) else { return nil }
+            let rgb = [(value >> 16) & 0xFF, (value >> 8) & 0xFF, value & 0xFF]
+            if let near = palette.first(where: { zip($0.rgb, rgb).reduce(0) { $0 + abs($1.0 - $1.1) } <= 48 }) { return near.hex }
+            palette.append((hex, rgb))
+            return hex
+        }
+    }
+
     private static func round2(_ value: CGFloat) -> Double { (Double(value) * 100).rounded() / 100 }
-}
-
-/// Reads ink colours from a downscaled RGBA copy of the page.
-final class OcrInkSampler {
-    private let width: Int
-    private let height: Int
-    private let pixels: [UInt8]
-
-    init?(image: CGImage, maxSide: Int = 1200) {
-        let factor = min(1, Double(maxSide) / Double(max(image.width, image.height)))
-        let w = max(1, Int(Double(image.width) * factor))
-        let h = max(1, Int(Double(image.height) * factor))
-        var buffer = [UInt8](repeating: 255, count: w * h * 4)
-        let drawn: Bool = buffer.withUnsafeMutableBytes { raw in
-            guard let context = CGContext(data: raw.baseAddress, width: w, height: h, bitsPerComponent: 8,
-                                          bytesPerRow: w * 4, space: CGColorSpaceCreateDeviceRGB(),
-                                          bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue) else { return false }
-            context.draw(image, in: CGRect(x: 0, y: 0, width: w, height: h))
-            return true
-        }
-        guard drawn else { return nil }
-        width = w
-        height = h
-        pixels = buffer
-    }
-
-    /// Pixel at a normalised point (top-left origin), nil outside the image.
-    func rgb(at point: CGPoint) -> (Int, Int, Int)? {
-        let x = Int(point.x * CGFloat(width)), y = Int(point.y * CGFloat(height))
-        guard x >= 0, y >= 0, x < width, y < height else { return nil }
-        let i = (y * width + x) * 4
-        return (Int(pixels[i]), Int(pixels[i + 1]), Int(pixels[i + 2]))
-    }
-
-    /// "#rrggbb" of the darkest 15% of the pixels in `box` (normalised, top-left) when that ink is
-    /// clearly coloured; nil for black / gray text.
-    func inkHex(in box: CGRect) -> String? {
-        let x0 = max(0, Int(box.minX * CGFloat(width))), x1 = min(width, Int(box.maxX * CGFloat(width)))
-        let y0 = max(0, Int(box.minY * CGFloat(height))), y1 = min(height, Int(box.maxY * CGFloat(height)))
-        guard x1 > x0, y1 > y0 else { return nil }
-        var samples: [(lum: Int, r: Int, g: Int, b: Int)] = []
-        samples.reserveCapacity((x1 - x0) * (y1 - y0))
-        for y in y0..<y1 {
-            for x in x0..<x1 {
-                let i = (y * width + x) * 4
-                let r = Int(pixels[i]), g = Int(pixels[i + 1]), b = Int(pixels[i + 2])
-                samples.append((r * 299 + g * 587 + b * 114, r, g, b))
-            }
-        }
-        samples.sort { $0.lum < $1.lum }
-        let ink = samples.prefix(max(1, samples.count * 15 / 100))
-        let n = ink.count
-        let r = ink.reduce(0) { $0 + $1.r } / n, g = ink.reduce(0) { $0 + $1.g } / n, b = ink.reduce(0) { $0 + $1.b } / n
-        let spread = max(r, g, b) - min(r, g, b)
-        guard spread >= 60, max(r, g, b) < 235 else { return nil }
-        return String(format: "#%02x%02x%02x", r, g, b)
-    }
 }
