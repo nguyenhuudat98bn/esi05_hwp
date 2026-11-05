@@ -34,6 +34,11 @@ final class HomeViewController: AppBaseViewController {
     private let listAd = ListAdInserter(place: .homeListInline)
     private lazy var actions = FileActionsCoordinator(presenter: self, viewModel: viewModel)
 
+    private var giftBox: GiftBoxView?
+    /// The countdown ran out once: the crown is back (the box itself stays until closed — NPI03).
+    private var giftCountdownEnded = false
+    private var isFirstAppearance = true
+
     // MARK: - Init
     init() {
         super.init(place: .home, navigationConfigs: SPNNavigationConfiguration(title: "", hasBackButton: false, backgroundColor: AppColors.background))
@@ -53,11 +58,65 @@ final class HomeViewController: AppBaseViewController {
         listAd.attachIfNeeded()
         SPNSession.shared.isFirstTimeOnboard = false
         HwpFontManager.shared.prefetchIfNeeded()
+        setupGiftBoxIfNeeded()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.reload()
+        // Back on Home: the gift box counts down from the top again (NPI03 logic).
+        if !isFirstAppearance { giftBox?.restartCountdown() }
+        isFirstAppearance = false
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        giftBox?.pauseCountdown()
+    }
+
+    // MARK: - Gift box (Figma 6764:101491)
+
+    /// Free users, countdown > 0 in remote config, not closed yet in this run.
+    private func setupGiftBoxIfNeeded() {
+        let seconds = IapConfigs.current.giftBoxCountdownTime ?? 180
+        guard !isPremium, seconds > 0, !GiftBoxView.isDismissedThisSession else { return }
+        let box = GiftBoxView(seconds: seconds)
+        view.addSubview(box)
+        // Figma: 5pt from the right edge, 196.6pt from the top of a 360×800 frame (44pt status bar).
+        box.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(196.6 - 44)
+            make.trailing.equalToSuperview().inset(5)
+        }
+        giftBox = box
+        refreshPremiumEntry()
+        box.giftTapped.receive(on: DispatchQueue.main)
+            .sink { [weak self] in
+                self?.removeGiftBox()
+                self?.presentPaywall(at: .homeGiftBox)
+            }
+            .store(in: &cancellables)
+        box.closeTapped.receive(on: DispatchQueue.main)
+            .sink { [weak self] in self?.removeGiftBox() }
+            .store(in: &cancellables)
+        box.countdownEnded.receive(on: DispatchQueue.main)
+            .sink { [weak self] in
+                self?.giftCountdownEnded = true
+                self?.refreshPremiumEntry()
+            }
+            .store(in: &cancellables)
+    }
+
+    private func removeGiftBox() {
+        GiftBoxView.isDismissedThisSession = true
+        giftBox?.pauseCountdown()
+        giftBox?.removeFromSuperview()
+        giftBox = nil
+        refreshPremiumEntry()
+    }
+
+    /// The crown hides while the gift box counts down: one way into the paywall at a time.
+    private func refreshPremiumEntry() {
+        headerView.setPremiumHidden(isPremium || (giftBox != nil && !giftCountdownEnded))
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -213,8 +272,11 @@ final class HomeViewController: AppBaseViewController {
 
     override func premiumStatusDidChange() {
         super.premiumStatusDidChange()
-        headerView.setPremiumHidden(isPremium)
-        if isPremium { listAd.detach() }
+        if isPremium {
+            listAd.detach()
+            if giftBox != nil { removeGiftBox() }
+        }
+        refreshPremiumEntry()
     }
 
     /// Tab -> list filter. Shared by the segment control and the swipe gesture.

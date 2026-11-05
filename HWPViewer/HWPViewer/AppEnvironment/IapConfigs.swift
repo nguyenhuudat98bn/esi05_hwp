@@ -81,6 +81,8 @@ struct IapConfigs: Codable {
     var yearlyTrialId: String?
     var isShowInTools: Bool?
     var isShowInViewFile: Bool?
+    /// Home gift box countdown in seconds; 0 hides the gift box (NPI03 logic).
+    var giftBoxCountdownTime: Int?
 
     enum CodingKeys: String, CodingKey {
         case plans
@@ -98,6 +100,7 @@ struct IapConfigs: Codable {
         case yearlyTrialId = "yearly_trial_id"
         case isShowInTools = "is_show_in_tools"
         case isShowInViewFile = "is_show_in_view_file"
+        case giftBoxCountdownTime = "gift_box_countdown_time"
     }
 
     /// Compiled-in fallback = the App Store Connect products of this app.

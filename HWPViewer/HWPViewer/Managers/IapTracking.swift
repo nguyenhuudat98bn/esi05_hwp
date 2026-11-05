@@ -26,6 +26,7 @@ enum PaywallPlacement: String {
     // User-initiated
     case homeCrown = "home_crown"
     case toolsCrown = "tools_crown"
+    case homeGiftBox = "home_gift_box"
     case setting
     // Premium-gated features
     case convert
