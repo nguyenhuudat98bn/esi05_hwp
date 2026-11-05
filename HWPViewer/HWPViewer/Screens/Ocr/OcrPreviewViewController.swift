@@ -16,7 +16,7 @@ import SPNComponent
 
 final class OcrPreviewViewController: AppBaseViewController, ToolFlowScreen {
     private let page: UIImage
-    private let imageView = UIImageView()
+    private lazy var pageView = OcrZoomableImageView(image: page)
     private let convertButton = MergeSplitUI.primaryButton(L10n.ocrConvertToHwp)
     private let adBadge = UILabel()
     /// Converted page not saved yet: the file-name dialog was cancelled. Convert again goes straight
@@ -40,20 +40,13 @@ final class OcrPreviewViewController: AppBaseViewController, ToolFlowScreen {
         MergeSplitUI.addNavHairline(to: navigationView)
         let content = UIView()
         containerStackView.addArrangedSubview(content)
-        imageView.image = page
-        imageView.contentMode = .scaleAspectFit
-        imageView.accessibilityIgnoresInvertColors = true
-        content.addSubview(imageView)
+        content.addSubview(pageView)
         MergeSplitUI.bottomBar(in: view, content: convertButton)
-        // Full width, 26pt under the header, as tall as the page needs (shrinks to fit short screens).
-        let ratio = page.size.height / max(page.size.width, 1)
-        imageView.snp.makeConstraints { make in
+        // 26pt under the header down to the bottom bar; the page fills the width at 1× and zooms (ESI05-54).
+        pageView.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(26)
-            make.centerX.equalToSuperview()
-            make.width.lessThanOrEqualToSuperview()
-            make.width.equalToSuperview().priority(.high)
-            make.height.equalTo(imageView.snp.width).multipliedBy(ratio)
-            make.bottom.lessThanOrEqualToSuperview().inset(MergeSplitUI.bottomBarHeight + 16)
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview().inset(MergeSplitUI.bottomBarHeight + 16)
         }
 
         // "AD" corner tab: white 40%, top-right of the button, 42×23, rounded bottom-left / top-right 12.
