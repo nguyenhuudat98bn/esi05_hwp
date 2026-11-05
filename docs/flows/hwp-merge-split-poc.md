@@ -41,14 +41,11 @@ Assets (from Figma, `Assets.xcassets/App`): `img_card_merge_bg`, `img_card_split
 `ic_checkbox_off/on`, `ic_select_all_off/on`, `ic_trash_red`, `ic_sort_hint`, `ic_fab_add`,
 `ic_page_check_off/on`, `img_empty_merge_files`.
 
-## Engine (HwpEditorKit, local)
+## Engine (HwpEditorKit 1.12.0)
 
-The app points at the local clone `../../HwpEditorKit` (branch `poc/merge-split`) instead of the
-remote `exactVersion 1.11.3` — switch back before any release build.
-
-- Engine `rhwp_editor_mobile-ios` branch `poc/merge-split`: `34cc109` (core `append_document` +
-  `extract_pages`, FFI, tests), `8155d0e` (xcframework).
-- Kit `HwpEditorKit` branch `poc/merge-split`: `90390ff` — `append(_:)`, `extractPages(_:)`.
+The app uses the remote package `HwpEditorKit` `exactVersion 1.12.0` (`append(_:)`, `extractPages(_:)`,
+`importOCR(json:progress:)`). Engine: `rhwp_editor_mobile-ios` branch `iOS` (merge 8d18490 of
+`poc/merge-split`: core `append_document` + `extract_pages`, FFI, tests, xcframework 1d3579c).
 
 ## Known limits
 

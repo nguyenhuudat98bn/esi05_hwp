@@ -226,7 +226,7 @@
 				DFCE150D2D9E3E2100DB3E8E /* XCRemoteSwiftPackageReference "CombineCocoa" */,
 				DF6B8EDE2E5C586900E6D9AE /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				DF4F975D2EA9D20F00B9FDB6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				AAFFEE00112233445566CC06 /* XCLocalSwiftPackageReference "../../HwpEditorKit" */,
+				AAFFEE00112233445566CC06 /* XCRemoteSwiftPackageReference "HwpEditorKit" */,
 				AA028955304A5AD2003A9CC9 /* XCLocalSwiftPackageReference "../../SPNComponent" */,
 			);
 			preferredProjectObjectVersion = 77;
@@ -512,13 +512,17 @@
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../../SPNComponent;
 		};
-		AAFFEE00112233445566CC06 /* XCLocalSwiftPackageReference "../../HwpEditorKit" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../../HwpEditorKit;
-		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		AAFFEE00112233445566CC06 /* XCRemoteSwiftPackageReference "HwpEditorKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:nguyenhuudat98bn/HwpEditorKit.git";
+			requirement = {
+				kind = exactVersion;
+				version = 1.12.0;
+			};
+		};
 		DF4F975D2EA9D20F00B9FDB6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -612,6 +616,7 @@
 		};
 		AAFFEE00112233445566CC07 /* HwpEditorKit */ = {
 			isa = XCSwiftPackageProductDependency;
+			package = AAFFEE00112233445566CC06 /* XCRemoteSwiftPackageReference "HwpEditorKit" */;
 			productName = HwpEditorKit;
 		};
 		DF4F975E2EA9D21000B9FDB6 /* FirebaseAnalytics */ = {

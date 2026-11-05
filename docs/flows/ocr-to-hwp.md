@@ -1,6 +1,6 @@
 # OCR to HWP
 
-Branch `poc/ocr-to-hwp` (on top of `poc/hwp-merge-split`). UI from Figma "🈯 HWP Edit", section
+In `main` since kit 1.12.0 (developed on `poc/ocr-to-hwp`). UI from Figma "🈯 HWP Edit", section
 **OCR** (`6988:130354`).
 
 ## Flow
@@ -38,7 +38,7 @@ flowchart LR
 5. **Background** (`OcrBackgroundCleaner`): the page through `CIDocumentEnhancer`, each recognised
    line painted over with the colour around it → table lines, boxes, logos, pictures stay behind the
    editable text.
-6. **Engine**: `RhwpDocument.importOCR(json:)` (kit `poc/merge-split`) groups lines into blocks and
+6. **Engine**: `RhwpDocument.importOCR(json:)` (HwpEditorKit 1.12.0) groups lines into blocks and
    writes each block as a borderless floating text box ("glass box") at its position, background image
    behind text — the same writer as PDF → HWP. Left-aligned boxes open to the free space on their
    right (next block or the right margin) so typed text runs on along the line instead of wrapping

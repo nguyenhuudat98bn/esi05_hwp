@@ -1,5 +1,5 @@
 {
-  "originHash" : "92f737edf1ade35076d727384c9d85107355710afd231dd4fa4e8b8b3edbe56c",
+  "originHash" : "01c35ed15887b797a92e5e9fee599c37ee0b45f9f19bd8c4234b493ac236aa8f",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -179,6 +179,15 @@
       "state" : {
         "revision" : "a2ab612cb980066ee56d90d60d8462992c07f24b",
         "version" : "3.5.0"
+      }
+    },
+    {
+      "identity" : "hwpeditorkit",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:nguyenhuudat98bn/HwpEditorKit.git",
+      "state" : {
+        "revision" : "3da4af360022f4fda6b1c4678a5a5224201d5440",
+        "version" : "1.12.0"
       }
     },
     {
