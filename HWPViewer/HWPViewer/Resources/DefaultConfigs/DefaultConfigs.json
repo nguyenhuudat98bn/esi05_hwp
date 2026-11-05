@@ -228,6 +228,22 @@
             "is_enable": false
         }
     ],
+    "banner_advertiser_units": [
+        {
+            "place_name": "banner",
+            "enc_high_ad_id": "aJMnnMq7NRUa4nhVDW6Jq/BpkAUATm7sJgodyh/TsuddulD+BVsqMI+CW43PM/pY",
+            "enc_medium_ad_id": "aJMnnMq7NRUa4nhVDW6Jq/BpkAUATm7sJgodyh/TsuddulD+BVsqMI+CW43PM/pY",
+            "enc_ad_id": "aJMnnMq7NRUa4nhVDW6Jq/BpkAUATm7sJgodyh/TsuddulD+BVsqMI+CW43PM/pY",
+            "countries": [
+                {
+                    "code": "tier1",
+                    "enc_high_ad_id": "aJMnnMq7NRUa4nhVDW6Jq/BpkAUATm7sJgodyh/TsuddulD+BVsqMI+CW43PM/pY",
+                    "enc_medium_ad_id": "aJMnnMq7NRUa4nhVDW6Jq/BpkAUATm7sJgodyh/TsuddulD+BVsqMI+CW43PM/pY",
+                    "enc_ad_id": "aJMnnMq7NRUa4nhVDW6Jq/BpkAUATm7sJgodyh/TsuddulD+BVsqMI+CW43PM/pY"
+                }
+            ]
+        }
+    ],
     "interstitial_advertiser": {
         "units": [
             "aJMnnMq7NRUa4nhVDW6Jq4BPtGcOo8+c+8m9P1UiwzTnzySGutGDLETttxB7HHw4"
