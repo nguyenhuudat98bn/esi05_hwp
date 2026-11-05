@@ -15,7 +15,8 @@ enum OnboardingConfigs {
             splash: splash(),
             prepareAds: prepareAds(),
             language: language(),
-            status: SPNStatusConfig(),
+            // Native ad under the "language applied" screen: off unless remote `native_advertiser_places` enables `status_screen`.
+            status: SPNStatusConfig(adPlace: .status),
             intro: intro()
         )
     }
