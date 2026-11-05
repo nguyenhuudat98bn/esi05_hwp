@@ -227,6 +227,7 @@
 "Split.Selected" = "נבחרו (%d)";
 "Split.PageA11y" = "עמוד %d";
 "Split.SelectAllA11y" = "בחירת הכול";
+"Split.OnePage" = "לקובץ הזה יש עמוד אחד בלבד ולכן אי אפשר לפצל אותו.";
 "Split.SuccessTitle" = "פיצול HWP הושלם";
 "Merge.FileNameTitle" = "שם הקובץ";
 "Split.SelectFile" = "בחירת קובץ";

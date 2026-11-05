@@ -23,6 +23,8 @@ final class NetworkMonitor {
     /// drops once more.
     private var didWarn = false
     private var started = false
+    /// Pending re-try while offline and the dialog could not be shown yet.
+    private var retryTask: Task<Void, Never>?
 
     private init() {}
 
@@ -36,6 +38,17 @@ final class NetworkMonitor {
             Task { @MainActor [weak self] in self?.handle(isOnline: online) }
         }
         monitor.start(queue: queue)
+        // The connection is usually cut from Control Center or the Settings app: the drop arrives while
+        // the app is inactive / in the background, when there is no screen to show the dialog on.
+        // Show it as soon as the app is active again (ESI05-26).
+        NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: .main) { [weak self] _ in
+            Task { @MainActor [weak self] in self?.warnIfStillOffline() }
+        }
+    }
+
+    private func warnIfStillOffline() {
+        guard !isOnline, !didWarn else { return }
+        presentOfflinePopup()
     }
 
     private func handle(isOnline online: Bool) {
@@ -43,6 +56,7 @@ final class NetworkMonitor {
         isOnline = online
         if online {
             didWarn = false
+            retryTask?.cancel()
             return
         }
         // Only the online -> offline edge, so a flapping connection cannot stack dialogs.
@@ -51,15 +65,29 @@ final class NetworkMonitor {
     }
 
     private func presentOfflinePopup() {
-        guard let presenter = Self.topViewController() else { return }
-        // An ad, the system picker or another alert owns the screen — don't fight it.
-        guard presenter.presentedViewController == nil, presenter is AppAlertViewController == false else { return }
+        // No active screen yet (Control Center / Settings in front), or an ad, the system picker or
+        // another alert owns it — don't fight it, look again in a moment (and on becoming active).
+        guard let presenter = Self.topViewController(),
+              presenter.presentedViewController == nil, presenter is AppAlertViewController == false else {
+            scheduleRetry()
+            return
+        }
+        retryTask?.cancel()
         didWarn = true
         OfflinePopup.present(from: presenter) { [weak self] in
             guard let self, !self.isOnline else { return }
             // "Try Again" and still down: say so again.
             self.didWarn = false
             self.presentOfflinePopup()
+        }
+    }
+
+    private func scheduleRetry() {
+        retryTask?.cancel()
+        retryTask = Task { @MainActor [weak self] in
+            try? await Task.sleep(nanoseconds: 2_000_000_000)
+            guard !Task.isCancelled else { return }
+            self?.warnIfStillOffline()
         }
     }
 

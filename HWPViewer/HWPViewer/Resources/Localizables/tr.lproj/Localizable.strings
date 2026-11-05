@@ -227,6 +227,7 @@
 "Split.Selected" = "Seçilen (%d)";
 "Split.PageA11y" = "Sayfa %d";
 "Split.SelectAllA11y" = "Tümünü seç";
+"Split.OnePage" = "Bu dosyada yalnızca bir sayfa olduğu için bölünemez.";
 "Split.SuccessTitle" = "HWP başarıyla bölündü";
 "Merge.FileNameTitle" = "Dosya adı";
 "Split.SelectFile" = "Dosya seç";

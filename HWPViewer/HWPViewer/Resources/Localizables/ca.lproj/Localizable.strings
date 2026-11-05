@@ -227,6 +227,7 @@
 "Split.Selected" = "Seleccionades (%d)";
 "Split.PageA11y" = "Pàgina %d";
 "Split.SelectAllA11y" = "Selecciona-ho tot";
+"Split.OnePage" = "Aquest fitxer només té una pàgina i no es pot dividir.";
 "Split.SuccessTitle" = "HWP dividit correctament";
 "Merge.FileNameTitle" = "Nom del fitxer";
 "Split.SelectFile" = "Tria un fitxer";

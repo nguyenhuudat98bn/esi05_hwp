@@ -227,6 +227,7 @@
 "Split.Selected" = "Selectate (%d)";
 "Split.PageA11y" = "Pagina %d";
 "Split.SelectAllA11y" = "Selectează tot";
+"Split.OnePage" = "Acest fișier are o singură pagină și nu poate fi împărțit.";
 "Split.SuccessTitle" = "HWP împărțit cu succes";
 "Merge.FileNameTitle" = "Nume fișier";
 "Split.SelectFile" = "Alege fișier";

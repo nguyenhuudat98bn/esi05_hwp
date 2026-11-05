@@ -227,6 +227,7 @@
 "Split.Selected" = "Vybráno (%d)";
 "Split.PageA11y" = "Stránka %d";
 "Split.SelectAllA11y" = "Vybrat vše";
+"Split.OnePage" = "Tento soubor má jen jednu stránku a nelze jej rozdělit.";
 "Split.SuccessTitle" = "HWP úspěšně rozděleno";
 "Merge.FileNameTitle" = "Název souboru";
 "Split.SelectFile" = "Vybrat soubor";

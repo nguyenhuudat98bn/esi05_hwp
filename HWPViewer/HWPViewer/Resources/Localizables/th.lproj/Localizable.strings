@@ -227,6 +227,7 @@
 "Split.Selected" = "เลือกแล้ว (%d)";
 "Split.PageA11y" = "หน้า %d";
 "Split.SelectAllA11y" = "เลือกทั้งหมด";
+"Split.OnePage" = "ไฟล์นี้มีเพียงหน้าเดียวจึงแยกไม่ได้";
 "Split.SuccessTitle" = "แยก HWP สำเร็จ";
 "Merge.FileNameTitle" = "ชื่อไฟล์";
 "Split.SelectFile" = "เลือกไฟล์";

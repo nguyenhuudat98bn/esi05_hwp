@@ -227,6 +227,7 @@
 "Split.Selected" = "Odabrano (%d)";
 "Split.PageA11y" = "Stranica %d";
 "Split.SelectAllA11y" = "Odaberi sve";
+"Split.OnePage" = "Ova datoteka ima samo jednu stranicu i ne može se podijeliti.";
 "Split.SuccessTitle" = "HWP uspješno podijeljen";
 "Merge.FileNameTitle" = "Naziv datoteke";
 "Split.SelectFile" = "Odaberi datoteku";

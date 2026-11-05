@@ -227,6 +227,7 @@
 "Split.Selected" = "已选 (%d)";
 "Split.PageA11y" = "第 %d 页";
 "Split.SelectAllA11y" = "全选";
+"Split.OnePage" = "此文件只有一页，无法拆分。";
 "Split.SuccessTitle" = "HWP 拆分成功";
 "Merge.FileNameTitle" = "文件名";
 "Split.SelectFile" = "选择文件";

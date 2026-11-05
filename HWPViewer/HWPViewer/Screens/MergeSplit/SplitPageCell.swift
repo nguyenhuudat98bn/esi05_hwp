@@ -22,6 +22,8 @@ final class SplitPageCell: UICollectionViewCell {
     private let band = UIView()
     private let check = UIImageView()
     private let numberLabel = UILabel()
+    /// Shown until the page's thumbnail lands (ESI05-68).
+    private let spinner = UIActivityIndicatorView(style: .medium)
     private var loadingPage: Int?
     /// Thumbnail request of the page on screen; cancelled when the cell scrolls away, so fast
     /// scrolling does not leave a queue of renders for pages nobody looks at any more.
@@ -40,6 +42,10 @@ final class SplitPageCell: UICollectionViewCell {
         contentView.addSubview(preview)
         contentView.addSubview(numberLabel)
         [band, check].forEach(preview.addSubview)
+        spinner.color = AppColors.textTertiary
+        spinner.hidesWhenStopped = true
+        preview.addSubview(spinner)
+        spinner.snp.makeConstraints { $0.center.equalToSuperview() }
         preview.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
             make.height.equalTo(preview.snp.width).multipliedBy(Self.previewAspect)
@@ -67,6 +73,7 @@ final class SplitPageCell: UICollectionViewCell {
         thumbnailTask?.cancel()
         thumbnailTask = nil
         pageView.image = nil
+        spinner.stopAnimating()
         loadingPage = nil
     }
 
@@ -84,10 +91,12 @@ final class SplitPageCell: UICollectionViewCell {
         let width = max(bounds.width, 80) * 1.2538
         let scale = traitCollection.displayScale
         thumbnailTask?.cancel()
+        spinner.startAnimating()
         thumbnailTask = Task { @MainActor [weak self] in
             let image = await renderer.thumbnail(page: page, width: width, scale: scale)
             guard let self, !Task.isCancelled, loadingPage == page else { return }
             pageView.image = image
+            spinner.stopAnimating()
         }
     }
 }

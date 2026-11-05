@@ -229,6 +229,18 @@ enum SaveChangesPopup {
 }
 
 enum ErrorPopup {
+    /// What the user reads for `error`: the app's own errors carry translated text; engine and system
+    /// errors (e.g. "Rhwp.RhwpDocumentError 0") get a plain sentence instead (ESI05-62).
+    static func message(for error: Error) -> String {
+        switch error {
+        case let error as HwpFontError: return error.errorDescription ?? L10n.ocrErrorMessage
+        case let error as MergeSplitError: return error.errorDescription ?? L10n.ocrErrorMessage
+        case let error as OcrError: return error.errorDescription ?? L10n.ocrErrorMessage
+        case let error as FileStoreError: return error.errorDescription ?? L10n.ocrErrorMessage
+        default: return L10n.ocrErrorMessage
+        }
+    }
+
     @MainActor
     static func present(from presenter: UIViewController, message: String, onDismiss: (() -> Void)? = nil) {
         let alert = AppAlertViewController(

@@ -105,6 +105,10 @@ final class OcrPreviewViewController: AppBaseViewController, ToolFlowScreen {
         case .success(let conversion):
             unsavedConversion = conversion
             askFileName(for: conversion)
+        case .failure(let error as HwpFontError) where error == .network:
+            // The engine fonts could not be fetched: offline dialog with Try Again (ESI05-56).
+            logger("[OCR] failed offline")
+            OfflinePopup.present(from: self) { [weak self] in self?.runConversion() }
         case .failure(let error):
             logger("[OCR] failed: \(error)")
             let failure = DocumentErrorViewController(place: .ocr, content: .ocr)
@@ -124,7 +128,7 @@ final class OcrPreviewViewController: AppBaseViewController, ToolFlowScreen {
                 let done = ConvertResultViewController(outputURL: output.url, size: output.size, place: .ocr)
                 navigationController?.pushViewController(done, animated: true)
             } catch {
-                ErrorPopup.present(from: self, message: error.localizedDescription)
+                ErrorPopup.present(from: self, message: ErrorPopup.message(for: error))
             }
         }
         present(dialog, animated: true)

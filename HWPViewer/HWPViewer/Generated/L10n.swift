@@ -404,6 +404,8 @@ internal enum L10n {
   internal static var settingsPremiumTitle: String { return L10n.tr("Localizable", "Settings.Premium.Title", fallback: "Upgrade to Premium") }
   /// Check out HWP Viewer - the easiest way to open, edit and convert HWP files on iPhone!
   internal static var settingsShareMessage: String { return L10n.tr("Localizable", "Settings.Share.Message", fallback: "Check out HWP Viewer - the easiest way to open, edit and convert HWP files on iPhone!") }
+  /// This file has only one page and can't be split.
+  internal static var splitOnePage: String { return L10n.tr("Localizable", "Split.OnePage", fallback: "This file has only one page and can't be split.") }
   /// Page %d
   internal static func splitPageA11y(_ p1: Int) -> String {
     return L10n.tr("Localizable", "Split.PageA11y", p1, fallback: "Page %d")

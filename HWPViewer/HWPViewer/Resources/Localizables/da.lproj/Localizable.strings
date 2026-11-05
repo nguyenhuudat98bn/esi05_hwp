@@ -227,6 +227,7 @@
 "Split.Selected" = "Valgt (%d)";
 "Split.PageA11y" = "Side %d";
 "Split.SelectAllA11y" = "Vælg alle";
+"Split.OnePage" = "Filen har kun én side og kan ikke opdeles.";
 "Split.SuccessTitle" = "HWP er opdelt";
 "Merge.FileNameTitle" = "Filnavn";
 "Split.SelectFile" = "Vælg fil";

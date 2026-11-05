@@ -11,7 +11,7 @@ import UIKit
 
 enum MergeSplitFlow {
     static func startMerge(on navigationController: UINavigationController) {
-        let picker = HwpFilePickerViewController(mode: .multiple(preselected: []))
+        let picker = HwpFilePickerViewController(mode: .multiple(minimum: 2))
         picker.onPicked = { [weak navigationController] files in
             navigationController?.pushViewController(MergeFilesViewController(files: files), animated: true)
         }

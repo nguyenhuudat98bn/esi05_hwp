@@ -227,6 +227,7 @@
 "Split.Selected" = "Geselecteerd (%d)";
 "Split.PageA11y" = "Pagina %d";
 "Split.SelectAllA11y" = "Alles selecteren";
+"Split.OnePage" = "Dit bestand heeft maar één pagina en kan niet worden gesplitst.";
 "Split.SuccessTitle" = "HWP gesplitst";
 "Merge.FileNameTitle" = "Bestandsnaam";
 "Split.SelectFile" = "Bestand kiezen";

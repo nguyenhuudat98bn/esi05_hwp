@@ -227,6 +227,7 @@
 "Split.Selected" = "Valda (%d)";
 "Split.PageA11y" = "Sida %d";
 "Split.SelectAllA11y" = "Markera alla";
+"Split.OnePage" = "Filen har bara en sida och kan inte delas.";
 "Split.SuccessTitle" = "HWP har delats";
 "Merge.FileNameTitle" = "Filnamn";
 "Split.SelectFile" = "Välj fil";

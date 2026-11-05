@@ -229,6 +229,7 @@
 "Split.Selected" = "Selected (%d)";
 "Split.PageA11y" = "Page %d";
 "Split.SelectAllA11y" = "Select all";
+"Split.OnePage" = "This file has only one page and can't be split.";
 "Split.SuccessTitle" = "Split HWP Successfully";
 "Tools.Ocr" = "OCR";
 "Tools.OcrSubtitle" = "Photo or scan to HWP";

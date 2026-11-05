@@ -57,6 +57,16 @@ final class HwpFontManager {
     private var verifiedThisLaunch = false
     private var inflight: Task<Void, Error>?
 
+    /// Bounded waits: a connection that drops mid-download fails within seconds instead of leaving
+    /// the caller's loading screen up for minutes (ESI05-56). `URLSession.shared` waits far longer.
+    private nonisolated static let session: URLSession = {
+        let configuration = URLSessionConfiguration.default
+        configuration.timeoutIntervalForRequest = 15
+        configuration.timeoutIntervalForResource = 90
+        configuration.waitsForConnectivity = false
+        return URLSession(configuration: configuration)
+    }()
+
     /// Quick check for UI (existence only; checksum verified in `ensureFonts`).
     var isReady: Bool {
         if verifiedThisLaunch { return true }
@@ -78,6 +88,8 @@ final class HwpFontManager {
             try await inflight.value
             return
         }
+        // Fonts to download and no connection: say so now rather than after the request times out.
+        if !isReady && !NetworkMonitor.shared.isConnected { throw HwpFontError.network }
         let fonts = self.fonts
         let dir = fontsDirectory
         let base = baseURL
@@ -88,7 +100,7 @@ final class HwpFontManager {
                     continue
                 }
                 guard let url = URL(string: "\(base)/\(font.fileName).xz") else { throw HwpFontError.network }
-                let (xzData, response) = try await URLSession.shared.data(from: url)
+                let (xzData, response) = try await Self.session.data(from: url)
                 guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw HwpFontError.network }
                 let data = try (xzData as NSData).decompressed(using: .lzma) as Data
                 guard Self.sha256Hex(data) == font.sha256 else { throw HwpFontError.corrupted }

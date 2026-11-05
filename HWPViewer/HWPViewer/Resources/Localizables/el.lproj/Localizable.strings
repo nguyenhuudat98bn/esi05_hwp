@@ -227,6 +227,7 @@
 "Split.Selected" = "Επιλεγμένες (%d)";
 "Split.PageA11y" = "Σελίδα %d";
 "Split.SelectAllA11y" = "Επιλογή όλων";
+"Split.OnePage" = "Αυτό το αρχείο έχει μόνο μία σελίδα και δεν μπορεί να διαχωριστεί.";
 "Split.SuccessTitle" = "Ο διαχωρισμός HWP ολοκληρώθηκε";
 "Merge.FileNameTitle" = "Όνομα αρχείου";
 "Split.SelectFile" = "Επιλογή αρχείου";

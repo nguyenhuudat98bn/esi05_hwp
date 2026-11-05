@@ -227,6 +227,7 @@
 "Split.Selected" = "Kijelölve (%d)";
 "Split.PageA11y" = "%d. oldal";
 "Split.SelectAllA11y" = "Összes kijelölése";
+"Split.OnePage" = "Ez a fájl csak egy oldalból áll, ezért nem osztható fel.";
 "Split.SuccessTitle" = "HWP sikeresen felosztva";
 "Merge.FileNameTitle" = "Fájlnév";
 "Split.SelectFile" = "Fájl kiválasztása";

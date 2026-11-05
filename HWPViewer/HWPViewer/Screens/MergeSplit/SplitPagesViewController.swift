@@ -16,6 +16,7 @@ import SPNComponent
 final class SplitPagesViewController: AppBaseViewController, ToolFlowScreen {
     private let item: FileItem
     private let renderer: HwpPageThumbnailRenderer
+    private let loadingIndicator = UIActivityIndicatorView(style: .large)
     private var pageCount = 0
     private var selected = Set<Int>()
     private let selectAll = SelectAllButton(type: .custom)
@@ -40,6 +41,10 @@ final class SplitPagesViewController: AppBaseViewController, ToolFlowScreen {
             .store(in: &cancellables)
 
         containerStackView.addArrangedSubview(collectionView)
+        loadingIndicator.color = AppColors.primary
+        loadingIndicator.hidesWhenStopped = true
+        view.addSubview(loadingIndicator)
+        loadingIndicator.snp.makeConstraints { $0.center.equalTo(collectionView) }
         collectionView.backgroundColor = AppColors.background
         collectionView.register(SplitPageCell.self, forCellWithReuseIdentifier: SplitPageCell.identifier)
         collectionView.dataSource = self
@@ -64,15 +69,18 @@ final class SplitPagesViewController: AppBaseViewController, ToolFlowScreen {
     }
 
     private func loadPages() {
+        // The document opens (and paginates) before any page shows: say it is loading (ESI05-68).
+        loadingIndicator.startAnimating()
         Task { @MainActor [weak self] in
             guard let self else { return }
+            defer { loadingIndicator.stopAnimating() }
             do {
                 try await HwpEngine.prepare()
                 pageCount = try await renderer.open()
                 collectionView.reloadData()
                 refreshSelectionUI()
             } catch {
-                ErrorPopup.present(from: self, message: error.localizedDescription)
+                ErrorPopup.present(from: self, message: ErrorPopup.message(for: error))
             }
         }
     }
@@ -132,7 +140,7 @@ final class SplitPagesViewController: AppBaseViewController, ToolFlowScreen {
                                                    titleFont: AppFonts.semibold(18), place: .mergeSplit)
             navigationController?.pushViewController(done, animated: true)
         case .failure(let error):
-            ErrorPopup.present(from: self, message: error.localizedDescription)
+            ErrorPopup.present(from: self, message: ErrorPopup.message(for: error))
         }
     }
 }

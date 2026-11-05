@@ -227,6 +227,7 @@
 "Split.Selected" = "المحدد (%d)";
 "Split.PageA11y" = "الصفحة %d";
 "Split.SelectAllA11y" = "تحديد الكل";
+"Split.OnePage" = "يحتوي هذا الملف على صفحة واحدة فقط ولا يمكن تقسيمه.";
 "Split.SuccessTitle" = "تم تقسيم HWP بنجاح";
 "Merge.FileNameTitle" = "اسم الملف";
 "Split.SelectFile" = "اختيار ملف";

@@ -227,6 +227,7 @@
 "Split.Selected" = "Выбрано (%d)";
 "Split.PageA11y" = "Страница %d";
 "Split.SelectAllA11y" = "Выбрать все";
+"Split.OnePage" = "В этом файле только одна страница, его нельзя разделить.";
 "Split.SuccessTitle" = "HWP успешно разделён";
 "Merge.FileNameTitle" = "Имя файла";
 "Split.SelectFile" = "Выбрать файл";

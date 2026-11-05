@@ -131,19 +131,21 @@ final class MergeFilesViewController: AppBaseViewController, ToolFlowScreen {
 
     // MARK: - Actions
 
-    private func remove(_ item: FileItem) {
-        guard let index = files.firstIndex(where: { $0.id == item.id }) else { return }
+    /// By row, not by file: the same file may sit in the merge twice.
+    private func remove(at index: Int) {
+        guard files.indices.contains(index) else { return }
         files.remove(at: index)
         tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
         refresh()
     }
 
-    /// The picker opens with the current files checked; Continue replaces the list (new picks at the end).
+    /// The picker opens with nothing ticked and its picks go to the end of the list, so a file already
+    /// in the merge can be added again to merge a file with itself (ESI05-55).
     private func addFiles() {
-        let picker = HwpFilePickerViewController(mode: .multiple(preselected: files))
+        let picker = HwpFilePickerViewController(mode: .multiple(minimum: 1))
         picker.onPicked = { [weak self] picked in
             guard let self else { return }
-            files = picked
+            files += picked
             tableView.reloadData()
             refresh()
             navigationController?.popToViewController(self, animated: true)
@@ -178,7 +180,7 @@ final class MergeFilesViewController: AppBaseViewController, ToolFlowScreen {
                                                    titleFont: AppFonts.semibold(18), place: .mergeSplit)
             navigationController?.pushViewController(done, animated: true)
         case .failure(let error):
-            ErrorPopup.present(from: self, message: error.localizedDescription)
+            ErrorPopup.present(from: self, message: ErrorPopup.message(for: error))
         }
     }
 }
@@ -192,7 +194,10 @@ extension MergeFilesViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: HwpFileRowCell.identifier, for: indexPath) as! HwpFileRowCell
         let item = files[indexPath.row]
         cell.configure(item: item, accessory: .delete)
-        cell.onDelete = { [weak self] in self?.remove(item) }
+        cell.onDelete = { [weak self, weak cell] in
+            guard let self, let cell, let row = tableView.indexPath(for: cell)?.row else { return }
+            remove(at: row)
+        }
         return cell
     }
 

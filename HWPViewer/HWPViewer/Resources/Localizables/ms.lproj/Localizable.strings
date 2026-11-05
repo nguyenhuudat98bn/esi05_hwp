@@ -227,6 +227,7 @@
 "Split.Selected" = "Dipilih (%d)";
 "Split.PageA11y" = "Halaman %d";
 "Split.SelectAllA11y" = "Pilih semua";
+"Split.OnePage" = "Fail ini hanya mempunyai satu halaman dan tidak boleh dipisahkan.";
 "Split.SuccessTitle" = "HWP berjaya dipisahkan";
 "Merge.FileNameTitle" = "Nama fail";
 "Split.SelectFile" = "Pilih fail";
