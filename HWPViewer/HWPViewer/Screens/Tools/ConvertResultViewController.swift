@@ -137,6 +137,8 @@ final class ConvertResultViewController: AppBaseViewController {
         if place == .convert {
             goToAllFiles()
         } else {
+            // All tabs share one navigation controller: pick the Tools tab, then pop to it.
+            (navigationController?.viewControllers.first as? MainTabBarController)?.selectTab(.tools)
             navigationController?.popToRootViewController(animated: true)
         }
     }

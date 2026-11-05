@@ -37,6 +37,9 @@ final class PaywallViewController: UIViewController {
     private lazy var selectedPlan: PaywallPlan? = config.defaultPlan
     /// Set by PaywallPresenter: true when this is not the first paywall of the session (X may be delayed).
     var isRepeatShow = false
+    /// Onboarding (after splash / intro): hand over before the slide-down, so the next screen (Home)
+    /// is already in place when the paywall uncovers it — not the intro page for a second (ESI05-52).
+    var revealsNextScreenFirst = false
     /// `iap_purchase_show` goes out once, when the products arrive (or fail to).
     private var didLogShow = false
 
@@ -322,12 +325,11 @@ final class PaywallViewController: UIViewController {
             }
             .store(in: &cancellables)
 
+        // Throttle, not debounce: a debounce held every close back by 0.3 s.
         closeButton.tapPublisher
-            .debounce(for: .seconds(0.3), scheduler: RunLoop.main)
+            .throttle(for: .seconds(0.5), scheduler: RunLoop.main, latest: false)
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
-                self?.dismiss(animated: true) { self?.delegate?.dismiss() }
-            }
+            .sink { [weak self] _ in self?.close { $0?.dismiss() } }
             .store(in: &cancellables)
         restoreButton.tapPublisher.receive(on: DispatchQueue.main)
             .sink { [weak self] _ in self?.restoreSubject.send() }
@@ -344,10 +346,18 @@ final class PaywallViewController: UIViewController {
 
         NotificationCenter.default.publisher(for: actionWhenPurchaseCompleted)
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
-                self?.dismiss(animated: true) { self?.delegate?.dismissWhenPurchased() }
-            }
+            .sink { [weak self] _ in self?.close { $0?.dismissWhenPurchased() } }
             .store(in: &cancellables)
+    }
+
+    private func close(_ report: @escaping (IAPVCEvent?) -> Void) {
+        let delegate = self.delegate
+        if revealsNextScreenFirst {
+            report(delegate)
+            dismiss(animated: true)
+        } else {
+            dismiss(animated: true) { report(delegate) }
+        }
     }
 
     private func logShowOnce() {

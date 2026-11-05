@@ -32,8 +32,26 @@ final class FileActionsCoordinator: NSObject {
         PaywallPresenter.shared.presentIfAllowed(at: .viewFile, from: presenter) {
             SPNAdsManager.shared.interstitial.show(from: presenter, place: .home) { result in
                 if case .didDismiss = result { RatePromptManager.shared.noteFullScreenAdDismissed() }
-                presenter.navigationController?.pushViewController(viewer, animated: true)
+                Self.pushViewerOrError(viewer, item: item, from: presenter)
             }
+        }
+    }
+
+    /// The file is opened here first (spinner on the current screen if it takes a moment): a broken
+    /// file goes straight to the error screen instead of flashing the grey viewer before it
+    /// (ESI05-67). If the engine cannot start yet (fonts, offline) the viewer handles that itself.
+    private static func pushViewerOrError(_ viewer: HwpViewerViewController, item: FileItem, from presenter: UIViewController) {
+        let hud = Task { @MainActor [weak presenter] in
+            try? await Task.sleep(nanoseconds: 250_000_000)
+            if !Task.isCancelled { presenter?.showLoadingHUD(true) }
+        }
+        Task { @MainActor [weak presenter] in
+            let check = try? await HwpFileInspector.shared.inspect(item)
+            hud.cancel()
+            guard let presenter else { return }
+            presenter.showLoadingHUD(false)
+            let next: UIViewController = check == .unreadable ? DocumentErrorViewController(place: .viewer) : viewer
+            presenter.navigationController?.pushViewController(next, animated: true)
         }
     }
 

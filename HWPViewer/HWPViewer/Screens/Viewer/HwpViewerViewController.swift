@@ -58,6 +58,8 @@ final class HwpViewerViewController: AppBaseViewController {
     private var item: FileItem
     private var startInEditMode: Bool
     private var searchMatches: [HwpSearchMatch] = []
+    /// Height the keyboard covers (0 when hidden): toasts during a search sit above it.
+    private var keyboardHeight: CGFloat = 0
     private var searchIndex = 0
     private var searchQueryToken = 0
     private var lastMode: EditorViewModel.EditorMode = .read
@@ -105,6 +107,16 @@ final class HwpViewerViewController: AppBaseViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.publisher(for: UIResponder.keyboardWillChangeFrameNotification)
+            .merge(with: NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification))
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] note in
+                guard let self else { return }
+                if note.name == UIResponder.keyboardWillHideNotification { keyboardHeight = 0; return }
+                let frame = (note.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect) ?? .zero
+                keyboardHeight = max(0, UIScreen.main.bounds.height - frame.minY)
+            }
+            .store(in: &cancellables)
         setupViews()
         bindViewModel()
         bindActions()
@@ -360,17 +372,23 @@ final class HwpViewerViewController: AppBaseViewController {
         }
     }
 
+    /// Leaving edit mode starts the next edit session clean: no Undo / Redo left over from this one
+    /// (ESI05-63) — e.g. edits undone back to the original still left Redo live.
     private func closeEditTapped() {
         guard vm.canUndo else {
+            vm.markSaved()
             vm.exitEditMode()
             return
         }
-        let wasEditing = vm.isEditing
         SaveChangesPopup.present(from: self, cancel: { [weak self] in
             guard let self else { return }
             vm.discardAllChanges()
             vm.exitEditMode()
-            _ = wasEditing
+            // The undo-all runs on the engine queue: clear the history once it is done.
+            Task { @MainActor [weak self] in
+                await self?.vm.waitForPendingEdits()
+                self?.vm.markSaved()
+            }
         }, save: { [weak self] in
             self?.commitSave()
         })
@@ -379,6 +397,7 @@ final class HwpViewerViewController: AppBaseViewController {
     /// Header "Save": confirm with the Save Changes popup (Figma 18387:126424) before writing the file.
     private func saveTapped() {
         guard vm.canUndo else {
+            vm.markSaved()
             vm.exitEditMode()
             return
         }
@@ -545,6 +564,8 @@ final class HwpViewerViewController: AppBaseViewController {
             searchBarView.setResultCount(matches.count)
             if matches.isEmpty {
                 vm.clearSearchHighlight()
+                // Say it, not only "0/0" in the bar (ESI05-65); above the keyboard that is still up.
+                showToast(L10n.searchNoResult, bottomInset: keyboardHeight > 0 ? keyboardHeight + 12 : nil)
             } else {
                 showCurrentMatch()
             }
@@ -578,9 +599,11 @@ final class HwpViewerViewController: AppBaseViewController {
         guard let fresh = FileStore.shared.item(at: item.url) else { return }
         item = fresh
         let sheet = FileActionSheet(item: fresh, actions: [.rename, .share, .print, .delete])
+        // Through the coordinator: it toggles and toasts "Added to / Removed from bookmarks", placed
+        // above the sheet (FileActionSheet.toastBottomInset) — the viewer used to toggle silently (ESI05-66).
         sheet.onBookmark = { [weak self] in
             guard let self else { return }
-            FileStore.shared.toggleBookmark(item.url)
+            actions.toggleBookmark(item)
         }
         sheet.onAction = { [weak self] action in
             guard let self else { return }
