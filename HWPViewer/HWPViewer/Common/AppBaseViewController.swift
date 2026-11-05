@@ -35,13 +35,16 @@ class AppBaseViewController: SPNBaseViewController, ToastInsetProviding {
                 make.bottom.equalTo(view.safeAreaLayoutGuide)
             }
         }
+        // Premium on (purchase / restore) or off (expired / refunded subscription).
         NotificationCenter.default.publisher(for: actionWhenPurchaseCompleted)
+            .merge(with: NotificationCenter.default.publisher(for: premiumDidEnd))
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in self?.premiumStatusDidChange() }
             .store(in: &cancellables)
     }
 
-    /// Called after a purchase / restore: hide ads, unlock gated features.
+    /// Called after a purchase / restore, and when a subscription ends: hide ads, unlock gated
+    /// features (overrides also refresh premium-dependent UI such as AD badges on the way back).
     func premiumStatusDidChange() {
         guard isPremium else { return }
         // Hiding alone leaves the loaded ad alive underneath and it reappears on the next layout;

@@ -25,6 +25,15 @@ enum OcrTextRecognizer {
     /// Recognition languages, Korean first (the app's documents are mostly Korean).
     static let languages = ["ko-KR", "en-US"]
 
+    /// Whether Vision on this device reads Korean (accurate revision 3, iOS 16+). The app still runs
+    /// on iOS 15, where `ko-KR` is missing and Hangul would come out as Latin noise — the Tools tab
+    /// hides OCR there.
+    static let supportsKorean: Bool = {
+        let request = VNRecognizeTextRequest()
+        request.recognitionLevel = .accurate
+        return ((try? request.supportedRecognitionLanguages()) ?? []).contains("ko-KR")
+    }()
+
     /// The page turned so most of its text reads left → right, with its upright lines. Lines in another
     /// direction (a sideways label in a table) are left out: they stay in the background picture.
     static func recognizeUpright(_ image: CGImage) throws -> (page: CGImage, lines: [OcrLine]) {

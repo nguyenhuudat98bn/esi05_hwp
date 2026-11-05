@@ -79,14 +79,20 @@ final class SplitPagesViewController: AppBaseViewController, ToolFlowScreen {
 
     private func toggle(page: Int) {
         if selected.contains(page) { selected.remove(page) } else { selected.insert(page) }
-        collectionView.reloadItems(at: [IndexPath(item: page - 1, section: 0)])
+        // Restyle the visible cell in place: reloading it would re-request its thumbnail.
+        if let cell = collectionView.cellForItem(at: IndexPath(item: page - 1, section: 0)) as? SplitPageCell {
+            cell.configure(page: page, selected: selected.contains(page), renderer: renderer)
+        }
         refreshSelectionUI()
     }
 
     private func toggleSelectAll() {
         guard pageCount > 0 else { return }
         selected = selected.count == pageCount ? [] : Set(1...pageCount)
-        collectionView.reloadData()
+        for case let cell as SplitPageCell in collectionView.visibleCells {
+            guard let indexPath = collectionView.indexPath(for: cell) else { continue }
+            cell.configure(page: indexPath.item + 1, selected: selected.contains(indexPath.item + 1), renderer: renderer)
+        }
         refreshSelectionUI()
     }
 

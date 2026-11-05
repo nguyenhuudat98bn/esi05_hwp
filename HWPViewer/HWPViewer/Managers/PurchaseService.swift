@@ -35,6 +35,9 @@ enum PurchaseServiceError: LocalizedError {
     var errorDescription: String? { L10n.purchaseFailedMessage }
 }
 
+/// Posted when an expired or refunded subscription switches premium off.
+let premiumDidEnd = Notification.Name("PremiumDidEnd")
+
 @MainActor
 final class PurchaseService {
     static let shared = PurchaseService()
@@ -50,6 +53,13 @@ final class PurchaseService {
     /// Products loaded from the App Store so far, by product id.
     private var catalog: [String: StoreKit.Product] = [:]
     private var updatesTask: Task<Void, Never>?
+    /// A purchase is between "Buy" and its result. The foreground re-check (the purchase sheet
+    /// closing makes the app active) stays out of the way: `purchase` grants premium itself, with
+    /// the success banner.
+    private var isPurchasing = false
+    /// Bumped each time premium is granted. A re-check that started before the grant read an older
+    /// entitlement list and must not switch premium back off.
+    private var grantCount = 0
 
     private init() {}
 
@@ -86,6 +96,8 @@ final class PurchaseService {
     // MARK: - Purchase / restore
 
     func purchase(productID: String) async throws -> PurchaseOutcome {
+        isPurchasing = true
+        defer { isPurchasing = false }
         do {
             let product = try await storeProduct(id: productID)
             // The hub must hold token → appsflyer_id before Apple's server notification can reach it.
@@ -128,18 +140,45 @@ final class PurchaseService {
 
     /// Sets the premium flag from the App Store's current entitlement list. The app sells a single
     /// premium level, so any active entitlement unlocks it.
+    ///
+    /// Premium is switched off only on a clear verdict: no active entitlement while the account's
+    /// purchase history does hold a (now expired or refunded) transaction. Unverifiable entries, an
+    /// empty history (no account / not synced yet / another Apple ID) or a grant that landed while
+    /// this read was running keep the current state — revoking without a verdict sent paying users
+    /// back to the paywall in the StoreKit 1 days.
     @discardableResult
     func refreshEntitlements(reason: ActivationReason = .sync) async -> Bool {
+        if reason == .sync && isPurchasing { return SPNSession.shared.isPremium }
+        let grantsBefore = grantCount
         var active: Transaction?
+        var hasUnverified = false
         for await entitlement in Transaction.currentEntitlements {
-            guard case .verified(let transaction) = entitlement, transaction.revocationDate == nil else { continue }
-            active = transaction
+            switch entitlement {
+            case .verified(let transaction):
+                if transaction.revocationDate == nil { active = transaction }
+            case .unverified(let transaction, let error):
+                hasUnverified = true
+                logger("[IAP] unverified entitlement \(transaction.productID): \(error)")
+            }
         }
         if let active {
             activate(productID: active.productID, reason: reason)
             return true
         }
+        guard !hasUnverified, grantCount == grantsBefore, await historyHasEndedPurchase(), grantCount == grantsBefore else {
+            if SPNSession.shared.isPremium { logger("[IAP] no active entitlement but no clear verdict, premium kept") }
+            return SPNSession.shared.isPremium
+        }
         deactivate()
+        return false
+    }
+
+    /// Whether the account's App Store history holds a verified transaction. Called only when no
+    /// entitlement is active, so such a transaction has expired or been refunded.
+    private func historyHasEndedPurchase() async -> Bool {
+        for await result in Transaction.all {
+            if case .verified = result { return true }
+        }
         return false
     }
 
@@ -179,6 +218,7 @@ final class PurchaseService {
     /// from free to premium — `PaywallViewController` dismisses on that notification, so a second
     /// post would dismiss whatever screen took its place.
     private func activate(productID: String, reason: ActivationReason) {
+        grantCount += 1
         let session = SPNSession.shared
         session.subscriptionPackage = productID
         guard !session.isPremium else { return }
@@ -198,7 +238,10 @@ final class PurchaseService {
     private func deactivate() {
         guard SPNSession.shared.isPremium else { return }
         SPNSession.shared.isPremium = false
-        logger("[IAP] no active entitlement, premium off")
+        logger("[IAP] subscription ended, premium off")
+        // Screens re-read `isPremium` (ads, AD badges, crown). Not `actionWhenPurchaseCompleted`:
+        // an open paywall dismisses itself on that one.
+        NotificationCenter.default.post(name: premiumDidEnd, object: nil)
     }
 
     private func verified<T>(_ result: VerificationResult<T>) throws -> T {

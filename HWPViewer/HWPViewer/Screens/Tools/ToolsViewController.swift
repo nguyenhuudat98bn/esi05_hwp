@@ -41,15 +41,21 @@ final class ToolsViewController: AppBaseViewController {
             .sink { [weak self] _ in self?.presentPaywall(at: .toolsCrown) }
             .store(in: &cancellables)
 
-        let content = UIView()
-        containerStackView.addArrangedSubview(content)
+        // Scrolls when the cards do not fit (4"/4.7" phones, or once the native ad below takes its
+        // height): a fixed grid would run under the ad slot / tab bar and cover the ad.
+        let scrollView = UIScrollView()
+        scrollView.alwaysBounceVertical = false
+        scrollView.showsVerticalScrollIndicator = false
+        containerStackView.addArrangedSubview(scrollView)
         containerStackView.addArrangedSubview(nativeAdSlot)
 
         let grid = UIStackView()
         grid.axis = .vertical
         grid.spacing = 12
         grid.distribution = .fillEqually
-        let pairs: [[ToolKind]] = [[.editHwp, .pdfToHwp], [.docToHwp, .print], [.mergeHwp, .splitHwp], [.ocr]]
+        var pairs: [[ToolKind]] = [[.editHwp, .pdfToHwp], [.docToHwp, .print], [.mergeHwp, .splitHwp]]
+        // OCR reads Korean only where Vision can (iOS 16+); elsewhere Hangul would come out as noise.
+        if OcrTextRecognizer.supportsKorean { pairs.append([.ocr]) }
         for pair in pairs {
             let row = UIStackView()
             row.axis = .horizontal
@@ -66,10 +72,12 @@ final class ToolsViewController: AppBaseViewController {
             if pair.count == 1 { row.addArrangedSubview(UIView()) }
             grid.addArrangedSubview(row)
         }
-        content.addSubview(grid)
+        scrollView.addSubview(grid)
         grid.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(8)
-            make.leading.trailing.equalToSuperview().inset(AppMetrics.screenPadding)
+            make.top.equalTo(scrollView.contentLayoutGuide).inset(8)
+            make.bottom.equalTo(scrollView.contentLayoutGuide).inset(16)
+            make.leading.trailing.equalTo(scrollView.contentLayoutGuide).inset(AppMetrics.screenPadding)
+            make.width.equalTo(scrollView.frameLayoutGuide).offset(-2 * AppMetrics.screenPadding)
             make.height.equalTo(CGFloat(pairs.count - 1) * 12 + CGFloat(pairs.count) * 88)
         }
         setupAdvertiser(on: .tools)

@@ -19,6 +19,9 @@ final class OcrPreviewViewController: AppBaseViewController, ToolFlowScreen {
     private let imageView = UIImageView()
     private let convertButton = MergeSplitUI.primaryButton(L10n.ocrConvertToHwp)
     private let adBadge = UILabel()
+    /// Converted page not saved yet: the file-name dialog was cancelled. Convert again goes straight
+    /// back to the dialog instead of another interstitial and another recognition pass.
+    private var unsavedConversion: OcrConversion?
 
     init(page: UIImage) {
         self.page = page
@@ -80,6 +83,7 @@ final class OcrPreviewViewController: AppBaseViewController, ToolFlowScreen {
     }
 
     private func convertTapped() {
+        if let unsavedConversion { return askFileName(for: unsavedConversion) }
         guard !isPremium else { return runConversion() }
         SPNAdsManager.shared.interstitial.show(from: self, place: .ocr) { [weak self] result in
             if case .didDismiss = result { RatePromptManager.shared.noteFullScreenAdDismissed() }
@@ -99,6 +103,7 @@ final class OcrPreviewViewController: AppBaseViewController, ToolFlowScreen {
     private func finish(_ result: Result<OcrConversion, Error>) {
         switch result {
         case .success(let conversion):
+            unsavedConversion = conversion
             askFileName(for: conversion)
         case .failure(let error):
             logger("[OCR] failed: \(error)")
@@ -115,6 +120,7 @@ final class OcrPreviewViewController: AppBaseViewController, ToolFlowScreen {
             guard let self else { return }
             do {
                 let output = try OcrToHwpService.shared.save(conversion, named: name.trimmingCharacters(in: .whitespacesAndNewlines))
+                unsavedConversion = nil
                 let done = ConvertResultViewController(outputURL: output.url, size: output.size, place: .ocr)
                 navigationController?.pushViewController(done, animated: true)
             } catch {

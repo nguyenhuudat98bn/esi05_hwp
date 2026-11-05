@@ -185,7 +185,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // re-made once the user picks a language — otherwise Intro renders in the launch language.
             reloadConfig: { OnboardingConfigs.make() }
         )
-        return SPNOnboardingCoordinator(navigationController: navigationController, config: OnboardingConfigs.make(), hooks: hooks)
+        let coordinator = SPNOnboardingCoordinator(navigationController: navigationController, config: OnboardingConfigs.make(), hooks: hooks)
+        // No reopen ad over Merge / Split / OCR loading: the work keeps running underneath and the
+        // overlay could not close itself while the ad is up.
+        let isBlocking = coordinator.lifecycleHandler.isBlockingViewController
+        coordinator.lifecycleHandler.isBlockingViewController = { isBlocking($0) || $0 is BlocksReopenAd }
+        return coordinator
     }
 
     #if DEBUG

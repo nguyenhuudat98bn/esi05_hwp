@@ -12,9 +12,17 @@ import UIKit
 import SnapKit
 import SPNComponent
 
-final class LoadingOverlayViewController<Output>: UIViewController {
+/// Screens the reopen (app-open) ad must not cover: the work behind them is not cancellable and the
+/// screen has to close itself when it is done (see `AppDelegate.makeOnboardingCoordinator`).
+protocol BlocksReopenAd: UIViewController {}
+
+final class LoadingOverlayViewController<Output>: UIViewController, BlocksReopenAd {
     private let work: () async throws -> Output
     private let onFinished: (Result<Output, Error>) -> Void
+    /// `viewDidAppear` runs again whenever a full-screen ad presented on top goes away: start once.
+    private var didStart = false
+    /// Result waiting for whatever is presented on top (an ad) to close first.
+    private var pendingResult: Result<Output, Error>?
 
     init(work: @escaping () async throws -> Output,
          onFinished: @escaping (Result<Output, Error>) -> Void) {
@@ -52,6 +60,13 @@ final class LoadingOverlayViewController<Output>: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        if let pendingResult {
+            // Back on top after an ad: finish now.
+            finish(pendingResult)
+            return
+        }
+        guard !didStart else { return }
+        didStart = true
         UIAccessibility.post(notification: .screenChanged, argument: view.subviews.first)
         Task { @MainActor [weak self] in
             guard let self else { return }
@@ -61,7 +76,19 @@ final class LoadingOverlayViewController<Output>: UIViewController {
             } catch {
                 result = .failure(error)
             }
-            dismiss(animated: true) { [onFinished] in onFinished(result) }
+            finish(result)
         }
+    }
+
+    /// Closes the overlay, then reports. With something presented on top, `dismiss` would close that
+    /// instead (and the spinner would stay): wait for it to go, `viewDidAppear` calls back here.
+    private func finish(_ result: Result<Output, Error>) {
+        guard presentedViewController == nil else {
+            pendingResult = result
+            return
+        }
+        pendingResult = nil
+        let onFinished = onFinished
+        presentingViewController?.dismiss(animated: true) { onFinished(result) }
     }
 }

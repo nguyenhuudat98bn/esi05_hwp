@@ -38,23 +38,50 @@ final class HwpPageThumbnailRenderer: @unchecked Sendable {
         }
     }
 
-    /// Thumbnail of 1-based `page`, `width` points wide at `scale`; nil when rendering fails.
+    /// Thumbnail of 1-based `page`, `width` points wide at `scale`; nil when rendering fails or the
+    /// calling task was cancelled before its turn on the queue (the cell scrolled away).
     func thumbnail(page: Int, width: CGFloat, scale: CGFloat) async -> UIImage? {
-        if let cached = cache.object(forKey: NSNumber(value: page)) { return cached }
-        return await withCheckedContinuation { continuation in
-            queue.async { [self] in
-                guard let document,
-                      let data = try? document.renderPDF(page: page - 1),
-                      let pdfPage = PDFDocument(data: data)?.page(at: 0) else {
-                    continuation.resume(returning: nil)
-                    return
+        let key = NSNumber(value: page)
+        if let cached = cache.object(forKey: key) { return cached }
+        let request = ThumbnailRequest()
+        return await withTaskCancellationHandler {
+            await withCheckedContinuation { continuation in
+                queue.async { [self] in
+                    // Rendered meanwhile by an earlier request for the same page.
+                    if let cached = cache.object(forKey: key) { return continuation.resume(returning: cached) }
+                    guard !request.isCancelled, let document,
+                          let data = try? document.renderPDF(page: page - 1),
+                          let pdfPage = PDFDocument(data: data)?.page(at: 0) else {
+                        continuation.resume(returning: nil)
+                        return
+                    }
+                    let bounds = pdfPage.bounds(for: .mediaBox)
+                    let height = width * bounds.height / max(bounds.width, 1)
+                    let image = pdfPage.thumbnail(of: CGSize(width: width * scale, height: height * scale), for: .mediaBox)
+                    cache.setObject(image, forKey: key)
+                    continuation.resume(returning: image)
                 }
-                let bounds = pdfPage.bounds(for: .mediaBox)
-                let height = width * bounds.height / max(bounds.width, 1)
-                let image = pdfPage.thumbnail(of: CGSize(width: width * scale, height: height * scale), for: .mediaBox)
-                cache.setObject(image, forKey: NSNumber(value: page))
-                continuation.resume(returning: image)
             }
+        } onCancel: {
+            request.cancel()
         }
+    }
+}
+
+/// Cancellation flag shared between the caller's task and the render queue.
+private final class ThumbnailRequest: @unchecked Sendable {
+    private let lock = NSLock()
+    private var cancelled = false
+
+    var isCancelled: Bool {
+        lock.lock()
+        defer { lock.unlock() }
+        return cancelled
+    }
+
+    func cancel() {
+        lock.lock()
+        cancelled = true
+        lock.unlock()
     }
 }

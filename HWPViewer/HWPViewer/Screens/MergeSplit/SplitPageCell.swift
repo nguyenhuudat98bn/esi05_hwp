@@ -23,6 +23,9 @@ final class SplitPageCell: UICollectionViewCell {
     private let check = UIImageView()
     private let numberLabel = UILabel()
     private var loadingPage: Int?
+    /// Thumbnail request of the page on screen; cancelled when the cell scrolls away, so fast
+    /// scrolling does not leave a queue of renders for pages nobody looks at any more.
+    private var thumbnailTask: Task<Void, Never>?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -61,6 +64,8 @@ final class SplitPageCell: UICollectionViewCell {
 
     override func prepareForReuse() {
         super.prepareForReuse()
+        thumbnailTask?.cancel()
+        thumbnailTask = nil
         pageView.image = nil
         loadingPage = nil
     }
@@ -78,9 +83,10 @@ final class SplitPageCell: UICollectionViewCell {
         loadingPage = page
         let width = max(bounds.width, 80) * 1.2538
         let scale = traitCollection.displayScale
-        Task { @MainActor [weak self] in
+        thumbnailTask?.cancel()
+        thumbnailTask = Task { @MainActor [weak self] in
             let image = await renderer.thumbnail(page: page, width: width, scale: scale)
-            guard let self, loadingPage == page else { return }
+            guard let self, !Task.isCancelled, loadingPage == page else { return }
             pageView.image = image
         }
     }

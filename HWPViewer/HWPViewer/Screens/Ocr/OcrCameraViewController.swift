@@ -23,6 +23,8 @@ final class OcrCameraViewController: UIViewController, ToolFlowScreen {
     private let galleryButton = UIButton(type: .custom)
     private var cancellables = Set<AnyCancellable>()
     private var isCapturing = false
+    /// Camera access denied: show "Allow Camera Access" once the scanner is up (Photos still works).
+    var explainsCameraAccessOnAppear = false
 
     override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
 
@@ -76,6 +78,10 @@ final class OcrCameraViewController: UIViewController, ToolFlowScreen {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         shutterButton.isEnabled = AVCaptureDeviceAvailability.hasCamera
+        if explainsCameraAccessOnAppear {
+            explainsCameraAccessOnAppear = false
+            present(CameraPermissionPopupViewController(), animated: true)
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -106,6 +112,10 @@ final class OcrCameraViewController: UIViewController, ToolFlowScreen {
 
     private func capture() {
         guard !isCapturing else { return }
+        guard AVCaptureDevice.authorizationStatus(for: .video) == .authorized else {
+            present(CameraPermissionPopupViewController(), animated: true)
+            return
+        }
         isCapturing = true
         Task { @MainActor [weak self] in
             guard let self else { return }

@@ -10,6 +10,7 @@
 import AVFoundation
 import UIKit
 import Vision
+import SPNComponent
 
 /// `@unchecked Sendable`: session state is touched on `queue`, UI callbacks hop to the main thread.
 final class OcrCameraSession: NSObject, @unchecked Sendable {
@@ -60,10 +61,16 @@ final class OcrCameraSession: NSObject, @unchecked Sendable {
         videoOutput.setSampleBufferDelegate(self, queue: detectionQueue)
         session.addOutput(videoOutput)
         session.commitConfiguration()
+        // Changing focusMode without the lock raises an Objective-C exception (crash), so only
+        // touch it when the lock was really taken.
         if device.isFocusModeSupported(.continuousAutoFocus) {
-            try? device.lockForConfiguration()
-            device.focusMode = .continuousAutoFocus
-            device.unlockForConfiguration()
+            do {
+                try device.lockForConfiguration()
+                device.focusMode = .continuousAutoFocus
+                device.unlockForConfiguration()
+            } catch {
+                logger("[OCR] camera focus not set: \(error)")
+            }
         }
         isAvailable = true
     }

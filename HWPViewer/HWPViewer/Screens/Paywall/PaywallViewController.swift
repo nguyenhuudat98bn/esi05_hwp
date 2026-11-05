@@ -66,6 +66,14 @@ final class PaywallViewController: UIViewController {
         ReminderManager.shared.requestAuthorizationIfNeeded()
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        // A purchase dismisses the paywall (`actionWhenPurchaseCompleted`) before the store call
+        // returns and `isBusy` goes false — by then this screen's sinks are gone, and the global HUD
+        // with its touch-blocking mask would stay up over the whole app.
+        if isBeingDismissed || isMovingFromParent || navigationController?.isBeingDismissed == true { showLoadingHUD(false) }
+    }
+
     // MARK: - Setup
     private func setupViews() {
         headerImage.contentMode = .scaleAspectFill
