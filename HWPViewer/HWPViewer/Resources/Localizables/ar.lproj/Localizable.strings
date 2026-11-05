@@ -226,6 +226,7 @@
 "MergeSplit.Loading" = "جارٍ التحميل";
 "Split.Selected" = "المحدد (%d)";
 "Split.PageA11y" = "الصفحة %d";
+"Split.SelectAllA11y" = "تحديد الكل";
 "Split.SuccessTitle" = "تم تقسيم HWP بنجاح";
 "Merge.FileNameTitle" = "اسم الملف";
 "Split.SelectFile" = "اختيار ملف";

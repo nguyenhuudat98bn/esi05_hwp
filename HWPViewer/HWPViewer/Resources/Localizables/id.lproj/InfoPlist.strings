@@ -1,0 +1,3 @@
+/* Permission prompts (Info.plist keys) */
+"NSCameraUsageDescription" = "Kamera digunakan untuk memindai dokumen kertas dan mengubahnya menjadi file HWP yang dapat diedit. Foto tetap tersimpan di perangkat Anda.";
+"NSUserTrackingUsageDescription" = "Kami menggunakan pelacakan untuk menampilkan iklan yang dipersonalisasi agar aplikasi tetap gratis untuk Anda. Data Anda membantu kami menampilkan iklan yang relevan dan meningkatkan pengalaman Anda.";

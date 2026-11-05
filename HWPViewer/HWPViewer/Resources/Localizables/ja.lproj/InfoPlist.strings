@@ -1,0 +1,3 @@
+/* Permission prompts (Info.plist keys) */
+"NSCameraUsageDescription" = "カメラは紙の書類をスキャンし、編集できるHWPファイルに変換するために使用します。写真はデバイスの外に送信されません。";
+"NSUserTrackingUsageDescription" = "パーソナライズされた広告を表示し、アプリを無料で提供し続けるためにトラッキングを使用します。データは関連性の高い広告の表示と体験の向上に役立てられます。";

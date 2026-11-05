@@ -226,6 +226,7 @@
 "MergeSplit.Loading" = "載入中";
 "Split.Selected" = "已選 (%d)";
 "Split.PageA11y" = "第 %d 頁";
+"Split.SelectAllA11y" = "全選";
 "Split.SuccessTitle" = "HWP 分割成功";
 "Merge.FileNameTitle" = "檔案名稱";
 "Split.SelectFile" = "選擇檔案";

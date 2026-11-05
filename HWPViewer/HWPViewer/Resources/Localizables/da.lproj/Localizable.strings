@@ -226,6 +226,7 @@
 "MergeSplit.Loading" = "Indlæser";
 "Split.Selected" = "Valgt (%d)";
 "Split.PageA11y" = "Side %d";
+"Split.SelectAllA11y" = "Vælg alle";
 "Split.SuccessTitle" = "HWP er opdelt";
 "Merge.FileNameTitle" = "Filnavn";
 "Split.SelectFile" = "Vælg fil";

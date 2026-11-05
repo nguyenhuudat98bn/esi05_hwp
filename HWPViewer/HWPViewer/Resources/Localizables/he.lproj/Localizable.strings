@@ -226,6 +226,7 @@
 "MergeSplit.Loading" = "טוען";
 "Split.Selected" = "נבחרו (%d)";
 "Split.PageA11y" = "עמוד %d";
+"Split.SelectAllA11y" = "בחירת הכול";
 "Split.SuccessTitle" = "פיצול HWP הושלם";
 "Merge.FileNameTitle" = "שם הקובץ";
 "Split.SelectFile" = "בחירת קובץ";

@@ -226,6 +226,7 @@
 "MergeSplit.Loading" = "Načítání";
 "Split.Selected" = "Vybráno (%d)";
 "Split.PageA11y" = "Stránka %d";
+"Split.SelectAllA11y" = "Vybrat vše";
 "Split.SuccessTitle" = "HWP úspěšně rozděleno";
 "Merge.FileNameTitle" = "Název souboru";
 "Split.SelectFile" = "Vybrat soubor";

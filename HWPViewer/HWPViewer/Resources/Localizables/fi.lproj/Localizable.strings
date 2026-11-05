@@ -226,6 +226,7 @@
 "MergeSplit.Loading" = "Ladataan";
 "Split.Selected" = "Valittu (%d)";
 "Split.PageA11y" = "Sivu %d";
+"Split.SelectAllA11y" = "Valitse kaikki";
 "Split.SuccessTitle" = "HWP jaettu";
 "Merge.FileNameTitle" = "Tiedostonimi";
 "Split.SelectFile" = "Valitse tiedosto";

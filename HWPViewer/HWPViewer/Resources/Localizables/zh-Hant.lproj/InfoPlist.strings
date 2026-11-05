@@ -1,0 +1,3 @@
+/* Permission prompts (Info.plist keys) */
+"NSCameraUsageDescription" = "相機用於掃描紙本文件並將其轉換為可編輯的 HWP 檔案。照片僅保留在你的裝置上。";
+"NSUserTrackingUsageDescription" = "我們使用追蹤來提供個人化廣告，讓你能免費使用本 App。你的資料可協助我們顯示相關廣告並改善你的使用體驗。";

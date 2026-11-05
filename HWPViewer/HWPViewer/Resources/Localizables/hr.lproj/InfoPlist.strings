@@ -1,0 +1,3 @@
+/* Permission prompts (Info.plist keys) */
+"NSCameraUsageDescription" = "Kamera se koristi za skeniranje papirnatih dokumenata i njihovo pretvaranje u HWP datoteke koje možete uređivati. Fotografije ostaju na vašem uređaju.";
+"NSUserTrackingUsageDescription" = "Praćenje koristimo za prikaz personaliziranih oglasa, kako bi aplikacija za vas ostala besplatna. Vaši podaci pomažu nam prikazivati relevantne oglase i poboljšati vaše iskustvo.";

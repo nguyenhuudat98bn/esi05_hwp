@@ -226,6 +226,7 @@
 "MergeSplit.Loading" = "Memuat";
 "Split.Selected" = "Dipilih (%d)";
 "Split.PageA11y" = "Halaman %d";
+"Split.SelectAllA11y" = "Pilih semua";
 "Split.SuccessTitle" = "HWP berhasil dipisah";
 "Merge.FileNameTitle" = "Nama file";
 "Split.SelectFile" = "Pilih file";

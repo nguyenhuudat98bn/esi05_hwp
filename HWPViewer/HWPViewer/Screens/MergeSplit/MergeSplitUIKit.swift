@@ -157,7 +157,7 @@ final class SelectAllButton: UIButton {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        accessibilityLabel = "Select all"
+        accessibilityLabel = L10n.splitSelectAllA11y
         apply()
     }
 

@@ -226,6 +226,7 @@
 "MergeSplit.Loading" = "S'està carregant";
 "Split.Selected" = "Seleccionades (%d)";
 "Split.PageA11y" = "Pàgina %d";
+"Split.SelectAllA11y" = "Selecciona-ho tot";
 "Split.SuccessTitle" = "HWP dividit correctament";
 "Merge.FileNameTitle" = "Nom del fitxer";
 "Split.SelectFile" = "Tria un fitxer";

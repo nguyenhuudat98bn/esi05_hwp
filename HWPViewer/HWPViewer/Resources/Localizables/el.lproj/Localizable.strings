@@ -226,6 +226,7 @@
 "MergeSplit.Loading" = "Φόρτωση";
 "Split.Selected" = "Επιλεγμένες (%d)";
 "Split.PageA11y" = "Σελίδα %d";
+"Split.SelectAllA11y" = "Επιλογή όλων";
 "Split.SuccessTitle" = "Ο διαχωρισμός HWP ολοκληρώθηκε";
 "Merge.FileNameTitle" = "Όνομα αρχείου";
 "Split.SelectFile" = "Επιλογή αρχείου";

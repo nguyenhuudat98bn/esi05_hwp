@@ -226,6 +226,7 @@
 "MergeSplit.Loading" = "Đang tải";
 "Split.Selected" = "Đã chọn (%d)";
 "Split.PageA11y" = "Trang %d";
+"Split.SelectAllA11y" = "Chọn tất cả";
 "Split.SuccessTitle" = "Tách HWP thành công";
 "Merge.FileNameTitle" = "Tên tệp";
 "Split.SelectFile" = "Chọn tệp";

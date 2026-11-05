@@ -226,6 +226,7 @@
 "MergeSplit.Loading" = "लोड हो रहा है";
 "Split.Selected" = "चयनित (%d)";
 "Split.PageA11y" = "पेज %d";
+"Split.SelectAllA11y" = "सभी चुनें";
 "Split.SuccessTitle" = "HWP सफलतापूर्वक विभाजित हुआ";
 "Merge.FileNameTitle" = "फ़ाइल का नाम";
 "Split.SelectFile" = "फ़ाइल चुनें";

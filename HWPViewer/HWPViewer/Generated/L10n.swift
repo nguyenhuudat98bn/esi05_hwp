@@ -408,6 +408,8 @@ internal enum L10n {
   internal static func splitPageA11y(_ p1: Int) -> String {
     return L10n.tr("Localizable", "Split.PageA11y", p1, fallback: "Page %d")
   }
+  /// Select all
+  internal static var splitSelectAllA11y: String { return L10n.tr("Localizable", "Split.SelectAllA11y", fallback: "Select all") }
   /// Selected (%d)
   internal static func splitSelected(_ p1: Int) -> String {
     return L10n.tr("Localizable", "Split.Selected", p1, fallback: "Selected (%d)")

@@ -227,6 +227,7 @@
 "MergeSplit.Loading" = "Завантаження";
 "Split.Selected" = "Вибрано (%d)";
 "Split.PageA11y" = "Сторінка %d";
+"Split.SelectAllA11y" = "Вибрати все";
 "Split.SuccessTitle" = "HWP успішно розділено";
 "Merge.FileNameTitle" = "Ім'я файлу";
 "Split.SelectFile" = "Вибрати файл";

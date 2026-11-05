@@ -1,0 +1,3 @@
+/* Permission prompts (Info.plist keys) */
+"NSCameraUsageDescription" = "La càmera s’utilitza per escanejar documents en paper i convertir-los en fitxers HWP editables. Les fotos es queden al teu dispositiu.";
+"NSUserTrackingUsageDescription" = "Fem servir el seguiment per mostrar anuncis personalitzats i així mantenir l’app gratuïta per a tu. Les teves dades ens ajuden a mostrar anuncis rellevants i a millorar la teva experiència.";

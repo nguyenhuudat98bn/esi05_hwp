@@ -7,10 +7,10 @@ output_dir: Generated/
 
 ## Generate constants for your localized strings.
 ##   Be sure that SwiftGen only parses ONE locale (typically Base.lproj, or en.lproj, or whichever your development region is); otherwise it will generate the same keys multiple times.
-##   SwiftGen will parse all `.strings` files found in that folder.
+##   SwiftGen parses only Localizable.strings (InfoPlist.strings sits in the same folder but is read by iOS, not by code).
 strings:
    inputs:
-     - Resources/Localizables/en.lproj
+     - Resources/Localizables/en.lproj/Localizable.strings  # only this table: InfoPlist.strings would nest L10n into per-table enums
    outputs:
      - templateName: flat-swift5
        params:

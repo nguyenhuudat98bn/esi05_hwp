@@ -226,6 +226,7 @@
 "MergeSplit.Loading" = "Učitavanje";
 "Split.Selected" = "Odabrano (%d)";
 "Split.PageA11y" = "Stranica %d";
+"Split.SelectAllA11y" = "Odaberi sve";
 "Split.SuccessTitle" = "HWP uspješno podijeljen";
 "Merge.FileNameTitle" = "Naziv datoteke";
 "Split.SelectFile" = "Odaberi datoteku";

@@ -1,0 +1,3 @@
+/* Permission prompts (Info.plist keys) */
+"NSCameraUsageDescription" = "Fotoaparát slúži na skenovanie papierových dokumentov a ich prevod na upraviteľné súbory HWP. Fotky zostávajú vo vašom zariadení.";
+"NSUserTrackingUsageDescription" = "Sledovanie používame na zobrazovanie personalizovaných reklám, vďaka ktorým môže aplikácia zostať zadarmo. Vaše údaje nám pomáhajú zobrazovať relevantné reklamy a zlepšovať váš zážitok.";

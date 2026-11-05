@@ -226,6 +226,7 @@
 "MergeSplit.Loading" = "Se încarcă";
 "Split.Selected" = "Selectate (%d)";
 "Split.PageA11y" = "Pagina %d";
+"Split.SelectAllA11y" = "Selectează tot";
 "Split.SuccessTitle" = "HWP împărțit cu succes";
 "Merge.FileNameTitle" = "Nume fișier";
 "Split.SelectFile" = "Alege fișier";

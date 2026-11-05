@@ -1,0 +1,3 @@
+/* Permission prompts (Info.plist keys) */
+"NSCameraUsageDescription" = "A kamerával papíralapú dokumentumokat szkennelhetsz be, és szerkeszthető HWP-fájlokká alakíthatod őket. A fotók az eszközödön maradnak.";
+"NSUserTrackingUsageDescription" = "Követést használunk a személyre szabott hirdetésekhez, így az alkalmazás ingyenes maradhat számodra. Az adataid segítenek releváns hirdetéseket megjeleníteni és javítani az élményedet.";

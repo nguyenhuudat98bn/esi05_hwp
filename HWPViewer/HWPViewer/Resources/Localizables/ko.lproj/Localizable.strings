@@ -226,6 +226,7 @@
 "MergeSplit.Loading" = "불러오는 중";
 "Split.Selected" = "선택됨 (%d)";
 "Split.PageA11y" = "%d페이지";
+"Split.SelectAllA11y" = "전체 선택";
 "Split.SuccessTitle" = "HWP 분할 완료";
 "Merge.FileNameTitle" = "파일 이름";
 "Split.SelectFile" = "파일 선택";
