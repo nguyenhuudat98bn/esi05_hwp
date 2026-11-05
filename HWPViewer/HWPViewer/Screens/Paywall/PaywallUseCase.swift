@@ -17,8 +17,15 @@ protocol PaywallUseCase {
 }
 
 final class StoreKitPaywallUseCase: PaywallUseCase {
+    /// nil → the remote `iap_configs.plans`; set for a paywall that sells something else (gift box).
+    private let plansOverride: [PaywallPlan]?
+
+    init(plans: [PaywallPlan]? = nil) {
+        plansOverride = plans
+    }
+
     func loadProducts() async throws -> [PaywallProduct] {
-        let plans = PaywallPlan.configured
+        let plans = plansOverride ?? PaywallPlan.configured
         let storeProducts = try await PurchaseService.shared.products(for: plans.map(\.id))
         var products: [PaywallProduct] = []
         for plan in plans {

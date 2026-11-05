@@ -24,6 +24,9 @@ final class FileListViewModel {
     }
 
     @Published private(set) var items: [FileItem] = []
+    /// False until the first listing arrives: `items` is an empty placeholder until then, which a
+    /// screen must not show as "No files" (ESI05-70: Select File flashed its empty state first).
+    @Published private(set) var hasLoaded = false
     @Published var filter: Filter
     @Published var query: String = ""
     /// Search screen: return no rows until the user types.
@@ -40,13 +43,20 @@ final class FileListViewModel {
         Publishers.CombineLatest3(
             changes,
             $filter.removeDuplicates(),
-            $query.debounce(for: .milliseconds(300), scheduler: RunLoop.main).removeDuplicates()
+            // The first value goes straight through: debouncing it left every list blank for 300 ms.
+            $query.prefix(1)
+                .merge(with: $query.dropFirst().debounce(for: .milliseconds(300), scheduler: RunLoop.main))
+                .removeDuplicates()
         )
         .map { [weak self] _, filter, query -> [FileItem] in
             self?.load(filter: filter, query: query) ?? []
         }
         .receive(on: DispatchQueue.main)
-        .sink { [weak self] in self?.items = $0 }
+        .sink { [weak self] in
+            // Flag first: `items` subscribers check it when the new list arrives.
+            if self?.hasLoaded == false { self?.hasLoaded = true }
+            self?.items = $0
+        }
         .store(in: &cancellables)
     }
 

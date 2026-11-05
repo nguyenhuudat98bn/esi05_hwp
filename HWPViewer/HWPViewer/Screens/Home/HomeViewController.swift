@@ -76,10 +76,26 @@ final class HomeViewController: AppBaseViewController {
 
     // MARK: - Gift box (Figma 6764:101491)
 
-    /// Free users, countdown > 0 in remote config, not closed yet in this run.
+    /// Free users, countdown > 0 and a gift product (`iap_configs.gift_box_product_id`, the 7-day
+    /// trial yearly) in remote config, not closed yet in this run. No product id → no gift box.
     private func setupGiftBoxIfNeeded() {
-        let seconds = IapConfigs.current.giftBoxCountdownTime ?? 180
-        guard !isPremium, seconds > 0, !GiftBoxView.isDismissedThisSession else { return }
+        let config = IapConfigs.current
+        let seconds = config.giftBoxCountdownTime ?? 180
+        guard !isPremium, seconds > 0, let plan = config.giftBoxPlan, !GiftBoxView.isDismissedThisSession else { return }
+        Task { @MainActor [weak self] in
+            // Only offer what the store can sell: a mistyped / not yet approved product id would
+            // open a paywall without a price.
+            let products = (try? await PurchaseService.shared.products(for: [plan.id])) ?? []
+            guard products.contains(where: { $0.id == plan.id }) else {
+                logger("[GiftBox] \(plan.id) not available in the store — no gift box")
+                return
+            }
+            guard let self, !isPremium, giftBox == nil, !GiftBoxView.isDismissedThisSession else { return }
+            showGiftBox(seconds: seconds, plan: plan)
+        }
+    }
+
+    private func showGiftBox(seconds: Int, plan: IapPlan) {
         let box = GiftBoxView(seconds: seconds)
         view.addSubview(box)
         // Figma: 5pt from the right edge, 196.6pt from the top of a 360×800 frame (44pt status bar).
@@ -91,8 +107,10 @@ final class HomeViewController: AppBaseViewController {
         refreshPremiumEntry()
         box.giftTapped.receive(on: DispatchQueue.main)
             .sink { [weak self] in
-                self?.removeGiftBox()
-                self?.presentPaywall(at: .homeGiftBox)
+                guard let self else { return }
+                removeGiftBox()
+                // The gift sells its own product; every other paywall keeps the plain yearly plan.
+                PaywallPresenter.shared.present(from: self, placement: .homeGiftBox, plans: [plan])
             }
             .store(in: &cancellables)
         box.closeTapped.receive(on: DispatchQueue.main)

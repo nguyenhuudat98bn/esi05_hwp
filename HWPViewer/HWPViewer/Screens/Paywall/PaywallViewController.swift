@@ -25,7 +25,7 @@ protocol IAPVCEvent: AnyObject {
 final class PaywallViewController: UIViewController {
     weak var delegate: IAPVCEvent?
 
-    private let viewModel = PaywallViewModel(useCase: StoreKitPaywallUseCase())
+    private let viewModel: PaywallViewModel
     private let loadSubject = PassthroughSubject<Void, Never>()
     private let restoreSubject = PassthroughSubject<Void, Never>()
     private let buySubject = PassthroughSubject<String, Never>()
@@ -33,8 +33,8 @@ final class PaywallViewController: UIViewController {
 
     private let config = IapConfigs.current
     private var products: [PaywallProduct] = []
-    private lazy var plans: [PaywallPlan] = config.effectivePlans
-    private lazy var selectedPlan: PaywallPlan? = config.defaultPlan
+    private let plans: [PaywallPlan]
+    private var selectedPlan: PaywallPlan?
     /// Set by PaywallPresenter: true when this is not the first paywall of the session (X may be delayed).
     var isRepeatShow = false
     /// Onboarding (after splash / intro): hand over before the slide-down, so the next screen (Home)
@@ -42,6 +42,20 @@ final class PaywallViewController: UIViewController {
     var revealsNextScreenFirst = false
     /// `iap_purchase_show` goes out once, when the products arrive (or fail to).
     private var didLogShow = false
+
+    /// `plans` nil → the remote `iap_configs.plans` (every paywall but the gift box);
+    /// the Home gift box passes its single trial plan (`iap_configs.gift_box_product_id`).
+    init(plans override: [PaywallPlan]? = nil) {
+        let config = IapConfigs.current
+        let plans = override ?? config.effectivePlans
+        self.plans = plans
+        selectedPlan = override.map { $0.first(where: \.selected) ?? $0.last } ?? config.defaultPlan
+        viewModel = PaywallViewModel(useCase: StoreKitPaywallUseCase(plans: override))
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    @available(*, unavailable)
+    required init?(coder: NSCoder) { fatalError() }
 
     // MARK: - Controls
     private let headerImage = UIImageView(image: Asset.Assets.App.imgPaywallHeaderBg.image)

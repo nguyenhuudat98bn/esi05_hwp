@@ -56,7 +56,8 @@ enum PrintService {
     static func printHwp(_ item: FileItem, from presenter: UIViewController) {
         guard !isPrinting else { return }
         isPrinting = true
-        presenter.showLoadingHUD(true)
+        // Dimmed: a big file takes a while and the screen must not look usable meanwhile (ESI05-72).
+        presenter.showLoadingHUD(true, dimsScreen: true)
         Task { @MainActor in
             defer {
                 isPrinting = false

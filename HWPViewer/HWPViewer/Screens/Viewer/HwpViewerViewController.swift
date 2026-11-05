@@ -20,6 +20,8 @@ final class HwpViewerViewController: AppBaseViewController {
     private let coordinator = DocumentCanvasCoordinator()
     private let scrollView = DocumentScrollView()
     private let keyCatcher = KeyCatcherView()
+    /// Native "page" after the last page (place `view_last_page`), read mode only.
+    private let endOfDocumentAd = ViewerEndOfDocumentAdView()
 
     // MARK: - Controls
     private let formatToolbar = HwpFormatToolbar()
@@ -124,6 +126,11 @@ final class HwpViewerViewController: AppBaseViewController {
         loadDocument()
     }
 
+    override func premiumStatusDidChange() {
+        super.premiumStatusDidChange()
+        if isPremium { endOfDocumentAd.detach() }
+    }
+
     override func backButtonTapped() {
         if vm.mode == .edit {
             closeEditTapped()
@@ -163,6 +170,7 @@ final class HwpViewerViewController: AppBaseViewController {
                 return
             }
             if vm.pages.isEmpty { showLoadingHUD(false) }
+            endOfDocumentAd.attach()
             // Khôi phục trang đọc lần trước (coordinator tự chờ layout xong rồi cuộn).
             if let page = FileStore.shared.lastPage(for: item.url), page > 0, page < vm.pages.count {
                 coordinator.scrollToPage(page)
@@ -216,6 +224,11 @@ final class HwpViewerViewController: AppBaseViewController {
         containerStackView.addArrangedSubview(bottomBar)
         coordinator.attach(scrollView: scrollView, vm: vm)
         scrollView.backgroundColor = AppColors.viewerBackground
+        coordinator.setEndAccessory(endOfDocumentAd, height: 0)
+        endOfDocumentAd.onReservedHeightChanged = { [weak self] height in
+            guard let self else { return }
+            coordinator.setEndAccessory(endOfDocumentAd, height: height)
+        }
 
         // Bottom bar: "Edit HWP" (read mode only). Note: never un-hide `nativeAdSlot` by hand —
         // an empty slot takes ~170pt and shrinks the document area.
@@ -506,6 +519,7 @@ final class HwpViewerViewController: AppBaseViewController {
         formatToolbar.isHidden = !isEdit
         bottomBar.isHidden = isEdit || isSearching
         pageIndicator.isHidden = isEdit || vm.pages.isEmpty
+        endOfDocumentAd.isVisible = !isEdit
         if !isEdit { formatToolbar.collapseStrips() }
     }
 

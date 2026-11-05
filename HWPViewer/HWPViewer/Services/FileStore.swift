@@ -133,6 +133,12 @@ final class FileStore {
         return meta.bookmarked
     }
 
+    /// First-launch samples: shown in Recent (opened at `date`) and Bookmark at once, no
+    /// `didChange` per file (the seeder sends one at the end).
+    func markSample(_ url: URL, openedAt date: Date) {
+        index[url.lastPathComponent] = Meta(lastOpened: date, bookmarked: true)
+    }
+
     func isBookmarked(_ url: URL) -> Bool {
         index[url.lastPathComponent]?.bookmarked ?? false
     }

@@ -18,15 +18,16 @@ final class ConvertResultViewController: AppBaseViewController {
     private let size: Int64
     private let titleText: String
     private let titleFont: UIFont
-    private let place: SPNAdPlace
+    /// Native at the bottom; `place` itself drives the interstitial and the banner.
+    private let nativePlace: SPNAdPlace
 
     init(outputURL: URL, size: Int64, title: String = L10n.convertSuccessTitle,
-         titleFont: UIFont = AppFonts.bold(20), place: SPNAdPlace = .convert) {
+         titleFont: UIFont = AppFonts.bold(20), place: SPNAdPlace = .convert, nativePlace: SPNAdPlace? = nil) {
         self.outputURL = outputURL
         self.size = size
         self.titleText = title
         self.titleFont = titleFont
-        self.place = place
+        self.nativePlace = nativePlace ?? place
         super.init(place: place, navigationConfigs: SPNNavigationConfiguration(
             title: "", hasBackButton: true, backIcon: Asset.Assets.App.icEditorCloseX.image,
             tintColor: AppColors.textPrimary, backgroundColor: AppColors.background
@@ -48,6 +49,7 @@ final class ConvertResultViewController: AppBaseViewController {
         let content = UIView()
         containerStackView.addArrangedSubview(content)
         containerStackView.addArrangedSubview(nativeAdSlot)
+        addBottomSafeAreaSpacer()
 
         let check = SuccessBadgeView()
         let title = UILabel()
@@ -115,6 +117,9 @@ final class ConvertResultViewController: AppBaseViewController {
             make.leading.trailing.equalToSuperview().inset(AppMetrics.screenPadding)
             make.top.equalTo(stack.snp.bottom).offset(24)
             make.height.equalTo(AppMetrics.buttonHeight)
+            // The content keeps its full height: on a short screen the ad below gives way (it is
+            // clipped to its slot), it never covers the buttons.
+            make.bottom.lessThanOrEqualToSuperview().inset(16)
         }
         backButton.tapPublisher.receive(on: DispatchQueue.main)
             .sink { [weak self] _ in self?.goToAllFiles() }
@@ -122,7 +127,7 @@ final class ConvertResultViewController: AppBaseViewController {
         openButton.tapPublisher.receive(on: DispatchQueue.main)
             .sink { [weak self] _ in self?.openResult() }
             .store(in: &cancellables)
-        setupAdvertiser(on: place)
+        setupAdvertiser(on: nativePlace)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -134,7 +139,7 @@ final class ConvertResultViewController: AppBaseViewController {
     /// Convert: X behaves like "Back Home". Merge / Split / OCR: X returns to Tools, where the flow
     /// started (ESI05-58); "Back Home" still goes to All Files.
     override func backButtonTapped() {
-        if place == .convert {
+        if interstitialPlace == .convert {
             goToAllFiles()
         } else {
             // All tabs share one navigation controller: pick the Tools tab, then pop to it.

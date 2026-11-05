@@ -46,6 +46,13 @@ final class HwpFilePickerViewController: AppBaseViewController, ToolFlowScreen {
         title: L10n.searchNoResult
     )
     private lazy var actions = FileActionsCoordinator(presenter: self, viewModel: viewModel)
+    /// Until the first listing arrives (ESI05-70) — instead of a blank list / a flash of "No files".
+    private let loadingIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.color = AppColors.primary
+        indicator.hidesWhenStopped = true
+        return indicator
+    }()
     /// A file is being opened to check it; further taps wait.
     private var isInspecting = false
     private var items: [FileItem] = []
@@ -85,6 +92,8 @@ final class HwpFilePickerViewController: AppBaseViewController, ToolFlowScreen {
         }
         containerStackView.addArrangedSubview(searchHolder)
         containerStackView.addArrangedSubview(tableView)
+        // Native at the bottom, above the Continue bar (Merge) / the screen edge (Split).
+        containerStackView.addArrangedSubview(nativeAdSlot)
 
         tableView.backgroundColor = AppColors.background
         tableView.separatorStyle = .none
@@ -99,11 +108,13 @@ final class HwpFilePickerViewController: AppBaseViewController, ToolFlowScreen {
             selectAll.tapPublisher
                 .sink { [weak self] _ in self?.toggleSelectAll() }
                 .store(in: &cancellables)
-            bottomBar = MergeSplitUI.bottomBar(in: view, content: continueButton)
-            tableView.contentInset.bottom = MergeSplitUI.bottomBarHeight
+            bottomBar = MergeSplitUI.bottomBar(in: containerStackView, of: view, content: continueButton)
+            tableView.contentInset.bottom = 8
             continueButton.tapPublisher
                 .sink { [weak self] _ in self?.finish() }
                 .store(in: &cancellables)
+        } else {
+            addBottomSafeAreaSpacer() // Split: the ad is the last row
         }
 
         for state in [emptyView, noResultView] {
@@ -112,6 +123,9 @@ final class HwpFilePickerViewController: AppBaseViewController, ToolFlowScreen {
             state.snp.makeConstraints { $0.edges.equalTo(tableView) }
         }
         emptyView.onAction = { [weak self] in self?.actions.pickAndImport(family: .hwp) }
+        view.addSubview(loadingIndicator)
+        loadingIndicator.snp.makeConstraints { $0.center.equalTo(tableView) }
+        loadingIndicator.startAnimating()
 
         searchField.textField.textPublisher
             .map { $0 ?? "" }
@@ -123,9 +137,23 @@ final class HwpFilePickerViewController: AppBaseViewController, ToolFlowScreen {
             .sink { [weak self] _ in self?.searchField.textField.resignFirstResponder() }
             .store(in: &cancellables)
 
+        setupAdvertiser(on: isMultiple ? .mergeSelectFile : .splitSelectFile)
+        // The keyboard (search) covers the bottom of the screen: hide the ad meanwhile, as the banner
+        // does — an ad under the keyboard counts as obscured.
+        NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)
+            .sink { [weak self] _ in self?.nativeAdSlot.alpha = 0 }
+            .store(in: &cancellables)
+        NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)
+            .sink { [weak self] _ in self?.nativeAdSlot.alpha = 1 }
+            .store(in: &cancellables)
+
         viewModel.$items.receive(on: DispatchQueue.main)
-            .sink { [weak self] items in
-                guard let self else { return }
+            .sink { [weak self] _ in
+                // Read the current list: a delivery queued before the first load still carries the
+                // empty placeholder.
+                guard let self, viewModel.hasLoaded else { return }
+                let items = viewModel.items
+                loadingIndicator.stopAnimating()
                 self.items = items
                 items.forEach { item in if self.pickedItems[item.id] != nil { self.pickedItems[item.id] = item } }
                 tableView.reloadData()

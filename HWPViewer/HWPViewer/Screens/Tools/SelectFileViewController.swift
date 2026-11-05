@@ -65,6 +65,7 @@ final class SelectFileViewController: AppBaseViewController, ToolFlowScreen {
     private func setupViews() {
         containerStackView.addArrangedSubview(tableView)
         containerStackView.addArrangedSubview(nativeAdSlot)
+        addBottomSafeAreaSpacer()
         tableView.backgroundColor = .clear
         tableView.separatorStyle = .none
         tableView.register(FileCell.self, forCellReuseIdentifier: FileCell.identifier)

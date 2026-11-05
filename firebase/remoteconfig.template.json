@@ -3,7 +3,7 @@
   "parameters": {
     "appconfigs": {
       "defaultValue": {
-        "value": "{\"accept_ad_version\":\"1.0.0\",\"time_interval_show_ad\":25,\"max_time_splash_loading\":30,\"is_enable_retry\":false,\"max_retry_count\":2,\"main_color\":\"#2E90FA\",\"is_enable_purchase_after_loading\":true,\"time_show_button_close_purchase\":0,\"force_update_version\":\"0.9.0\"}"
+        "value": "{\"accept_ad_version\":\"1.0.0\",\"time_interval_show_ad\":25,\"max_time_splash_loading\":30,\"is_enable_retry\":false,\"max_retry_count\":2,\"main_color\":\"#2E90FA\",\"is_enable_purchase_after_loading\":true,\"time_show_button_close_purchase\":0,\"force_update_version\":\"0.9.0\",\"max_interstitial_per_session\":3,\"max_interstitial_per_day\":6}"
       },
       "valueType": "JSON"
     },
@@ -33,13 +33,25 @@
     },
     "banner_native_places": {
       "defaultValue": {
-        "value": "[{\"place_name\":\"language_screen\",\"native_template_size\":\"small\",\"is_enable\":true},{\"place_name\":\"introduce_0_screen\",\"native_template_size\":\"small\",\"is_enable\":false},{\"place_name\":\"introduce_1_screen\",\"native_template_size\":\"full_screen\",\"is_enable\":false},{\"place_name\":\"introduce_2_screen\",\"native_template_size\":\"small\",\"is_enable\":false},{\"place_name\":\"introduce_3_screen\",\"native_template_size\":\"full_screen\",\"is_enable\":false},{\"place_name\":\"introduce_4_screen\",\"native_template_size\":\"small\",\"is_enable\":true},{\"place_name\":\"permission_screen\",\"native_template_size\":\"small\",\"is_enable\":false},{\"place_name\":\"home_screen\",\"native_template_size\":\"small\",\"is_enable\":true},{\"place_name\":\"setting_screen\",\"native_template_size\":\"small\",\"is_enable\":true},{\"place_name\":\"import_sheet\",\"native_template_size\":\"small\",\"is_enable\":true},{\"place_name\":\"file_action_sheet\",\"native_template_size\":\"small\",\"is_enable\":true},{\"place_name\":\"viewer_screen\",\"native_template_size\":\"small\",\"is_enable\":false},{\"place_name\":\"tools_screen\",\"native_template_size\":\"small\",\"is_enable\":false},{\"place_name\":\"search_screen\",\"native_template_size\":\"small\",\"is_enable\":true},{\"place_name\":\"convert_screen\",\"native_template_size\":\"small\",\"is_enable\":false},{\"place_name\":\"home_list_inline\",\"native_template_size\":\"in_line_cta_right\",\"is_enable\":true},{\"place_name\":\"search_list_inline\",\"native_template_size\":\"in_line_cta_right\",\"is_enable\":true},{\"place_name\":\"select_file_list_inline\",\"native_template_size\":\"in_line_cta_right\",\"is_enable\":true},{\"place_name\":\"select_file_screen\",\"native_template_size\":\"small\",\"is_enable\":true}]"
+        "value": "[{\"place_name\":\"language_screen\",\"native_template_size\":\"small\",\"is_enable\":true},{\"place_name\":\"introduce_0_screen\",\"native_template_size\":\"small\",\"is_enable\":false},{\"place_name\":\"introduce_1_screen\",\"native_template_size\":\"full_screen\",\"is_enable\":false},{\"place_name\":\"introduce_2_screen\",\"native_template_size\":\"small\",\"is_enable\":false},{\"place_name\":\"introduce_3_screen\",\"native_template_size\":\"full_screen\",\"is_enable\":false},{\"place_name\":\"introduce_4_screen\",\"native_template_size\":\"small\",\"is_enable\":true},{\"place_name\":\"permission_screen\",\"native_template_size\":\"small\",\"is_enable\":false},{\"place_name\":\"home_screen\",\"native_template_size\":\"small\",\"is_enable\":true},{\"place_name\":\"setting_screen\",\"native_template_size\":\"small\",\"is_enable\":true},{\"place_name\":\"import_sheet\",\"native_template_size\":\"small\",\"is_enable\":true},{\"place_name\":\"file_action_sheet\",\"native_template_size\":\"small\",\"is_enable\":true},{\"place_name\":\"viewer_screen\",\"native_template_size\":\"small\",\"is_enable\":false},{\"place_name\":\"tools_screen\",\"native_template_size\":\"small\",\"is_enable\":true},{\"place_name\":\"search_screen\",\"native_template_size\":\"small\",\"is_enable\":true},{\"place_name\":\"convert_screen\",\"native_template_size\":\"small\",\"is_enable\":false},{\"place_name\":\"home_list_inline\",\"native_template_size\":\"in_line_cta_right\",\"is_enable\":true},{\"place_name\":\"search_list_inline\",\"native_template_size\":\"in_line_cta_right\",\"is_enable\":true},{\"place_name\":\"select_file_list_inline\",\"native_template_size\":\"in_line_cta_right\",\"is_enable\":true},{\"place_name\":\"select_file_screen\",\"native_template_size\":\"small\",\"is_enable\":true},{\"place_name\":\"view_last_page\",\"native_template_size\":\"medium\",\"is_enable\":true},{\"place_name\":\"merge_select_file_screen\",\"native_template_size\":\"small\",\"is_enable\":true},{\"place_name\":\"merge_files_screen\",\"native_template_size\":\"small\",\"is_enable\":true},{\"place_name\":\"merge_result_screen\",\"native_template_size\":\"small\",\"is_enable\":true},{\"place_name\":\"split_select_file_screen\",\"native_template_size\":\"small\",\"is_enable\":true},{\"place_name\":\"split_pages_screen\",\"native_template_size\":\"small\",\"is_enable\":true},{\"place_name\":\"split_result_screen\",\"native_template_size\":\"small\",\"is_enable\":true},{\"place_name\":\"ocr_preview_screen\",\"native_template_size\":\"small\",\"is_enable\":true},{\"place_name\":\"ocr_result_screen\",\"native_template_size\":\"small\",\"is_enable\":true}]"
       },
       "valueType": "JSON"
     },
     "native_advertiser_units": {
       "defaultValue": {
         "value": "[{\"place_name\":\"onboarding\",\"enc_high_ad_id\":\"aJMnnMq7NRUa4nhVDW6Jq23jy165dI12gcfJj6IcXO9blqZQEoDKsuy08wmNu6A5\",\"enc_medium_ad_id\":\"aJMnnMq7NRUa4nhVDW6Jq23jy165dI12gcfJj6IcXO9blqZQEoDKsuy08wmNu6A5\",\"enc_ad_id\":\"aJMnnMq7NRUa4nhVDW6Jq23jy165dI12gcfJj6IcXO9blqZQEoDKsuy08wmNu6A5\",\"countries\":[{\"code\":\"tier1\",\"enc_high_ad_id\":\"aJMnnMq7NRUa4nhVDW6Jq23jy165dI12gcfJj6IcXO9blqZQEoDKsuy08wmNu6A5\",\"enc_medium_ad_id\":\"aJMnnMq7NRUa4nhVDW6Jq23jy165dI12gcfJj6IcXO9blqZQEoDKsuy08wmNu6A5\",\"enc_ad_id\":\"aJMnnMq7NRUa4nhVDW6Jq23jy165dI12gcfJj6IcXO9blqZQEoDKsuy08wmNu6A5\"}]},{\"place_name\":\"others\",\"enc_high_ad_id\":\"aJMnnMq7NRUa4nhVDW6Jq1X1BDS0vBBNBGSfn1DCAv//EI3b2e3wSBF4xMoB3WDK\",\"enc_medium_ad_id\":\"aJMnnMq7NRUa4nhVDW6Jq1X1BDS0vBBNBGSfn1DCAv//EI3b2e3wSBF4xMoB3WDK\",\"enc_ad_id\":\"aJMnnMq7NRUa4nhVDW6Jq1X1BDS0vBBNBGSfn1DCAv//EI3b2e3wSBF4xMoB3WDK\",\"countries\":[{\"code\":\"tier1\",\"enc_high_ad_id\":\"aJMnnMq7NRUa4nhVDW6Jq1X1BDS0vBBNBGSfn1DCAv//EI3b2e3wSBF4xMoB3WDK\",\"enc_medium_ad_id\":\"aJMnnMq7NRUa4nhVDW6Jq1X1BDS0vBBNBGSfn1DCAv//EI3b2e3wSBF4xMoB3WDK\",\"enc_ad_id\":\"aJMnnMq7NRUa4nhVDW6Jq1X1BDS0vBBNBGSfn1DCAv//EI3b2e3wSBF4xMoB3WDK\"}]}]"
+      },
+      "valueType": "JSON"
+    },
+    "banner_advertiser_places": {
+      "defaultValue": {
+        "value": "[{\"place_name\":\"home_screen\",\"is_enable\":true},{\"place_name\":\"viewer_screen\",\"is_enable\":true},{\"place_name\":\"tools_screen\",\"is_enable\":false},{\"place_name\":\"setting_screen\",\"is_enable\":false},{\"place_name\":\"search_screen\",\"is_enable\":false},{\"place_name\":\"select_file_screen\",\"is_enable\":false},{\"place_name\":\"convert_screen\",\"is_enable\":false},{\"place_name\":\"merge_split_screen\",\"is_enable\":false},{\"place_name\":\"ocr_screen\",\"is_enable\":false}]"
+      },
+      "valueType": "JSON"
+    },
+    "banner_advertiser_units": {
+      "defaultValue": {
+        "value": "[{\"place_name\":\"banner\",\"enc_high_ad_id\":\"aJMnnMq7NRUa4nhVDW6Jq/BpkAUATm7sJgodyh/TsuddulD+BVsqMI+CW43PM/pY\",\"enc_medium_ad_id\":\"aJMnnMq7NRUa4nhVDW6Jq/BpkAUATm7sJgodyh/TsuddulD+BVsqMI+CW43PM/pY\",\"enc_ad_id\":\"aJMnnMq7NRUa4nhVDW6Jq/BpkAUATm7sJgodyh/TsuddulD+BVsqMI+CW43PM/pY\",\"countries\":[{\"code\":\"tier1\",\"enc_high_ad_id\":\"aJMnnMq7NRUa4nhVDW6Jq/BpkAUATm7sJgodyh/TsuddulD+BVsqMI+CW43PM/pY\",\"enc_medium_ad_id\":\"aJMnnMq7NRUa4nhVDW6Jq/BpkAUATm7sJgodyh/TsuddulD+BVsqMI+CW43PM/pY\",\"enc_ad_id\":\"aJMnnMq7NRUa4nhVDW6Jq/BpkAUATm7sJgodyh/TsuddulD+BVsqMI+CW43PM/pY\"}]}]"
       },
       "valueType": "JSON"
     },
@@ -75,14 +87,14 @@
     },
     "app_extra_configs": {
       "defaultValue": {
-        "value": "{\"hwp_fonts_base_url\":\"https://raw.githubusercontent.com/nguyenhuudat98bn/NotoSFont/main/fonts\",\"edit_requires_premium\":false,\"convert_requires_premium\":true,\"gift_box_enabled\":false,\"gift_box_countdown_seconds\":180}"
+        "value": "{\"hwp_fonts_base_url\":\"https://raw.githubusercontent.com/nguyenhuudat98bn/NotoSFont/main/fonts\",\"edit_requires_premium\":false,\"convert_requires_premium\":true,\"gift_box_enabled\":false,\"gift_box_countdown_seconds\":180,\"rate_prompt\":{\"enabled\":true,\"version\":1,\"min_sessions\":3,\"min_days_since_install\":1,\"min_success_events\":2,\"max_prompts_total\":3,\"cooldown_days\":30,\"ad_gap_seconds\":10,\"delay_seconds\":2,\"triggers\":[\"convert_success\",\"save_success\"]}}"
       },
       "valueType": "JSON"
     }
   },
   "version": {
     "versionNumber": "1",
-    "updateTime": "2026-09-24T07:44:03.110415Z",
+    "updateTime": "2026-11-05T09:49:50.910361Z",
     "updateUser": {
       "email": "datnh@supernovajsc.com"
     },

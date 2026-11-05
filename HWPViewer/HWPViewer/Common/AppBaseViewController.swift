@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import SnapKit
 import SPNComponent
 
 class AppBaseViewController: SPNBaseViewController, ToastInsetProviding {
@@ -89,6 +90,16 @@ class AppBaseViewController: SPNBaseViewController, ToastInsetProviding {
             .store(in: &cancellables)
         guard !isPremium else { return }
         bannerAdSlot.attach(place: interstitialPlace, rootViewController: self)
+    }
+
+    /// Pushed screens run to the bottom edge (bottom bars pad themselves above the home indicator).
+    /// When the native ad is the last row instead, close the stack with an empty row as tall as the
+    /// bottom safe area, so the ad (its CTA) never sits under the home indicator. 0 high when the
+    /// stack already ends at the safe area (banner shown, tab roots).
+    func addBottomSafeAreaSpacer() {
+        let spacer = UIView()
+        containerStackView.addArrangedSubview(spacer)
+        spacer.snp.makeConstraints { $0.top.equalTo(view.safeAreaLayoutGuide.snp.bottom) }
     }
 
     /// Called after a purchase / restore, and when a subscription ends: hide ads, unlock gated

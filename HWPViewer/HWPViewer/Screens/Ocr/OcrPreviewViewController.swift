@@ -41,12 +41,14 @@ final class OcrPreviewViewController: AppBaseViewController, ToolFlowScreen {
         let content = UIView()
         containerStackView.addArrangedSubview(content)
         content.addSubview(pageView)
-        MergeSplitUI.bottomBar(in: view, content: convertButton)
-        // 26pt under the header down to the bottom bar; the page fills the width at 1× and zooms (ESI05-54).
+        containerStackView.addArrangedSubview(nativeAdSlot) // above the Convert bar
+        MergeSplitUI.bottomBar(in: containerStackView, of: view, content: convertButton)
+        setupAdvertiser(on: .ocrPreview)
+        // 26pt under the header down to the ad / bottom bar; the page fills the width at 1× and zooms (ESI05-54).
         pageView.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(26)
             make.leading.trailing.equalToSuperview()
-            make.bottom.equalToSuperview().inset(MergeSplitUI.bottomBarHeight + 16)
+            make.bottom.equalToSuperview().inset(16)
         }
 
         // "AD" corner tab: white 40%, top-right of the button, 42×23, rounded bottom-left / top-right 12.
@@ -118,7 +120,8 @@ final class OcrPreviewViewController: AppBaseViewController, ToolFlowScreen {
             do {
                 let output = try OcrToHwpService.shared.save(conversion, named: name.trimmingCharacters(in: .whitespacesAndNewlines))
                 unsavedConversion = nil
-                let done = ConvertResultViewController(outputURL: output.url, size: output.size, place: .ocr)
+                let done = ConvertResultViewController(outputURL: output.url, size: output.size, place: .ocr,
+                                                       nativePlace: .ocrResult)
                 navigationController?.pushViewController(done, animated: true)
             } catch {
                 ErrorPopup.present(from: self, message: ErrorPopup.message(for: error))

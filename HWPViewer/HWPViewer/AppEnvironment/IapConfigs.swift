@@ -18,7 +18,9 @@
 //    "max_paywall_shows_per_session": 2,         // automatic shows per app session
 //    "time_show_button_close_purchase_since_second_time": 1,   // seconds the X stays hidden from the 2nd show on
 //    "continue_button_version": 1,               // 1 = CONTINUE, 2 = "Start free trial" / "Subscribe now"
-//    "title_trial_version": 2                    // parsed but ignored: the paywall heading is fixed (ESI05-30)
+//    "title_trial_version": 2,                   // parsed but ignored: the paywall heading is fixed (ESI05-30)
+//    "gift_box_countdown_time": 180,             // Home gift box countdown (s); 0 hides the box
+//    "gift_box_product_id": "hwp.sub.yearly.trial.7d"   // product sold by the Home gift box; unset → no gift box
 //  }
 //  Legacy keys (`monthly_id`, `weekly_id`, `yearly_id`, `yearly_trial_id`, `is_show_in_tools`,
 //  `is_show_in_view_file`) are still understood when `plans` / `show_paywall_at` are absent.
@@ -83,6 +85,9 @@ struct IapConfigs: Codable {
     var isShowInViewFile: Bool?
     /// Home gift box countdown in seconds; 0 hides the gift box (NPI03 logic).
     var giftBoxCountdownTime: Int?
+    /// Product the Home gift box sells (yearly with a 7-day free trial, `hwp.sub.yearly.trial.7d`).
+    /// Unset / empty → no gift box at all. Every other paywall keeps the plain plans.
+    var giftBoxProductId: String?
 
     enum CodingKeys: String, CodingKey {
         case plans
@@ -101,6 +106,7 @@ struct IapConfigs: Codable {
         case isShowInTools = "is_show_in_tools"
         case isShowInViewFile = "is_show_in_view_file"
         case giftBoxCountdownTime = "gift_box_countdown_time"
+        case giftBoxProductId = "gift_box_product_id"
     }
 
     /// Compiled-in fallback = the App Store Connect products of this app.
@@ -162,6 +168,14 @@ struct IapConfigs: Codable {
         case .viewFile: return isShowInViewFile ?? true
         case .afterSplash, .afterIntro: return true
         }
+    }
+
+    /// The gift box paywall's only card. Deliberately outside `trialOptionsEnabled` / `enable_trial`:
+    /// those gate the trial cards of the regular paywall; the gift box exists to sell this trial,
+    /// and remote config turns it off by leaving `gift_box_product_id` unset.
+    var giftBoxPlan: IapPlan? {
+        guard let id = giftBoxProductId?.trimmingCharacters(in: .whitespacesAndNewlines), !id.isEmpty else { return nil }
+        return IapPlan(id: id, period: .year, trial: true, selected: true)
     }
 
     var autoShowPercent: Int { min(max(percentShowPaywall ?? 100, 0), 100) }

@@ -53,11 +53,20 @@ enum OcrTextRecognizer {
         request.usesLanguageCorrection = true
         let supported = (try? request.supportedRecognitionLanguages()) ?? []
         request.recognitionLanguages = languages.filter { supported.isEmpty || supported.contains($0) }
+        // ESI05-71: with Korean + English only, Vietnamese / French / German lost their accents and
+        // Russian came out as Latin noise. Detection picks the page's language among every language
+        // Vision reads (Korean / English pages unchanged on the 26-image test set). Greek and other
+        // scripts Vision does not support still cannot be read; Vietnamese needs iOS 17+.
+        if #available(iOS 16.0, *) {
+            request.automaticallyDetectsLanguage = true
+        }
         try VNImageRequestHandler(cgImage: image, options: [:]).perform([request])
         let size = CGSize(width: image.width, height: image.height)
         return (request.results ?? []).compactMap { observation in
             guard let candidate = observation.topCandidates(1).first else { return nil }
-            let text = candidate.string.trimmingCharacters(in: .whitespacesAndNewlines)
+            // ₩ / 『』 read as W / 「』 in Korean lines (ESI05-71). Same length, so the glyph boxes
+            // measured on `candidate.string` below still line up.
+            let text = OcrKoreanSymbolFixer.fix(candidate.string.trimmingCharacters(in: .whitespacesAndNewlines))
             guard !text.isEmpty else { return nil }
             // Short, unsure reads are usually logos / stamps / marks: leave them in the background image.
             if candidate.confidence < 0.5 && text.count <= 4 { return nil }

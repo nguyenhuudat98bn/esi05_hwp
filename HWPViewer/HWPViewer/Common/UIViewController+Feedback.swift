@@ -11,9 +11,16 @@ import SVProgressHUD
 import SPNComponent
 
 extension UIViewController {
-    func showLoadingHUD(_ show: Bool) {
+    /// Spinner that blocks touches. `dimsScreen`: also darkens everything under it, for long jobs
+    /// where buttons that look live but do nothing read as a frozen app (ESI05-72, Print).
+    func showLoadingHUD(_ show: Bool, dimsScreen: Bool = false) {
         if show {
-            SVProgressHUD.setDefaultMaskType(.clear)
+            if dimsScreen {
+                SVProgressHUD.setBackgroundLayerColor(UIColor.black.withAlphaComponent(0.4))
+                SVProgressHUD.setDefaultMaskType(.custom)
+            } else {
+                SVProgressHUD.setDefaultMaskType(.clear)
+            }
             SVProgressHUD.show()
         } else {
             SVProgressHUD.dismiss()

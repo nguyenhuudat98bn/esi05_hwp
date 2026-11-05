@@ -61,13 +61,14 @@ final class PaywallPresenter {
     }
 
     /// Feature-gated / settings entry point (no onboarding trigger). `placement` is the `where` of the IAP events.
+    /// `plans` replaces the remote plans for this one paywall (the Home gift box's trial product).
     @MainActor
     @discardableResult
-    func present(from presenter: UIViewController, placement: PaywallPlacement, revealsNextScreenFirst: Bool = false,
-                 completion: @escaping () -> Void = {}) -> Bool {
+    func present(from presenter: UIViewController, placement: PaywallPlacement, plans: [PaywallPlan]? = nil,
+                 revealsNextScreenFirst: Bool = false, completion: @escaping () -> Void = {}) -> Bool {
         guard !SPNSession.shared.isPremium else { return false }
         IapTracking.shared.paywallPresented(at: placement)
-        let purchaseVC = PaywallViewController()
+        let purchaseVC = PaywallViewController(plans: plans)
         purchaseVC.isRepeatShow = showCount > 0
         purchaseVC.revealsNextScreenFirst = revealsNextScreenFirst
         showCount += 1

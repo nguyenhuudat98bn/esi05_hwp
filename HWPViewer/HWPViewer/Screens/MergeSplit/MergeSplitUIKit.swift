@@ -43,16 +43,19 @@ enum MergeSplitUI {
         return button
     }
 
-    /// White bar pinned to the bottom (safe area), 1pt #F0F0F1 top hairline, 16pt padding.
+    /// White bar at the bottom (button above the safe area), 1pt #F0F0F1 top hairline, 16pt padding.
+    /// It is the last row of the screen's stack, so the native ad placed before it sits right above
+    /// the bar and the content above shrinks for both — nothing overlaps (a floating bar covered
+    /// the bottom of lists and would have covered the ad).
     @discardableResult
-    static func bottomBar(in view: UIView, content: UIView) -> UIView {
+    static func bottomBar(in stack: UIStackView, of view: UIView, content: UIView) -> UIView {
         let bar = UIView()
         bar.backgroundColor = AppColors.background
         let line = UIView()
         line.backgroundColor = AppColors.bottomBarBorder
         bar.addSubview(line)
         bar.addSubview(content)
-        view.addSubview(bar)
+        stack.addArrangedSubview(bar)
         line.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
             make.height.equalTo(1)
@@ -62,13 +65,10 @@ enum MergeSplitUI {
             make.leading.trailing.equalToSuperview().inset(AppMetrics.screenPadding)
             make.bottom.equalTo(view.safeAreaLayoutGuide).inset(16)
         }
-        bar.snp.makeConstraints { make in
-            make.leading.trailing.bottom.equalToSuperview()
-        }
         return bar
     }
 
-    /// Height the bottom bar occupies above the safe area (16 + 48 + 16), for content insets.
+    /// Height the bottom bar occupies above the safe area (16 + 48 + 16).
     static let bottomBarHeight: CGFloat = 16 + AppMetrics.buttonHeight + 16
 
     static func label(_ text: String? = nil, font: UIFont, color: UIColor = AppColors.textPrimary, lines: Int = 1) -> UILabel {
@@ -128,7 +128,7 @@ final class FileSearchField: UIView {
             attributes: [.foregroundColor: AppColors.textTertiary, .font: AppFonts.regular(14)]
         )
         textField.returnKeyType = .search
-        textField.clearButtonMode = .whileEditing
+        textField.clearButtonMode = .always // ESI05-69: keep X while the keyboard is closed
         textField.autocorrectionType = .no
         addSubview(icon)
         addSubview(textField)

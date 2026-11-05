@@ -158,6 +158,51 @@
             "place_name": "select_file_screen",
             "native_template_size": "small",
             "is_enable": true
+        },
+        {
+            "place_name": "view_last_page",
+            "native_template_size": "medium",
+            "is_enable": true
+        },
+        {
+            "place_name": "merge_select_file_screen",
+            "native_template_size": "small",
+            "is_enable": true
+        },
+        {
+            "place_name": "merge_files_screen",
+            "native_template_size": "small",
+            "is_enable": true
+        },
+        {
+            "place_name": "merge_result_screen",
+            "native_template_size": "small",
+            "is_enable": true
+        },
+        {
+            "place_name": "split_select_file_screen",
+            "native_template_size": "small",
+            "is_enable": true
+        },
+        {
+            "place_name": "split_pages_screen",
+            "native_template_size": "small",
+            "is_enable": true
+        },
+        {
+            "place_name": "split_result_screen",
+            "native_template_size": "small",
+            "is_enable": true
+        },
+        {
+            "place_name": "ocr_preview_screen",
+            "native_template_size": "small",
+            "is_enable": true
+        },
+        {
+            "place_name": "ocr_result_screen",
+            "native_template_size": "small",
+            "is_enable": true
         }
     ],
     "native_advertiser_units": [

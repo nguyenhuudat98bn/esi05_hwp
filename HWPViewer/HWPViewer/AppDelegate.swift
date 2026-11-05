@@ -58,6 +58,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         MTGSDK.sharedInstance().doNotTrackStatus = false
 
         configureSPNComponent()
+        // Before any screen lists files: All / Recent / Bookmark show the samples on a fresh install.
+        SampleDocumentSeeder.seedIfNeeded()
 
         Messaging.messaging().delegate = self
         UNUserNotificationCenter.current().delegate = self

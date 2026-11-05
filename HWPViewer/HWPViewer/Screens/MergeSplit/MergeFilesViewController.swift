@@ -37,6 +37,7 @@ final class MergeFilesViewController: AppBaseViewController, ToolFlowScreen {
         buildHintBar()
         containerStackView.addArrangedSubview(hintBar)
         containerStackView.addArrangedSubview(tableView)
+        containerStackView.addArrangedSubview(nativeAdSlot) // above the Merge bar
 
         tableView.backgroundColor = AppColors.background
         tableView.separatorStyle = .none
@@ -51,7 +52,8 @@ final class MergeFilesViewController: AppBaseViewController, ToolFlowScreen {
         tableView.dropDelegate = self
 
         buildEmptyView()
-        bottomBar = MergeSplitUI.bottomBar(in: view, content: mergeButton)
+        bottomBar = MergeSplitUI.bottomBar(in: containerStackView, of: view, content: mergeButton)
+        setupAdvertiser(on: .mergeFiles)
         mergeButton.tapPublisher
             .sink { [weak self] _ in self?.askFileName() }
             .store(in: &cancellables)
@@ -101,7 +103,8 @@ final class MergeFilesViewController: AppBaseViewController, ToolFlowScreen {
     }
 
     /// 52pt blue round button, 16pt from the right, 48pt above the bottom bar — same spot when the
-    /// list is empty and the bar is hidden (Figma 6978:108525).
+    /// list is empty and the bar is hidden (Figma 6978:108525). Always 48pt above the end of the list,
+    /// so a native ad under the list pushes it up instead of being covered.
     private func buildAddButton() {
         addButton.backgroundColor = AppColors.primary
         addButton.layer.cornerRadius = 25.25
@@ -111,7 +114,9 @@ final class MergeFilesViewController: AppBaseViewController, ToolFlowScreen {
         addButton.snp.makeConstraints { make in
             make.trailing.equalToSuperview().inset(AppMetrics.screenPadding)
             make.size.equalTo(52)
-            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(48 + MergeSplitUI.bottomBarHeight)
+            make.bottom.lessThanOrEqualTo(tableView).inset(48)
+            make.bottom.lessThanOrEqualTo(view.safeAreaLayoutGuide).inset(48 + MergeSplitUI.bottomBarHeight)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(48 + MergeSplitUI.bottomBarHeight).priority(.low)
         }
         addButton.tapPublisher
             .sink { [weak self] _ in self?.addFiles() }
@@ -126,7 +131,7 @@ final class MergeFilesViewController: AppBaseViewController, ToolFlowScreen {
         bottomBar?.isHidden = isEmpty
         mergeButton.setTitle(L10n.mergeAction(files.count), for: .normal)
         mergeButton.isEnabled = files.count >= 2
-        tableView.contentInset.bottom = MergeSplitUI.bottomBarHeight + 52 + 48
+        tableView.contentInset.bottom = 52 + 48 // the last row can scroll clear of the + button
     }
 
     // MARK: - Actions
@@ -177,7 +182,8 @@ final class MergeFilesViewController: AppBaseViewController, ToolFlowScreen {
         case .success(let outputs):
             guard let output = outputs.first else { return }
             let done = ConvertResultViewController(outputURL: output.url, size: output.size, title: L10n.mergeSuccessTitle,
-                                                   titleFont: AppFonts.semibold(18), place: .mergeSplit)
+                                                   titleFont: AppFonts.semibold(18), place: .mergeSplit,
+                                                   nativePlace: .mergeResult)
             navigationController?.pushViewController(done, animated: true)
         case .failure(let error):
             ErrorPopup.present(from: self, message: ErrorPopup.message(for: error))

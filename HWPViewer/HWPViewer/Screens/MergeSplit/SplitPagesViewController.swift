@@ -41,6 +41,7 @@ final class SplitPagesViewController: AppBaseViewController, ToolFlowScreen {
             .store(in: &cancellables)
 
         containerStackView.addArrangedSubview(collectionView)
+        containerStackView.addArrangedSubview(nativeAdSlot) // above the Split bar
         loadingIndicator.color = AppColors.primary
         loadingIndicator.hidesWhenStopped = true
         view.addSubview(loadingIndicator)
@@ -49,9 +50,10 @@ final class SplitPagesViewController: AppBaseViewController, ToolFlowScreen {
         collectionView.register(SplitPageCell.self, forCellWithReuseIdentifier: SplitPageCell.identifier)
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.contentInset = UIEdgeInsets(top: 15.36, left: 0, bottom: MergeSplitUI.bottomBarHeight + 8, right: 0)
+        collectionView.contentInset = UIEdgeInsets(top: 15.36, left: 0, bottom: 8, right: 0)
 
-        MergeSplitUI.bottomBar(in: view, content: continueButton)
+        MergeSplitUI.bottomBar(in: containerStackView, of: view, content: continueButton)
+        setupAdvertiser(on: .splitPages)
         continueButton.tapPublisher
             .sink { [weak self] _ in self?.askFileName() }
             .store(in: &cancellables)
@@ -137,7 +139,8 @@ final class SplitPagesViewController: AppBaseViewController, ToolFlowScreen {
         case .success(let outputs):
             guard let output = outputs.first else { return }
             let done = ConvertResultViewController(outputURL: output.url, size: output.size, title: L10n.splitSuccessTitle,
-                                                   titleFont: AppFonts.semibold(18), place: .mergeSplit)
+                                                   titleFont: AppFonts.semibold(18), place: .mergeSplit,
+                                                   nativePlace: .splitResult)
             navigationController?.pushViewController(done, animated: true)
         case .failure(let error):
             ErrorPopup.present(from: self, message: ErrorPopup.message(for: error))
