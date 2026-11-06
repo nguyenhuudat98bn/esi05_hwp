@@ -135,6 +135,7 @@ final class RenameDialog: UIViewController {
             .sink { [weak self] _ in
                 guard let self, self.isAutoSelecting else { return }
                 self.selectWholeName()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) { [weak self] in self?.redrawWholeSelection() }
             }
             .store(in: &cancellables)
 
@@ -153,9 +154,11 @@ final class RenameDialog: UIViewController {
         // Last pass once the keyboard's presentation animation is over — on iOS 16 nothing applied
         // before that point survives.
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { [weak self] in self?.selectWholeName() }
+        // No software keyboard (hardware keyboard attached): no keyboardDidShow to redraw from.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.55) { [weak self] in self?.redrawWholeSelection() }
         // Still a bare caret (iOS 16 collapses every selection): show the name as selected and let
         // the first keystroke replace it, like a real selection would (ESI05-39).
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) { [weak self] in
             guard let self, canAutoSelectName, !isWholeNameSelected else { return }
             canAutoSelectName = false
             textField.showsWholeTextSelected()
@@ -204,6 +207,20 @@ final class RenameDialog: UIViewController {
         field.selectedTextRange = field.textRange(from: field.beginningOfDocument,
                                                   to: field.endOfDocument)
         field.selectAll(nil)
+    }
+
+    /// iOS 16 keeps a programmatic select-all of a name wider than the field — typing replaces the
+    /// whole name — but draws no highlight, so the name looks unselected (ESI05-39, long names only).
+    /// Collapsing the selection and selecting everything again a runloop later makes UIKit draw it.
+    /// iOS 17+ draws it the first time.
+    private func redrawWholeSelection() {
+        guard #unavailable(iOS 17), canAutoSelectName, isWholeNameSelected else { return }
+        let field = textField
+        field.selectedTextRange = field.textRange(from: field.endOfDocument, to: field.endOfDocument)
+        DispatchQueue.main.async { [weak self] in
+            guard let self, canAutoSelectName else { return }
+            field.selectedTextRange = field.textRange(from: field.beginningOfDocument, to: field.endOfDocument)
+        }
     }
 
     private var isAutoSelecting: Bool {
