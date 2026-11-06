@@ -23,6 +23,8 @@ final class OcrCameraViewController: UIViewController, ToolFlowScreen {
     private let galleryButton = UIButton(type: .custom)
     private var cancellables = Set<AnyCancellable>()
     private var isCapturing = false
+    /// Covers the dead preview while camera access is not granted (ESI05-73).
+    private let permissionView = OcrCameraPermissionView()
     /// Camera access denied: show "Allow Camera Access" once the scanner is up (Photos still works).
     var explainsCameraAccessOnAppear = false
 
@@ -38,6 +40,21 @@ final class OcrCameraViewController: UIViewController, ToolFlowScreen {
         pageOutline.lineJoin = .round
         view.layer.addSublayer(pageOutline)
         camera.onPageQuad = { [weak self] corners in self?.showPage(corners) }
+
+        permissionView.isHidden = true
+        view.addSubview(permissionView)
+        permissionView.snp.makeConstraints { make in
+            make.top.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview().inset(178) // above the bottom panel
+        }
+        // Back from Settings with access granted (or revoked): refresh the preview area.
+        NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)
+            .sink { [weak self] _ in
+                guard let self, view.window != nil else { return }
+                updatePermissionState()
+                camera.start()
+            }
+            .store(in: &cancellables)
 
         panel.backgroundColor = UIColor(hex: "#181A20")
         view.addSubview(panel)
@@ -72,7 +89,15 @@ final class OcrCameraViewController: UIViewController, ToolFlowScreen {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: false)
+        updatePermissionState()
         camera.start()
+    }
+
+    /// No camera access on a device that has a camera → explanation + "Open Settings" instead of a
+    /// black preview. (No camera at all — simulator — keeps the plain dark scanner: Photos only.)
+    private func updatePermissionState() {
+        let authorized = AVCaptureDevice.authorizationStatus(for: .video) == .authorized
+        permissionView.isHidden = authorized || !AVCaptureDeviceAvailability.hasCamera
     }
 
     override func viewDidAppear(_ animated: Bool) {
