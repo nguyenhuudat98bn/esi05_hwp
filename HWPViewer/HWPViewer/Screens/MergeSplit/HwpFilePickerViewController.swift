@@ -189,7 +189,7 @@ final class HwpFilePickerViewController: AppBaseViewController, ToolFlowScreen {
     private func pickForSplit(_ item: FileItem) {
         inspect(item) { [weak self] check in
             guard let self, case .readable(let pages) = check else { return }
-            guard pages > 1 else { return showToast(L10n.splitOnePage) }
+            guard pages > 1 else { return showToast(L10n.splitOnePage, centered: true) }
             onPicked?([item])
         }
     }
@@ -211,8 +211,8 @@ final class HwpFilePickerViewController: AppBaseViewController, ToolFlowScreen {
             guard let self else { return }
             showLoadingHUD(false)
             isInspecting = false
-            if let failure { return showToast(ErrorPopup.message(for: failure)) }
-            if check == .unreadable { showToast(L10n.viewerInvalidFile) }
+            if let failure { return showToast(ErrorPopup.message(for: failure), centered: true) }
+            if check == .unreadable { showToast(L10n.viewerInvalidFile, centered: true) }
             if let check { then(check) }
         }
     }
@@ -257,7 +257,11 @@ final class HwpFilePickerViewController: AppBaseViewController, ToolFlowScreen {
             isInspecting = false
             tableView.reloadData()
             refreshSelectionUI()
-            if let failure { showToast(ErrorPopup.message(for: failure)) } else if skipped > 0 { showToast(L10n.viewerInvalidFile) }
+            if let failure {
+                showToast(ErrorPopup.message(for: failure), centered: true)
+            } else if skipped > 0 {
+                showToast(L10n.viewerInvalidFile, centered: true)
+            }
         }
     }
 

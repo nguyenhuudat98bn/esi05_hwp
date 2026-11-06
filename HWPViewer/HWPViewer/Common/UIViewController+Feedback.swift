@@ -31,7 +31,9 @@ extension UIViewController {
     /// Bottom toast (Figma 18387:124320): blue pill, 14pt white text, 16pt X that dismisses it early. Auto hides.
     /// `bottomInset` defaults to whatever the screen declares via `ToastInsetProviding`, so screens with
     /// their own bottom bar (the viewer's blue "Edit HWP" pill) don't get the toast laid over it.
-    func showToast(_ message: String, duration: TimeInterval = 2.5, bottomInset: CGFloat? = nil) {
+    /// `centered`: in the middle of the screen instead of above the bottom edge — for a refusal tied
+    /// to what the user just tapped in a list (Merge / Split: a broken or one-page file).
+    func showToast(_ message: String, duration: TimeInterval = 2.5, bottomInset: CGFloat? = nil, centered: Bool = false) {
         guard let host = view.window ?? view else { return }
         let inset = bottomInset ?? topToastInsetProvider?.toastBottomInset ?? 24
         host.subviews.filter { $0.tag == ToastView.tag }.forEach { $0.removeFromSuperview() }
@@ -40,7 +42,11 @@ extension UIViewController {
         toast.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.leading.greaterThanOrEqualToSuperview().inset(24)
-            make.bottom.equalTo(host.safeAreaLayoutGuide).inset(inset)
+            if centered {
+                make.centerY.equalToSuperview()
+            } else {
+                make.bottom.equalTo(host.safeAreaLayoutGuide).inset(inset)
+            }
         }
         let hide = { [weak toast] in
             guard let toast, toast.superview != nil else { return }
@@ -100,7 +106,9 @@ final class ToastView: UIView {
         label.text = message
         label.textColor = .white
         label.font = AppFonts.medium(14)
-        label.numberOfLines = 1
+        // One line keeps the Figma 34pt pill; longer messages ("The file is invalid or corrupted and
+        // cannot be opened.") wrap to a second line instead of losing their end.
+        label.numberOfLines = 2
         label.lineBreakMode = .byTruncatingTail
         let close = UIButton(type: .system)
         close.setImage(Asset.Assets.App.icToastCancel16.image.withRenderingMode(.alwaysTemplate), for: .normal)
