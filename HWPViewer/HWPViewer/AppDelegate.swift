@@ -236,6 +236,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             guard let item = FileStore.shared.hwpFiles().first else { return MainTabBarController() }
             return ConvertResultViewController(outputURL: item.url, size: item.size)
         case "paywall": return PaywallViewController()
+        case "ocr_preview":
+            // SIMCTL_CHILD_SPN_DEBUG_IMAGE=<png path on the Mac> — the page to preview.
+            guard let path = ProcessInfo.processInfo.environment["SPN_DEBUG_IMAGE"],
+                  let image = UIImage(contentsOfFile: path) else { return nil }
+            return OcrPreviewViewController(page: image)
         default: return nil
         }
     }
