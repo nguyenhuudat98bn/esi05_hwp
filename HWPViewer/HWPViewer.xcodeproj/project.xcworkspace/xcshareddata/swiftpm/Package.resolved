@@ -186,8 +186,8 @@
       "kind" : "remoteSourceControl",
       "location" : "git@github.com:nguyenhuudat98bn/HwpEditorKit.git",
       "state" : {
-        "revision" : "9cd29133a8c3588d089f43178a2c3e49b285d606",
-        "version" : "1.13.0"
+        "revision" : "6ab9632f49260dcf37d33353c121fae21050b2b4",
+        "version" : "1.13.1"
       }
     },
     {

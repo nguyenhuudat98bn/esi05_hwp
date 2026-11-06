@@ -34,16 +34,10 @@ enum HwpEngine {
         HwpEditorKitConfig.deleteMenuTitle = L10n.viewerMenuDelete
     }
 
-    /// Renders the whole document to a temporary PDF (UIPrintInteractionController cannot read HWP).
-    static func renderPDF(from url: URL) async throws -> URL {
+    /// Opens the document off the main thread (a long file takes seconds to paginate).
+    static func openDocument(at url: URL) async throws -> RhwpDocument {
         try await Task.detached(priority: .userInitiated) {
-            let doc = try RhwpDocument(contentsOf: url)
-            let data = try HwpPrintPDFBuilder.buildPDF(document: doc)
-            let tmp = FileManager.default.temporaryDirectory
-                .appendingPathComponent(url.deletingPathExtension().lastPathComponent)
-                .appendingPathExtension("pdf")
-            try data.write(to: tmp, options: .atomic)
-            return tmp
+            try RhwpDocument(contentsOf: url)
         }.value
     }
 }
@@ -51,7 +45,10 @@ enum HwpEngine {
 enum PrintService {
     private static var isPrinting = false
 
-    /// Render → system print sheet. Guards against double taps while rendering.
+    /// Open → system print sheet, pages drawn on demand (`HwpPrintPageRenderer`): the sheet comes up
+    /// as soon as the document is open and the preview only draws the pages it shows. Rendering the
+    /// whole document to one PDF first never finished on very long files (16 384 pages). Guards
+    /// against double taps while the document opens.
     @MainActor
     static func printHwp(_ item: FileItem, from presenter: UIViewController) {
         guard !isPrinting else { return }
@@ -70,8 +67,8 @@ enum PrintService {
                 return
             }
             do {
-                let pdfURL = try await HwpEngine.renderPDF(from: item.url)
-                printPDF(at: pdfURL, from: presenter)
+                let document = try await HwpEngine.openDocument(at: item.url)
+                presentPrintSheet(for: document, jobName: item.url.deletingPathExtension().lastPathComponent)
             } catch {
                 logger("[Print] failed: \(error)")
                 presenter.showToast(L10n.popupErrorTitle)
@@ -80,18 +77,16 @@ enum PrintService {
     }
 
     @MainActor
-    static func printPDF(at url: URL, from presenter: UIViewController) {
-        guard UIPrintInteractionController.canPrint(url) else {
-            presenter.showToast(L10n.popupErrorTitle)
-            return
-        }
+    private static func presentPrintSheet(for document: RhwpDocument, jobName: String) {
         let controller = UIPrintInteractionController.shared
         let info = UIPrintInfo(dictionary: nil)
         info.outputType = .general
-        info.jobName = url.deletingPathExtension().lastPathComponent
+        info.jobName = jobName
         controller.printInfo = info
-        controller.printingItem = url
-        controller.present(animated: true, completionHandler: nil)
+        controller.printingItem = nil
+        controller.printPageRenderer = HwpPrintPageRenderer(document: document)
+        // The shared controller keeps its renderer (and the open document) until the next print.
+        controller.present(animated: true) { controller, _, _ in controller.printPageRenderer = nil }
     }
 }
 
