@@ -22,6 +22,15 @@ final class MainTabBarController: UITabBarController {
             }
         }
 
+        /// Interstitial shown when the user switches to this tab.
+        var interstitialPlace: SPNAdPlace {
+            switch self {
+            case .home: return .tabHome
+            case .tools: return .tabTools
+            case .settings: return .tabSettings
+            }
+        }
+
         var icon: UIImage? {
             switch self {
             case .home: return Asset.Assets.App.icTabHomeFilled.image
@@ -51,7 +60,7 @@ final class MainTabBarController: UITabBarController {
             make.height.equalTo(AppMetrics.tabBarHeight)
         }
         pillTabBar.onSelect = { [weak self] tab in
-            self?.selectedIndex = tab.rawValue
+            self?.userSelected(tab)
         }
         pillTabBar.select(.home, animated: false)
         additionalSafeAreaInsets.bottom = AppMetrics.tabBarHeight + 8
@@ -63,6 +72,24 @@ final class MainTabBarController: UITabBarController {
         let windowBottom = view.safeAreaInsets.bottom - additionalSafeAreaInsets.bottom
         pillTabBar.snp.updateConstraints { make in
             make.bottom.equalToSuperview().inset(max(windowBottom, 8) + 8)
+        }
+    }
+
+    /// The user tapped a tab in the pill: interstitial for the destination tab first (remote place,
+    /// cooldown and caps handled by SPN; premium never sees it), then the switch. Tapping the tab that
+    /// is already open does nothing. Code-driven switches (`selectTab`) never show an ad.
+    private func userSelected(_ tab: Tab) {
+        guard tab.rawValue != selectedIndex else { return }
+        pillTabBar.isUserInteractionEnabled = false
+        SPNAdsManager.shared.interstitial.show(from: self, place: tab.interstitialPlace) { [weak self] result in
+            if case .didDismiss = result {
+                RatePromptManager.shared.noteFullScreenAdDismissed()
+                // One full-screen interruption per tab switch: no automatic paywall right after the ad.
+                PaywallPresenter.shared.holdAutoShow()
+            }
+            guard let self else { return }
+            pillTabBar.isUserInteractionEnabled = true
+            selectedIndex = tab.rawValue
         }
     }
 

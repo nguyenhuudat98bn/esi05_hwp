@@ -305,6 +305,18 @@
             {
                 "place_name": "home_screen",
                 "is_enable": true
+            },
+            {
+                "place_name": "tab_home",
+                "is_enable": true
+            },
+            {
+                "place_name": "tab_tools",
+                "is_enable": true
+            },
+            {
+                "place_name": "tab_settings",
+                "is_enable": true
             }
         ]
     },

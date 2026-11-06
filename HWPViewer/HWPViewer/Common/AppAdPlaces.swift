@@ -32,6 +32,12 @@ extension SPNAdPlace {
     static let splitResult: SPNAdPlace = "split_result_screen"
     static let ocrPreview: SPNAdPlace = "ocr_preview_screen"
     static let ocrResult: SPNAdPlace = "ocr_result_screen"
+    /// Interstitial when the user switches tab (pill tab bar), one per destination tab
+    /// (`interstitial_advertiser.places`). Spacing / caps: `appconfigs.time_interval_show_ad`,
+    /// `max_interstitial_per_session`, `max_interstitial_per_day`.
+    static let tabHome: SPNAdPlace = "tab_home"
+    static let tabTools: SPNAdPlace = "tab_tools"
+    static let tabSettings: SPNAdPlace = "tab_settings"
     /// Native inline rows (2nd item of a file list).
     static let homeListInline: SPNAdPlace = "home_list_inline"
     static let searchListInline: SPNAdPlace = "search_list_inline"

@@ -19,6 +19,15 @@ final class PaywallPresenter {
     private var firedTriggers = Set<PaywallAutoTrigger>()
     /// A paywall is on screen right now (rate prompt must not stack on it).
     var isPresenting: Bool { !activeBridges.isEmpty }
+    /// Automatic paywalls wait until then — an interstitial just played (tab switch).
+    private var autoShowHeldUntil = Date.distantPast
+
+    /// An interstitial was just dismissed: the screen it led to must not open an automatic paywall on
+    /// top of it (Tools does on its first visit). The trigger is not used up — a later visit can still
+    /// show it.
+    func holdAutoShow(for seconds: TimeInterval = 3) {
+        autoShowHeldUntil = Date().addingTimeInterval(seconds)
+    }
 
     /// Onboarding hook (after splash / after intro). Returns `false` when the paywall is skipped — the
     /// coordinator then runs `completion` itself, so it must NOT be called here (it would `goHome()` twice).
@@ -48,6 +57,10 @@ final class PaywallPresenter {
     @MainActor
     private func consumeAutoShowSlot(for trigger: PaywallAutoTrigger) -> Bool {
         let config = IapConfigs.current
+        guard Date() >= autoShowHeldUntil else {
+            logger("[Paywall] auto show at \(trigger.rawValue) held: an interstitial just played")
+            return false
+        }
         guard !SPNSession.shared.isPremium,
               config.allowsAutoShow(trigger),
               !firedTriggers.contains(trigger),
