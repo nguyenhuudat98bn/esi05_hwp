@@ -221,6 +221,8 @@
 "Merge.Action" = "Spoji (%d)";
 "Merge.AddFiles" = "Dodaj datoteke";
 "Merge.Empty" = "Još nema datoteka. Dodajte datoteku za spajanje";
+"Merge.PickerEmpty" = "Još nema HWP datoteka. Dodajte datoteke za spajanje";
+"Split.PickerEmpty" = "Još nema HWP datoteka. Dodajte datoteku za dijeljenje";
 "Merge.NeedTwoFiles" = "Dodajte barem 2 datoteke za spajanje.";
 "Merge.SuccessTitle" = "HWP uspješno spojen";
 "MergeSplit.Loading" = "Učitavanje";

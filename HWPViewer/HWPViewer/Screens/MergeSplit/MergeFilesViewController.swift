@@ -18,8 +18,8 @@ final class MergeFilesViewController: AppBaseViewController, ToolFlowScreen {
     private var files: [FileItem]
     private let tableView = UITableView(frame: .zero, style: .plain)
     private let hintBar = UIView()
-    private let emptyView = UIView()
-    private let addButton = UIButton(type: .custom)
+    private let emptyView = MergeSplitUI.emptyState(text: L10n.mergeEmpty)
+    private let addButton = MergeSplitUI.addButton(accessibilityLabel: L10n.mergeAddFiles)
     private let mergeButton = MergeSplitUI.primaryButton("")
     private var bottomBar: UIView?
 
@@ -85,39 +85,19 @@ final class MergeFilesViewController: AppBaseViewController, ToolFlowScreen {
 
     /// Box illustration 165×140 + 14pt hint, centred in the list area.
     private func buildEmptyView() {
-        let image = UIImageView(image: Asset.Assets.App.imgEmptyMergeFiles.image)
-        image.contentMode = .scaleAspectFit
-        let label = MergeSplitUI.label(L10n.mergeEmpty, font: AppFonts.regular(14), color: AppColors.textDark.withAlphaComponent(0.5))
-        label.textAlignment = .center
-        let stack = UIStackView(arrangedSubviews: [image, label])
-        stack.axis = .vertical
-        stack.alignment = .center
-        stack.spacing = 12
-        image.snp.makeConstraints { $0.size.equalTo(CGSize(width: 165, height: 140)) }
-        emptyView.addSubview(stack)
-        stack.snp.makeConstraints { $0.center.equalToSuperview() }
         view.addSubview(emptyView)
         emptyView.snp.makeConstraints { make in
             make.edges.equalTo(tableView)
         }
+        MergeSplitUI.centerEmptyState(emptyView, onScreenOf: view)
     }
 
     /// 52pt blue round button, 16pt from the right, 48pt above the bottom bar — same spot when the
     /// list is empty and the bar is hidden (Figma 6978:108525). Always 48pt above the end of the list,
     /// so a native ad under the list pushes it up instead of being covered.
     private func buildAddButton() {
-        addButton.backgroundColor = AppColors.primary
-        addButton.layer.cornerRadius = 25.25
-        addButton.setImage(Asset.Assets.App.icFabAdd.image, for: .normal)
-        addButton.accessibilityLabel = L10n.mergeAddFiles
         view.addSubview(addButton)
-        addButton.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().inset(AppMetrics.screenPadding)
-            make.size.equalTo(52)
-            make.bottom.lessThanOrEqualTo(tableView).inset(48)
-            make.bottom.lessThanOrEqualTo(view.safeAreaLayoutGuide).inset(48 + MergeSplitUI.bottomBarHeight)
-            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(48 + MergeSplitUI.bottomBarHeight).priority(.low)
-        }
+        MergeSplitUI.pinAddButton(addButton, in: view, above: tableView)
         addButton.tapPublisher
             .sink { [weak self] _ in self?.addFiles() }
             .store(in: &cancellables)

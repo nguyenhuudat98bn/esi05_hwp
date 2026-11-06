@@ -166,6 +166,8 @@ internal enum L10n {
   internal static var mergeFilesTitle: String { return L10n.tr("Localizable", "Merge.FilesTitle", fallback: "Merge Files") }
   /// Add at least 2 files to merge.
   internal static var mergeNeedTwoFiles: String { return L10n.tr("Localizable", "Merge.NeedTwoFiles", fallback: "Add at least 2 files to merge.") }
+  /// No HWP files yet. Add files to merge
+  internal static var mergePickerEmpty: String { return L10n.tr("Localizable", "Merge.PickerEmpty", fallback: "No HWP files yet. Add files to merge") }
   /// Select Files
   internal static var mergeSelectFiles: String { return L10n.tr("Localizable", "Merge.SelectFiles", fallback: "Select Files") }
   /// Long press to sort manually
@@ -410,6 +412,8 @@ internal enum L10n {
   internal static func splitPageA11y(_ p1: Int) -> String {
     return L10n.tr("Localizable", "Split.PageA11y", p1, fallback: "Page %d")
   }
+  /// No HWP files yet. Add a file to split
+  internal static var splitPickerEmpty: String { return L10n.tr("Localizable", "Split.PickerEmpty", fallback: "No HWP files yet. Add a file to split") }
   /// Select all
   internal static var splitSelectAllA11y: String { return L10n.tr("Localizable", "Split.SelectAllA11y", fallback: "Select all") }
   /// Selected (%d)

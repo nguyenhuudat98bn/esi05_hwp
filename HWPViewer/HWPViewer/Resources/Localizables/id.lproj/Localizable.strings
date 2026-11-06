@@ -221,6 +221,8 @@
 "Merge.Action" = "Gabung (%d)";
 "Merge.AddFiles" = "Tambah file";
 "Merge.Empty" = "Belum ada file. Tambahkan file untuk digabung";
+"Merge.PickerEmpty" = "Belum ada file HWP. Tambahkan file untuk digabung";
+"Split.PickerEmpty" = "Belum ada file HWP. Tambahkan file untuk dipisah";
 "Merge.NeedTwoFiles" = "Tambahkan minimal 2 file untuk digabung.";
 "Merge.SuccessTitle" = "HWP berhasil digabung";
 "MergeSplit.Loading" = "Memuat";

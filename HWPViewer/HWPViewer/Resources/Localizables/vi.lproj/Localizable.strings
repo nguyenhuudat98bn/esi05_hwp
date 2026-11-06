@@ -221,6 +221,8 @@
 "Merge.Action" = "Gộp (%d)";
 "Merge.AddFiles" = "Thêm tệp";
 "Merge.Empty" = "Chưa có tệp nào. Thêm tệp để gộp";
+"Merge.PickerEmpty" = "Chưa có tệp HWP. Thêm tệp để gộp";
+"Split.PickerEmpty" = "Chưa có tệp HWP. Thêm tệp để tách";
 "Merge.NeedTwoFiles" = "Thêm ít nhất 2 tệp để gộp.";
 "Merge.SuccessTitle" = "Gộp HWP thành công";
 "MergeSplit.Loading" = "Đang tải";

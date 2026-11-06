@@ -8,7 +8,8 @@
 //    from `minimum` picks (2 to start a merge, 1 to add to one). Picks keep tap order — that is the
 //    merge order on the next screen. Files the engine cannot read are refused at the tick.
 //  - `.single`: plain rows, tapping one picks it — unless it cannot be read or has a single page (Split).
-//  No files → "No files found" + Import (no search, no select-all); a search with no match → "No result".
+//  No files → open box + "No HWP files yet…" and a "+" at the bottom right that imports HWP files
+//  (Figma "Merge file/no data" 6978:108423; no search, no select-all); a search with no match → "No result".
 //
 
 import UIKit
@@ -36,11 +37,9 @@ final class HwpFilePickerViewController: AppBaseViewController, ToolFlowScreen {
     private let continueButton = MergeSplitUI.primaryButton("")
     private let searchHolder = UIView()
     private var bottomBar: UIView?
-    private lazy var emptyView = HomeEmptyView(
-        image: Asset.Assets.App.imgEmptyNoFiles.image,
-        title: L10n.toolsSelectFileEmpty,
-        actionTitle: L10n.toolsImportFromFiles
-    )
+    private lazy var emptyView = MergeSplitUI.emptyState(text: isMultiple ? L10n.mergePickerEmpty : L10n.splitPickerEmpty)
+    /// Shown with the empty state only: imports HWP files from the Files app.
+    private let addButton = MergeSplitUI.addButton(accessibilityLabel: L10n.toolsImportFromFiles)
     private lazy var noResultView = HomeEmptyView(
         image: Asset.Assets.App.imgNoResultFoundVector.image,
         title: L10n.searchNoResult
@@ -122,7 +121,13 @@ final class HwpFilePickerViewController: AppBaseViewController, ToolFlowScreen {
             view.addSubview(state)
             state.snp.makeConstraints { $0.edges.equalTo(tableView) }
         }
-        emptyView.onAction = { [weak self] in self?.actions.pickAndImport(family: .hwp) }
+        MergeSplitUI.centerEmptyState(emptyView, onScreenOf: view)
+        addButton.isHidden = true
+        view.addSubview(addButton)
+        MergeSplitUI.pinAddButton(addButton, in: view, above: tableView)
+        addButton.tapPublisher
+            .sink { [weak self] _ in self?.actions.pickAndImport(family: .hwp) }
+            .store(in: &cancellables)
         view.addSubview(loadingIndicator)
         loadingIndicator.snp.makeConstraints { $0.center.equalTo(tableView) }
         loadingIndicator.startAnimating()
@@ -260,6 +265,7 @@ final class HwpFilePickerViewController: AppBaseViewController, ToolFlowScreen {
         // No file at all → empty state with Import; a search that matches nothing → "No result".
         let hasNoFiles = items.isEmpty && viewModel.query.isEmpty
         emptyView.isHidden = !hasNoFiles
+        addButton.isHidden = !hasNoFiles
         noResultView.isHidden = !(items.isEmpty && !viewModel.query.isEmpty)
         searchHolder.isHidden = hasNoFiles
         selectAll.isHidden = items.isEmpty

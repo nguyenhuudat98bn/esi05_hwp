@@ -221,6 +221,8 @@
 "Merge.Action" = "合併 (%d)";
 "Merge.AddFiles" = "新增檔案";
 "Merge.Empty" = "還沒有檔案。新增要合併的檔案";
+"Merge.PickerEmpty" = "還沒有 HWP 檔案。新增要合併的檔案";
+"Split.PickerEmpty" = "還沒有 HWP 檔案。新增要分割的檔案";
 "Merge.NeedTwoFiles" = "請至少新增 2 個檔案進行合併。";
 "Merge.SuccessTitle" = "HWP 合併成功";
 "MergeSplit.Loading" = "載入中";

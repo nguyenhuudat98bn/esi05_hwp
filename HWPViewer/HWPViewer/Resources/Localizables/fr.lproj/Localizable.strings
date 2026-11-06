@@ -221,6 +221,8 @@
 "Merge.Action" = "Fusionner (%d)";
 "Merge.AddFiles" = "Ajouter des fichiers";
 "Merge.Empty" = "Aucun fichier pour l'instant. Ajoutez un fichier à fusionner";
+"Merge.PickerEmpty" = "Aucun fichier HWP pour l'instant. Ajoutez des fichiers à fusionner";
+"Split.PickerEmpty" = "Aucun fichier HWP pour l'instant. Ajoutez un fichier à diviser";
 "Merge.NeedTwoFiles" = "Ajoutez au moins 2 fichiers à fusionner.";
 "Merge.SuccessTitle" = "Fusion HWP réussie";
 "MergeSplit.Loading" = "Chargement";

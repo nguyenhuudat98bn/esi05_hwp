@@ -221,6 +221,8 @@
 "Merge.Action" = "Egyesítés (%d)";
 "Merge.AddFiles" = "Fájlok hozzáadása";
 "Merge.Empty" = "Még nincsenek fájlok. Adjon hozzá egyesítendő fájlt";
+"Merge.PickerEmpty" = "Még nincsenek HWP-fájlok. Adjon hozzá fájlokat az egyesítéshez";
+"Split.PickerEmpty" = "Még nincsenek HWP-fájlok. Adjon hozzá egy fájlt a felosztáshoz";
 "Merge.NeedTwoFiles" = "Az egyesítéshez legalább 2 fájl kell.";
 "Merge.SuccessTitle" = "HWP sikeresen egyesítve";
 "MergeSplit.Loading" = "Betöltés";

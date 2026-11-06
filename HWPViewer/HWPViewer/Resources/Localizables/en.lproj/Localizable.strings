@@ -221,6 +221,8 @@
 "Merge.Action" = "Merge (%d)";
 "Merge.AddFiles" = "Add files";
 "Merge.Empty" = "No files yet. Add file to merge";
+"Merge.PickerEmpty" = "No HWP files yet. Add files to merge";
+"Split.PickerEmpty" = "No HWP files yet. Add a file to split";
 "Merge.NeedTwoFiles" = "Add at least 2 files to merge.";
 "Merge.FileNameTitle" = "Filename";
 "Merge.SuccessTitle" = "Merge HWP Successfully";

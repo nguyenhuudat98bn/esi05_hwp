@@ -221,6 +221,8 @@
 "Merge.Action" = "Slå ihop (%d)";
 "Merge.AddFiles" = "Lägg till filer";
 "Merge.Empty" = "Inga filer än. Lägg till en fil att slå ihop";
+"Merge.PickerEmpty" = "Inga HWP-filer än. Lägg till filer att sammanfoga";
+"Split.PickerEmpty" = "Inga HWP-filer än. Lägg till en fil att dela upp";
 "Merge.NeedTwoFiles" = "Lägg till minst 2 filer att slå ihop.";
 "Merge.SuccessTitle" = "HWP har slagits ihop";
 "MergeSplit.Loading" = "Läser in";

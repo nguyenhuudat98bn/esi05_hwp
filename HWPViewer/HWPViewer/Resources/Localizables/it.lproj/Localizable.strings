@@ -221,6 +221,8 @@
 "Merge.Action" = "Unisci (%d)";
 "Merge.AddFiles" = "Aggiungi file";
 "Merge.Empty" = "Ancora nessun file. Aggiungi un file da unire";
+"Merge.PickerEmpty" = "Ancora nessun file HWP. Aggiungi file da unire";
+"Split.PickerEmpty" = "Ancora nessun file HWP. Aggiungi un file da dividere";
 "Merge.NeedTwoFiles" = "Aggiungi almeno 2 file da unire.";
 "Merge.SuccessTitle" = "HWP unito correttamente";
 "MergeSplit.Loading" = "Caricamento";

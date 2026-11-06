@@ -221,6 +221,8 @@
 "Merge.Action" = "Samenvoegen (%d)";
 "Merge.AddFiles" = "Bestanden toevoegen";
 "Merge.Empty" = "Nog geen bestanden. Voeg een bestand toe om samen te voegen";
+"Merge.PickerEmpty" = "Nog geen HWP-bestanden. Voeg bestanden toe om samen te voegen";
+"Split.PickerEmpty" = "Nog geen HWP-bestanden. Voeg een bestand toe om te splitsen";
 "Merge.NeedTwoFiles" = "Voeg minstens 2 bestanden toe om samen te voegen.";
 "Merge.SuccessTitle" = "HWP samengevoegd";
 "MergeSplit.Loading" = "Laden";

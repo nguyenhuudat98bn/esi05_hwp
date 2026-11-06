@@ -221,6 +221,8 @@
 "Merge.Action" = "मर्ज करें (%d)";
 "Merge.AddFiles" = "फ़ाइलें जोड़ें";
 "Merge.Empty" = "अभी कोई फ़ाइल नहीं। मर्ज करने के लिए फ़ाइल जोड़ें";
+"Merge.PickerEmpty" = "अभी कोई HWP फ़ाइल नहीं। मर्ज करने के लिए फ़ाइलें जोड़ें";
+"Split.PickerEmpty" = "अभी कोई HWP फ़ाइल नहीं। विभाजित करने के लिए फ़ाइल जोड़ें";
 "Merge.NeedTwoFiles" = "मर्ज करने के लिए कम से कम 2 फ़ाइलें जोड़ें।";
 "Merge.SuccessTitle" = "HWP सफलतापूर्वक मर्ज हुआ";
 "MergeSplit.Loading" = "लोड हो रहा है";

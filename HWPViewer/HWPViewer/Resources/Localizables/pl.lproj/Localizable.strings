@@ -221,6 +221,8 @@
 "Merge.Action" = "Scal (%d)";
 "Merge.AddFiles" = "Dodaj pliki";
 "Merge.Empty" = "Nie ma jeszcze plików. Dodaj plik do scalenia";
+"Merge.PickerEmpty" = "Brak plików HWP. Dodaj pliki do scalenia";
+"Split.PickerEmpty" = "Brak plików HWP. Dodaj plik do podzielenia";
 "Merge.NeedTwoFiles" = "Dodaj co najmniej 2 pliki do scalenia.";
 "Merge.SuccessTitle" = "Scalono plik HWP";
 "MergeSplit.Loading" = "Wczytywanie";

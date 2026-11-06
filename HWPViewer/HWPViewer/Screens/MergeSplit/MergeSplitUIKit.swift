@@ -68,6 +68,65 @@ enum MergeSplitUI {
         return bar
     }
 
+    /// "No data" (Figma "Merge file/no data" 6978:108423): open-box illustration 165×140, 12pt gap,
+    /// 14pt hint in #1C2A33 at 50%, centred in whatever area the view is pinned to. Long translations
+    /// wrap onto a second line instead of running off the screen.
+    static func emptyState(text: String) -> UIView {
+        let container = UIView()
+        let image = UIImageView(image: Asset.Assets.App.imgEmptyMergeFiles.image)
+        image.contentMode = .scaleAspectFit
+        let label = label(text, font: AppFonts.regular(14), color: AppColors.textDark.withAlphaComponent(0.5), lines: 2)
+        label.textAlignment = .center
+        let stack = UIStackView(arrangedSubviews: [image, label])
+        stack.axis = .vertical
+        stack.alignment = .center
+        stack.spacing = 12
+        image.snp.makeConstraints { $0.size.equalTo(CGSize(width: 165, height: 140)) }
+        container.addSubview(stack)
+        stack.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.leading.trailing.greaterThanOrEqualToSuperview().inset(24)
+        }
+        return container
+    }
+
+    /// Figma places the illustration + hint 20pt above the middle of the *screen*, whatever sits
+    /// below the list (bottom bar, ad). Call once `empty` is in the hierarchy; it still stays inside
+    /// its own area, so it never runs under the ad or the bottom bar on a short screen.
+    static func centerEmptyState(_ empty: UIView, onScreenOf view: UIView) {
+        guard let stack = empty.subviews.first else { return }
+        stack.snp.remakeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.leading.trailing.greaterThanOrEqualToSuperview().inset(24)
+            make.centerY.equalTo(view).offset(-20).priority(.high)
+            make.top.greaterThanOrEqualToSuperview().inset(16)
+            make.bottom.lessThanOrEqualToSuperview().inset(16)
+        }
+    }
+
+    /// 52pt blue round "+" (Figma "Floating button" 6978:108525): #2E90FA, 24pt glyph.
+    static func addButton(accessibilityLabel: String) -> UIButton {
+        let button = UIButton(type: .custom)
+        button.backgroundColor = AppColors.primary
+        button.layer.cornerRadius = 25.25
+        button.setImage(Asset.Assets.App.icFabAdd.image, for: .normal)
+        button.accessibilityLabel = accessibilityLabel
+        return button
+    }
+
+    /// The "+" sits 16pt from the right and 128pt above the safe area (48pt above where the bottom
+    /// bar is), and always 48pt above the end of `list`, so a native ad under the list pushes it up
+    /// instead of being covered.
+    static func pinAddButton(_ button: UIButton, in view: UIView, above list: UIView) {
+        button.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().inset(AppMetrics.screenPadding)
+            make.size.equalTo(52)
+            make.bottom.lessThanOrEqualTo(list).inset(48)
+            make.bottom.lessThanOrEqualTo(view.safeAreaLayoutGuide).inset(48 + bottomBarHeight)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(48 + bottomBarHeight).priority(.low)
+        }
+    }
+
     /// Height the bottom bar occupies above the safe area (16 + 48 + 16).
     static let bottomBarHeight: CGFloat = 16 + AppMetrics.buttonHeight + 16
 

@@ -221,6 +221,8 @@
 "Merge.Action" = "Birleştir (%d)";
 "Merge.AddFiles" = "Dosya ekle";
 "Merge.Empty" = "Henüz dosya yok. Birleştirmek için dosya ekleyin";
+"Merge.PickerEmpty" = "Henüz HWP dosyası yok. Birleştirmek için dosya ekleyin";
+"Split.PickerEmpty" = "Henüz HWP dosyası yok. Bölmek için bir dosya ekleyin";
 "Merge.NeedTwoFiles" = "Birleştirmek için en az 2 dosya ekleyin.";
 "Merge.SuccessTitle" = "HWP başarıyla birleştirildi";
 "MergeSplit.Loading" = "Yükleniyor";

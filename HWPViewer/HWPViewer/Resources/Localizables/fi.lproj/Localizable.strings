@@ -221,6 +221,8 @@
 "Merge.Action" = "Yhdistä (%d)";
 "Merge.AddFiles" = "Lisää tiedostoja";
 "Merge.Empty" = "Ei vielä tiedostoja. Lisää yhdistettävä tiedosto";
+"Merge.PickerEmpty" = "Ei vielä HWP-tiedostoja. Lisää yhdistettävät tiedostot";
+"Split.PickerEmpty" = "Ei vielä HWP-tiedostoja. Lisää jaettava tiedosto";
 "Merge.NeedTwoFiles" = "Lisää vähintään 2 tiedostoa yhdistettäväksi.";
 "Merge.SuccessTitle" = "HWP yhdistetty";
 "MergeSplit.Loading" = "Ladataan";

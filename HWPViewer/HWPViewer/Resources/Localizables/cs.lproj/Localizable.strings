@@ -221,6 +221,8 @@
 "Merge.Action" = "Sloučit (%d)";
 "Merge.AddFiles" = "Přidat soubory";
 "Merge.Empty" = "Zatím žádné soubory. Přidejte soubor ke sloučení";
+"Merge.PickerEmpty" = "Zatím žádné soubory HWP. Přidejte soubory ke sloučení";
+"Split.PickerEmpty" = "Zatím žádné soubory HWP. Přidejte soubor k rozdělení";
 "Merge.NeedTwoFiles" = "Ke sloučení přidejte alespoň 2 soubory.";
 "Merge.SuccessTitle" = "HWP úspěšně sloučeno";
 "MergeSplit.Loading" = "Načítání";

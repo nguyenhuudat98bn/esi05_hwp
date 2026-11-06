@@ -221,6 +221,8 @@
 "Merge.Action" = "מיזוג (%d)";
 "Merge.AddFiles" = "הוספת קבצים";
 "Merge.Empty" = "אין קבצים עדיין. הוסיפו קובץ למיזוג";
+"Merge.PickerEmpty" = "אין עדיין קובצי HWP. הוסיפו קבצים למיזוג";
+"Split.PickerEmpty" = "אין עדיין קובצי HWP. הוסיפו קובץ לפיצול";
 "Merge.NeedTwoFiles" = "יש להוסיף לפחות 2 קבצים למיזוג.";
 "Merge.SuccessTitle" = "מיזוג HWP הושלם";
 "MergeSplit.Loading" = "טוען";

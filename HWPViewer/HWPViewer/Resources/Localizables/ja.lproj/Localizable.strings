@@ -221,6 +221,8 @@
 "Merge.Action" = "結合 (%d)";
 "Merge.AddFiles" = "ファイルを追加";
 "Merge.Empty" = "ファイルがありません。結合するファイルを追加してください";
+"Merge.PickerEmpty" = "HWPファイルがまだありません。結合するファイルを追加してください";
+"Split.PickerEmpty" = "HWPファイルがまだありません。分割するファイルを追加してください";
 "Merge.NeedTwoFiles" = "結合するには2つ以上のファイルを追加してください。";
 "Merge.SuccessTitle" = "HWPの結合が完了しました";
 "MergeSplit.Loading" = "読み込み中";

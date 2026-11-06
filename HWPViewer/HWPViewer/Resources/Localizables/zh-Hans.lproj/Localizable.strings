@@ -221,6 +221,8 @@
 "Merge.Action" = "合并 (%d)";
 "Merge.AddFiles" = "添加文件";
 "Merge.Empty" = "还没有文件。添加要合并的文件";
+"Merge.PickerEmpty" = "还没有 HWP 文件。添加要合并的文件";
+"Split.PickerEmpty" = "还没有 HWP 文件。添加要拆分的文件";
 "Merge.NeedTwoFiles" = "请至少添加 2 个文件进行合并。";
 "Merge.SuccessTitle" = "HWP 合并成功";
 "MergeSplit.Loading" = "正在加载";

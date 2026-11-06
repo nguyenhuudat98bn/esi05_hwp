@@ -221,6 +221,8 @@
 "Merge.Action" = "Combină (%d)";
 "Merge.AddFiles" = "Adaugă fișiere";
 "Merge.Empty" = "Încă nu există fișiere. Adaugă un fișier pentru combinare";
+"Merge.PickerEmpty" = "Încă nu există fișiere HWP. Adăugați fișiere de îmbinat";
+"Split.PickerEmpty" = "Încă nu există fișiere HWP. Adăugați un fișier de împărțit";
 "Merge.NeedTwoFiles" = "Adaugă cel puțin 2 fișiere pentru combinare.";
 "Merge.SuccessTitle" = "HWP combinat cu succes";
 "MergeSplit.Loading" = "Se încarcă";

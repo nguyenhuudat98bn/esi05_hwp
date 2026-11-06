@@ -221,6 +221,8 @@
 "Merge.Action" = "Zlúčiť (%d)";
 "Merge.AddFiles" = "Pridať súbory";
 "Merge.Empty" = "Zatiaľ žiadne súbory. Pridajte súbor na zlúčenie";
+"Merge.PickerEmpty" = "Zatiaľ žiadne súbory HWP. Pridajte súbory na zlúčenie";
+"Split.PickerEmpty" = "Zatiaľ žiadne súbory HWP. Pridajte súbor na rozdelenie";
 "Merge.NeedTwoFiles" = "Na zlúčenie pridajte aspoň 2 súbory.";
 "Merge.SuccessTitle" = "HWP úspešne zlúčené";
 "MergeSplit.Loading" = "Načítava sa";

@@ -221,6 +221,8 @@
 "Merge.Action" = "รวม (%d)";
 "Merge.AddFiles" = "เพิ่มไฟล์";
 "Merge.Empty" = "ยังไม่มีไฟล์ เพิ่มไฟล์เพื่อรวม";
+"Merge.PickerEmpty" = "ยังไม่มีไฟล์ HWP เพิ่มไฟล์เพื่อรวม";
+"Split.PickerEmpty" = "ยังไม่มีไฟล์ HWP เพิ่มไฟล์เพื่อแยก";
 "Merge.NeedTwoFiles" = "เพิ่มอย่างน้อย 2 ไฟล์เพื่อรวม";
 "Merge.SuccessTitle" = "รวม HWP สำเร็จ";
 "MergeSplit.Loading" = "กำลังโหลด";

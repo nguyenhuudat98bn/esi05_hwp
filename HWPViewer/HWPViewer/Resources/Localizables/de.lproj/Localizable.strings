@@ -221,6 +221,8 @@
 "Merge.Action" = "Zusammenführen (%d)";
 "Merge.AddFiles" = "Dateien hinzufügen";
 "Merge.Empty" = "Noch keine Dateien. Füge eine Datei zum Zusammenführen hinzu";
+"Merge.PickerEmpty" = "Noch keine HWP-Dateien. Füge Dateien zum Zusammenführen hinzu";
+"Split.PickerEmpty" = "Noch keine HWP-Dateien. Füge eine Datei zum Teilen hinzu";
 "Merge.NeedTwoFiles" = "Füge mindestens 2 Dateien zum Zusammenführen hinzu.";
 "Merge.SuccessTitle" = "HWP erfolgreich zusammengeführt";
 "MergeSplit.Loading" = "Wird geladen";

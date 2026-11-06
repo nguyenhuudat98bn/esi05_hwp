@@ -221,6 +221,8 @@
 "Merge.Action" = "دمج (%d)";
 "Merge.AddFiles" = "إضافة ملفات";
 "Merge.Empty" = "لا توجد ملفات بعد. أضف ملفًا لدمجه";
+"Merge.PickerEmpty" = "لا توجد ملفات HWP بعد. أضف ملفات لدمجها";
+"Split.PickerEmpty" = "لا توجد ملفات HWP بعد. أضف ملفًا لتقسيمه";
 "Merge.NeedTwoFiles" = "أضف ملفين على الأقل للدمج.";
 "Merge.SuccessTitle" = "تم دمج HWP بنجاح";
 "MergeSplit.Loading" = "جارٍ التحميل";

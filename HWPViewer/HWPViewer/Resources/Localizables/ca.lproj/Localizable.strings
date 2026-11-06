@@ -221,6 +221,8 @@
 "Merge.Action" = "Combina (%d)";
 "Merge.AddFiles" = "Afegeix fitxers";
 "Merge.Empty" = "Encara no hi ha fitxers. Afegeix-ne per combinar";
+"Merge.PickerEmpty" = "Encara no hi ha fitxers HWP. Afegeix fitxers per combinar";
+"Split.PickerEmpty" = "Encara no hi ha fitxers HWP. Afegeix un fitxer per dividir";
 "Merge.NeedTwoFiles" = "Afegeix almenys 2 fitxers per combinar.";
 "Merge.SuccessTitle" = "HWP combinat correctament";
 "MergeSplit.Loading" = "S'està carregant";

@@ -221,6 +221,8 @@
 "Merge.Action" = "Flet (%d)";
 "Merge.AddFiles" = "Tilføj filer";
 "Merge.Empty" = "Ingen filer endnu. Tilføj en fil for at flette";
+"Merge.PickerEmpty" = "Ingen HWP-filer endnu. Tilføj filer for at flette";
+"Split.PickerEmpty" = "Ingen HWP-filer endnu. Tilføj en fil for at opdele";
 "Merge.NeedTwoFiles" = "Tilføj mindst 2 filer for at flette.";
 "Merge.SuccessTitle" = "HWP er flettet";
 "MergeSplit.Loading" = "Indlæser";

@@ -222,6 +222,8 @@
 "Merge.Action" = "Об'єднати (%d)";
 "Merge.AddFiles" = "Додати файли";
 "Merge.Empty" = "Файлів поки немає. Додайте файл для об'єднання";
+"Merge.PickerEmpty" = "Ще немає файлів HWP. Додайте файли для об'єднання";
+"Split.PickerEmpty" = "Ще немає файлів HWP. Додайте файл для розділення";
 "Merge.NeedTwoFiles" = "Додайте щонайменше 2 файли для об'єднання.";
 "Merge.SuccessTitle" = "HWP успішно об'єднано";
 "MergeSplit.Loading" = "Завантаження";
