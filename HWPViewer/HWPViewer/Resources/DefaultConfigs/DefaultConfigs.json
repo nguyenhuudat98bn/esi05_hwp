@@ -307,6 +307,30 @@
                 "is_enable": true
             },
             {
+                "place_name": "viewer_screen",
+                "is_enable": true
+            },
+            {
+                "place_name": "search_screen",
+                "is_enable": true
+            },
+            {
+                "place_name": "select_file_screen",
+                "is_enable": true
+            },
+            {
+                "place_name": "convert_screen",
+                "is_enable": true
+            },
+            {
+                "place_name": "merge_split_screen",
+                "is_enable": true
+            },
+            {
+                "place_name": "ocr_screen",
+                "is_enable": true
+            },
+            {
                 "place_name": "tab_home",
                 "is_enable": true
             },

@@ -57,7 +57,7 @@
     },
     "interstitial_advertiser": {
       "defaultValue": {
-        "value": "{\"units\":[\"aJMnnMq7NRUa4nhVDW6Jq4BPtGcOo8+c+8m9P1UiwzTnzySGutGDLETttxB7HHw4\"],\"places\":[{\"place_name\":\"language_screen\",\"is_enable\":true},{\"place_name\":\"introduce_screen\",\"is_enable\":true},{\"place_name\":\"home_screen\",\"is_enable\":true},{\"place_name\":\"tab_home\",\"is_enable\":true},{\"place_name\":\"tab_tools\",\"is_enable\":true},{\"place_name\":\"tab_settings\",\"is_enable\":true}]}"
+        "value": "{\"units\":[\"aJMnnMq7NRUa4nhVDW6Jq4BPtGcOo8+c+8m9P1UiwzTnzySGutGDLETttxB7HHw4\"],\"places\":[{\"place_name\":\"language_screen\",\"is_enable\":true},{\"place_name\":\"introduce_screen\",\"is_enable\":true},{\"place_name\":\"home_screen\",\"is_enable\":true},{\"place_name\":\"viewer_screen\",\"is_enable\":true},{\"place_name\":\"search_screen\",\"is_enable\":true},{\"place_name\":\"select_file_screen\",\"is_enable\":true},{\"place_name\":\"convert_screen\",\"is_enable\":true},{\"place_name\":\"merge_split_screen\",\"is_enable\":true},{\"place_name\":\"ocr_screen\",\"is_enable\":true},{\"place_name\":\"tab_home\",\"is_enable\":true},{\"place_name\":\"tab_tools\",\"is_enable\":true},{\"place_name\":\"tab_settings\",\"is_enable\":true}]}"
       },
       "valueType": "JSON"
     },
@@ -94,7 +94,7 @@
   },
   "version": {
     "versionNumber": "1",
-    "updateTime": "2026-11-06T08:22:30.182766Z",
+    "updateTime": "2026-11-06T08:27:19.298811Z",
     "updateUser": {
       "email": "datnh@supernovajsc.com"
     },
