@@ -244,6 +244,23 @@ Kết quả thực (user chấm mấy sao) **không đo được** trong app; đ
 - `PaywallPresenter.isPresenting` mới thêm để gate paywall.
 - Event `rate_prompt_skipped` có thêm reason `trigger_off` và `no_scene`.
 
+## 10c. Merge / Split / OCR success — hỏi 1 lần (2026-11-06)
+
+Theo NI03 (pdfreader, `ConversionResultViewController`): vào màn success của **Merge / Split / OCR** là
+gọi `requestReview` — **một lần duy nhất mỗi lần cài app** (`RatePromptManager.requestOnceAtToolSuccess`,
+UserDefaults `rate_tool_success_prompted`). Màn Convert (PDF / DOC → HWP) vẫn đi luồng `recordSuccess`
+có gate ở trên.
+
+- Không cần remote config: chạy mặc định. Tắt khẩn: `app_extra_configs.rate_prompt.enabled = false`
+  (ghi rõ `false`; thiếu khối `rate_prompt` thì vẫn chạy). Người dùng đã rate từ Settings → không hỏi.
+- Bỏ các gate `min_sessions`, `min_days_since_install`, `min_success_events`, `cooldown_days`.
+- Giữ các gate lúc hiện (sau `delay_seconds`, mặc định 2 s): app đang active, không có paywall / popup
+  che, không ngay sau quảng cáo toàn màn (`ad_gap_seconds`). Bị chặn thì **chưa** tính là đã hỏi —
+  màn success sau thử lại.
+- Tracking: `rate_prompt_requested` / `rate_prompt_skipped` với `trigger` = `merge_success` /
+  `split_success` / `ocr_success`; `reason: asked_once` khi đã hỏi rồi.
+- Lần hỏi này tính vào `prompt_count` / `last_prompt_at` của luồng chung (cooldown cho Convert / Save).
+
 ## 11. Glossary
 
 | Term | Definition |

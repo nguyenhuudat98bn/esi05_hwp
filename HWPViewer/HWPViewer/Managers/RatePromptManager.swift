@@ -16,6 +16,9 @@ enum RatePromptTrigger: String {
     case convertSuccess = "convert_success"
     case saveSuccess = "save_success"
     case openSuccess = "open_success"
+    case mergeSuccess = "merge_success"
+    case splitSuccess = "split_success"
+    case ocrSuccess = "ocr_success"
 }
 
 final class RatePromptManager {
@@ -29,6 +32,7 @@ final class RatePromptManager {
         static let promptCount = "rate_prompt_count"
         static let lastPromptAt = "rate_last_prompt_at"
         static let manualRated = "rate_manual_rated"
+        static let toolSuccessPrompted = "rate_tool_success_prompted"
     }
 
     private let defaults = UserDefaults.standard
@@ -97,6 +101,37 @@ final class RatePromptManager {
                 self.skip(trigger, reason: reason)
                 return
             }
+            self.request(trigger, from: presenter)
+        }
+        pending = work
+        DispatchQueue.main.asyncAfter(deadline: .now() + config.delaySeconds, execute: work)
+    }
+
+    /// Merge / Split / OCR success screen, as NI03's result screen: ask **once per install**, without
+    /// the session / days / success-count gates of `recordSuccess`, and on by default — it does not
+    /// need `rate_prompt` in remote config (missing there = the regular prompt is off). Off only when
+    /// remote sets `rate_prompt.enabled` to `false` explicitly, or the user already rated from
+    /// Settings. Only a prompt that was
+    /// actually requested uses the one chance — when a paywall / popup / fresh ad is on screen at that
+    /// moment, the next success screen tries again. Counts as a prompt for the regular cooldown.
+    @MainActor
+    func requestOnceAtToolSuccess(_ trigger: RatePromptTrigger, from presenter: UIViewController) {
+        let config = AppRemoteConfigs.current.rate
+        resetIfConfigVersionChanged(config)
+        defaults.set(successCount + 1, forKey: Key.successCount)
+        if defaults.bool(forKey: Key.toolSuccessPrompted) { return skip(trigger, reason: "asked_once") }
+        if config.enabledRaw == false { return skip(trigger, reason: "disabled") }
+        if manualRated { return skip(trigger, reason: "manual_rated") }
+        cancelPending(reason: nil)
+        let work = DispatchWorkItem { [weak self, weak presenter] in
+            guard let self else { return }
+            self.pending = nil
+            guard let presenter else { return }
+            if let reason = self.lateGateReason(config, presenter: presenter) {
+                self.skip(trigger, reason: reason)
+                return
+            }
+            self.defaults.set(true, forKey: Key.toolSuccessPrompted)
             self.request(trigger, from: presenter)
         }
         pending = work

@@ -133,7 +133,14 @@ final class ConvertResultViewController: AppBaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // Strongest success moment in the app: the user just got a converted file.
-        RatePromptManager.shared.recordSuccess(.convertSuccess, from: self)
+        // Merge / Split / OCR ask once per install right here (as NI03's result screen); Convert keeps
+        // the remote-gated prompt.
+        switch nativePlace {
+        case .mergeResult: RatePromptManager.shared.requestOnceAtToolSuccess(.mergeSuccess, from: self)
+        case .splitResult: RatePromptManager.shared.requestOnceAtToolSuccess(.splitSuccess, from: self)
+        case .ocrResult: RatePromptManager.shared.requestOnceAtToolSuccess(.ocrSuccess, from: self)
+        default: RatePromptManager.shared.recordSuccess(.convertSuccess, from: self)
+        }
     }
 
     /// Convert: X behaves like "Back Home". Merge / Split / OCR: X returns to Tools, where the flow
