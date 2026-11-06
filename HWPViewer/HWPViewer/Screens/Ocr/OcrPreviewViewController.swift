@@ -3,8 +3,8 @@
 //  HWPViewer
 //
 //  "OCR" preview (Figma 6985:111076): X header with hairline, the page image full width 26pt under
-//  the header, bottom bar with "Convert to HWP" (+ "AD" corner badge for free users, Figma
-//  6988:130067: an interstitial plays first). Convert → loading (6988:130059) → error screen
+//  the header, bottom bar with "Convert to HWP" (free users: an interstitial plays first; the
+//  Figma "AD" corner badge 6988:130067 was dropped on request). Convert → loading (6988:130059) → error screen
 //  (6987:129718, "Try Again") or file name (7011:116206) → "Convert HWP Successfully" (7011:116139).
 //
 
@@ -18,7 +18,6 @@ final class OcrPreviewViewController: AppBaseViewController, ToolFlowScreen {
     private let page: UIImage
     private lazy var pageView = OcrZoomableImageView(image: page)
     private let convertButton = MergeSplitUI.primaryButton(L10n.ocrConvertToHwp)
-    private let adBadge = UILabel()
     /// Converted page not saved yet: the file-name dialog was cancelled. Convert again goes straight
     /// back to the dialog instead of another interstitial and another recognition pass.
     private var unsavedConversion: OcrConversion?
@@ -51,30 +50,9 @@ final class OcrPreviewViewController: AppBaseViewController, ToolFlowScreen {
             make.bottom.equalToSuperview().inset(16)
         }
 
-        // "AD" corner tab: white 40%, top-right of the button, 42×23, rounded bottom-left / top-right 12.
-        adBadge.text = L10n.ocrAdBadge
-        adBadge.font = AppFonts.medium(16)
-        adBadge.textColor = .white
-        adBadge.textAlignment = .center
-        adBadge.backgroundColor = UIColor.white.withAlphaComponent(0.4)
-        adBadge.layer.cornerRadius = 12
-        adBadge.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMinYCorner]
-        adBadge.clipsToBounds = true
-        convertButton.addSubview(adBadge)
-        adBadge.snp.makeConstraints { make in
-            make.top.trailing.equalToSuperview()
-            make.size.equalTo(CGSize(width: 42, height: 23))
-        }
-        adBadge.isHidden = isPremium
-
         convertButton.tapPublisher
             .sink { [weak self] _ in self?.convertTapped() }
             .store(in: &cancellables)
-    }
-
-    override func premiumStatusDidChange() {
-        super.premiumStatusDidChange()
-        adBadge.isHidden = isPremium
     }
 
     private func convertTapped() {
