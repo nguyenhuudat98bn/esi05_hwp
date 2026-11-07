@@ -544,7 +544,7 @@
 			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
 			requirement = {
 				kind = exactVersion;
-				version = 18.0.1;
+				version = 18.1.1;
 			};
 		};
 		DFCE14FB2D9E3D0E00DB3E8E /* XCRemoteSwiftPackageReference "SnapKit" */ = {
