@@ -55,7 +55,7 @@ final class MergeFilesViewController: AppBaseViewController, ToolFlowScreen {
         bottomBar = MergeSplitUI.bottomBar(in: containerStackView, of: view, content: mergeButton)
         setupAdvertiser(on: .mergeFiles)
         mergeButton.tapPublisher
-            .sink { [weak self] _ in self?.askFileName() }
+            .sink { [weak self] _ in self?.mergeTapped() }
             .store(in: &cancellables)
         buildAddButton()
         refresh()
@@ -136,6 +136,18 @@ final class MergeFilesViewController: AppBaseViewController, ToolFlowScreen {
             navigationController?.popToViewController(self, animated: true)
         }
         navigationController?.pushViewController(picker, animated: true)
+    }
+
+    /// Free users see the interstitial (`merge_split_screen`) at the tap that commits to the merge, before
+    /// the file-name popup — as OCR does. Not after the merge: the result screen asks for a rating once, and
+    /// an ad closing right before it would skip that prompt (`ad_gap_seconds`).
+    private func mergeTapped() {
+        guard files.count >= 2 else { return }
+        guard !isPremium else { return askFileName() }
+        SPNAdsManager.shared.interstitial.show(from: self, place: interstitialPlace) { [weak self] result in
+            if case .didDismiss = result { RatePromptManager.shared.noteFullScreenAdDismissed() }
+            self?.askFileName()
+        }
     }
 
     private func askFileName() {

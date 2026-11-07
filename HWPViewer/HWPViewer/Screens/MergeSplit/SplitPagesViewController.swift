@@ -55,7 +55,7 @@ final class SplitPagesViewController: AppBaseViewController, ToolFlowScreen {
         MergeSplitUI.bottomBar(in: containerStackView, of: view, content: continueButton)
         setupAdvertiser(on: .splitPages)
         continueButton.tapPublisher
-            .sink { [weak self] _ in self?.askFileName() }
+            .sink { [weak self] _ in self?.continueTapped() }
             .store(in: &cancellables)
         refreshSelectionUI()
         loadPages()
@@ -111,6 +111,18 @@ final class SplitPagesViewController: AppBaseViewController, ToolFlowScreen {
         selectAll.isOn = pageCount > 0 && selected.count == pageCount
         continueButton.setTitle(L10n.mergeContinue(selected.count), for: .normal)
         continueButton.isEnabled = !selected.isEmpty
+    }
+
+    /// Free users see the interstitial (`merge_split_screen`) at the tap that commits to the split, before
+    /// the file-name popup — as OCR does. Not after the split: the result screen asks for a rating once, and
+    /// an ad closing right before it would skip that prompt (`ad_gap_seconds`).
+    private func continueTapped() {
+        guard !selected.isEmpty else { return }
+        guard !isPremium else { return askFileName() }
+        SPNAdsManager.shared.interstitial.show(from: self, place: interstitialPlace) { [weak self] result in
+            if case .didDismiss = result { RatePromptManager.shared.noteFullScreenAdDismissed() }
+            self?.askFileName()
+        }
     }
 
     private func askFileName() {

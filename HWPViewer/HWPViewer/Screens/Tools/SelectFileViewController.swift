@@ -140,7 +140,18 @@ final class SelectFileViewController: AppBaseViewController, ToolFlowScreen {
     }
 
     // G3: output name → G4 convert → G5 result
+    /// Free users see the interstitial (`convert_screen`) here, at the tap that commits to the tool — as OCR
+    /// does — not after the conversion, where an ad closing right before the result screen would skip its
+    /// rate prompt (`ad_gap_seconds`). When Convert is premium-gated the paywall is the gate: no ad first.
     private func startConvert(_ item: FileItem) {
+        guard !isPremium, !AppRemoteConfigs.current.isConvertPremium else { return askOutputName(for: item) }
+        SPNAdsManager.shared.interstitial.show(from: self, place: .convert) { [weak self] result in
+            if case .didDismiss = result { RatePromptManager.shared.noteFullScreenAdDismissed() }
+            self?.askOutputName(for: item)
+        }
+    }
+
+    private func askOutputName(for item: FileItem) {
         let dialog = RenameDialog(title: L10n.popupFileName, initialName: item.displayName, confirmTitle: L10n.popupOk)
         dialog.validator = { FileStore.shared.validateNewName($0, ext: "hwp")?.errorDescription }
         dialog.onConfirm = { [weak self] name in

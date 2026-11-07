@@ -12,9 +12,9 @@ flowchart LR
   MS --> MF[Merge Files<br/>long press to sort · trash · + add<br/>Merge n, needs 2+]
   MF -->|+| MS2[Select Files<br/>current files pre-checked] --> MF
   MF -->|all removed| ME[empty: No files yet. Add file to merge]
-  MF -->|Merge| N1[Filename dialog] --> L1[Loading] --> D1[Merge HWP Successfully]
+  MF -->|Merge · free user: interstitial first| N1[Filename dialog] --> L1[Loading] --> D1[Merge HWP Successfully]
   T2[Tools: Split card] --> SF[Select a file<br/>search] --> SP[Selected n<br/>page grid · select all<br/>Continue n]
-  SP --> N2[Filename dialog] --> L2[Loading] --> D2[Split HWP Successfully]
+  SP -->|Continue · free user: interstitial first| N2[Filename dialog] --> L2[Loading] --> D2[Split HWP Successfully]
 ```
 
 - Merge output is always `.hwp` (HWPX inputs are converted by the engine); the merge order is the
@@ -22,6 +22,10 @@ flowchart LR
 - Split = the picked pages go into **one** new file named in the dialog, in the source's format.
 - Outputs land in Documents (My Files); originals are never changed. Result screen = the convert
   result screen (Name / Size / Path, Back Home / Open) with its own title.
+- Ads: free users see the interstitial (`merge_split_screen`) at the Merge / Continue tap, before the
+  filename dialog (as OCR does) — not after the loading, where an ad closing right before the result
+  screen would skip its one-time rate prompt (`ad_gap_seconds`). Back on every Merge / Split screen
+  shows it too (base class); the result screen's X / Back Home / Open never do.
 
 ## App code
 

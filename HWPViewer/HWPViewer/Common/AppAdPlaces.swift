@@ -17,8 +17,11 @@ extension SPNAdPlace {
     static let tools: SPNAdPlace = "tools_screen"
     static let selectFile: SPNAdPlace = "select_file_screen"
     static let search: SPNAdPlace = "search_screen"
+    /// Convert (PDF / DOC → HWP): interstitial at the tap that starts the conversion (free users, tool not
+    /// premium-gated) and on back from its error screen + banner.
     static let convert: SPNAdPlace = "convert_screen"
-    /// Merge / Split HWP screens: interstitial on back + banner (native: per screen, below).
+    /// Merge / Split HWP screens: interstitial at the Merge / Continue tap and on back + banner (native: per
+    /// screen, below).
     static let mergeSplit: SPNAdPlace = "merge_split_screen"
     /// OCR to HWP (preview / result / error; interstitial before converting for free users).
     static let ocr: SPNAdPlace = "ocr_screen"
